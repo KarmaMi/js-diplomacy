@@ -1,0 +1,21 @@
+{
+  "name": "js-diplomacy",
+  "homepage": "https://github.com/KarmaMi/js-diplomacy",
+  "authors": [
+    "karmami <karmami674+github@gmail.com>"
+  ],
+  "description": "Diplomacy library written in JavaScript",
+  "main": "",
+  "keywords": [
+    "diplomacy"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
