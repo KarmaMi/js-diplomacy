@@ -1,0 +1,21 @@
+{
+  "name": "js-diplomacy",
+  "version": "0.0.0",
+  "description": "Diplomacy library written in JavaScript",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarmaMi/js-diplomacy.git"
+  },
+  "keywords": [
+    "diplomacy"
+  ],
+  "author": "karmami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarmaMi/js-diplomacy/issues"
+  },
+  "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
+}
