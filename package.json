@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/KarmaMi/js-diplomacy/issues"
   },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
   "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
 }
