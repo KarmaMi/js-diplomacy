@@ -6,7 +6,7 @@ const assert = require('assert')
 const Name = require('./../lib/data/name')
 const Location = require('./../lib/data/location')
 const Unit = require('./../lib/data/unit')
-const Order = require('./../lib/data/order')
+const Order = require('./../lib/variant/standard/order')
 
 chai.should()
 

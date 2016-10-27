@@ -8,7 +8,7 @@ const Location = require('./../lib/data/location')
 const Unit = require('./../lib/data/unit')
 const Edge = require('./../lib/data/edge')
 const DiplomacyMap = require('./../lib/data/diplomacy-map')
-const Order = require('./../lib/data/order')
+const Order = require('./../lib/variant/standard/order')
 const Variant = require('./../lib/variant')
 
 chai.should()
