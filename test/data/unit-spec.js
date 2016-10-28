@@ -3,9 +3,9 @@
 const chai = require('chai')
 const assert = require('assert')
 
-const Name = require('./../lib/data/name')
-const Location = require('./../lib/data/location')
-const Unit = require('./../lib/data/unit')
+const Name = require('./../../lib/data/name')
+const Location = require('./../../lib/data/location')
+const Unit = require('./../../lib/data/unit')
 
 chai.should()
 
