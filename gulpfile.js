@@ -3,7 +3,7 @@ const mocha = require('gulp-mocha')
 const gutil = require('gulp-util')
 
 gulp.task('mocha', () => {
-  return gulp.src(['test/*.js'], { read: false })
+  return gulp.src(['test/data/*.js', 'test/variant/*.js', 'test/*.js'], { read: false })
     .pipe(mocha({ reporter: 'list' }))
     .on('error', gutil.log)
 })

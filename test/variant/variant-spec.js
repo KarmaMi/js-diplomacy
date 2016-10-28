@@ -3,12 +3,12 @@
 const chai = require('chai')
 const assert = require('assert')
 
-const Name = require('./../lib/data/name')
-const Location = require('./../lib/data/location')
-const Edge = require('./../lib/data/edge')
-const DiplomacyMap = require('./../lib/data/diplomacy-map')
-const Variant = require('./../lib/variant/variant')
-const Order = require('./../lib/variant/standard/order')
+const Name = require('./../../lib/data/name')
+const Location = require('./../../lib/data/location')
+const Edge = require('./../../lib/data/edge')
+const DiplomacyMap = require('./../../lib/data/diplomacy-map')
+const Variant = require('./../../lib/variant/variant')
+const Order = require('./../../lib/variant/standard/order')
 
 chai.should()
 

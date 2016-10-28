@@ -3,7 +3,7 @@
 const chai = require('chai')
 const assert = require('assert')
 
-const Name = require('./../lib/data/name')
+const Name = require('./../../lib/data/name')
 
 chai.should()
 
