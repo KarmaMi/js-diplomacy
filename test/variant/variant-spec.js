@@ -6,6 +6,7 @@ const assert = require('assert')
 const Name = require('./../../lib/data/name')
 const Location = require('./../../lib/data/location')
 const Edge = require('./../../lib/data/edge')
+const Province = require('./../../lib/data/province')
 const DiplomacyMap = require('./../../lib/data/diplomacy-map')
 const Variant = require('./../../lib/variant/variant')
 const Order = require('./../../lib/variant/standard/order')
@@ -17,17 +18,17 @@ describe('Variant', () => {
     const fleet = new Name('Fleet', 'F')
     const army = new Name('Army', 'A')
 
-    const spain = new Name('Spa')
+    const spain = new Province(new Name('Spa'), null, true)
     const spa = new Location(spain, [army])
     const spaSc = new Location(spain, [fleet])
 
-    const naples = new Name('Nap')
+    const naples = new Province(new Name('Nap'))
     const nap = new Location(naples, [army, fleet])
 
-    const apulia = new Name('Apu')
+    const apulia = new Province(new Name('Apu'))
     const apu = new Location(apulia, [army, fleet])
 
-    const western = new Name('Wes')
+    const western = new Province(new Name('Wes'))
     const wes = new Location(western, [fleet])
 
     const map = new DiplomacyMap(
@@ -41,7 +42,7 @@ describe('Variant', () => {
 
     const v = new Variant([fleet, army], [new Name('SC')], orders, map)
     v.generateLocation = (province, arg) => {
-      switch (province.abbreviatedName) {
+      switch (province.name.abbreviatedName) {
         case 'Nap': return nap
         case 'Apu': return apu
         case 'Wes': return wes

@@ -9,6 +9,15 @@ chai.should()
 
 describe('Variant', () => {
   it('defines a map (1).', () => {
+    $.Pic().province.isSupplyCenter.should.equal(false)
+    $.Pic().province.homeOf.should.equal('France')
+    $.Bre().province.isSupplyCenter.should.equal(true)
+    $.Bre().province.homeOf.should.equal('France')
+    $.Bur().province.isSupplyCenter.should.equal(false)
+    $.Bur().province.homeOf.should.equal('France')
+    $.Gas().province.isSupplyCenter.should.equal(false)
+    $.Gas().province.homeOf.should.equal('France')
+
     const provinces = $.map.canMoveTo($.A($.Par()))
 
     provinces.size.should.equal(4)
@@ -18,6 +27,10 @@ describe('Variant', () => {
     provinces.has($.Gas()).should.equal(true)
   })
   it('defines a map (2).', () => {
+    ($.Iri().province.homeOf == null).should.equal(true)
+    $.Iri().province.isSupplyCenter.should.equal(false)
+    $.Wal().province.homeOf.should.equal('England')
+
     const provinces = $.map.canMoveTo($.F($.Eng()))
 
     provinces.size.should.equal(8)
