@@ -40,7 +40,7 @@ describe('Variant', () => {
       orders.push({name: name.toLowerCase(), Clazz: Order[name]})
     }
 
-    const v = new Variant([fleet, army], [new Name('SC')], orders, map)
+    const v = new Variant([], [], [fleet, army], [new Name('SC')], orders, map)
     v.generateLocation = (province, arg) => {
       switch (province.name.abbreviatedName) {
         case 'Nap': return nap
