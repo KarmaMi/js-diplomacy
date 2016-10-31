@@ -8,19 +8,23 @@ const Location = require('./../../lib/data/location')
 const Edge = require('./../../lib/data/edge')
 const Province = require('./../../lib/data/province')
 const DiplomacyMap = require('./../../lib/data/diplomacy-map')
-const Variant = require('./../../lib/variant/variant')
+const Helper = require('./../../lib/variant/helper')
 const Order = require('./../../lib/variant/standard/order')
 
 chai.should()
 
-describe('Variant', () => {
+describe('Helper', () => {
   it('defines helper functions.', () => {
     const fleet = new Name('Fleet', 'F')
     const army = new Name('Army', 'A')
 
+    const mar_ = new Province(new Name('Mar'), null, true)
+    const mar = new Location(mar_, [army, fleet])
+
     const spain = new Province(new Name('Spa'), null, true)
     const spa = new Location(spain, [army])
     const spaSc = new Location(spain, [fleet])
+    spaSc.toString = () => 'Spa/SC'
 
     const naples = new Province(new Name('Nap'))
     const nap = new Location(naples, [army, fleet])
@@ -32,38 +36,31 @@ describe('Variant', () => {
     const wes = new Location(western, [fleet])
 
     const map = new DiplomacyMap(
-      [new Edge(spaSc, wes, [fleet]), new Edge(wes, nap, [fleet]), new Edge(nap, apu, [army])]
+      [
+        new Edge(mar, spa, [army, fleet]), new Edge(spaSc, wes, [fleet]),
+        new Edge(wes, nap, [fleet]), new Edge(nap, apu, [army])
+      ]
     )
 
     const orders = []
     for (const name in Order) {
-      orders.push({name: name.toLowerCase(), Clazz: Order[name]})
+      orders.push([name.toLowerCase(), Order[name]])
     }
 
-    const v = new Variant([], [], [fleet, army], [new Name('SC')], orders, map)
-    v.generateLocation = (province, arg) => {
-      switch (province.name.abbreviatedName) {
-        case 'Nap': return nap
-        case 'Apu': return apu
-        case 'Wes': return wes
-        case 'Spa': return (arg && arg.abbreviatedName === 'SC') ? spaSc : spa
-      }
-    }
+    const h = new Helper([], [], [fleet, army], orders, map)
+    h.$l.Nap.should.deep.equal(nap)
+    h.$l['Spa/SC'].should.deep.equal(spaSc)
 
-    v.$p.Nap().should.deep.equal(nap)
-    v.$p.Spa().should.deep.equal(spa)
-    v.$p.Spa(v.$k.SC).should.deep.equal(spaSc)
+    h.$m.F(h.$l.Nap).militaryBranch.should.deep.equal(fleet)
+    h.$m.F(h.$l.Nap).location.should.deep.equal(nap)
 
-    v.$m.F(v.$p.Nap()).militaryBranch.should.deep.equal(fleet)
-    v.$m.F(v.$p.Nap()).location.should.deep.equal(nap)
-
-    const c = v.F(v.Wes()).convoy(v.A(v.Nap()).move(v.Spa()).viaConvoy())
+    const c = h.F(h.Wes).convoy(h.A(h.Nap).move(h.Spa).viaConvoy())
 
     c.unit.militaryBranch.should.deep.equal(fleet)
-    c.unit.location.should.deep.equal(v.Wes())
+    c.unit.location.should.deep.equal(h.Wes)
     c.target.unit.militaryBranch.should.deep.equal(army)
-    c.target.unit.location.should.deep.equal(v.Nap())
-    c.target.destination.should.deep.equal(v.Spa())
+    c.target.unit.location.should.deep.equal(h.Nap)
+    c.target.destination.should.deep.equal(h.Spa)
     c.target.isViaConvoy.should.equal(true)
   })
 })
