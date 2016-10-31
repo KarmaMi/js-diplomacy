@@ -52,4 +52,8 @@ describe('Variant', () => {
     provinces.has($.Nap).should.equal(true)
     provinces.has($.Tyn).should.equal(true)
   })
+  it('defines an initial board.', () => {
+    standard.initialBoard.numberOfsupplyCenters($.Russia).should.equal(4)
+    standard.initialBoard.units.get($.Russia).length.should.equal(4)
+  })
 })

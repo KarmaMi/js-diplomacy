@@ -30,7 +30,7 @@ describe('Board', () => {
 
     const $ = new Helper([], [], [fleet, army], [], map)
     const board = new Board(
-      new State(1901, 'Spring', 'Moving'),
+      new State(1901, 'Spring', 'Movement'),
       [['France', [$.A($.Mar), $.A($.Spa)]]],
       [['France', [mar_, spain]]],
       []
