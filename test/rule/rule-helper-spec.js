@@ -6,7 +6,7 @@ const assert = require('assert')
 const Name = require('./../../lib/data/name')
 const Location = require('./../../lib/data/location')
 const Province = require('./../../lib/data/province')
-const SystemHelper = require('./../../lib/rule/rule-helper')
+const RuleHelper = require('./../../lib/rule/rule-helper')
 const Order = require('./../../lib/variant/standard/order')
 
 chai.should()
@@ -32,7 +32,7 @@ describe('RuleHelper', () => {
       orders.push([name.toLowerCase(), Order[name]])
     }
 
-    const h = new SystemHelper([], [fleet, army], orders)
+    const h = new RuleHelper([], [fleet, army], orders)
     h.$m.F(nap).militaryBranch.should.deep.equal(fleet)
     h.$m.F(nap).location.should.deep.equal(nap)
 
