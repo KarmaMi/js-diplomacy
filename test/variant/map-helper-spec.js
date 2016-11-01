@@ -25,10 +25,10 @@ describe('MapHelper', () => {
     const spaSc = new Location(spain, [fleet])
     spaSc.toString = () => 'Spa/SC'
 
-    const naples = new Province(new Name('Nap'))
+    const naples = new Province(new Name('Nap'), 'Italy')
     const nap = new Location(naples, [army, fleet])
 
-    const apulia = new Province(new Name('Apu'))
+    const apulia = new Province(new Name('Apu'), 'Italy')
     const apu = new Location(apulia, [army, fleet])
 
     const western = new Province(new Name('Wes'))
@@ -41,8 +41,10 @@ describe('MapHelper', () => {
       ]
     )
 
-    const h = new MapHelper([], map)
+    const h = new MapHelper(map)
     h.$l.Nap.should.deep.equal(nap)
     h.$l['Spa/SC'].should.deep.equal(spaSc)
+
+    h.$f.Italy.should.equal('Italy')
   })
 })
