@@ -6,8 +6,8 @@ const assert = require('assert')
 const Name = require('./../../lib/data/name')
 const Location = require('./../../lib/data/location')
 const Unit = require('./../../lib/data/unit')
-const Edge = require('./../../lib/data/edge')
-const DiplomacyMap = require('./../../lib/data/diplomacy-map')
+const Edge = require('./../../lib/map/edge')
+const DiplomacyMap = require('./../../lib/map/diplomacy-map')
 
 chai.should()
 

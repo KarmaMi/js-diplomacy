@@ -4,11 +4,11 @@ const chai = require('chai')
 const assert = require('assert')
 
 const Name = require('./../../lib/data/name')
-const Location = require('./../../lib/data/location')
-const Edge = require('./../../lib/data/edge')
 const Province = require('./../../lib/data/province')
-const DiplomacyMap = require('./../../lib/data/diplomacy-map')
-const MapHelper = require('./../../lib/variant/map-helper')
+const Location = require('./../../lib/data/location')
+const Edge = require('./../../lib/map/edge')
+const DiplomacyMap = require('./../../lib/map/diplomacy-map')
+const MapHelper = require('./../../lib/map/map-helper')
 
 chai.should()
 

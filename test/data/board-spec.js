@@ -6,10 +6,10 @@ const assert = require('assert')
 const Name = require('./../../lib/data/name')
 const Province = require('./../../lib/data/province')
 const Location = require('./../../lib/data/location')
-const Edge = require('./../../lib/data/edge')
-const DiplomacyMap = require('./../../lib/data/diplomacy-map')
 const Board = require('./../../lib/data/board')
 const State = require('./../../lib/data/state')
+const Edge = require('./../../lib/map/edge')
+const DiplomacyMap = require('./../../lib/map/diplomacy-map')
 
 const Helper = require('./../../lib/variant/helper')
 
