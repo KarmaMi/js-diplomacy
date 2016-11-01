@@ -10,6 +10,7 @@ const Board = require('./../../lib/data/board')
 const State = require('./../../lib/data/state')
 const Edge = require('./../../lib/map/edge')
 const DiplomacyMap = require('./../../lib/map/diplomacy-map')
+const Rule = require('./../../lib/rule/rule')
 
 const Helper = require('./../../lib/variant/helper')
 
@@ -28,7 +29,7 @@ describe('Board', () => {
 
     const map = new DiplomacyMap([new Edge(mar, spa, [army, fleet])])
 
-    const $ = new Helper([], [], [fleet, army], [], map)
+    const $ = new Helper(new Rule([], [], [fleet, army], []), map)
     const board = new Board(
       new State(1901, 'Spring', 'Movement'),
       [['France', [$.A($.Mar), $.A($.Spa)]]],
