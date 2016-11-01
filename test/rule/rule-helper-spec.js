@@ -6,12 +6,12 @@ const assert = require('assert')
 const Name = require('./../../lib/data/name')
 const Location = require('./../../lib/data/location')
 const Province = require('./../../lib/data/province')
-const SystemHelper = require('./../../lib/variant/system-helper')
+const SystemHelper = require('./../../lib/rule/rule-helper')
 const Order = require('./../../lib/variant/standard/order')
 
 chai.should()
 
-describe('SystemHelper', () => {
+describe('RuleHelper', () => {
   it('defines helper functions.', () => {
     const fleet = new Name('Fleet', 'F')
     const army = new Name('Army', 'A')
