@@ -31,4 +31,23 @@ describe('DirectedGraph', () => {
     ([...g2.nodes]).should.deep.equal([[1, 'a'], [3, 'c'], [4, 'd']]);
     ([...g2.edges]).should.deep.equal([[3, 4]])
   })
+  describe('#getCycle', () => {
+    it('returns a cycle', () => {
+      const g = new DirectedGraph(
+        [[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd']],
+        [[1, 2], [2, 3], [3, 2], [3, 4]]
+      )
+      const cycle = g.getCycle()
+      cycle.should.deep.equal([2, 3])
+    })
+    it('returns null if there are no cycles', () => {
+      const g = new DirectedGraph(
+        [[1, 'a'], [2, 'b'], [4, 'd']],
+        [[1, 2], [2, 4]]
+      )
+      const cycle = g.getCycle();
+      (cycle === null).should.equal(true)
+    })
+  })
+
 })
