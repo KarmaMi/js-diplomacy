@@ -34,7 +34,7 @@ describe('Board', () => {
       new State(1901, 'Spring', 'Movement'),
       [['France', [$.A($.Mar), $.A($.Spa)]]],
       [['France', [mar_, spain]]],
-      []
+      [], []
     )
 
     board.numberOfsupplyCenters('France').should.equal(2)
