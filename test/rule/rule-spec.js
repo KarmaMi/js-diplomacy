@@ -27,7 +27,7 @@ describe('Rule', () => {
         orders.push([name.toLowerCase(), Order[name]])
       }
 
-      const rule = new Rule([], [], [army], orders, (map, board, os) => {})
+      const rule = new Rule([], [], [], [army], orders, (map, board, os) => {})
 
       const $ = new RuleHelper(rule)
 
@@ -51,7 +51,7 @@ describe('Rule', () => {
       }
 
       let result = null
-      const rule = new Rule([], [], [army], orders)
+      const rule = new Rule([], [], [], [army], orders)
       const $ = new RuleHelper(rule)
 
       rule._resolveOrder = (map, board, os) => { result = os }

@@ -29,7 +29,7 @@ describe('Board', () => {
 
     const map = new DiplomacyMap([new Edge(mar, spa, [army, fleet])])
 
-    const $ = new Helper(new Rule([], [], [fleet, army], []), map)
+    const $ = new Helper(new Rule([], [], [], [fleet, army], []), map)
     const board = new Board(
       new State(1901, 'Spring', 'Movement'),
       [['France', [$.A($.Mar), $.A($.Spa)]]],
