@@ -31,7 +31,7 @@ describe('Rule', () => {
 
       const $ = new RuleHelper(rule)
 
-      const result = rule.resolve(null, null, [$.A(mar).move(spa), $.A(mar).hold()]);
+      const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
 
       (result == null).should.equal(true)
     })
@@ -58,11 +58,38 @@ describe('Rule', () => {
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
       rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
 
-      rule.resolve(null, null, [$.A(mar).move(spa), $.A(spa).hold()])
+      rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(spa).hold()])
 
       result.length.should.equal(2)
       result[0].type.should.equal('Hold')
       result[1].type.should.equal('Hold')
+    })
+  })
+  describe('when some units have no orders', () => {
+    it('uses a default order.', () => {
+      const army = new Name('Army', 'A')
+      const spa_ = new Province(new Name('Spa'), null, true)
+      const spa = new Location(spa_, [army])
+
+      const mar_ = new Province(new Name('Mar'), 'France', true)
+      const mar = new Location(mar_, [army])
+
+      const orders = []
+      for (const name in Order) {
+        orders.push([name.toLowerCase(), Order[name]])
+      }
+
+      let result = null
+      const rule = new Rule([], [], [], [army], orders)
+      const $ = new RuleHelper(rule)
+
+      rule._resolveOrder = (map, board, os) => { result = os }
+      rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
+
+      rule.resolve(null, { units: new Map([['England', [$.A(mar)]]]) }, [])
+
+      result.length.should.equal(1)
+      result[0].type.should.equal('Hold')
     })
   })
 })
