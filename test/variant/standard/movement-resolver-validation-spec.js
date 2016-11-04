@@ -3,7 +3,6 @@
 const chai = require('chai')
 const assert = require('assert')
 
-const Board = require('./../../../lib/data/board')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
@@ -85,34 +84,6 @@ describe('MovementResolver', () => {
         $.F($.Lon).convoy($.A($.Lvp).move($.Bre))
       )
       msg.should.equal('F Lon is not on sea.')
-    })
-  })
-
-  describe('#resolve', () => {
-    it('resolves orders (DIAGRAM 4)', () => {
-      let { board, orderResult } = r.resolve(
-        map,
-        new Board(
-          variant.initialBoard.state,
-          [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.War)]]],
-          [], [], []
-        ),
-        [$.A($.Ber).move($.Sil), $.A($.War).move($.Sil)]
-      )
-      orderResult = [...orderResult].map(elem => [elem[0].toString(), elem[1]])
-
-      orderResult.should.deep.equal([
-        [$.A($.Ber).move($.Sil).toString(), $.Standoff],
-        [$.A($.War).move($.Sil).toString(), $.Standoff]
-      ])
-
-      board.provincesStatus.has($.Sil.province).should.equal(true)
-      board.provincesStatus.get($.Sil.province).should.equal($.Standoff)
-
-      const units = [...board.units].map(x => [x[0], x[1].map(e => e.toString())])
-      units.should.deep.equal(
-        [[$.Germany, [$.A($.Ber).toString()]], [$.Russia, [$.A($.War).toString()]]]
-      )
     })
   })
 })
