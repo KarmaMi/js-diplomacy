@@ -10,8 +10,8 @@ module.exports = class ResolverSpecUtil {
 
     ([...actual.provincesStatus]).should.deep.equal([...expected.provincesStatus])
 
-    actual.unitsStatus = [...actual.unitsStatus].map(x => [x[0], x[1].map(e => e.toString())])
-    expected.unitsStatus = [...expected.unitsStatus].map(x => [x[0], x[1].map(e => e.toString())])
+    actual.unitsStatus = [...actual.unitsStatus].map(x => [x[0].toString(), x[1]])
+    expected.unitsStatus = [...expected.unitsStatus].map(x => [x[0].toString(), x[1]])
     actual.unitsStatus.should.deep.equal(expected.unitsStatus)
   }
   static checkOrderResult (actual, expected) {
