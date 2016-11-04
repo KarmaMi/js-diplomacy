@@ -21,7 +21,7 @@ chai.should()
 
 describe('MovementResolver', () => {
   it('resolves orders (DIAGRAM 4)', () => {
-    let { board, orderResult } = r.resolve(
+    const { board, orderResult } = r.resolve(
       map,
       new Board(
         variant.initialBoard.state,
@@ -39,8 +39,63 @@ describe('MovementResolver', () => {
       board,
       new Board(
         new State(1901, $.Autumn, $.Movement),
-        [[$.Germany, [$.A($.Ber).toString()]], [$.Russia, [$.A($.War).toString()]]],
+        [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.War)]]],
         [], [], [[$.Sil.province, $.Standoff]]
+      )
+    )
+  })
+  it('resolves orders (DIAGRAM 5)', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Kie), $.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
+        [], [], []
+      ),
+      [$.A($.Kie).move($.Ber), $.A($.Ber).move($.Pru), $.A($.Pru).hold()]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Pru).hold(), $.Success],
+        [$.A($.Ber).move($.Pru), $.Fail],
+        [$.A($.Kie).move($.Ber), $.Fail]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.Germany, [$.A($.Kie), $.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
+        [], [], []
+      )
+    )
+  })
+  it('resolves orders (DIAGRAM 6)', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
+        [], [], []
+      ),
+      [$.A($.Ber).move($.Pru), $.A($.Pru).move($.Ber)]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Pru).move($.Ber), $.Fail],
+        [$.A($.Ber).move($.Pru), $.Fail]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
+        [], [], []
       )
     )
   })
