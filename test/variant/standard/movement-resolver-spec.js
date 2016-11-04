@@ -19,7 +19,7 @@ const r = new MovementResolver(rule)
 
 chai.should()
 
-describe('MovementResolver#resolve', () => {
+describe('MovementResolver', () => {
   it('resolves orders (DIAGRAM 4)', () => {
     let { board, orderResult } = r.resolve(
       map,
