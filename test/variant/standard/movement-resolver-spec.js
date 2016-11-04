@@ -215,4 +215,36 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 11', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Tyn)]]],
+        [], [], []
+      ),
+      [
+        $.F($.GoL).move($.Tyn), $.F($.Wes).support($.F($.GoL).move($.Tyn)),
+        $.F($.Tyn).hold(), $.F($.Rom).support($.F($.Tyn).hold())
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
+        [$.F($.Rom).support($.F($.Tyn).hold()), $.Success],
+        [$.F($.Tyn).hold(), $.Success],
+        [$.F($.GoL).move($.Tyn), $.Fail]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Tyn)]]],
+        [], [], []
+      )
+    )
+  })
 })
