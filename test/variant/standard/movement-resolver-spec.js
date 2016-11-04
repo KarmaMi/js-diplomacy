@@ -99,4 +99,32 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('resolves orders (DIAGRAM 7)', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.England, [$.F($.Bel), $.F($.Nth)]], [$.Germany, [$.A($.Hol)]]],
+        [], [], []
+      ),
+      [$.F($.Bel).move($.Nth), $.F($.Nth).move($.Hol), $.A($.Hol).move($.Bel)]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Hol).move($.Bel), $.Success],
+        [$.F($.Nth).move($.Hol), $.Success],
+        [$.F($.Bel).move($.Nth), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.England, [$.F($.Nth), $.F($.Hol)]], [$.Germany, [$.A($.Bel)]]],
+        [], [], []
+      )
+    )
+  })
 })
