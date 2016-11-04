@@ -20,7 +20,7 @@ const r = new MovementResolver(rule)
 chai.should()
 
 describe('MovementResolver', () => {
-  it('resolves orders (DIAGRAM 4)', () => {
+  it('DIAGRAM 4', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -44,7 +44,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('resolves orders (DIAGRAM 5)', () => {
+  it('DIAGRAM 5', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -72,7 +72,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('resolves orders (DIAGRAM 6)', () => {
+  it('DIAGRAM 6', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -99,7 +99,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('resolves orders (DIAGRAM 7)', () => {
+  it('DIAGRAM 7', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -127,7 +127,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('resolves orders (DIAGRAM 8)', () => {
+  it('DIAGRAM 8', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -155,7 +155,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('resolves orders (DIAGRAM 9)', () => {
+  it('DIAGRAM 9', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -180,6 +180,38 @@ describe('MovementResolver', () => {
         new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.F($.Bal), $.A($.Pru)]], [$.Russia, []]],
         [], [[$.A($.Pru), $.Dislodged]], []
+      )
+    )
+  })
+  it('DIAGRAM 10', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Nap)]]],
+        [], [], []
+      ),
+      [
+        $.F($.GoL).move($.Tyn), $.F($.Wes).support($.F($.GoL).move($.Tyn)),
+        $.F($.Nap).move($.Tyn), $.F($.Rom).support($.F($.Nap).move($.Tyn))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
+        [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success],
+        [$.F($.GoL).move($.Tyn), $.Standoff],
+        [$.F($.Nap).move($.Tyn), $.Standoff]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Nap)]]],
+        [], [], [[$.Tyn.province, $.Standoff]]
       )
     )
   })
