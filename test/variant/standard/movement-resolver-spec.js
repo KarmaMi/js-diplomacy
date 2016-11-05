@@ -401,4 +401,35 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 16', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Pru), $.A($.Sil)]], [$.Russia, [$.A($.War)]]],
+        [], [], []
+      ),
+      [
+        $.A($.Pru).move($.War), $.A($.Sil).support($.A($.Pru).move($.War)),
+        $.A($.War).move($.Sil)
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Sil).support($.A($.Pru).move($.War)), $.Success],
+        [$.A($.War).move($.Sil), $.Dislodged],
+        [$.A($.Pru).move($.War), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [[$.Germany, [$.A($.War), $.A($.Sil)]], [$.Russia, []]],
+        [], [[$.A($.War), $.Dislodged]], []
+      )
+    )
+  })
 })
