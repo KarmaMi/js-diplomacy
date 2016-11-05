@@ -58,8 +58,8 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Pru).hold(), $.Success],
         [$.A($.Ber).move($.Pru), $.Fail],
+        [$.A($.Pru).hold(), $.Success],
         [$.A($.Kie).move($.Ber), $.Fail]
       ]
     )
@@ -141,9 +141,9 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Gas).support($.A($.Mar).move($.Bur)), $.Success],
+        [$.A($.Mar).move($.Bur), $.Success],
         [$.A($.Bur).hold(), $.Dislodged],
-        [$.A($.Mar).move($.Bur), $.Success]
+        [$.A($.Gas).support($.A($.Mar).move($.Bur)), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -170,8 +170,8 @@ describe('MovementResolver', () => {
       orderResult,
       [
         [$.F($.Bal).support($.A($.Sil).move($.Pru)), $.Success],
-        [$.A($.Pru).hold(), $.Dislodged],
-        [$.A($.Sil).move($.Pru), $.Success]
+        [$.A($.Sil).move($.Pru), $.Success],
+        [$.A($.Pru).hold(), $.Dislodged]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -200,10 +200,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
-        [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success],
         [$.F($.GoL).move($.Tyn), $.Standoff],
-        [$.F($.Nap).move($.Tyn), $.Standoff]
+        [$.F($.Nap).move($.Tyn), $.Standoff],
+        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
+        [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -232,10 +232,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
-        [$.F($.Rom).support($.F($.Tyn).hold()), $.Success],
+        [$.F($.GoL).move($.Tyn), $.Fail],
         [$.F($.Tyn).hold(), $.Success],
-        [$.F($.GoL).move($.Tyn), $.Fail]
+        [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
+        [$.F($.Rom).support($.F($.Tyn).hold()), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -270,11 +270,11 @@ describe('MovementResolver', () => {
       orderResult,
       [
         [$.A($.Tyr).support($.A($.Boh).move($.Mun)), $.Success],
-        [$.A($.Ber).support($.A($.Mun).move($.Sil)), $.Success],
-        [$.A($.Pru).support($.A($.War).move($.Sil)), $.Success],
         [$.A($.Mun).move($.Sil), $.Dislodged],
         [$.A($.War).move($.Sil), $.Standoff],
-        [$.A($.Boh).move($.Mun), $.Success]
+        [$.A($.Boh).move($.Mun), $.Success],
+        [$.A($.Ber).support($.A($.Mun).move($.Sil)), $.Success],
+        [$.A($.Pru).support($.A($.War).move($.Sil)), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -287,6 +287,44 @@ describe('MovementResolver', () => {
           [$.Russia, [$.A($.Pru), $.A($.War)]]
         ],
         [], [[$.A($.Mun), $.Dislodged]], [[$.Sil.province, $.Standoff]]
+      )
+    )
+  })
+  it('DIAGRAM 12', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.Austria, [$.A($.Ser), $.A($.Rum), $.A($.Sev)]],
+          [$.Turkey, [$.A($.Bul)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Bul).move($.Rum),
+        $.A($.Rum).move($.Bul), $.A($.Sev).move($.Rum), $.A($.Ser).support($.A($.Rum).move($.Bul))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Bul).move($.Rum), $.Dislodged],
+        [$.A($.Rum).move($.Bul), $.Success],
+        [$.A($.Sev).move($.Rum), $.Success],
+        [$.A($.Ser).support($.A($.Rum).move($.Bul)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [
+          [$.Austria, [$.A($.Ser), $.A($.Bul), $.A($.Rum)]],
+          [$.Turkey, []]
+        ],
+        [], [[$.A($.Bul), $.Dislodged]], []
       )
     )
   })
