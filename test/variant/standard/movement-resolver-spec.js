@@ -247,7 +247,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('DIAGRAM 11', () => {
+  it('DIAGRAM 12', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -290,7 +290,7 @@ describe('MovementResolver', () => {
       )
     )
   })
-  it('DIAGRAM 12', () => {
+  it('DIAGRAM 13', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
