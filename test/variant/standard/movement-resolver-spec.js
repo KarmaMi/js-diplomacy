@@ -141,9 +141,9 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
+        [$.A($.Gas).support($.A($.Mar).move($.Bur)), $.Success],
         [$.A($.Mar).move($.Bur), $.Success],
-        [$.A($.Bur).hold(), $.Dislodged],
-        [$.A($.Gas).support($.A($.Mar).move($.Bur)), $.Success]
+        [$.A($.Bur).hold(), $.Dislodged]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -200,10 +200,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.F($.GoL).move($.Tyn), $.Standoff],
-        [$.F($.Nap).move($.Tyn), $.Standoff],
         [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
-        [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success]
+        [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success],
+        [$.F($.GoL).move($.Tyn), $.Standoff],
+        [$.F($.Nap).move($.Tyn), $.Standoff]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -232,10 +232,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.F($.GoL).move($.Tyn), $.Fail],
-        [$.F($.Tyn).hold(), $.Success],
         [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
-        [$.F($.Rom).support($.F($.Tyn).hold()), $.Success]
+        [$.F($.Rom).support($.F($.Tyn).hold()), $.Success],
+        [$.F($.GoL).move($.Tyn), $.Fail],
+        [$.F($.Tyn).hold(), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -270,11 +270,11 @@ describe('MovementResolver', () => {
       orderResult,
       [
         [$.A($.Tyr).support($.A($.Boh).move($.Mun)), $.Success],
+        [$.A($.Ber).support($.A($.Mun).move($.Sil)), $.Success],
+        [$.A($.Pru).support($.A($.War).move($.Sil)), $.Success],
         [$.A($.Mun).move($.Sil), $.Dislodged],
         [$.A($.War).move($.Sil), $.Standoff],
-        [$.A($.Boh).move($.Mun), $.Success],
-        [$.A($.Ber).support($.A($.Mun).move($.Sil)), $.Success],
-        [$.A($.Pru).support($.A($.War).move($.Sil)), $.Success]
+        [$.A($.Boh).move($.Mun), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -310,10 +310,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
+        [$.A($.Ser).support($.A($.Rum).move($.Bul)), $.Success],
         [$.A($.Bul).move($.Rum), $.Dislodged],
         [$.A($.Rum).move($.Bul), $.Success],
-        [$.A($.Sev).move($.Rum), $.Success],
-        [$.A($.Ser).support($.A($.Rum).move($.Bul)), $.Success]
+        [$.A($.Sev).move($.Rum), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -349,12 +349,12 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Bul).move($.Rum), $.Dislodged],
-        [$.A($.Rum).move($.Bul), $.Success],
-        [$.A($.Sev).move($.Rum), $.Success],
         [$.F($.Bla).support($.A($.Bul).move($.Rum)), $.Success],
         [$.A($.Ser).support($.A($.Rum).move($.Bul)), $.Success],
-        [$.A($.Gre).support($.A($.Rum).move($.Bul)), $.Success]
+        [$.A($.Gre).support($.A($.Rum).move($.Bul)), $.Success],
+        [$.A($.Bul).move($.Rum), $.Dislodged],
+        [$.A($.Rum).move($.Bul), $.Success],
+        [$.A($.Sev).move($.Rum), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -366,6 +366,38 @@ describe('MovementResolver', () => {
           [$.Turkey, [$.F($.Bla)]]
         ],
         [], [[$.A($.Bul), $.Dislodged]], []
+      )
+    )
+  })
+  it('DIAGRAM 15', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Pru), $.A($.Sil)]], [$.Russia, [$.A($.Boh), $.A($.War)]]],
+        [], [], []
+      ),
+      [
+        $.A($.Pru).move($.War), $.A($.Sil).support($.A($.Pru).move($.War)),
+        $.A($.War).hold(), $.A($.Boh).move($.Sil)
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Sil).support($.A($.Pru).move($.War)), $.Cut],
+        [$.A($.Boh).move($.Sil), $.Fail],
+        [$.A($.Pru).move($.War), $.Fail],
+        [$.A($.War).hold(), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.Germany, [$.A($.Pru), $.A($.Sil)]], [$.Russia, [$.A($.Boh), $.A($.War)]]],
+        [], [], []
       )
     )
   })
