@@ -263,10 +263,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Bel).move($.Lon), $.Success],
+        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success],
         [$.F($.Eng).convoy($.A($.Bel).move($.Lon)), $.Success],
-        [$.A($.Lon).move($.Bel), $.Success],
-        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success]
+        [$.A($.Bel).move($.Lon), $.Success],
+        [$.A($.Lon).move($.Bel), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -296,11 +296,11 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
+        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success],
         [$.F($.Eng).convoy($.A($.Lon).move($.Bel)), $.Dislodged],
         [$.F($.Bre).move($.Eng), $.Success],
         [$.F($.Iri).support($.F($.Bre).move($.Eng)), $.Success],
         [$.A($.Lon).move($.Bel), $.Success],
-        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -309,6 +309,44 @@ describe('MovementResolver', () => {
         new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.A($.Bel), $.F($.Nth)]], [$.France, [$.F($.Eng), $.F($.Iri)]]],
         [], [[$.F($.Eng), $.Dislodged]], []
+      )
+    )
+  })
+  it('DIAGRAM 30', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.France, [$.A($.Tun), $.F($.Tyn)]],
+          [$.Italy, [$.F($.Ion), $.F($.Nap)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Tun).move($.Nap), $.F($.Tyn).convoy($.A($.Tun).move($.Nap)),
+        $.F($.Ion).move($.Tyn), $.F($.Nap).support($.F($.Ion).move($.Tyn))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Tun).move($.Nap), $.Failed],
+        [$.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.Dislodged],
+        [$.F($.Ion).move($.Tyn), $.Success],
+        [$.F($.Nap).support($.F($.Ion).move($.Tyn)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [
+          [$.France, [$.A($.Tun)]],
+          [$.Italy, [$.F($.Tyn), $.F($.Nap)]]
+        ],
+        [], [[$.F($.Tyn), $.Dislodged]], []
       )
     )
   })
