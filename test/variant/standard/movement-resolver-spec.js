@@ -33,7 +33,7 @@ describe('MovementResolver', () => {
 
     ResolverSpecUtil.checkOrderResult(
       orderResult,
-      [[$.A($.Ber).move($.Sil), $.Standoff], [$.A($.War).move($.Sil), $.Standoff]]
+      [[$.A($.Ber).move($.Sil), $.Bounced], [$.A($.War).move($.Sil), $.Bounced]]
     )
     ResolverSpecUtil.checkBoard(
       board,
@@ -58,9 +58,9 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Ber).move($.Pru), $.Fail],
+        [$.A($.Ber).move($.Pru), $.Bounced],
         [$.A($.Pru).hold(), $.Success],
-        [$.A($.Kie).move($.Ber), $.Fail]
+        [$.A($.Kie).move($.Ber), $.Bounced]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -86,8 +86,8 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Pru).move($.Ber), $.Fail],
-        [$.A($.Ber).move($.Pru), $.Fail]
+        [$.A($.Pru).move($.Ber), $.Bounced],
+        [$.A($.Ber).move($.Pru), $.Bounced]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -202,8 +202,8 @@ describe('MovementResolver', () => {
       [
         [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
         [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Success],
-        [$.F($.GoL).move($.Tyn), $.Standoff],
-        [$.F($.Nap).move($.Tyn), $.Standoff]
+        [$.F($.GoL).move($.Tyn), $.Bounced],
+        [$.F($.Nap).move($.Tyn), $.Bounced]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -234,7 +234,7 @@ describe('MovementResolver', () => {
       [
         [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Success],
         [$.F($.Rom).support($.F($.Tyn).hold()), $.Success],
-        [$.F($.GoL).move($.Tyn), $.Fail],
+        [$.F($.GoL).move($.Tyn), $.Bounced],
         [$.F($.Tyn).hold(), $.Success]
       ]
     )
@@ -273,7 +273,7 @@ describe('MovementResolver', () => {
         [$.A($.Ber).support($.A($.Mun).move($.Sil)), $.Success],
         [$.A($.Pru).support($.A($.War).move($.Sil)), $.Success],
         [$.A($.Mun).move($.Sil), $.Dislodged],
-        [$.A($.War).move($.Sil), $.Standoff],
+        [$.A($.War).move($.Sil), $.Bounced],
         [$.A($.Boh).move($.Mun), $.Success]
       ]
     )
@@ -387,8 +387,8 @@ describe('MovementResolver', () => {
       orderResult,
       [
         [$.A($.Sil).support($.A($.Pru).move($.War)), $.Cut],
-        [$.A($.Boh).move($.Sil), $.Fail],
-        [$.A($.Pru).move($.War), $.Fail],
+        [$.A($.Boh).move($.Sil), $.Bounced],
+        [$.A($.Pru).move($.War), $.Bounced],
         [$.A($.War).hold(), $.Success]
       ]
     )
