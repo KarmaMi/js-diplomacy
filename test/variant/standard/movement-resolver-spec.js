@@ -432,4 +432,37 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 17', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Ber), $.A($.Sil)]], [$.Russia, [$.F($.Bal), $.A($.Pru), $.A($.War)]]],
+        [], [], []
+      ),
+      [
+        $.A($.Ber).move($.Pru), $.A($.Sil).support($.A($.Ber).move($.Pru)),
+        $.F($.Bal).move($.Pru), $.A($.Pru).move($.Sil), $.A($.War).support($.A($.Pru).move($.Sil))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.War).support($.A($.Pru).move($.Sil)), $.Success],
+        [$.A($.Sil).support($.A($.Ber).move($.Pru)), $.Dislodged],
+        [$.A($.Pru).move($.Sil), $.Success],
+        [$.A($.Ber).move($.Pru), $.Bounced],
+        [$.F($.Bal).move($.Pru), $.Bounced]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.F($.Bal), $.A($.Sil), $.A($.War)]]],
+        [], [[$.A($.Sil), $.Dislodged]], [[$.Pru.province, $.Standoff]]
+      )
+    )
+  })
 })
