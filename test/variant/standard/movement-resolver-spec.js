@@ -717,4 +717,43 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 25', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.Austria, [$.A($.Boh), $.A($.Tyr)]],
+          [$.Germany, [$.A($.Ruh), $.A($.Mun), $.A($.Sil)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Boh).support($.A($.Sil).move($.Mun)), $.A($.Tyr).move($.Mun),
+        $.A($.Mun).move($.Tyr), $.A($.Sil).move($.Mun), $.A($.Ruh).move($.Mun)
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Boh).support($.A($.Sil).move($.Mun)), $.Success],
+        [$.A($.Mun).move($.Tyr), $.Bounced],
+        [$.A($.Sil).move($.Mun), $.Bounced],
+        [$.A($.Tyr).move($.Mun), $.Bounced],
+        [$.A($.Ruh).move($.Mun), $.Bounced]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [
+          [$.Austria, [$.A($.Boh), $.A($.Tyr)]],
+          [$.Germany, [$.A($.Ruh), $.A($.Mun), $.A($.Sil)]]
+        ],
+        [], [], []
+      )
+    )
+  })
 })
