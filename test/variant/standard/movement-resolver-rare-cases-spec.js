@@ -263,10 +263,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Lon).move($.Bel), $.Success],
-        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success],
         [$.A($.Bel).move($.Lon), $.Success],
-        [$.F($.Eng).convoy($.A($.Bel).move($.Lon)), $.Success]
+        [$.F($.Eng).convoy($.A($.Bel).move($.Lon)), $.Success],
+        [$.A($.Lon).move($.Bel), $.Success],
+        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
