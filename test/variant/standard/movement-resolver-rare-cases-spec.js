@@ -278,4 +278,38 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 29', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.England, [$.A($.Lon), $.F($.Nth), $.F($.Eng)]], [$.France, [$.F($.Bre), $.F($.Iri)]]],
+        [], [], []
+      ),
+      [
+        $.A($.Lon).move($.Bel),
+        $.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.F($.Eng).convoy($.A($.Lon).move($.Bel)),
+        $.F($.Bre).move($.Eng), $.F($.Iri).support($.F($.Bre).move($.Eng))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Eng).convoy($.A($.Lon).move($.Bel)), $.Dislodged],
+        [$.F($.Bre).move($.Eng), $.Success],
+        [$.F($.Iri).support($.F($.Bre).move($.Eng)), $.Success],
+        [$.A($.Lon).move($.Bel), $.Success],
+        [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [[$.England, [$.A($.Bel), $.F($.Nth)]], [$.France, [$.F($.Eng), $.F($.Iri)]]],
+        [], [[$.F($.Eng), $.Dislodged]], []
+      )
+    )
+  })
 })
