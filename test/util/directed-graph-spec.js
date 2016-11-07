@@ -32,10 +32,18 @@ describe('DirectedGraph', () => {
     ([...g2.edges]).should.deep.equal([[3, 4]])
   })
   describe('#getCycle', () => {
-    it('returns a cycle', () => {
+    it('returns a cycle (1)', () => {
       const g = new DirectedGraph(
         [[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd']],
         [[1, 2], [2, 3], [3, 2], [3, 4]]
+      )
+      const cycle = g.getCycle()
+      cycle.should.deep.equal([2, 3])
+    })
+    it('returns a cycle (2)', () => {
+      const g = new DirectedGraph(
+        [[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd']],
+        [[2, 1], [2, 3], [3, 2], [4, 2]]
       )
       const cycle = g.getCycle()
       cycle.should.deep.equal([2, 3])
