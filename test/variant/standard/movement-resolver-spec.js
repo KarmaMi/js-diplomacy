@@ -533,4 +533,38 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 20', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.England, [$.A($.Lon), $.F($.Eng), $.F($.Mid)]], [$.France, [$.F($.Wes)]]],
+        [], [], []
+      ),
+      [
+        $.A($.Lon).move($.Tun),
+        $.F($.Eng).convoy($.A($.Lon).move($.Tun)),
+        $.F($.Mid).convoy($.A($.Lon).move($.Tun)),
+        $.F($.Wes).convoy($.A($.Lon).move($.Tun))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Eng).convoy($.A($.Lon).move($.Tun)), $.Success],
+        [$.F($.Mid).convoy($.A($.Lon).move($.Tun)), $.Success],
+        [$.F($.Wes).convoy($.A($.Lon).move($.Tun)), $.Success],
+        [$.A($.Lon).move($.Tun), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.England, [$.A($.Tun), $.F($.Eng), $.F($.Mid)]], [$.France, [$.F($.Wes)]]],
+        [], [], []
+      )
+    )
+  })
 })
