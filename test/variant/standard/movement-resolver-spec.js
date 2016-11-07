@@ -465,4 +465,45 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 18', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.Germany, [$.A($.Ber), $.A($.Mun)]],
+          [$.Russia, [$.A($.Pru), $.A($.Sil), $.A($.Boh), $.A($.Tyr)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Ber).hold(), $.A($.Mun).move($.Sil),
+        $.A($.Pru).move($.Ber), $.A($.Sil).support($.A($.Pru).move($.Ber)),
+        $.A($.Boh).move($.Mun), $.A($.Tyr).support($.A($.Boh).move($.Mun))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Mun).move($.Sil), $.Dislodged],
+        [$.A($.Sil).support($.A($.Pru).move($.Ber)), $.Cut],
+        [$.A($.Ber).hold(), $.Success],
+        [$.A($.Pru).move($.Ber), $.Bounced],
+        [$.A($.Tyr).support($.A($.Boh).move($.Mun)), $.Success],
+        [$.A($.Boh).move($.Mun), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [
+          [$.Germany, [$.A($.Ber)]],
+          [$.Russia, [$.A($.Pru), $.A($.Sil), $.A($.Mun), $.A($.Tyr)]]
+        ],
+        [], [[$.A($.Mun), $.Dislodged]], []
+      )
+    )
+  })
 })
