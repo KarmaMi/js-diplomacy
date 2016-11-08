@@ -25,7 +25,7 @@ describe('MovementResolver#Support Order', () => {
       map,
       new Board(
         variant.initialBoard.state,
-        [[$.France, [$.A($.Gas), $.F($.Mar)]], [$.Germany, [$.A($.Bur)]]],
+        [[$.France, [$.A($.Gas), $.A($.Mar)]], [$.Germany, [$.A($.Bur)]]],
         [], [], []
       ),
       [$.A($.Mar).move($.Bur), $.A($.Gas).support($.A($.Mar).move($.Bur)), $.A($.Bur).hold()]
@@ -43,8 +43,10 @@ describe('MovementResolver#Support Order', () => {
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
-        [[$.France, [$.A($.Gas), $.F($.Bur)]], [$.Germany, []]],
-        [], [[$.A($.Bur), $.Dislodged]], []
+        [[$.France, [$.A($.Gas), $.A($.Bur)]], [$.Germany, []]],
+        [],
+        [[$.Germany, [[$.A($.Bur), { status: $.Dislodged, attackedFrom: $.Mar.province }]]]],
+        []
       )
     )
   })
@@ -72,7 +74,9 @@ describe('MovementResolver#Support Order', () => {
       new Board(
         new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.F($.Bal), $.A($.Pru)]], [$.Russia, []]],
-        [], [[$.A($.Pru), $.Dislodged]], []
+        [],
+        [[$.Russia, [[$.A($.Pru), { status: $.Dislodged, attackedFrom: $.Sil.province }]]]],
+        []
       )
     )
   })
@@ -179,7 +183,9 @@ describe('MovementResolver#Support Order', () => {
           [$.Germany, [$.A($.Ber)]],
           [$.Russia, [$.A($.Pru), $.A($.War)]]
         ],
-        [], [[$.A($.Mun), $.Dislodged]], [[$.Sil.province, $.Standoff]]
+        [],
+        [[$.Germany, [[$.A($.Mun), { status: $.Dislodged, attackedFrom: $.Boh.province }]]]],
+        [[$.Sil.province, $.Standoff]]
       )
     )
   })
@@ -217,7 +223,9 @@ describe('MovementResolver#Support Order', () => {
           [$.Austria, [$.A($.Ser), $.A($.Bul), $.A($.Rum)]],
           [$.Turkey, []]
         ],
-        [], [[$.A($.Bul), $.Dislodged]], []
+        [],
+        [[$.Turkey, [[$.A($.Bul), { status: $.Dislodged, attackedFrom: $.Rum.province }]]]],
+        []
       )
     )
   })
@@ -258,7 +266,9 @@ describe('MovementResolver#Support Order', () => {
           [$.Austria, [$.A($.Ser), $.A($.Bul), $.A($.Rum), $.A($.Gre)]],
           [$.Turkey, [$.F($.Bla)]]
         ],
-        [], [[$.A($.Bul), $.Dislodged]], []
+        [],
+        [[$.Turkey, [[$.A($.Bul), { status: $.Dislodged, attackedFrom: $.Rum.province }]]]],
+        []
       )
     )
   })
@@ -321,7 +331,9 @@ describe('MovementResolver#Support Order', () => {
       new Board(
         new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.War), $.A($.Sil)]], [$.Russia, []]],
-        [], [[$.A($.War), $.Dislodged]], []
+        [],
+        [[$.Russia, [[$.A($.War), { status: $.Dislodged, attackedFrom: $.Pru.province }]]]],
+        []
       )
     )
   })
@@ -354,7 +366,9 @@ describe('MovementResolver#Support Order', () => {
       new Board(
         new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.F($.Bal), $.A($.Sil), $.A($.War)]]],
-        [], [[$.A($.Sil), $.Dislodged]], [[$.Pru.province, $.Standoff]]
+        [],
+        [[$.Germany, [[$.A($.Sil), { status: $.Dislodged, attackedFrom: $.Pru.province }]]]],
+        [[$.Pru.province, $.Standoff]]
       )
     )
   })
@@ -395,7 +409,9 @@ describe('MovementResolver#Support Order', () => {
           [$.Germany, [$.A($.Ber)]],
           [$.Russia, [$.A($.Pru), $.A($.Sil), $.A($.Mun), $.A($.Tyr)]]
         ],
-        [], [[$.A($.Mun), $.Dislodged]], []
+        [],
+        [[$.Germany, [[$.A($.Mun), { status: $.Dislodged, attackedFrom: $.Boh.province }]]]],
+        []
       )
     )
   })

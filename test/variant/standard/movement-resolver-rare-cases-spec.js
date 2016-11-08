@@ -308,7 +308,9 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       new Board(
         new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.A($.Bel), $.F($.Nth)]], [$.France, [$.F($.Eng), $.F($.Iri)]]],
-        [], [[$.F($.Eng), $.Dislodged]], []
+        [],
+        [[$.England, [[$.F($.Eng), { status: $.Dislodged, attackedFrom: $.Bre.province }]]]],
+        []
       )
     )
   })
@@ -346,7 +348,9 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
           [$.France, [$.A($.Tun)]],
           [$.Italy, [$.F($.Tyn), $.F($.Nap)]]
         ],
-        [], [[$.F($.Tyn), $.Dislodged]], []
+        [],
+        [[$.France, [[$.F($.Tyn), { status: $.Dislodged, attackedFrom: $.Ion.province }]]]],
+        []
       )
     )
   })
@@ -427,7 +431,9 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
           [$.France, [$.A($.Nap), $.F($.Tyn), $.F($.Ion), $.A($.Apu)]],
           [$.Italy, [$.F($.Rom)]]
         ],
-        [], [[$.F($.Nap), $.Dislodged]], []
+        [],
+        [[$.Italy, [[$.F($.Nap), { status: $.Dislodged, attackedFrom: $.Tun.province }]]]],
+        []
       )
     )
   })

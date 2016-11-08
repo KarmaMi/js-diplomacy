@@ -117,7 +117,9 @@ describe('MovementResolver#Convoy Order', () => {
           [$.France, [$.A($.Spa), $.F($.GoL)]],
           [$.Italy, [$.F($.Tun), $.F($.Tyn)]]
         ],
-        [], [[$.F($.Tyn), $.Dislodged]], []
+        [],
+        [[$.France, [[$.F($.Tyn), { status: $.Dislodged, attackedFrom: $.Ion.province }]]]],
+        []
       )
     )
   })
