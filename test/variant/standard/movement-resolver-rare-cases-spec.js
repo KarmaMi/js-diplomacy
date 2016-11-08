@@ -383,10 +383,51 @@ describe('MovementResolver', () => {
       new Board(
         new State(1901, $.Autumn, $.Movement),
         [
-          [$.France, [$.A($.Tun)]],
-          [$.Italy, [$.F($.Tyn), $.F($.Nap)]]
+          [$.France, [$.A($.Tun), $.F($.Tyn), $.F($.Ion)]],
+          [$.Italy, [$.F($.Rom), $.F($.Nap)]]
         ],
-        [], [[$.F($.Tyn), $.Dislodged]], []
+        [], [], []
+      )
+    )
+  })
+  it('DIAGRAM 32', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.France, [$.A($.Tun), $.F($.Tyn), $.F($.Ion), $.A($.Apu)]],
+          [$.Italy, [$.F($.Rom), $.F($.Nap)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Tun).move($.Nap), $.A($.Apu).support($.A($.Tun).move($.Nap)),
+        $.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.F($.Ion).convoy($.A($.Tun).move($.Nap)),
+        $.F($.Rom).move($.Tyn), $.F($.Nap).support($.F($.Rom).move($.Tyn))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Ion).convoy($.A($.Tun).move($.Nap)), $.Success],
+        [$.F($.Nap).support($.F($.Rom).move($.Tyn)), $.Dislodged],
+        [$.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.Success],
+        [$.F($.Rom).move($.Tyn), $.Bounced],
+        [$.A($.Tun).move($.Nap), $.Success],
+        [$.A($.Apu).support($.A($.Tun).move($.Nap)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [
+          [$.France, [$.A($.Nap), $.F($.Tyn), $.F($.Ion), $.A($.Apu)]],
+          [$.Italy, [$.F($.Rom)]]
+        ],
+        [], [[$.F($.Nap), $.Dislodged]], []
       )
     )
   })
