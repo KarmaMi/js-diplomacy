@@ -350,4 +350,44 @@ describe('MovementResolver', () => {
       )
     )
   })
+  it('DIAGRAM 31', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.France, [$.A($.Tun), $.F($.Tyn), $.F($.Ion)]],
+          [$.Italy, [$.F($.Rom), $.F($.Nap)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Tun).move($.Nap),
+        $.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.F($.Ion).convoy($.A($.Tun).move($.Nap)),
+        $.F($.Rom).move($.Tyn), $.F($.Nap).support($.F($.Rom).move($.Tyn))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Ion).convoy($.A($.Tun).move($.Nap)), $.Failed],
+        [$.F($.Nap).support($.F($.Rom).move($.Tyn)), $.Cut],
+        [$.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.Failed],
+        [$.F($.Rom).move($.Tyn), $.Bounced],
+        [$.A($.Tun).move($.Nap), $.Bounced]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [
+          [$.France, [$.A($.Tun)]],
+          [$.Italy, [$.F($.Tyn), $.F($.Nap)]]
+        ],
+        [], [[$.F($.Tyn), $.Dislodged]], []
+      )
+    )
+  })
 })
