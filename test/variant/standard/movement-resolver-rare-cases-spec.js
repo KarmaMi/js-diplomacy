@@ -300,7 +300,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.F($.Eng).convoy($.A($.Lon).move($.Bel)), $.Dislodged],
         [$.F($.Bre).move($.Eng), $.Success],
         [$.F($.Iri).support($.F($.Bre).move($.Eng)), $.Success],
-        [$.A($.Lon).move($.Bel), $.Success],
+        [$.A($.Lon).move($.Bel), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
