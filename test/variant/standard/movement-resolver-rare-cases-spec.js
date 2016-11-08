@@ -71,10 +71,10 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Bur).move($.Mar), $.Bounced],
         [$.A($.Par).move($.Bur), $.Bounced],
         [$.A($.Ruh).support($.A($.Par).move($.Bur)), $.Failed],
-        [$.A($.Mar).move($.Bur), $.Bounced]
+        [$.A($.Mar).move($.Bur), $.Bounced],
+        [$.A($.Bur).move($.Mar), $.Bounced]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -150,11 +150,11 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Mun).move($.Tyr), $.Bounced],
         [$.A($.Sil).move($.Mun), $.Bounced],
         [$.A($.Boh).support($.A($.Sil).move($.Mun)), $.Failed],
         [$.A($.Tyr).move($.Mun), $.Bounced],
-        [$.A($.Ruh).move($.Mun), $.Bounced]
+        [$.A($.Ruh).move($.Mun), $.Bounced],
+        [$.A($.Mun).move($.Tyr), $.Bounced]
       ]
     )
     ResolverSpecUtil.checkBoard(
