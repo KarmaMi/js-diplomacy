@@ -47,4 +47,31 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('No corresponding order (convoy)', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.France, [$.A($.Bre), $.F($.Eng)]]],
+        [], [], []
+      ),
+      [$.A($.Bre).move($.Par), $.F($.Eng).convoy($.A($.Bre).move($.Lon))]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Eng).convoy($.A($.Bre).move($.Lon)), $.NoCorrespondingOrder],
+        [$.A($.Bre).move($.Par), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.France, [$.A($.Par), $.F($.Eng)]]],
+        [], [], []
+      )
+    )
+  })
 })
