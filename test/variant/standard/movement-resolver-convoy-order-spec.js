@@ -34,8 +34,8 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Lon).move($.Nwy), $.Success],
-        [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.Success]
+        [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.Success],
+        [$.A($.Lon).move($.Nwy), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -56,20 +56,20 @@ describe('MovementResolver', () => {
         [], [], []
       ),
       [
-        $.A($.Lon).move($.Tun),
         $.F($.Eng).convoy($.A($.Lon).move($.Tun)),
         $.F($.Mid).convoy($.A($.Lon).move($.Tun)),
-        $.F($.Wes).convoy($.A($.Lon).move($.Tun))
+        $.F($.Wes).convoy($.A($.Lon).move($.Tun)),
+        $.A($.Lon).move($.Tun)
       ]
     )
 
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
-        [$.A($.Lon).move($.Tun), $.Success],
         [$.F($.Eng).convoy($.A($.Lon).move($.Tun)), $.Success],
         [$.F($.Mid).convoy($.A($.Lon).move($.Tun)), $.Success],
-        [$.F($.Wes).convoy($.A($.Lon).move($.Tun)), $.Success]
+        [$.F($.Wes).convoy($.A($.Lon).move($.Tun)), $.Success],
+        [$.A($.Lon).move($.Tun), $.Success]
       ]
     )
     ResolverSpecUtil.checkBoard(
@@ -102,11 +102,11 @@ describe('MovementResolver', () => {
     ResolverSpecUtil.checkOrderResult(
       orderResult,
       [
+        [$.F($.GoL).convoy($.A($.Spa).move($.Nap)), $.Failed],
         [$.F($.Tyn).convoy($.A($.Spa).move($.Nap)), $.Dislodged],
         [$.F($.Ion).move($.Tyn), $.Success],
         [$.F($.Tun).support($.F($.Ion).move($.Tyn)), $.Success],
-        [$.A($.Spa).move($.Nap), $.Failed],
-        [$.F($.GoL).convoy($.A($.Spa).move($.Nap)), $.Failed]
+        [$.A($.Spa).move($.Nap), $.Failed]
       ]
     )
     ResolverSpecUtil.checkBoard(
