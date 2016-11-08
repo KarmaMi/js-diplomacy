@@ -19,7 +19,7 @@ const r = new MovementResolver(rule)
 
 chai.should()
 
-describe('MovementResolver', () => {
+describe('MovementResolver#Rare Cases and Tricky Situations', () => {
   it('DIAGRAM 22', () => {
     const { board, orderResult } = r.resolve(
       map,
