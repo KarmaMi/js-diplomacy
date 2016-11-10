@@ -140,4 +140,33 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('two units support each other.', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.England, [$.F($.Nth), $.F($.Nwy)]]],
+        [], [], []
+      ),
+      [
+        $.F($.Nth).support($.F($.Nwy).hold()), $.F($.Nwy).support($.F($.Nth).hold())
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Nwy).support($.F($.Nth).hold()), $.Success],
+        [$.F($.Nth).support($.F($.Nwy).hold()), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.England, [$.F($.Nth), $.F($.Nwy)]]],
+        [], [], []
+      )
+    )
+  })
 })
