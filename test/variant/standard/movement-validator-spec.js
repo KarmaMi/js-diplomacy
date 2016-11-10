@@ -4,6 +4,7 @@ const chai = require('chai')
 const assert = require('assert')
 
 const Helper = require('./../../../lib/variant/helper')
+const Board = require('./../../../lib/data/board')
 const MovementValidator = require('./../../../lib/variant/standard/movement-validator')
 
 const rule = require('./../../../lib/variant/standard/rule')
@@ -22,8 +23,15 @@ describe('MovementValidator', () => {
     v.defaultOrder(map, variant.initialBoard, $.F($.Lon)).type.should.equal('Hold')
   })
   describe('valid order is received', () => {
-    it('returns null', () => {
+    it('returns null (1)', () => {
       const msg = v.getErrorMessageForOrder(map, variant.initialBoard, $.A($.Lvp).move($.Bre));
+
+      (msg === null).should.equal(true)
+    })
+    it('returns null (2)', () => {
+      const msg = v.getErrorMessageForOrder(
+        map, new Board(null, [[$.France, [$.A($.Spa)]]], [], [], []), $.A($.Spa).move($.Tun)
+      );
 
       (msg === null).should.equal(true)
     })
