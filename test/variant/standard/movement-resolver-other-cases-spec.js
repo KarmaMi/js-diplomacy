@@ -74,4 +74,32 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('swap locations using convoy', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.Germany, [$.A($.Pru), $.A($.Ber), $.F($.Bal)]]],
+        [], [], []
+      ),
+      [$.A($.Pru).move($.Ber), $.A($.Ber).move($.Pru), $.F($.Bal).convoy($.A($.Pru).move($.Ber))]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Bal).convoy($.A($.Pru).move($.Ber)), $.Success],
+        [$.A($.Ber).move($.Pru), $.Success],
+        [$.A($.Pru).move($.Ber), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.Germany, [$.A($.Ber), $.A($.Pru), $.F($.Bal)]]],
+        [], [], []
+      )
+    )
+  })
 })
