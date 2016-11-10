@@ -74,7 +74,7 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
-  it('swap locations using convoy', () => {
+  it('swap locations using convoy (1)', () => {
     const { board, orderResult } = r.resolve(
       map,
       new Board(
@@ -98,6 +98,44 @@ describe('MovementResolver#Other Cases', () => {
       new Board(
         new State(1901, $.Autumn, $.Movement),
         [[$.Germany, [$.A($.Ber), $.A($.Pru), $.F($.Bal)]]],
+        [], [], []
+      )
+    )
+  })
+  it('swap locations using convoy (2)', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.Germany, [$.A($.Ber), $.F($.Bal)]],
+          [$.Russia, [$.A($.Pru), $.A($.Sil)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Pru).move($.Ber), $.A($.Sil).support($.A($.Pru).move($.Ber)),
+        $.A($.Ber).move($.Pru), $.F($.Bal).convoy($.A($.Pru).move($.Ber))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Bal).convoy($.A($.Pru).move($.Ber)), $.Success],
+        [$.A($.Ber).move($.Pru), $.Success],
+        [$.A($.Pru).move($.Ber), $.Success],
+        [$.A($.Sil).support($.A($.Pru).move($.Ber)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [
+          [$.Germany, [$.A($.Pru), $.F($.Bal)]],
+          [$.Russia, [$.A($.Ber), $.A($.Sil)]]
+        ],
         [], [], []
       )
     )
