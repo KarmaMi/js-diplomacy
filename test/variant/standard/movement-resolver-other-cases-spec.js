@@ -234,4 +234,47 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('a complex case conaining convoy and support.', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.Turkey, [$.A($.Tun), $.F($.Tyn)]],
+          [$.France, [$.F($.Rom), $.F($.Wes)]],
+          [$.Italy, [$.A($.Ven), $.F($.Nap)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Tun).move($.Nap), $.F($.Tyn).convoy($.A($.Tun).move($.Nap)),
+        $.F($.Rom).support($.F($.Wes).move($.Tyn)), $.F($.Wes).move($.Tyn),
+        $.A($.Ven).move($.Rom), $.F($.Nap).support($.A($.Ven).move($.Rom))
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.F($.Rom).support($.F($.Wes).move($.Tyn)), $.Cut],
+        [$.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.Failed],
+        [$.F($.Wes).move($.Tyn), $.Bounced],
+        [$.F($.Nap).support($.A($.Ven).move($.Rom)), $.Cut],
+        [$.A($.Ven).move($.Rom), $.Bounced],
+        [$.A($.Tun).move($.Nap), $.Bounced]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [
+          [$.Turkey, [$.A($.Tun), $.F($.Tyn)]],
+          [$.France, [$.F($.Rom), $.F($.Wes)]],
+          [$.Italy, [$.A($.Ven), $.F($.Nap)]]
+        ],
+        [], [], []
+      )
+    )
+  })
 })
