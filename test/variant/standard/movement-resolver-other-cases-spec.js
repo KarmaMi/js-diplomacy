@@ -196,4 +196,42 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('self cutting support.', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [
+          [$.France, [$.A($.Par), $.A($.Bur), $.A($.Gas)]],
+          [$.Italy, [$.A($.Mar)]]
+        ],
+        [], [], []
+      ),
+      [
+        $.A($.Par).move($.Bur), $.A($.Bur).support($.A($.Gas).move($.Mar)), $.A($.Gas).move($.Mar),
+        $.A($.Mar).hold()
+      ]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Par).move($.Bur), $.Bounced],
+        [$.A($.Mar).hold(), $.Dislodged],
+        [$.A($.Gas).move($.Mar), $.Success],
+        [$.A($.Bur).support($.A($.Gas).move($.Mar)), $.Success]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Spring, $.Retreat),
+        [
+          [$.France, [$.A($.Par), $.A($.Bur), $.A($.Mar)]],
+          [$.Italy, []]
+        ],
+        [], [[$.Italy, [[$.A($.Mar), { status: $.Dislodged, attackedFrom: $.Gas.province }]]]], []
+      )
+    )
+  })
 })
