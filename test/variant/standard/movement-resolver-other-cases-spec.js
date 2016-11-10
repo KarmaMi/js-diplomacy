@@ -169,4 +169,31 @@ describe('MovementResolver#Other Cases', () => {
       )
     )
   })
+  it('self stand-off.', () => {
+    const { board, orderResult } = r.resolve(
+      map,
+      new Board(
+        variant.initialBoard.state,
+        [[$.France, [$.A($.Par), $.A($.Mar)]]],
+        [], [], []
+      ),
+      [$.A($.Par).move($.Bur), $.A($.Mar).move($.Bur)]
+    )
+
+    ResolverSpecUtil.checkOrderResult(
+      orderResult,
+      [
+        [$.A($.Par).move($.Bur), $.Bounced],
+        [$.A($.Mar).move($.Bur), $.Bounced]
+      ]
+    )
+    ResolverSpecUtil.checkBoard(
+      board,
+      new Board(
+        new State(1901, $.Autumn, $.Movement),
+        [[$.France, [$.A($.Par), $.A($.Mar)]]],
+        [], [], [[$.Bur.province, $.Standoff]]
+      )
+    )
+  })
 })
