@@ -41,7 +41,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.A($.Bur), $.A($.Mar)]]],
         [], [], []
       )
@@ -68,7 +68,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.A($.Par), $.F($.Eng)]]],
         [], [], []
       )
@@ -96,7 +96,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Ber), $.A($.Pru), $.F($.Bal)]]],
         [], [], []
       )
@@ -131,7 +131,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.Germany, [$.A($.Pru), $.F($.Bal)]],
           [$.Russia, [$.A($.Ber), $.A($.Sil)]]
@@ -163,7 +163,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.F($.Nth), $.F($.Nwy)]]],
         [], [], []
       )
@@ -190,7 +190,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.A($.Par), $.A($.Mar)]]],
         [], [], [[$.Bur.province, $.Standoff]]
       )
@@ -267,7 +267,7 @@ describe('MovementResolver#Other Cases', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.Turkey, [$.A($.Tun), $.F($.Tyn)]],
           [$.France, [$.F($.Rom), $.F($.Wes)]],

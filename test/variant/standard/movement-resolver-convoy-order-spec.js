@@ -41,7 +41,7 @@ describe('MovementResolver#Convoy Order', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.A($.Nwy), $.F($.Nth)]]],
         [], [], []
       )
@@ -75,7 +75,7 @@ describe('MovementResolver#Convoy Order', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.A($.Tun), $.F($.Eng), $.F($.Mid)]], [$.France, [$.F($.Wes)]]],
         [], [], []
       )

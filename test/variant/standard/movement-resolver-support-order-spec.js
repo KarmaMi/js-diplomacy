@@ -106,7 +106,7 @@ describe('MovementResolver#Support Order', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Nap)]]],
         [], [], [[$.Tyn.province, $.Standoff]]
       )
@@ -138,7 +138,7 @@ describe('MovementResolver#Support Order', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.F($.GoL), $.F($.Wes)]], [$.Italy, [$.F($.Rom), $.F($.Tyn)]]],
         [], [], []
       )
@@ -298,7 +298,7 @@ describe('MovementResolver#Support Order', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Pru), $.A($.Sil)]], [$.Russia, [$.A($.Boh), $.A($.War)]]],
         [], [], []
       )
