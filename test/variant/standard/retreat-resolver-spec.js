@@ -12,7 +12,6 @@ const ResolverSpecUtil = require('./resolver-spec-util')
 
 const rule = require('./../../../lib/variant/standard/rule')
 const map = require('./../../../lib/variant/standard/map')
-const variant = require('./../../../lib/variant/standard/variant')
 
 const $ = new Helper(rule, map)
 const r = new RetreatResolver(rule)
