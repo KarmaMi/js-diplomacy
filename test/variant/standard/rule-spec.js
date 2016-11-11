@@ -83,4 +83,40 @@ describe('MovementResolver#Other Cases', () => {
       )
     })
   })
+  describe('when there are no force that can build units', () => {
+    it('skip build phase.', () => {
+      const { board, orderResult } = rule.resolve(
+        map,
+        new Board(new State(1901, $.Autumn, $.Retreat), [], [], [], []),
+        []
+      )
+
+      ResolverSpecUtil.checkOrderResult(
+        orderResult,
+        []
+      )
+      ResolverSpecUtil.checkBoard(
+        board,
+        new Board(new State(1902, $.Spring, $.Movement), [], [], [], [])
+      )
+    })
+  })
+  describe('when all build or disband orders are automatically decidable', () => {
+    it('skip build phase.', () => {
+      const { board, orderResult } = rule.resolve(
+        map,
+        new Board(new State(1901, $.Autumn, $.Retreat), [[$.Germany, [$.A($.Ruh)]]], [], [], []),
+        []
+      )
+
+      ResolverSpecUtil.checkOrderResult(orderResult, [[$.A($.Ruh).disband(), $.Success]])
+      ResolverSpecUtil.checkBoard(
+        board,
+        new Board(
+          new State(1902, $.Spring, $.Movement), [[$.Germany, []]],
+          [[$.Germany, [$.Ruh.province]]], [], []
+        )
+      )
+    })
+  })
 })
