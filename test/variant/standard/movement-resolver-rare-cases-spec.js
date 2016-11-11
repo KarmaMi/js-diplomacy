@@ -42,7 +42,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.France, [$.A($.Par), $.A($.Bur), $.A($.Mar)]]],
         [], [], []
       )
@@ -80,7 +80,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.France, [$.A($.Par), $.A($.Bur)]],
           [$.Italy, [$.A($.Mar)]],
@@ -121,7 +121,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.France, [$.A($.Par), $.A($.Bur)]],
           [$.Germany, [$.A($.Mun), $.A($.Ruh)]]
@@ -160,7 +160,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.Austria, [$.A($.Boh), $.A($.Tyr)]],
           [$.Germany, [$.A($.Ruh), $.A($.Mun), $.A($.Sil)]]
@@ -200,7 +200,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.England, [$.F($.Hel), $.F($.Nth), $.F($.Den)]],
           [$.Germany, [$.A($.Ber), $.F($.Ska)], $.F($.Bal)]
@@ -237,7 +237,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.Austria, [$.A($.Vie), $.A($.Bud)]],
           [$.Russia, [$.A($.Gal)]]
@@ -272,7 +272,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.A($.Bel), $.F($.Nth)]], [$.France, [$.A($.Lon), $.F($.Eng)]]],
         [], [], []
       )
@@ -385,7 +385,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [
           [$.France, [$.A($.Tun), $.F($.Tyn), $.F($.Ion)]],
           [$.Italy, [$.F($.Rom), $.F($.Nap)]]

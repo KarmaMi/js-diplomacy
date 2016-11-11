@@ -38,7 +38,7 @@ describe('MovementResolver#Standoffs', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.War)]]],
         [], [], [[$.Sil.province, $.Standoff]]
       )
@@ -66,7 +66,7 @@ describe('MovementResolver#Standoffs', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Kie), $.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
         [], [], []
       )
@@ -93,7 +93,7 @@ describe('MovementResolver#Standoffs', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.Germany, [$.A($.Ber)]], [$.Russia, [$.A($.Pru)]]],
         [], [], []
       )
@@ -121,7 +121,7 @@ describe('MovementResolver#Standoffs', () => {
     ResolverSpecUtil.checkBoard(
       board,
       new Board(
-        new State(1901, $.Autumn, $.Movement),
+        new State(1901, $.Spring, $.Retreat),
         [[$.England, [$.F($.Nth), $.F($.Hol)]], [$.Germany, [$.A($.Bel)]]],
         [], [], []
       )
