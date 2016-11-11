@@ -12,6 +12,31 @@ const DiplomacyMap = require('./../../lib/map/diplomacy-map')
 chai.should()
 
 describe('DiplomacyMap', () => {
+  it('returns locations that belong to an province', () => {
+    const Fleet = new Name('Fleet', 'F')
+    const Army = new Name('Army', 'A')
+
+    const spain = new Name('Spa')
+    const spa = new Location(spain, [Army])
+    const spaSc = new Location(spain, [Fleet])
+
+    const naples = new Name('Nap')
+    const nap = new Location(naples, [Army, Fleet])
+
+    const apulia = new Name('Apu')
+    const apu = new Location(apulia, [Army, Fleet])
+
+    const western = new Name('Wes')
+    const wes = new Location(western, [Fleet])
+
+    const edges = [
+      new Edge(spaSc, wes, [Fleet]), new Edge(wes, nap, [Fleet]), new Edge(nap, apu, [Army])
+    ]
+
+    const map = new DiplomacyMap(edges);
+
+    ([...map.locationsOf(spain)]).should.deep.equal([spaSc])
+  })
   it('returns provinces that an unit in the province can move to.', () => {
     const Fleet = new Name('Fleet', 'F')
     const Army = new Name('Army', 'A')
