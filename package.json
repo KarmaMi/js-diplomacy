@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
-    "test": "mocha -R spec test/data/*.js test/variant/*.js test/variant/standard/*.js test/*.js"
+    "test": "mocha -R spec test/util/*.js test/data/*.js test/map/*.js test/rule/*.js test/variant/*.js test/variant/standard/*.js test/*.js"
   },
   "repository": {
     "type": "git",

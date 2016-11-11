@@ -4,7 +4,10 @@ const gutil = require('gulp-util')
 
 gulp.task('mocha', () => {
   return gulp.src(
-    ['test/data/*.js', 'test/variant/*.js', 'test/variant/standard/*.js', 'test/*.js'],
+    [
+      'test/util/*.js', 'test/data/*.js', 'test/map/*.js', 'test/rule/*.js',
+      'test/variant/*.js', 'test/variant/standard/*.js', 'test/*.js'
+    ],
     { read: false }
   )
     .pipe(mocha({ reporter: 'list' }))
