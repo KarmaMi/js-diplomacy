@@ -17,7 +17,7 @@ const $ = new Helper(rule, map)
 
 chai.should()
 
-describe('MovementResolver#Other Cases', () => {
+describe('Rule', () => {
   describe('when there are no dislodged units', () => {
     it('skip retreat phase.', () => {
       const { board, orderResult } = rule.resolve(
