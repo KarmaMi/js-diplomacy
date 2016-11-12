@@ -33,7 +33,7 @@ describe('RuleHelper', () => {
       orders.push([name.toLowerCase(), Order[name]])
     }
 
-    const h = new RuleHelper(new Rule([], [], [], [fleet, army], orders))
+    const h = RuleHelper(new Rule([], [], [], [fleet, army], orders))
     h.$m.F(nap).militaryBranch.should.deep.equal(fleet)
     h.$m.F(nap).location.should.deep.equal(nap)
 

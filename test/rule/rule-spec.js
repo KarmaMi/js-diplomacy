@@ -29,7 +29,7 @@ describe('Rule', () => {
 
       const rule = new Rule([], [], [], [army], orders, (map, board, os) => {})
 
-      const $ = new RuleHelper(rule)
+      const $ = RuleHelper(rule)
 
       const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
 
@@ -52,7 +52,7 @@ describe('Rule', () => {
 
       let result = null
       const rule = new Rule([], [], [], [army], orders)
-      const $ = new RuleHelper(rule)
+      const $ = RuleHelper(rule)
 
       rule._resolveOrder = (map, board, os) => { result = os }
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
@@ -81,7 +81,7 @@ describe('Rule', () => {
       }
 
       const rule = new Rule([], [], [], [army], orders, (map, board, os) => {})
-      const $ = new RuleHelper(rule)
+      const $ = RuleHelper(rule)
 
       rule._resolveOrder = (map, board, os) => {}
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
