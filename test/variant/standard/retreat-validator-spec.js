@@ -23,9 +23,6 @@ const board = new Board(
 chai.should()
 
 describe('RetreatValidator', () => {
-  it('uses Disband as a default order.', () => {
-    v.defaultOrder(map, board, $.A($.Mar)).type.should.equal('Disband')
-  })
   describe('valid order is received', () => {
     it('returns null (1)', () => {
       const msg = v.getErrorMessageForOrder(map, board, $.A($.Mar).retreat($.Spa));

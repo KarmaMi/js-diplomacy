@@ -17,10 +17,6 @@ const v = new MovementValidator()
 chai.should()
 
 describe('MovementValidator', () => {
-  it('uses Hold as a default order.', () => {
-    v.defaultOrder(map, variant.initialBoard, $.A($.Lon)).type.should.equal('Hold')
-    v.defaultOrder(map, variant.initialBoard, $.F($.Lon)).type.should.equal('Hold')
-  })
   describe('valid order is received', () => {
     it('returns null (1)', () => {
       const msg = v.getErrorMessageForOrder(map, variant.initialBoard, $.A($.Lvp).move($.Bre));

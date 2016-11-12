@@ -22,9 +22,6 @@ const board = new Board(
 chai.should()
 
 describe('BuildValidator', () => {
-  it('has no default orders.', () => {
-    (v.defaultOrder(map, board, $.A($.Mar)) === null).should.equal(true)
-  })
   describe('valid order is received', () => {
     it('returns null (1)', () => {
       const msg = v.getErrorMessageForOrder(map, board, $.A($.Rom).build());
