@@ -8,9 +8,8 @@ const Board = require('./../../../lib/data/board')
 const MovementValidator = require('./../../../lib/variant/standard/movement-validator')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
-const map = require('./../../../lib/variant/standard/map')
-
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
 const $ = new Helper(ruleKeywords, map)
 const v = new MovementValidator()

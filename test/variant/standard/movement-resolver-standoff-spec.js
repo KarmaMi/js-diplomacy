@@ -10,8 +10,8 @@ const MovementResolver = require('./../../../lib/variant/standard/movement-resol
 const ResolverSpecUtil = require('./resolver-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
-const map = require('./../../../lib/variant/standard/map')
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
 const $ = new Helper(ruleKeywords, map)
 const r = new MovementResolver()

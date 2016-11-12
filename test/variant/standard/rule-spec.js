@@ -9,9 +9,8 @@ const Helper = require('./../../../lib/variant/helper')
 const ResolverSpecUtil = require('./resolver-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
 const variant = require('./../../../lib/variant/standard/variant')
+const { rule, map } = variant
 
 const $ = new Helper(ruleKeywords, map)
 
