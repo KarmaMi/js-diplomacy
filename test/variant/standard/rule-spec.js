@@ -1,23 +1,22 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
 const Board = require('./../../../lib/data/board')
 const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
+const { rule, map } = variant
 
-const $ = new Helper(rule, map)
+const $ = new Helper(ruleKeywords, map)
 
 chai.should()
 
-describe('MovementResolver#Other Cases', () => {
+describe('Rule', () => {
   describe('when there are no dislodged units', () => {
     it('skip retreat phase.', () => {
       const { board, orderResult } = rule.resolve(
@@ -26,18 +25,17 @@ describe('MovementResolver#Other Cases', () => {
           variant.initialBoard.state,
           [[$.France, [$.A($.Bre)]], [$.Germany, [$.A($.Pic)]]],
           [], [], []
-        ),
-        [$.A($.Bre).hold(), $.A($.Pic).hold()]
+        ), []
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         [
           [$.A($.Bre).hold(), $.Success],
           [$.A($.Pic).hold(), $.Success]
         ]
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1901, $.Autumn, $.Movement),
@@ -57,13 +55,12 @@ describe('MovementResolver#Other Cases', () => {
           [], [], []
         ),
         [
-          $.A($.Bre).hold(),
           $.A($.Pic).move($.Bre),
           $.A($.Par).support($.A($.Pic).move($.Bre)), $.A($.Gas).support($.A($.Pic).move($.Bre))
         ]
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         [
           [$.A($.Bre).hold(), $.Dislodged],
@@ -73,7 +70,7 @@ describe('MovementResolver#Other Cases', () => {
           [$.A($.Bre).disband(), $.Success]
         ]
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1901, $.Autumn, $.Movement),
@@ -91,11 +88,11 @@ describe('MovementResolver#Other Cases', () => {
         []
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         []
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(new State(1902, $.Spring, $.Movement), [], [], [], [])
       )
@@ -109,8 +106,8 @@ describe('MovementResolver#Other Cases', () => {
         []
       )
 
-      ResolverSpecUtil.checkOrderResult(orderResult, [[$.A($.Ruh).disband(), $.Success]])
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkOrderResult(orderResult, [[$.A($.Ruh).disband(), $.Success]])
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1902, $.Spring, $.Movement), [[$.Germany, []]],

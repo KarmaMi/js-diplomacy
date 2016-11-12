@@ -8,14 +8,14 @@ const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
-const $ = new Helper(rule, map)
-const r = new MovementResolver(rule)
+const $ = new Helper(ruleKeywords, map)
+const r = new MovementResolver()
 
 chai.should()
 
@@ -31,7 +31,7 @@ describe('MovementResolver#Support Order', () => {
       [$.A($.Mar).move($.Bur), $.A($.Gas).support($.A($.Mar).move($.Bur)), $.A($.Bur).hold()]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Bur).hold(), $.Dislodged],
@@ -39,7 +39,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Gas).support($.A($.Mar).move($.Bur)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -61,7 +61,7 @@ describe('MovementResolver#Support Order', () => {
       [$.F($.Bal).support($.A($.Sil).move($.Pru)), $.A($.Sil).move($.Pru), $.A($.Pru).hold()]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Pru).hold(), $.Dislodged],
@@ -69,7 +69,7 @@ describe('MovementResolver#Support Order', () => {
         [$.F($.Bal).support($.A($.Sil).move($.Pru)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -94,7 +94,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.GoL).move($.Tyn), $.Bounced],
@@ -103,7 +103,7 @@ describe('MovementResolver#Support Order', () => {
         [$.F($.Rom).support($.F($.Nap).move($.Tyn)), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -126,7 +126,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Tyn).hold(), $.Success],
@@ -135,7 +135,7 @@ describe('MovementResolver#Support Order', () => {
         [$.F($.Wes).support($.F($.GoL).move($.Tyn)), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -163,7 +163,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Mun).move($.Sil), $.Dislodged],
@@ -174,7 +174,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Tyr).support($.A($.Boh).move($.Mun)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -206,7 +206,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Bul).move($.Rum), $.Dislodged],
@@ -215,7 +215,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Sev).move($.Rum), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -247,7 +247,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Bul).move($.Rum), $.Dislodged],
@@ -258,7 +258,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Sev).move($.Rum), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -286,7 +286,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Sil).support($.A($.Pru).move($.War)), $.Cut],
@@ -295,7 +295,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Pru).move($.War), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -318,7 +318,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.War).move($.Sil), $.Dislodged],
@@ -326,7 +326,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Sil).support($.A($.Pru).move($.War)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -351,7 +351,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Sil).support($.A($.Ber).move($.Pru)), $.Dislodged],
@@ -361,7 +361,7 @@ describe('MovementResolver#Support Order', () => {
         [$.F($.Bal).move($.Pru), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -390,7 +390,7 @@ describe('MovementResolver#Support Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Sil).support($.A($.Pru).move($.Ber)), $.Cut],
@@ -401,7 +401,7 @@ describe('MovementResolver#Support Order', () => {
         [$.A($.Tyr).support($.A($.Boh).move($.Mun)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),

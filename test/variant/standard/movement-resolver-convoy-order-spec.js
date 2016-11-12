@@ -1,21 +1,20 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
 const Board = require('./../../../lib/data/board')
 const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
-const $ = new Helper(rule, map)
-const r = new MovementResolver(rule)
+const $ = new Helper(ruleKeywords, map)
+const r = new MovementResolver()
 
 chai.should()
 
@@ -31,14 +30,14 @@ describe('MovementResolver#Convoy Order', () => {
       [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.A($.Lon).move($.Nwy)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.Success],
         [$.A($.Lon).move($.Nwy), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -63,7 +62,7 @@ describe('MovementResolver#Convoy Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Eng).convoy($.A($.Lon).move($.Tun)), $.Success],
@@ -72,7 +71,7 @@ describe('MovementResolver#Convoy Order', () => {
         [$.A($.Lon).move($.Tun), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -99,7 +98,7 @@ describe('MovementResolver#Convoy Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.GoL).convoy($.A($.Spa).move($.Nap)), $.Failed],
@@ -109,7 +108,7 @@ describe('MovementResolver#Convoy Order', () => {
         [$.A($.Spa).move($.Nap), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),

@@ -41,7 +41,7 @@ describe('MapHelper', () => {
       ]
     )
 
-    const h = new MapHelper(map)
+    const h = MapHelper(map)
     h.$l.Nap.should.deep.equal(nap)
     h.$l['Spa/SC'].should.deep.equal(spaSc)
 

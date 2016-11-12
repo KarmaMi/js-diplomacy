@@ -1,4 +1,10 @@
-module.exports = class ResolverSpecUtil {
+module.exports = class StandardSpecUtil {
+  static checkOrders (actual, expected) {
+    actual = [...actual].map(elem => elem.toString())
+    expected = [...expected].map(elem => elem.toString())
+
+    actual.should.deep.equal(expected)
+  }
   static checkBoard (actual, expected) {
     actual.state.should.deep.equal(expected.state)
 

@@ -7,21 +7,16 @@ const Helper = require('./../../../lib/variant/helper')
 const Board = require('./../../../lib/data/board')
 const MovementValidator = require('./../../../lib/variant/standard/movement-validator')
 
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
-
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
-const $ = new Helper(rule, map)
-const v = new MovementValidator(rule)
+const $ = new Helper(ruleKeywords, map)
+const v = new MovementValidator()
 
 chai.should()
 
 describe('MovementValidator', () => {
-  it('uses Hold as a default order.', () => {
-    v.defaultOrder(map, variant.initialBoard, $.A($.Lon)).type.should.equal('Hold')
-    v.defaultOrder(map, variant.initialBoard, $.F($.Lon)).type.should.equal('Hold')
-  })
   describe('valid order is received', () => {
     it('returns null (1)', () => {
       const msg = v.getErrorMessageForOrder(map, variant.initialBoard, $.A($.Lvp).move($.Bre));

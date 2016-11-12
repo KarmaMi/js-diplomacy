@@ -1,7 +1,6 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
 const Name = require('./../../lib/data/name')
 const Province = require('./../../lib/data/province')
@@ -10,7 +9,7 @@ const Board = require('./../../lib/data/board')
 const State = require('./../../lib/data/state')
 const Edge = require('./../../lib/map/edge')
 const DiplomacyMap = require('./../../lib/map/diplomacy-map')
-const Rule = require('./../../lib/rule/rule')
+const RuleKeywords = require('./../../lib/rule/rule-keywords')
 
 const Helper = require('./../../lib/variant/helper')
 
@@ -29,7 +28,7 @@ describe('Board', () => {
 
     const map = new DiplomacyMap([new Edge(mar, spa, [army, fleet])])
 
-    const $ = new Helper(new Rule([], [], [], [fleet, army], []), map)
+    const $ = new Helper(new RuleKeywords([], [], [], [fleet, army], []), map)
     const board = new Board(
       new State(1901, 'Spring', 'Movement'),
       [['France', [$.A($.Mar), $.A($.Spa)]]],

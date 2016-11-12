@@ -8,14 +8,14 @@ const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
-const map = require('./../../../lib/variant/standard/map')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
+const { map } = variant
 
-const $ = new Helper(rule, map)
-const r = new MovementResolver(rule)
+const $ = new Helper(ruleKeywords, map)
+const r = new MovementResolver()
 
 chai.should()
 
@@ -31,7 +31,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       [$.A($.Par).move($.Bur), $.A($.Mar).support($.A($.Par).move($.Bur)), $.A($.Bur).hold()]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Bur).hold(), $.Success],
@@ -39,7 +39,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Mar).support($.A($.Par).move($.Bur)), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -68,7 +68,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Par).move($.Bur), $.Bounced],
@@ -77,7 +77,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Bur).move($.Mar), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -109,7 +109,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Bur).hold(), $.Success],
@@ -118,7 +118,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Mun).hold(), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -147,7 +147,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Sil).move($.Mun), $.Bounced],
@@ -157,7 +157,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Mun).move($.Tyr), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -186,7 +186,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Den).move($.Kie), $.Bounced],
@@ -197,7 +197,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.F($.Bal).support($.F($.Ska).move($.Den)), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -226,7 +226,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Vie).move($.Bud), $.Bounced],
@@ -234,7 +234,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Gal).support($.A($.Ser).move($.Bud)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -260,7 +260,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success],
@@ -269,7 +269,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Lon).move($.Bel), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -293,7 +293,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Nth).convoy($.A($.Lon).move($.Bel)), $.Success],
@@ -303,7 +303,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Lon).move($.Bel), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -331,7 +331,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Tyn).convoy($.A($.Tun).move($.Nap)), $.Dislodged],
@@ -340,7 +340,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Tun).move($.Nap), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -372,7 +372,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Ion).convoy($.A($.Tun).move($.Nap)), $.Failed],
@@ -382,7 +382,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Tun).move($.Nap), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -412,7 +412,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Ion).convoy($.A($.Tun).move($.Nap)), $.Success],
@@ -423,7 +423,7 @@ describe('MovementResolver#Rare Cases and Tricky Situations', () => {
         [$.A($.Apu).support($.A($.Tun).move($.Nap)), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
