@@ -50,20 +50,21 @@ describe('Rule', () => {
         orders.push([name.toLowerCase(), Order[name]])
       }
 
-      let result = null
       const rule = new Rule([], [], [], [army], orders)
       const $ = RuleHelper(rule)
 
-      rule._resolveOrder = (map, board, os) => { result = os }
+      rule._resolveOrder = (map, board, os) => {
+        return { orderResult: os.map(order => [order, 'result']) }
+      }
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
       rule.getErrorMessageForOrders = (map, board, orders) => null
       rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
 
-      rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(spa).hold()])
+      const result = [...rule.resolve(null, { units: [] }, [$.A(mar).move(spa)]).orderResult]
 
-      result.length.should.equal(2)
-      result[0].type.should.equal('Hold')
-      result[1].type.should.equal('Hold')
+      result.length.should.equal(1)
+      result[0][0].type.should.equal('Move')
+      result[0][1].replacedBy.type.should.equal('Hold')
     })
   })
   describe('when orders are invalid', () => {
