@@ -89,7 +89,7 @@ describe('Rule', () => {
 
       rule._resolveOrder = (map, board, os) => {}
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
-      rule.getErrorMessageForOrders = (map, board, orders) => 'eror'
+      rule.getErrorMessageForOrders = (map, board, orders) => 'error'
       rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
 
       const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
