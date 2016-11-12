@@ -10,11 +10,11 @@ const BuildResolver = require('./../../../lib/variant/standard/build-resolver')
 
 const ResolverSpecUtil = require('./resolver-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const map = require('./../../../lib/variant/standard/map')
 
-const $ = new Helper(rule, map)
-const r = new BuildResolver(rule)
+const $ = new Helper(ruleKeywords, map)
+const r = new BuildResolver()
 
 const b = new Board(
   new State(1901, $.Spring, $.Retreat),

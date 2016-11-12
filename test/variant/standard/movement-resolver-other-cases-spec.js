@@ -10,12 +10,12 @@ const MovementResolver = require('./../../../lib/variant/standard/movement-resol
 
 const ResolverSpecUtil = require('./resolver-spec-util')
 
-const rule = require('./../../../lib/variant/standard/rule')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const map = require('./../../../lib/variant/standard/map')
 const variant = require('./../../../lib/variant/standard/variant')
 
-const $ = new Helper(rule, map)
-const r = new MovementResolver(rule)
+const $ = new Helper(ruleKeywords, map)
+const r = new MovementResolver()
 
 chai.should()
 

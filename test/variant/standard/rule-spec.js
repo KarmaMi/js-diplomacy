@@ -1,7 +1,6 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
 const Board = require('./../../../lib/data/board')
 const State = require('./../../../lib/data/state')
@@ -9,11 +8,12 @@ const Helper = require('./../../../lib/variant/helper')
 
 const ResolverSpecUtil = require('./resolver-spec-util')
 
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const rule = require('./../../../lib/variant/standard/rule')
 const map = require('./../../../lib/variant/standard/map')
 const variant = require('./../../../lib/variant/standard/variant')
 
-const $ = new Helper(rule, map)
+const $ = new Helper(ruleKeywords, map)
 
 chai.should()
 

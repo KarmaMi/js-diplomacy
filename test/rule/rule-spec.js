@@ -7,7 +7,8 @@ const Name = require('./../../lib/data/name')
 const Location = require('./../../lib/data/location')
 const Province = require('./../../lib/data/province')
 const Rule = require('./../../lib/rule/rule')
-const RuleHelper = require('./../../lib/rule/rule-helper')
+const RuleKeywords = require('./../../lib/rule/rule-keywords')
+const RuleKeywordsHelper = require('./../../lib/rule/rule-keywords-helper')
 const Order = require('./../../lib/variant/standard/order')
 
 chai.should()
@@ -27,9 +28,9 @@ describe('Rule', () => {
         orders.push([name.toLowerCase(), Order[name]])
       }
 
-      const rule = new Rule([], [], [], [army], orders, (map, board, os) => {})
-
-      const $ = RuleHelper(rule)
+      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
+      const $ = RuleKeywordsHelper(ruleKeywords)
+      const rule = new Rule()
 
       const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
 
@@ -50,8 +51,9 @@ describe('Rule', () => {
         orders.push([name.toLowerCase(), Order[name]])
       }
 
-      const rule = new Rule([], [], [], [army], orders)
-      const $ = RuleHelper(rule)
+      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
+      const $ = RuleKeywordsHelper(ruleKeywords)
+      const rule = new Rule()
 
       rule._resolveOrder = (map, board, os) => {
         return { orderResult: os.map(order => [order, 'result']) }
@@ -81,8 +83,9 @@ describe('Rule', () => {
         orders.push([name.toLowerCase(), Order[name]])
       }
 
-      const rule = new Rule([], [], [], [army], orders, (map, board, os) => {})
-      const $ = RuleHelper(rule)
+      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
+      const $ = RuleKeywordsHelper(ruleKeywords)
+      const rule = new Rule()
 
       rule._resolveOrder = (map, board, os) => {}
       rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'

@@ -1,17 +1,16 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
 const Helper = require('./../../../lib/variant/helper')
 const Board = require('./../../../lib/data/board')
 const BuildValidator = require('./../../../lib/variant/standard/build-validator')
 
-const rule = require('./../../../lib/variant/standard/rule')
+const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const map = require('./../../../lib/variant/standard/map')
 
-const $ = new Helper(rule, map)
-const v = new BuildValidator(rule)
+const $ = new Helper(ruleKeywords, map)
+const v = new BuildValidator()
 
 const board = new Board(
   null,
