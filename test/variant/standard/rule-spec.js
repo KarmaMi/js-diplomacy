@@ -25,8 +25,7 @@ describe('Rule', () => {
           variant.initialBoard.state,
           [[$.France, [$.A($.Bre)]], [$.Germany, [$.A($.Pic)]]],
           [], [], []
-        ),
-        [$.A($.Bre).hold(), $.A($.Pic).hold()]
+        ), []
       )
 
       StandardSpecUtil.checkOrderResult(
@@ -56,7 +55,6 @@ describe('Rule', () => {
           [], [], []
         ),
         [
-          $.A($.Bre).hold(),
           $.A($.Pic).move($.Bre),
           $.A($.Par).support($.A($.Pic).move($.Bre)), $.A($.Gas).support($.A($.Pic).move($.Bre))
         ]
