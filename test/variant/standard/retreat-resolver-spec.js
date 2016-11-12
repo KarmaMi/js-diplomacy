@@ -7,7 +7,7 @@ const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const RetreatResolver = require('./../../../lib/variant/standard/retreat-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const map = require('./../../../lib/variant/standard/map')
@@ -34,14 +34,14 @@ describe('RetreatResolver', () => {
       map, b, [$.A($.Mar).disband(), $.F($.Wes).disband()]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Mar).disband(), $.Success],
         [$.F($.Wes).disband(), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Autumn, $.Movement),
@@ -55,14 +55,14 @@ describe('RetreatResolver', () => {
       map, b, [$.A($.Mar).retreat($.Spa), $.F($.Wes).retreat($.NAf)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Mar).retreat($.Spa), $.Success],
         [$.F($.Wes).retreat($.NAf), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Autumn, $.Movement),
@@ -76,14 +76,14 @@ describe('RetreatResolver', () => {
       map, b, [$.A($.Mar).retreat($.Spa), $.F($.Wes).retreat($.Spa)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Mar).retreat($.Spa), $.Failed],
         [$.F($.Wes).retreat($.Spa), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Autumn, $.Movement),

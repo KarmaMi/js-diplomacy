@@ -5,7 +5,7 @@ const chai = require('chai')
 const Helper = require('./../../../lib/variant/helper')
 const Board = require('./../../../lib/data/board')
 const BuildOrderGenerator = require('./../../../lib/variant/standard/build-order-generator')
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
@@ -45,7 +45,7 @@ describe('RetreatOrderGenerator', () => {
           new Board(null, [[$.Germany, [$.A($.Ruh)]]], [], [], [])
         )
 
-        ResolverSpecUtil.checkOrders(orders, [$.A($.Ruh).disband()])
+        StandardSpecUtil.checkOrders(orders, [$.A($.Ruh).disband()])
       })
     })
   })

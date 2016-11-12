@@ -1,4 +1,4 @@
-module.exports = class ResolverSpecUtil {
+module.exports = class StandardSpecUtil {
   static checkOrders (actual, expected) {
     actual = [...actual].map(elem => elem.toString())
     expected = [...expected].map(elem => elem.toString())

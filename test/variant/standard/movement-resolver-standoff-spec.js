@@ -7,7 +7,7 @@ const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
@@ -30,11 +30,11 @@ describe('MovementResolver#Standoffs', () => {
       [$.A($.Ber).move($.Sil), $.A($.War).move($.Sil)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [[$.A($.Ber).move($.Sil), $.Bounced], [$.A($.War).move($.Sil), $.Bounced]]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -54,7 +54,7 @@ describe('MovementResolver#Standoffs', () => {
       [$.A($.Kie).move($.Ber), $.A($.Ber).move($.Pru), $.A($.Pru).hold()]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Pru).hold(), $.Success],
@@ -62,7 +62,7 @@ describe('MovementResolver#Standoffs', () => {
         [$.A($.Kie).move($.Ber), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -82,14 +82,14 @@ describe('MovementResolver#Standoffs', () => {
       [$.A($.Ber).move($.Pru), $.A($.Pru).move($.Ber)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Pru).move($.Ber), $.Bounced],
         [$.A($.Ber).move($.Pru), $.Bounced]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -109,7 +109,7 @@ describe('MovementResolver#Standoffs', () => {
       [$.F($.Bel).move($.Nth), $.F($.Nth).move($.Hol), $.A($.Hol).move($.Bel)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.A($.Hol).move($.Bel), $.Success],
@@ -117,7 +117,7 @@ describe('MovementResolver#Standoffs', () => {
         [$.F($.Bel).move($.Nth), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),

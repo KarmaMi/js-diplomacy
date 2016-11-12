@@ -7,7 +7,7 @@ const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 const MovementResolver = require('./../../../lib/variant/standard/movement-resolver')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
@@ -30,14 +30,14 @@ describe('MovementResolver#Convoy Order', () => {
       [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.A($.Lon).move($.Nwy)]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Nth).convoy($.A($.Lon).move($.Nwy)), $.Success],
         [$.A($.Lon).move($.Nwy), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -62,7 +62,7 @@ describe('MovementResolver#Convoy Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.Eng).convoy($.A($.Lon).move($.Tun)), $.Success],
@@ -71,7 +71,7 @@ describe('MovementResolver#Convoy Order', () => {
         [$.A($.Lon).move($.Tun), $.Success]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),
@@ -98,7 +98,7 @@ describe('MovementResolver#Convoy Order', () => {
       ]
     )
 
-    ResolverSpecUtil.checkOrderResult(
+    StandardSpecUtil.checkOrderResult(
       orderResult,
       [
         [$.F($.GoL).convoy($.A($.Spa).move($.Nap)), $.Failed],
@@ -108,7 +108,7 @@ describe('MovementResolver#Convoy Order', () => {
         [$.A($.Spa).move($.Nap), $.Failed]
       ]
     )
-    ResolverSpecUtil.checkBoard(
+    StandardSpecUtil.checkBoard(
       board,
       new Board(
         new State(1901, $.Spring, $.Retreat),

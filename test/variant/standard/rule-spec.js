@@ -6,7 +6,7 @@ const Board = require('./../../../lib/data/board')
 const State = require('./../../../lib/data/state')
 const Helper = require('./../../../lib/variant/helper')
 
-const ResolverSpecUtil = require('./resolver-spec-util')
+const StandardSpecUtil = require('./standard-spec-util')
 
 const ruleKeywords = require('./../../../lib/variant/standard/rule-keywords')
 const variant = require('./../../../lib/variant/standard/variant')
@@ -29,14 +29,14 @@ describe('Rule', () => {
         [$.A($.Bre).hold(), $.A($.Pic).hold()]
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         [
           [$.A($.Bre).hold(), $.Success],
           [$.A($.Pic).hold(), $.Success]
         ]
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1901, $.Autumn, $.Movement),
@@ -62,7 +62,7 @@ describe('Rule', () => {
         ]
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         [
           [$.A($.Bre).hold(), $.Dislodged],
@@ -72,7 +72,7 @@ describe('Rule', () => {
           [$.A($.Bre).disband(), $.Success]
         ]
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1901, $.Autumn, $.Movement),
@@ -90,11 +90,11 @@ describe('Rule', () => {
         []
       )
 
-      ResolverSpecUtil.checkOrderResult(
+      StandardSpecUtil.checkOrderResult(
         orderResult,
         []
       )
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkBoard(
         board,
         new Board(new State(1902, $.Spring, $.Movement), [], [], [], [])
       )
@@ -108,8 +108,8 @@ describe('Rule', () => {
         []
       )
 
-      ResolverSpecUtil.checkOrderResult(orderResult, [[$.A($.Ruh).disband(), $.Success]])
-      ResolverSpecUtil.checkBoard(
+      StandardSpecUtil.checkOrderResult(orderResult, [[$.A($.Ruh).disband(), $.Success]])
+      StandardSpecUtil.checkBoard(
         board,
         new Board(
           new State(1902, $.Spring, $.Movement), [[$.Germany, []]],
