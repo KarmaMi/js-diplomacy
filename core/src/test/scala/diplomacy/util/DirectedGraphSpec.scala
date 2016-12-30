@@ -4,14 +4,14 @@ import diplomacy.UnitSpec
 
 class DirectedGraphSpec extends UnitSpec {
   "A directed graph" when {
-    "the type of nodes is Set" can {
-      "merge the nodes." in {
+    "the type of vertices is Set" can {
+      "merge the vertices." in {
         val g1 = DirectedGraph(
           Set(Set(1), Set(2), Set(3), Set(4)),
           Set(Set(1) -> Set(2), Set(2) -> Set(3), Set(3) -> Set(2), Set(3) -> Set(4))
         )
         val g2 = g1.merge(Set(Set(2), Set(3)))
-        g2.nodes should be (Set(Set(1), Set(2, 3), Set(4)))
+        g2.vertices should be (Set(Set(1), Set(2, 3), Set(4)))
         g2.edges should be(Set(Set(1) -> Set(2, 3), Set(2, 3) -> Set(4)))
       }
     }
@@ -33,11 +33,11 @@ class DirectedGraphSpec extends UnitSpec {
     }
   }
   it can {
-    "delete a node." in {
+    "delete a vertex." in {
       val g1 = DirectedGraph(Set(1, 2, 3, 4), Set(1 -> 2, 2 -> 3, 3 -> 2, 3 -> 4))
       val g2 = g1 - 2
 
-      g2.nodes should be(Set(1, 3, 4))
+      g2.vertices should be(Set(1, 3, 4))
       g2.edges should be(Set(3 -> 4))
     }
   }
