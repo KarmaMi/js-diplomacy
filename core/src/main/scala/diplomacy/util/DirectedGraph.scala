@@ -5,6 +5,8 @@ import scala.util.control.Breaks
 import scala.collection.mutable
 
 case class DirectedGraph[V](vertices: Set[V], edges: Set[(V, V)]) {
+  require(edges forall { case (v0, v1) => (vertices contains v0) && (vertices contains v1)})
+
   def cycle: Option[Seq[V]] = {
     def visit(vertex: V, path: Seq[V], visited: mutable.Set[V]): Option[Seq[V]] = {
       visited += vertex
