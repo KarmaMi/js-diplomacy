@@ -1,6 +1,6 @@
 package diplomacy.board
 
-case class Board[State, P <: Power, MB <: MilitaryBranch, UnitStatus, ProvinceStatus](
+final case class Board[State, P <: Power, MB <: MilitaryBranch, UnitStatus, ProvinceStatus](
   state: State, units: Map[P, Set[DiplomacyUnit[P, MB]]], occupation: Map[P, Set[Province[P]]],
   unitStatuses: Map[P, Map[DiplomacyUnit[P, MB], UnitStatus]],
   provinceStatuses: Map[Province[P], ProvinceStatus]

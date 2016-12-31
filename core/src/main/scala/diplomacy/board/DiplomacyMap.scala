@@ -4,7 +4,7 @@ import scala.collection.mutable
 
 import diplomacy.util.LabeledUndirectedGraph
 
-case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
+final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
   map: LabeledUndirectedGraph[Location[P, MB], Set[MB]]
 ) {
   type Province = diplomacy.board.Province[P]

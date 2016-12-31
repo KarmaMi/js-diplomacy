@@ -1,6 +1,6 @@
 package diplomacy.board
 
-case class Name(name: String, abbreviatedName: String) {
+final case class Name(name: String, abbreviatedName: String) {
   def this(name: String) = this(name, name)
 
   override def toString: String = this.abbreviatedName
