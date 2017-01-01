@@ -1,7 +1,7 @@
 package diplomacy.board
 
 final case class DiplomacyUnit[P <: Power, MB <: MilitaryBranch](
-  militaryBranch: MB, location: Location[P, MB]
+  power: P, militaryBranch: MB, location: Location[P, MB]
 ) {
   require(location.militaryBranches contains militaryBranch)
 

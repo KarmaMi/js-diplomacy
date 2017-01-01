@@ -35,9 +35,11 @@ class DiplomacyMapSpec extends UnitSpec {
       map.locationsOf(spaP) should be(Set(spa, spaSc))
     }
     "return locations that an unit can move to." in {
-      map.movableLocationsOf(DiplomacyUnit(army, spa)) should be(Set())
-      map.movableLocationsOf(DiplomacyUnit(fleet, spaSc)) should be(Set(wes))
-      map.movableLocationsOf(DiplomacyUnit(fleet, apu)) should be(Set())
+      val france = new Power { val name = "France" }
+
+      map.movableLocationsOf(DiplomacyUnit(france, army, spa)) should be(Set())
+      map.movableLocationsOf(DiplomacyUnit(france, fleet, spaSc)) should be(Set(wes))
+      map.movableLocationsOf(DiplomacyUnit(france, fleet, apu)) should be(Set())
     }
     "return provinces that an unit in the province can move to." in {
       map.movableProvincesOf(spaP, fleet) should be(Set(wesP))

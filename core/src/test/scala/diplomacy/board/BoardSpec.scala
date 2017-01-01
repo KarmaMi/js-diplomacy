@@ -17,7 +17,7 @@ class BoardSpec extends UnitSpec {
       val spa = Location(spaP, Set(army))
 
       val board = Board[String, Power, MilitaryBranch, String, String](
-        "State", Map(), Map(france -> Set(marP, spaP)), Map(), Map()
+        "State", Set(), Map(france -> Set(marP, spaP)), Map(), Map()
       )
       board.numberOfSupplyCenters should be(Map(france -> 2))
     }
