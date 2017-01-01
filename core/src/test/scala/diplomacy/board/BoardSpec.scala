@@ -1,6 +1,7 @@
 package diplomacy.board
 
 import diplomacy.UnitSpec
+import diplomacy.util.LabeledUndirectedGraph
 
 class BoardSpec extends UnitSpec {
   "A board" should {
@@ -16,8 +17,15 @@ class BoardSpec extends UnitSpec {
       val spaP = Province[Power](Name("Spa"), None, true)
       val spa = Location(spaP, Set(army))
 
+      val map = DiplomacyMap(
+        LabeledUndirectedGraph(
+          Set(mar, spa),
+          Set((mar -> spa, Set(army)))
+        )
+      )
+
       val board = Board[String, Power, MilitaryBranch, String, String](
-        "State", Set(), Map(france -> Set(marP, spaP)), Map(), Map()
+        map, "State", Set(), Map(france -> Set(marP, spaP)), Map(), Map()
       )
       board.numberOfSupplyCenters should be(Map(france -> 2))
     }
