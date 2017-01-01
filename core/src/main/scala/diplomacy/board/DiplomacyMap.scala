@@ -31,6 +31,11 @@ final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
 
   val locations: Set[Location] = this.map.vertices
   val provinces: Set[Province] = this.locations map { _.province }
+  val militaryBranches: Set[MB] = {
+    val x1 = this.locations flatMap { _.militaryBranches }
+    val x2 = this.map.edges flatMap { _._2 }
+    x1 ++ x2
+  }
   val powers: Set[P] = this.provinces flatMap { _.homeOf }
 
   private[this] val province2Locations: Map[Province, Set[Location]] = {
