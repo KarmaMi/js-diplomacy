@@ -6,7 +6,7 @@ import diplomacy.util.LabeledUndirectedGraph
 
 final case class DiplomacyMap[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch](
   map: LabeledUndirectedGraph[Location[Power_, MilitaryBranch_], Set[MilitaryBranch_]]
-) extends DiplomacyUnit.TypeHelper {
+) extends DiplomacyMap.TypeHelper {
   type Power = Power_
   type MilitaryBranch = MilitaryBranch_
 
