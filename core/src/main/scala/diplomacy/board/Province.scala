@@ -6,3 +6,10 @@ final case class Province[P <: Power](name: Name, homeOf: Option[P], isSupplyCen
     case false => this.name.toString
   }
 }
+
+object Province {
+  trait TypeHelper {
+    type Power <: diplomacy.board.Power
+    type Province = diplomacy.board.Province[Power]
+  }
+}

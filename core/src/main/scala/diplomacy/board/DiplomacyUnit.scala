@@ -7,3 +7,9 @@ final case class DiplomacyUnit[P <: Power, MB <: MilitaryBranch](
 
   override def toString: String = s"${this.militaryBranch} ${this.location}"
 }
+
+object DiplomacyUnit {
+  trait TypeHelper extends diplomacy.board.Location.TypeHelper {
+    type DiplomacyUnit = diplomacy.board.DiplomacyUnit[Power, MilitaryBranch]
+  }
+}

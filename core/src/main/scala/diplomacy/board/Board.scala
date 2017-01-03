@@ -16,6 +16,13 @@ final case class Board[State, P <: Power, MB <: MilitaryBranch, UnitStatus, Prov
 }
 
 object Board {
+  trait TypeHelper extends DiplomacyMap.TypeHelper {
+    type State
+    type UnitStatus
+    type ProvinceStatus
+    type Board = diplomacy.board.Board[State, Power, MilitaryBranch, UnitStatus, ProvinceStatus]
+  }
+
   class Helper[P <: Power, MB <: MilitaryBranch](board: Board[_, P, MB, _, _]) extends Dynamic {
     def selectDynamic(key: String): MB = this.militaryBranches(key)
     def applyDynamic(key: String)(location: String): DiplomacyUnit[P, MB] = {
