@@ -27,8 +27,11 @@ package object board extends TypeHelper {
 
   val map = DiplomacyMap(
     LabeledUndirectedGraph(
-      Set(spa, spaSc, wes, apu, nap),
-      Set((spaSc -> wes, Set(fleet)), (wes -> nap, Set(fleet)), (nap -> apu, Set(army)))
+      Set(spa, spaSc, wes, apu, nap, mar),
+      Set(
+        (spaSc -> wes, Set(fleet)), (wes -> nap, Set(fleet)), (nap -> apu, Set(army)),
+        (mar -> spa, Set(army)), (mar -> spaSc, Set(fleet))
+      )
     )
   )
 }
