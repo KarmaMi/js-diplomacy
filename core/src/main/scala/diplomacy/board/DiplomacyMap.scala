@@ -6,9 +6,12 @@ import diplomacy.util.LabeledUndirectedGraph
 
 final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
   map: LabeledUndirectedGraph[Location[P, MB], Set[MB]]
-) extends DiplomacyMap.TypeHelper {
-  type Power = P
-  type MilitaryBranch = MB
+) {
+  object Types extends DiplomacyUnit.TypeHelper {
+    type Power = P
+    type MilitaryBranch = MB
+  }
+  import Types._
 
   def locationsOf(province: Province): Set[Location] = {
     require(this.province2Locations contains province)

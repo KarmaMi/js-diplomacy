@@ -2,4 +2,4 @@ package diplomacy.mock.board
 
 import diplomacy.board.{ Power => BasePower }
 
-final case class Power(name: String) extends BasePower
+final case class MockPower(name: String) extends BasePower

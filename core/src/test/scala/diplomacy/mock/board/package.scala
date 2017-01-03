@@ -3,11 +3,11 @@ package diplomacy.mock
 import diplomacy.board._
 import diplomacy.util.LabeledUndirectedGraph
 
-package object board {
-  val fleet = MilitaryBranch(Name("Fleet", "F"))
-  val army = MilitaryBranch(Name("Army", "A"))
+package object board extends TypeHelper {
+  val fleet = MockMilitaryBranch(Name("Fleet", "F"))
+  val army = MockMilitaryBranch(Name("Army", "A"))
 
-  val france = Power("France")
+  val france = MockPower("France")
 
   val marP = Province[Power](Name("Mar"), Option(france), true)
   val mar = Location(marP, Set(army, fleet))
