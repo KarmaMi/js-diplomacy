@@ -2,13 +2,14 @@ package diplomacy.board
 
 import scala.language.dynamics
 
-final case class Board[State, P <: Power, MB <: MilitaryBranch, UnitStatus, ProvinceStatus](
-  map: DiplomacyMap[P, MB],
-  state: State, units: Set[DiplomacyUnit[P, MB]], occupation: Map[P, Set[Province[P]]],
-  unitStatuses: Map[DiplomacyUnit[P, MB], UnitStatus],
-  provinceStatuses: Map[Province[P], ProvinceStatus]
+final case class Board[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStatus_, ProvinceStatus_](
+  map: DiplomacyMap[Power_, MilitaryBranch_],
+  state: State_, units: Set[DiplomacyUnit[Power_, MilitaryBranch_]],
+  occupation: Map[Power_, Set[Province[Power_]]],
+  unitStatuses: Map[DiplomacyUnit[Power_, MilitaryBranch_], UnitStatus_],
+  provinceStatuses: Map[Province[Power_], ProvinceStatus_]
 ) {
-  val numberOfSupplyCenters: Map[P, Int] = this.occupation map {
+  val numberOfSupplyCenters: Map[Power_, Int] = this.occupation map {
     case (power, provinces) => power -> provinces.count(province => province.isSupplyCenter)
   }
 

@@ -1,6 +1,8 @@
 package diplomacy.board
 
-final case class Province[P <: Power](name: Name, homeOf: Option[P], isSupplyCenter: Boolean) {
+final case class Province[Power_ <: Power](
+  name: Name, homeOf: Option[Power_], isSupplyCenter: Boolean
+) {
   override def toString: String = this.isSupplyCenter match {
     case true => s"${this.name}*"
     case false => this.name.toString

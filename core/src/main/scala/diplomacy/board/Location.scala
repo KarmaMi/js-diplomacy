@@ -1,7 +1,7 @@
 package diplomacy.board
 
-final case class Location[P <: Power, MB <: MilitaryBranch](
-  province: Province[P], militaryBranches: Set[MB]
+final case class Location[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch](
+  province: Province[Power_], militaryBranches: Set[MilitaryBranch_]
 ) {
   override def toString: String = this.province.toString
 }

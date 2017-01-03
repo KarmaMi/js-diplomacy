@@ -4,20 +4,17 @@ import scala.collection.mutable
 
 import diplomacy.util.LabeledUndirectedGraph
 
-final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
-  map: LabeledUndirectedGraph[Location[P, MB], Set[MB]]
-) {
-  object Types extends DiplomacyUnit.TypeHelper {
-    type Power = P
-    type MilitaryBranch = MB
-  }
-  import Types._
+final case class DiplomacyMap[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch](
+  map: LabeledUndirectedGraph[Location[Power_, MilitaryBranch_], Set[MilitaryBranch_]]
+) extends DiplomacyUnit.TypeHelper {
+  type Power = Power_
+  type MilitaryBranch = MilitaryBranch_
 
   def locationsOf(province: Province): Set[Location] = {
     require(this.province2Locations contains province)
     this.province2Locations(province)
   }
-  def movableProvincesOf(province: Province, militaryBranch: MB): Set[Province] = {
+  def movableProvincesOf(province: Province, militaryBranch: MilitaryBranch): Set[Province] = {
     this.locationsOf(province) flatMap { location =>
       this.movableLocationsOf(location, militaryBranch) map { _.province }
     }
@@ -25,7 +22,7 @@ final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
   def movableLocationsOf(unit: DiplomacyUnit): Set[Location] = {
     movableLocationsOf(unit.location, unit.militaryBranch)
   }
-  def movableLocationsOf(location: Location, militaryBranch: MB): Set[Location] = {
+  def movableLocationsOf(location: Location, militaryBranch: MilitaryBranch): Set[Location] = {
     (this.map.neighborsOf(location) collect {
       case (l, mbs) if mbs contains militaryBranch => l
     })(collection.breakOut)
@@ -33,12 +30,12 @@ final case class DiplomacyMap[P <: Power, MB <: MilitaryBranch](
 
   val locations: Set[Location] = this.map.vertices
   val provinces: Set[Province] = this.locations map { _.province }
-  val militaryBranches: Set[MB] = {
+  val militaryBranches: Set[MilitaryBranch] = {
     val x1 = this.locations flatMap { _.militaryBranches }
     val x2 = this.map.edges flatMap { _._2 }
     x1 ++ x2
   }
-  val powers: Set[P] = this.provinces flatMap { _.homeOf }
+  val powers: Set[Power] = this.provinces flatMap { _.homeOf }
 
   private[this] val province2Locations: Map[Province, Set[Location]] = {
     val x = mutable.Map[Province, mutable.Set[Location]]()
