@@ -8,13 +8,8 @@ final case class Board[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranc
   occupation: Map[Power_, Set[Province[Power_]]],
   unitStatuses: Map[DiplomacyUnit[Power_, MilitaryBranch_], UnitStatus_],
   provinceStatuses: Map[Province[Power_], ProvinceStatus_]
-) extends Board.TypeHelper {
-  type State = State_
-  type Power = Power_
-  type UnitStatus = UnitStatus_
-  type ProvinceStatus = ProvinceStatus_
-
-  val numberOfSupplyCenters: Map[Power, Int] = this.occupation map {
+) {
+  val numberOfSupplyCenters: Map[Power_, Int] = this.occupation map {
     case (power, provinces) => power -> provinces.count(province => province.isSupplyCenter)
   }
 
