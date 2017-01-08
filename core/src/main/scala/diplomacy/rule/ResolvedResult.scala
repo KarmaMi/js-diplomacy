@@ -2,8 +2,7 @@ package diplomacy.rule
 
 import diplomacy.board.{ Power, MilitaryBranch, Board }
 
-// TODO
-final case class ResolvedResult[State, P <: Power, MB <: MilitaryBranch, UnitStatus, ProvinceStatus, O <: Order[P, MB], Result](
-  board: Board[State, P, MB, UnitStatus, ProvinceStatus],
-  result: Set[OrderResult.OrderResult[P, MB, O, Result]]
+final case class ResolvedResult[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStatus_, ProvinceStatus_, Order_ <: Order[Power_, MilitaryBranch_], Result_](
+  board: Board[State_, Power_, MilitaryBranch_, UnitStatus_, ProvinceStatus_],
+  result: Set[OrderResult.OrderResult[Power_, MilitaryBranch_, Order_, Result_]]
 )
