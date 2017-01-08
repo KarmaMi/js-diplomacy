@@ -17,7 +17,7 @@ class RuleSpec extends UnitSpec {
 
         val rule = new MockRule() {}
         rule.resolve(board, Set(Move($.A("Mar"), spa), Hold($.A("Mar")))) should be(
-          Left(InvalidOrderMessage("A Mar*: several orders."))
+          Left(InvalidOrderMessage("A Mar: several orders."))
         )
       }
     }
