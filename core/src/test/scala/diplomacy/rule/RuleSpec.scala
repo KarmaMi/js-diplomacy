@@ -1,7 +1,7 @@
 package diplomacy.rule
 
 import diplomacy.UnitSpec
-import diplomacy.board.{ Board => BaseBoard }
+import diplomacy.board.{ Board => BaseBoard, BoardHelper }
 import diplomacy.mock.board._
 import diplomacy.mock.rule._
 
@@ -13,10 +13,10 @@ class RuleSpec extends UnitSpec {
           map, "State", Set(new DiplomacyUnit(france, army, mar)),
           Map(france -> Set(marP, spaP)), Map(), Map()
         )
-        val $ = new BaseBoard.Helper(board)
+        val $ = BoardHelper(board)
 
         val rule = new MockRule() {}
-        rule.resolve(board, Set(Move($.A("Mar"), spa), Hold($.A("Mar")))) should be(
+        rule.resolve(board, Set(Move($.A($.Mar), $.Spa), Hold($.A($.Mar)))) should be(
           Left(InvalidOrderMessage("A Mar: several orders."))
         )
       }
@@ -29,7 +29,7 @@ class RuleSpec extends UnitSpec {
           Map(france -> Set(marP, spaP)),
           Map(), Map()
         )
-        val $ = new BaseBoard.Helper(board)
+        val $ = BoardHelper(board)
 
         val rule = new MockRule() {
           override def errorMessageOfOrder(board: Board)(order: Order) = order match {
@@ -47,13 +47,13 @@ class RuleSpec extends UnitSpec {
           }
         }
 
-        val Right(result) = rule.resolve(board, Set(Move($.A("Mar"), spa), Hold($.F("Wes"))))
+        val Right(result) = rule.resolve(board, Set(Move($.A($.Mar), $.Spa), Hold($.F($.Wes))))
         result.result should be (Set(
           OrderResult.Executed[Power, MilitaryBranch, rule.Order, String](
-            Hold($.F("Wes")), "resolved"
+            Hold($.F($.Wes)), "resolved"
           ),
           OrderResult.Replaced[Power, MilitaryBranch, rule.Order, String](
-            Move($.A("Mar"), spa), InvalidOrderMessage(""), Hold($.A("Mar")), "resolved"
+            Move($.A($.Mar), $.Spa), InvalidOrderMessage(""), Hold($.A($.Mar)), "resolved"
           )
         ))
       }
@@ -66,7 +66,6 @@ class RuleSpec extends UnitSpec {
           Map(france -> Set(marP, spaP)),
           Map(), Map()
         )
-        val $ = new BaseBoard.Helper(board)
 
         val rule = new MockRule() {
           override def errorMessageOfOrders(board: Board)(orders: Set[Order]) = {
@@ -84,7 +83,7 @@ class RuleSpec extends UnitSpec {
           Map(france -> Set(marP, spaP)),
           Map(), Map()
         )
-        val $ = new BaseBoard.Helper(board)
+        val $ = BoardHelper(board)
 
         val rule = new MockRule() {
           override def defaultOrderOf(board: Board)(unit: DiplomacyUnit) = Hold(unit)
@@ -96,13 +95,13 @@ class RuleSpec extends UnitSpec {
               }
             ))
           }
-          override def unitsRequiringOrder(board: Board) = Set($.A("Mar"))
+          override def unitsRequiringOrder(board: Board) = Set($.A($.Mar))
         }
 
         val Right(result) = rule.resolve(board, Set())
         result.result should be (Set(
           OrderResult.Executed[Power, MilitaryBranch, rule.Order, String](
-            Hold($.A("Mar")), "resolved"
+            Hold($.A($.Mar)), "resolved"
           )
         ))
       }

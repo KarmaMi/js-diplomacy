@@ -14,7 +14,7 @@ package object board extends TypeHelper {
 
   val spaP = Province[Power](Name("Spa"), None, true)
   val spa = Location(spaP, Set(army))
-  val spaSc = Location(spaP, Set(fleet))
+  val spaSc = Location(Name("Spa_SC"), spaP, Set(fleet))
 
   val napP = Province[Power](Name("Nap"), None, true)
   val nap = Location(napP, Set(army, fleet))
