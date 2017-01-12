@@ -11,7 +11,9 @@ final case class Board[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranc
     case (power, provinces) => power -> provinces.count(province => province.isSupplyCenter)
   }
 
-  override def toString: String = this.state.toString
+  override def toString: String = {
+    s"${this.state}(${this.units}, ${this.occupation}, ${this.unitStatuses}, ${this.provinceStatuses})"
+  }
 }
 
 object Board {

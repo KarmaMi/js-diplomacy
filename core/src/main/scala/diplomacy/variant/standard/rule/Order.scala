@@ -32,6 +32,10 @@ object Order {
     type Power = Power_
     type MilitaryBranch = MilitaryBranch.MilitaryBranch
 
+    val targetOrder: MovementOrder[Power] = target match {
+      case Right(m) => m
+      case Left(h) => h
+    }
     val destinationLocation: Location = target match {
       case Right(m) => m.destination
       case Left(h) => h.unit.location

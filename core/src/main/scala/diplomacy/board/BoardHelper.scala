@@ -16,7 +16,7 @@ trait BoardHelper[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch]
 
   implicit class MakeUnitHelper(target: MilitaryBranch) {
     def apply(location: Location): DiplomacyUnit = {
-      (board.units find { unit => unit.location == location && unit.militaryBranch == target}).get
+      (board.units find { unit => unit.location == location && unit.militaryBranch == target }).get
     }
   }
 }

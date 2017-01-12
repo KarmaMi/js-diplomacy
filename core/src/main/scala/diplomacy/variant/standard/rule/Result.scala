@@ -1,10 +1,15 @@
 package diplomacy.variant.standard.rule
 
+import diplomacy.board.{ Power, Province }
+
 object Result {
-  sealed class Result(name: String)
+  sealed class Result(name: String) {
+    override def toString: String = name
+  }
   object Success extends Result("Success")
   object Failed extends Result("Failed")
-  object Dislodged extends Result("Dislodged")
+  case class Dislodged[Power_ <: Power](attackedFrom: Province[Power_])
+    extends Result(s"Dislodged from ${attackedFrom.name}")
   object Bounced extends Result("Bounced")
   object Cut extends Result("Cut")
   object Standoff extends Result("Standoff")
