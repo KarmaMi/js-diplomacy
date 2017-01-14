@@ -5,7 +5,14 @@ import scala.util.control.Breaks
 import scala.collection.mutable
 
 case class DirectedGraph[V](vertices: Set[V], edges: Set[(V, V)]) {
-  require(edges forall { case (v0, v1) => (vertices contains v0) && (vertices contains v1)})
+  require(edges forall { case (v0, v1) => (vertices contains v0) && (vertices contains v1) })
+
+  def this(edges: Set[(V, V)]) = {
+    this(
+      edges flatMap { case (v1, v2) => Set(v1, v2) },
+      edges
+    )
+  }
 
   def cycle: Option[Seq[V]] = {
     def visit(vertex: V, path: Seq[V], visited: mutable.Set[V]): Option[Seq[V]] = {
@@ -70,5 +77,11 @@ case class DirectedGraph[V](vertices: Set[V], edges: Set[(V, V)]) {
     }
 
     DirectedGraph(newVertices, newEdges)
+  }
+}
+
+object DirectedGraph {
+  def apply[V](edges: Set[(V, V)]): DirectedGraph[V] = {
+    DirectedGraph(edges flatMap { case (v1, v2) => Set(v1, v2) }, edges)
   }
 }
