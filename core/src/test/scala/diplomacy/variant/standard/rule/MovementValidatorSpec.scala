@@ -12,38 +12,35 @@ class MovementVailidatorSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    val $ = DiplomacyMapHelper(map.map)
     Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
-      State(Turn(1901, Season.Spring), Phase.Movement),
+      1901.Spring - Movement,
       Set(
-        DiplomacyUnit(Power.England, MilitaryBranch.Army, $.Lvp),
-        DiplomacyUnit(Power.England, MilitaryBranch.Fleet, $.Lon),
-        DiplomacyUnit(Power.England, MilitaryBranch.Fleet, $.Eng),
-        DiplomacyUnit(Power.France, MilitaryBranch.Army, $.Spa),
-        DiplomacyUnit(Power.France, MilitaryBranch.Army, $.Bur)
+        DiplomacyUnit(England, Army, Lvp),
+        DiplomacyUnit(England, Fleet, Lon),
+        DiplomacyUnit(England, Fleet, Eng),
+        DiplomacyUnit(France, Army, Spa),
+        DiplomacyUnit(France, Army, Bur)
       ), Map(), Map(), Map()
     )
   }
-  val $ = BoardHelper(board)
-
-  val orderHelper = new OrderHelper[Power.Power]() {}
-  import orderHelper._
+  val $ = StandardRuleOrderHelper(board)
+  import $._
 
   "A movement-validator" when {
     "a valid order is received" should {
       "return null (1)." in {
-        validator.errorMessageOfOrder(board)($.A($.Lvp).move($.Bre)) should be(None)
+        validator.errorMessageOfOrder(board)(A(Lvp).move(Bre)) should be(None)
       }
       "return null (2)." in {
-        validator.errorMessageOfOrder(board)($.A($.Spa).move($.Tun)) should be(None)
+        validator.errorMessageOfOrder(board)(A(Spa).move(Tun)) should be(None)
       }
     }
 
     "an order that its target unit does not exist is received" should {
       "return an error message." in {
-        val aLon = new validator.DiplomacyUnit($.p.England, $.m.A, $.Lon)
-        validator.errorMessageOfOrder(board)(aLon.move($.Tun)) should be(Some(
+        val aLon = new validator.DiplomacyUnit(England, Army, Lon)
+        validator.errorMessageOfOrder(board)(aLon.move(Tun)) should be(Some(
           InvalidOrderMessage("A Lon does not exist.")
         ))
       }
@@ -51,7 +48,7 @@ class MovementVailidatorSpec extends UnitSpec {
 
     "a unit tries to move an invalid location" should {
       "return an error message." in {
-        validator.errorMessageOfOrder(board)($.A($.Lvp).move($.Bud)) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Lvp).move(Bud)) should be(Some(
           InvalidOrderMessage("A Lvp cannot move to Bud.")
         ))
       }
@@ -59,13 +56,13 @@ class MovementVailidatorSpec extends UnitSpec {
 
     "a unit tries to support an invalid location" should {
       "return an error message (1)." in {
-        validator.errorMessageOfOrder(board)($.A($.Lvp).support($.A($.Spa).hold())) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Lvp).support(A(Spa).hold())) should be(Some(
           InvalidOrderMessage("A Lvp cannot support A Spa H.")
         ))
       }
 
       "return an error message (2)." in {
-        validator.errorMessageOfOrder(board)($.A($.Lvp).support($.A($.Spa).move($.Bud))) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Lvp).support(A(Spa).move(Bud))) should be(Some(
           InvalidOrderMessage("A Spa cannot move to Bud.")
         ))
       }
@@ -73,17 +70,17 @@ class MovementVailidatorSpec extends UnitSpec {
 
     "a unit tries to convoy an invalid order" should {
       "return an error message (1)." in {
-        validator.errorMessageOfOrder(board)($.A($.Lvp).convoy($.F($.Lon).move($.Yor))) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Lvp).convoy(F(Lon).move(Yor))) should be(Some(
           InvalidOrderMessage("A Lvp is not fleet.")
         ))
       }
       "return an error message (2)." in {
-        validator.errorMessageOfOrder(board)($.F($.Eng).convoy($.F($.Lon).move($.Eng))) should be(Some(
+        validator.errorMessageOfOrder(board)(F(Eng).convoy(F(Lon).move(Eng))) should be(Some(
           InvalidOrderMessage("F Lon is not army.")
         ))
       }
       "return an error message (3)." in {
-        validator.errorMessageOfOrder(board)($.F($.Eng).convoy($.A($.Bur).move($.Mar))) should be(Some(
+        validator.errorMessageOfOrder(board)(F(Eng).convoy(A(Bur).move(Mar))) should be(Some(
           InvalidOrderMessage("Moving from Bur to Mar via convoy is invalid.")
         ))
       }

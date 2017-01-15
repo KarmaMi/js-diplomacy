@@ -11,9 +11,6 @@ class MovementResolverStandoffSpec extends UnitSpec {
     type Turn = map.Turn
     type Power = map.Power
   }
-  val $$ = DiplomacyMapHelper(map.map)
-  val orderHelper = new OrderHelper[map.Power]() {}
-  import orderHelper._
 
   type Executed =
     OrderResult.Executed[resolver.Power, resolver.MilitaryBranch, resolver.Order, resolver.Result]
@@ -21,123 +18,127 @@ class MovementResolverStandoffSpec extends UnitSpec {
   "A movement-resolver" should {
     "handle DIAGRAM 4" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Ber),
-          DiplomacyUnit(Power.Russia, $$.m.A, $$.War)
+          DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Russia, Army, War)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Ber).move($.Sil),
-          $.A($.War).move($.Sil)
+          A(Ber).move(Sil),
+          A(War).move(Sil)
         )
       )
 
       result.result should be(Set(
-        new Executed($.A($.Ber).move($.Sil), Result.Bounced),
-        new Executed($.A($.War).move($.Sil), Result.Bounced)
+        new Executed(A(Ber).move(Sil), Result.Bounced),
+        new Executed(A(War).move(Sil), Result.Bounced)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat),
-        provinceStatuses = Map($.Sil.province -> ProvinceStatus.Standoff)
+        state = 1901.Spring - Retreat,
+        provinceStatuses = Map(Sil.province -> ProvinceStatus.Standoff)
       ))
     }
 
     "handle DIAGRAM 5" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Kie),
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Ber),
-          DiplomacyUnit(Power.Russia, $$.m.A, $$.Pru)
+          DiplomacyUnit(Germany, Army, Kie),
+          DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Russia, Army, Pru)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Kie).move($.Ber),
-          $.A($.Ber).move($.Pru),
-          $.A($.Pru).hold()
+          A(Kie).move(Ber),
+          A(Ber).move(Pru),
+          A(Pru).hold()
         )
       )
 
       result.result should be(Set(
-        new Executed($.A($.Ber).move($.Pru), Result.Bounced),
-        new Executed($.A($.Kie).move($.Ber), Result.Bounced),
-        new Executed($.A($.Pru).hold(), Result.Success)
+        new Executed(A(Ber).move(Pru), Result.Bounced),
+        new Executed(A(Kie).move(Ber), Result.Bounced),
+        new Executed(A(Pru).hold(), Result.Success)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat)
+        state = 1901.Spring - Retreat
       ))
     }
 
     "handle DIAGRAM 6" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Ber),
-          DiplomacyUnit(Power.Russia, $$.m.A, $$.Pru)
+          DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Russia, Army, Pru)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Ber).move($.Pru),
-          $.A($.Pru).move($.Ber))
+          A(Ber).move(Pru),
+          A(Pru).move(Ber))
         )
 
       result.result should be(Set(
-        new Executed($.A($.Ber).move($.Pru), Result.Bounced),
-        new Executed($.A($.Pru).move($.Ber), Result.Bounced)
+        new Executed(A(Ber).move(Pru), Result.Bounced),
+        new Executed(A(Pru).move(Ber), Result.Bounced)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat)
+        state = 1901.Spring - Retreat
       ))
     }
 
     "handle DIAGRAM 7" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.England, $$.m.F, $$.Bel),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Nth),
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Hol)
+          DiplomacyUnit(England, Fleet, Bel),
+          DiplomacyUnit(England, Fleet, Nth),
+          DiplomacyUnit(Germany, Army, Hol)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.F($.Bel).move($.Nth),
-          $.F($.Nth).move($.Hol),
-          $.A($.Hol).move($.Bel)
+          F(Bel).move(Nth),
+          F(Nth).move(Hol),
+          A(Hol).move(Bel)
         )
       )
 
       result.result should be(Set(
-        new Executed($.F($.Bel).move($.Nth), Result.Success),
-        new Executed($.F($.Nth).move($.Hol), Result.Success),
-        new Executed($.A($.Hol).move($.Bel), Result.Success)
+        new Executed(F(Bel).move(Nth), Result.Success),
+        new Executed(F(Nth).move(Hol), Result.Success),
+        new Executed(A(Hol).move(Bel), Result.Success)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat),
+        state = 1901.Spring - Retreat,
         units = Set(
-          DiplomacyUnit(Power.England, $$.m.F, $$.Hol),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Nth),
-          DiplomacyUnit(Power.Germany, $$.m.A, $$.Bel)
+          DiplomacyUnit(England, Fleet, Hol),
+          DiplomacyUnit(England, Fleet, Nth),
+          DiplomacyUnit(Germany, Army, Bel)
         )
       ))
     }

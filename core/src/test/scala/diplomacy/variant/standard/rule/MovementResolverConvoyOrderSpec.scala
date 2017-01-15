@@ -11,128 +11,130 @@ class MovementResolverConvoyOrderSpec extends UnitSpec {
     type Turn = map.Turn
     type Power = map.Power
   }
-  val $$ = DiplomacyMapHelper(map.map)
-  val orderHelper = new OrderHelper[map.Power]() {}
-  import orderHelper._
-
   type Executed =
     OrderResult.Executed[resolver.Power, resolver.MilitaryBranch, resolver.Order, resolver.Result]
 
   "A movement-resolver" should {
     "handle DIAGRAM 19" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.England, $$.m.A, $$.Lon),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Nth)
+          DiplomacyUnit(England, Army, Lon),
+          DiplomacyUnit(England, Fleet, Nth)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Lon).move($.Nwy),
-          $.F($.Nth).convoy($.A($.Lon).move($.Nwy))
+          A(Lon).move(Nwy),
+          F(Nth).convoy(A(Lon).move(Nwy))
         )
       )
 
       result.result should be(Set(
-        new Executed($.A($.Lon).move($.Nwy), Result.Success),
-        new Executed($.F($.Nth).convoy($.A($.Lon).move($.Nwy)), Result.Success)
+        new Executed(A(Lon).move(Nwy), Result.Success),
+        new Executed(F(Nth).convoy(A(Lon).move(Nwy)), Result.Success)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat),
+        state = 1901.Spring - Retreat,
         units = Set(
-          DiplomacyUnit(Power.England, $$.m.A, $$.Nwy),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Nth)
+          DiplomacyUnit(England, Army, Nwy),
+          DiplomacyUnit(England, Fleet, Nth)
         )
       ))
     }
 
     "handle DIAGRAM 20" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.England, $$.m.A, $$.Lon),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Eng),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Mid),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Wes)
+          DiplomacyUnit(England, Army, Lon),
+          DiplomacyUnit(England, Fleet, Eng),
+          DiplomacyUnit(England, Fleet, Mid),
+          DiplomacyUnit(England, Fleet, Wes)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Lon).move($.Tun),
-          $.F($.Eng).convoy($.A($.Lon).move($.Tun)),
-          $.F($.Mid).convoy($.A($.Lon).move($.Tun)),
-          $.F($.Wes).convoy($.A($.Lon).move($.Tun))
+          A(Lon).move(Tun),
+          F(Eng).convoy(A(Lon).move(Tun)),
+          F(Mid).convoy(A(Lon).move(Tun)),
+          F(Wes).convoy(A(Lon).move(Tun))
         )
       )
 
       result.result should be(Set(
-        new Executed($.A($.Lon).move($.Tun), Result.Success),
-        new Executed($.F($.Eng).convoy($.A($.Lon).move($.Tun)), Result.Success),
-        new Executed($.F($.Mid).convoy($.A($.Lon).move($.Tun)), Result.Success),
-        new Executed($.F($.Wes).convoy($.A($.Lon).move($.Tun)), Result.Success)
+        new Executed(A(Lon).move(Tun), Result.Success),
+        new Executed(F(Eng).convoy(A(Lon).move(Tun)), Result.Success),
+        new Executed(F(Mid).convoy(A(Lon).move(Tun)), Result.Success),
+        new Executed(F(Wes).convoy(A(Lon).move(Tun)), Result.Success)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat),
+        state = 1901.Spring - Retreat,
         units = Set(
-          DiplomacyUnit(Power.England, $$.m.A, $$.Tun),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Eng),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Mid),
-          DiplomacyUnit(Power.England, $$.m.F, $$.Wes)
+          DiplomacyUnit(England, Army, Tun),
+          DiplomacyUnit(England, Fleet, Eng),
+          DiplomacyUnit(England, Fleet, Mid),
+          DiplomacyUnit(England, Fleet, Wes)
         )
       ))
     }
 
     "handle DIAGRAM 21" in {
       val board = new resolver.Board(
-        map.map, State(Turn(1901, Season.Spring), Phase.Movement),
+        map.map, 1901.Spring - Movement,
         Set(
-          DiplomacyUnit(Power.France, $$.m.A, $$.Spa),
-          DiplomacyUnit(Power.France, $$.m.F, $$.GoL),
-          DiplomacyUnit(Power.France, $$.m.F, $$.Tyn),
-          DiplomacyUnit(Power.Italy, $$.m.F, $$.Ion),
-          DiplomacyUnit(Power.Italy, $$.m.F, $$.Tun)
+          DiplomacyUnit(France, Army, Spa),
+          DiplomacyUnit(France, Fleet, GoL),
+          DiplomacyUnit(France, Fleet, Tyn),
+          DiplomacyUnit(Italy, Fleet, Ion),
+          DiplomacyUnit(Italy, Fleet, Tun)
         ),
         Map(), Map(), Map()
       )
 
-      val $ = BoardHelper(board)
+      val $ = StandardRuleOrderHelper(board)
+
+      import $._
       val Right(result) = resolver(
         board,
         Set(
-          $.A($.Spa).move($.Nap),
-          $.F($.GoL).convoy($.A($.Spa).move($.Nap)),
-          $.F($.Tyn).convoy($.A($.Spa).move($.Nap)),
-          $.F($.Ion).move($.Tyn),
-          $.F($.Tun).support($.F($.Ion).move($.Tyn))
+          A(Spa).move(Nap),
+          F(GoL).convoy(A(Spa).move(Nap)),
+          F(Tyn).convoy(A(Spa).move(Nap)),
+          F(Ion).move(Tyn),
+          F(Tun).support(F(Ion).move(Tyn))
         )
       )
 
       result.result should be(Set(
-        new Executed($.A($.Spa).move($.Nap), Result.Failed),
-        new Executed($.F($.GoL).convoy($.A($.Spa).move($.Nap)), Result.Failed),
-        new Executed($.F($.Tyn).convoy($.A($.Spa).move($.Nap)), Result.Dislodged($.Ion.province)),
-        new Executed($.F($.Ion).move($.Tyn), Result.Success),
-        new Executed($.F($.Tun).support($.F($.Ion).move($.Tyn)), Result.Success)
+        new Executed(A(Spa).move(Nap), Result.Failed),
+        new Executed(F(GoL).convoy(A(Spa).move(Nap)), Result.Failed),
+        new Executed(F(Tyn).convoy(A(Spa).move(Nap)), Result.Dislodged(Ion.province)),
+        new Executed(F(Ion).move(Tyn), Result.Success),
+        new Executed(F(Tun).support(F(Ion).move(Tyn)), Result.Success)
       ))
       result.board should be(board.copy(
-        state = State(Turn(1901, Season.Spring), Phase.Retreat),
+        state = 1901.Spring - Retreat,
         units = Set(
-          DiplomacyUnit(Power.France, $$.m.A, $$.Spa),
-          DiplomacyUnit(Power.France, $$.m.F, $$.GoL),
-          DiplomacyUnit(Power.Italy, $$.m.F, $$.Tyn),
-          DiplomacyUnit(Power.Italy, $$.m.F, $$.Tun)
+          DiplomacyUnit(France, Army, Spa),
+          DiplomacyUnit(France, Fleet, GoL),
+          DiplomacyUnit(Italy, Fleet, Tyn),
+          DiplomacyUnit(Italy, Fleet, Tun)
         ),
         unitStatuses =
-          Map($.F($.Tyn) -> UnitStatus.Dislodged($.Ion.province))
+          Map(F(Tyn) -> UnitStatus.Dislodged(Ion.province))
       ))
     }
   }

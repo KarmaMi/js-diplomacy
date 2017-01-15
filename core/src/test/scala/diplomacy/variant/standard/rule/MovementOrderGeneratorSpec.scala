@@ -11,25 +11,22 @@ class MovementOrderGeneratorSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    val $ = DiplomacyMapHelper(map.map)
     Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
-      State(Turn(1901, Season.Spring), Phase.Movement),
+      1901.Spring - Movement,
       Set(
-        DiplomacyUnit(Power.France, MilitaryBranch.Army, $.Spa),
-        DiplomacyUnit(Power.France, MilitaryBranch.Fleet, $.GoL)
+        DiplomacyUnit(France, Army, Spa),
+        DiplomacyUnit(France, Fleet, GoL)
       ), Map(), Map(), Map()
     )
   }
 
-  val orderHelper = new OrderHelper[Power.Power]() {}
-  import orderHelper._
-
   "A movement-order-generator" should {
     "use Hold as a default order." in {
-      val $ = BoardHelper(board)
-      generator.defaultOrder(board)($.A($.Spa)) should be($.A($.Spa).hold())
-      generator.defaultOrder(board)($.F($.GoL)) should be($.F($.GoL).hold())
+      val $ = StandardRuleOrderHelper(board)
+      import $._
+      generator.defaultOrder(board)(A(Spa)) should be(A(Spa).hold())
+      generator.defaultOrder(board)(F(GoL)) should be(F(GoL).hold())
     }
   }
   it when {
@@ -37,9 +34,7 @@ class MovementOrderGeneratorSpec extends UnitSpec {
       "use an empty to skip the movement phase." in {
         val emptyBoard = {
           Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
-            map.map,
-            State(Turn(1901, Season.Spring), Phase.Movement),
-            Set(), Map(), Map(), Map()
+            map.map, 1901.Spring - Movement, Set(), Map(), Map(), Map()
           )
         }
         generator.ordersToSkipPhase(emptyBoard) should be(Some(Set()))
