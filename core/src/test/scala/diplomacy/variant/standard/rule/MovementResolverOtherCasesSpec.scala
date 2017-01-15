@@ -248,7 +248,8 @@ class MovementResolverOtherCasesSpec extends UnitSpec {
         units = Set(
           DiplomacyUnit(France, Army, Par),
           DiplomacyUnit(France, Army, Bur),
-          DiplomacyUnit(France, Army, Mar)
+          DiplomacyUnit(France, Army, Mar),
+          DiplomacyUnit(Italy, Army, Mar)
         ),
         unitStatuses = Map(A(Mar) -> UnitStatus.Dislodged(Gas.province))
       ))

@@ -322,6 +322,7 @@ class MovementResolverRareCasesSpec extends UnitSpec {
         units = Set(
           DiplomacyUnit(England, Army, Bel),
           DiplomacyUnit(England, Fleet, Nth),
+          DiplomacyUnit(England, Fleet, Eng),
           DiplomacyUnit(France, Fleet, Eng),
           DiplomacyUnit(France, Fleet, Iri)
         ),
@@ -364,6 +365,7 @@ class MovementResolverRareCasesSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(France, Army, Tun),
+          DiplomacyUnit(France, Fleet, Tyn),
           DiplomacyUnit(Italy, Fleet, Nap),
           DiplomacyUnit(Italy, Fleet, Tyn)
         ),
@@ -454,7 +456,8 @@ class MovementResolverRareCasesSpec extends UnitSpec {
           DiplomacyUnit(France, Fleet, Tyn),
           DiplomacyUnit(France, Fleet, Ion),
           DiplomacyUnit(France, Army, Apu),
-          DiplomacyUnit(Italy, Fleet, Rom)
+          DiplomacyUnit(Italy, Fleet, Rom),
+          DiplomacyUnit(Italy, Fleet, Nap)
         ),
         unitStatuses = Map(F(Nap) -> UnitStatus.Dislodged(Tun.province))
       ))

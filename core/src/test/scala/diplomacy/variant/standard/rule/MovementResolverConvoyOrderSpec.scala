@@ -130,6 +130,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec {
         units = Set(
           DiplomacyUnit(France, Army, Spa),
           DiplomacyUnit(France, Fleet, GoL),
+          DiplomacyUnit(France, Fleet, Tyn),
           DiplomacyUnit(Italy, Fleet, Tyn),
           DiplomacyUnit(Italy, Fleet, Tun)
         ),

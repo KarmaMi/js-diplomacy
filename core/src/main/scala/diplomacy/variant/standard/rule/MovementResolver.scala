@@ -360,16 +360,15 @@ class MovementResolver extends Rule.TypeHelper {
     }).toMap
 
     val newUnits: Set[DiplomacyUnit] =
-      board.units flatMap { unit =>
+      board.units map { unit =>
         unit2Result.get(unit) match {
-          case Some((order, Some(Result.Dislodged(_)))) => None
           case Some((order, result)) =>
             order match {
               case m@ Order.Move(_, _, _) if result == Option(Result.Success) =>
-                Option(unit.copy(location = m.destination))
-              case _ => Option(unit)
+                unit.copy(location = m.destination)
+              case _ => unit
             }
-          case None => Option(unit)
+          case None => unit
         }
       }
 

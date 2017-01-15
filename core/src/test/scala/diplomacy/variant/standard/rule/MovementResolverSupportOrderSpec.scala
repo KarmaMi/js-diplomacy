@@ -47,7 +47,8 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(France, Army, Gas),
-          DiplomacyUnit(France, Army, Bur)
+          DiplomacyUnit(France, Army, Bur),
+          DiplomacyUnit(Germany, Army, Bur)
         ),
         unitStatuses = Map(
           A(Bur) -> UnitStatus.Dislodged(Mar.province)
@@ -85,7 +86,8 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(Germany, Fleet, Bal),
-          DiplomacyUnit(Germany, Army, Pru)
+          DiplomacyUnit(Germany, Army, Pru),
+          DiplomacyUnit(Russia, Army, Pru)
         ),
         unitStatuses = Map(
           A(Pru) -> UnitStatus.Dislodged(Sil.province)
@@ -206,6 +208,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
           DiplomacyUnit(Austria, Army, Mun),
           DiplomacyUnit(Austria, Army, Tyr),
           DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Germany, Army, Mun),
           DiplomacyUnit(Russia, Army, Pru),
           DiplomacyUnit(Russia, Army, War)
         ),
@@ -251,7 +254,8 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         units = Set(
           DiplomacyUnit(Austria, Army, Ser),
           DiplomacyUnit(Austria, Army, Bul),
-          DiplomacyUnit(Austria, Army, Rum)
+          DiplomacyUnit(Austria, Army, Rum),
+          DiplomacyUnit(Turkey, Army, Bul)
         ),
         unitStatuses = Map(
           A(Bul) -> UnitStatus.Dislodged(Rum.province)
@@ -302,7 +306,8 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
           DiplomacyUnit(Austria, Army, Bul),
           DiplomacyUnit(Austria, Army, Gre),
           DiplomacyUnit(Austria, Army, Rum),
-          DiplomacyUnit(Turkey, Fleet, Bla)
+          DiplomacyUnit(Turkey, Fleet, Bla),
+          DiplomacyUnit(Turkey, Army, Bul)
         ),
         unitStatuses = Map(
           A(Bul) -> UnitStatus.Dislodged(Rum.province)
@@ -376,7 +381,8 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(Germany, Army, War),
-          DiplomacyUnit(Germany, Army, Sil)
+          DiplomacyUnit(Germany, Army, Sil),
+          DiplomacyUnit(Russia, Army, War)
         ),
         unitStatuses = Map(
           A(War) -> UnitStatus.Dislodged(Pru.province)
@@ -421,6 +427,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Germany, Army, Sil),
           DiplomacyUnit(Russia, Fleet, Bal),
           DiplomacyUnit(Russia, Army, Sil),
           DiplomacyUnit(Russia, Army, War)
@@ -472,6 +479,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec {
         state = 1901.Spring - Retreat,
         units = Set(
           DiplomacyUnit(Germany, Army, Ber),
+          DiplomacyUnit(Germany, Army, Mun),
           DiplomacyUnit(Russia, Army, Pru),
           DiplomacyUnit(Russia, Army, Sil),
           DiplomacyUnit(Russia, Army, Mun),
