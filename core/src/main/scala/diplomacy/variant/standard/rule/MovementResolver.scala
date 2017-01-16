@@ -397,7 +397,7 @@ class MovementResolver extends Rule.TypeHelper {
           }
       }
 
-    val newState = board.state.copy(phase = Phase.Retreat)
+    val newState = board.state.copy(phase = Retreat)
 
     val newBoard = board.copy(
       state = newState,
