@@ -112,7 +112,15 @@ class RetreatResolverSpec extends UnitSpec {
         import $._
 
         val Right(result) = resolver(_.copy(season = Autumn))(board, Set())
-        result.board should be(board.copy(state = 1901.Autumn - Build))
+        result.board should be(
+          board.copy(
+            state = 1901.Autumn - Build,
+            occupation = Map(
+              Bur.province -> France,
+              Mar.province -> France,
+              Wes.province -> Italy
+            )
+          ))
       }
     }
   }

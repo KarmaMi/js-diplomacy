@@ -63,6 +63,7 @@ class RetreatResolver extends Rule.TypeHelper {
     val newBoard = board.copy(
       state = newState,
       units = newUnits,
+      occupation = newOccupation,
       unitStatuses = Map[DiplomacyUnit, UnitStatus](),
       provinceStatuses = Map[Province, ProvinceStatus]()
     )
