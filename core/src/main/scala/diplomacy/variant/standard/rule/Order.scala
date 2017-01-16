@@ -72,6 +72,8 @@ object Order {
   final case class Build[Power_ <: Power](
     unit: DiplomacyUnit[Power_, MilitaryBranch.MilitaryBranch]
   ) extends NotMovementOrder[Power_] {
+    require(Option(unit.power) == unit.location.province.homeOf)
+
     override def toString: String = s"Build: ${unit}"
   }
 }
