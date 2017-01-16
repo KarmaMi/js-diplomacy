@@ -3,12 +3,13 @@ package diplomacy.board
 final case class Board[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStatus_, ProvinceStatus_](
   map: DiplomacyMap[Power_, MilitaryBranch_],
   state: State_, units: Set[DiplomacyUnit[Power_, MilitaryBranch_]],
-  occupation: Map[Power_, Set[Province[Power_]]],
+  occupation: Map[Province[Power_], Power_],
   unitStatuses: Map[DiplomacyUnit[Power_, MilitaryBranch_], UnitStatus_],
   provinceStatuses: Map[Province[Power_], ProvinceStatus_]
 ) {
-  val numberOfSupplyCenters: Map[Power_, Int] = this.occupation map {
-    case (power, provinces) => power -> provinces.count(province => province.isSupplyCenter)
+  val numberOfSupplyCenters: Map[Power_, Int] = this.occupation groupBy { _._2 } map {
+    case (power, provinces) =>
+      power -> (provinces.count { case (province, _) => province.isSupplyCenter })
   }
 
   override def toString: String = {

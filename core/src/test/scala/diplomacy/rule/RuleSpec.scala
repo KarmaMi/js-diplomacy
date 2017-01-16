@@ -11,7 +11,7 @@ class RuleSpec extends UnitSpec {
       "not resolve the orders." in {
         val board = new Board(
           map, "State", Set(new DiplomacyUnit(france, army, mar)),
-          Map(france -> Set(marP, spaP)), Map(), Map()
+          Map(),  Map(), Map()
         )
         val $ = BoardHelper(board)
 
@@ -26,8 +26,7 @@ class RuleSpec extends UnitSpec {
         val board = new Board(
           map, "State",
           Set(new DiplomacyUnit(france, army, mar), new DiplomacyUnit(france, fleet, wes)),
-          Map(france -> Set(marP, spaP)),
-          Map(), Map()
+          Map(), Map(), Map()
         )
         val $ = BoardHelper(board)
 
@@ -63,8 +62,7 @@ class RuleSpec extends UnitSpec {
         val board = new Board(
           map, "State",
           Set(new DiplomacyUnit(france, army, mar), new DiplomacyUnit(france, fleet, wes)),
-          Map(france -> Set(marP, spaP)),
-          Map(), Map()
+          Map(), Map(), Map()
         )
 
         val rule = new MockRule() {
@@ -80,8 +78,7 @@ class RuleSpec extends UnitSpec {
         val board = new Board(
           map, "State",
           Set(new DiplomacyUnit(france, army, mar), new DiplomacyUnit(france, fleet, wes)),
-          Map(france -> Set(marP, spaP)),
-          Map(), Map()
+          Map(), Map(), Map()
         )
         val $ = BoardHelper(board)
 
