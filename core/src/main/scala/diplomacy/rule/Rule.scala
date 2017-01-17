@@ -33,12 +33,15 @@ trait Rule[Status_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStat
       }
 
       // Replace from invalid orders to default orders
-      val replaced =
-        os flatMap {
-          case (unit, order) =>
-            this.errorMessageOfOrder(board)(order) map { message => unit -> (order, message) }
-        }
-      replaced foreach { case (unit, _) => os(unit) = this.defaultOrderOf(board)(unit) }
+      val replaced = mutable.Map[Order, (Order, InvalidOrderMessage)]()
+      os foreach {
+        case (unit, order) =>
+          this.errorMessageOfOrder(board)(order) foreach { message =>
+            val replacedOrder = this.defaultOrderOf(board)(unit)
+            os(unit) = replacedOrder
+            replaced(replacedOrder) = (order, message)
+          }
+      }
 
       this.errorMessageOfOrders(board)(os.values.toSet) match {
         // Reject if the set of the orders is invalid
@@ -46,12 +49,12 @@ trait Rule[Status_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStat
         case None =>
           this.resolveProcedure(board, os.values.toSet).right map {
             case r @ ResolvedResult(board, result) =>
-              val newResult = mutable.Map() ++ (result map { r => r.target.unit -> r })
+              val newResult = mutable.Map() ++ (result map { r => r.target -> r })
               replaced foreach {
-                case (unit, (order, message)) =>
-                  val resultOfUnit = newResult(unit)
-                  newResult(unit) =
-                    OrderResult.Replaced(order, message, resultOfUnit.target, resultOfUnit.result)
+                case (replacedOrder, (order, message)) =>
+                  val result = newResult(replacedOrder)
+                  newResult(replacedOrder) =
+                    OrderResult.Replaced(order, message, result.target, result.result)
               }
               r.copy(result = newResult.values.toSet)
           }

@@ -3,8 +3,9 @@ package diplomacy.variant.standard.rule
 import scala.collection.{ mutable => cmutable }
 
 import diplomacy.rule.InvalidOrderMessage
+import diplomacy.board.Power
 
-class RetreatValidator extends Validator {
+class RetreatValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Power_] {
   def unitsRequiringOrder(board: Board): Set[DiplomacyUnit] = (board.unitStatuses collect {
     case (unit, UnitStatus.Dislodged(_)) => unit
   })(collection.breakOut)

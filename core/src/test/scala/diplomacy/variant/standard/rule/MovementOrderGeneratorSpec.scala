@@ -6,10 +6,7 @@ import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
 
 class MovementOrderGeneratorSpec extends UnitSpec {
-  val generator = new MovementOrderGenerator {
-    type Turn = map.Turn
-    type Power = map.Power
-  }
+  val generator = new MovementOrderGenerator[map.Turn, map.Power]
   val board = {
     Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,

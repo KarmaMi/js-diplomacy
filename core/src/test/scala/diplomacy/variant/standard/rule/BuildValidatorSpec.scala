@@ -7,10 +7,7 @@ import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
 
 class BuildVailidatorSpec extends UnitSpec {
-  val validator = new BuildValidator {
-    type Turn = map.Turn
-    type Power = map.Power
-  }
+  val validator = new BuildValidator[map.Turn, map.Power]
   val board = {
     Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,

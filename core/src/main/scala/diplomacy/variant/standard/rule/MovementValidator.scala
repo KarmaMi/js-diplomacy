@@ -3,8 +3,9 @@ package diplomacy.variant.standard.rule
 import scala.collection.{ mutable => cmutable }
 
 import diplomacy.rule.InvalidOrderMessage
+import diplomacy.board.Power
 
-class MovementValidator extends Validator {
+class MovementValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Power_] {
   def unitsRequiringOrder(board: Board): Set[DiplomacyUnit] = board.units
 
   def errorMessageOfOrder(board: Board)(order: Order): Option[InvalidOrderMessage] = {

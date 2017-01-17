@@ -6,10 +6,7 @@ import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
 
 class BuildOrderGeneratorSpec extends UnitSpec {
-  val generator = new BuildOrderGenerator {
-    type Turn = map.Turn
-    type Power = map.Power
-  }
+  val generator = new BuildOrderGenerator[map.Turn, map.Power]
 
   "A movement-order-generator"  when {
     "there are no powers that can build or disband units" should {
