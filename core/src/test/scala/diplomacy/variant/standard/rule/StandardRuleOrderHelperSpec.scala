@@ -4,12 +4,14 @@ import diplomacy.UnitSpec
 import diplomacy.board._
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board._
 
 class StandardRuleOrderHelperSpec extends UnitSpec {
   "A StandardRuleOrderHelper" when {
     "the phase is movement" should {
       val board = {
-        Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
           map.map,
           1901.Spring - Phase.Movement,
           Set(
@@ -49,7 +51,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
 
     "the phase is retreat" should {
       val board = {
-        Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
           map.map,
           1901.Spring - Phase.Retreat,
           Set(
@@ -77,7 +79,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
 
     "the phase is build" should {
       val board = {
-        Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
           map.map,
           1901.Spring - Phase.Build,
           Set(

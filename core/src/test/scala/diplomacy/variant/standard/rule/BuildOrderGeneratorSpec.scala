@@ -4,19 +4,20 @@ import diplomacy.UnitSpec
 import diplomacy.board._
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T}
+import diplomacy.variant.standard.board._
 
 class BuildOrderGeneratorSpec extends UnitSpec {
-  val generator = new BuildOrderGenerator[map.Turn, map.Power]
+  val generator = new BuildOrderGenerator[T, map.Power]
 
   "A movement-order-generator"  when {
     "there are no powers that can build or disband units" should {
       "use an empty set to skip the build phase." in {
-        val board = {
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        val board =
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Build,
             Set(), Map(), Map(), Map()
           )
-        }
         val $ = StandardRuleOrderHelper(board)
         import $._
 
@@ -27,7 +28,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
     "all disband orders are automatically decidable" should {
       "use disband orders to skip the build phase." in {
         val board = {
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Build,
             Set(
               DiplomacyUnit(Germany, Army, Ruh)
@@ -45,7 +46,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
     "otherwise" can {
       "not skip the build phase." in {
         val board =
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Autumn - Build,
             Set(

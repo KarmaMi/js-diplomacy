@@ -4,11 +4,13 @@ import diplomacy.UnitSpec
 import diplomacy.board._
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board._
 
 class RetreatOrderGeneratorSpec extends UnitSpec {
-  val generator = new RetreatOrderGenerator[map.Turn, map.Power]
+  val generator = new RetreatOrderGenerator[T, map.Power]
   val board = {
-    Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Spring - Retreat,
       Set(
@@ -36,7 +38,7 @@ class RetreatOrderGeneratorSpec extends UnitSpec {
     "all dislodged units cannot retreat" should {
       "use disband orders to skip the retreat phase." in {
         val board = {
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Retreat,
             Set(
               DiplomacyUnit(Germany, Army, Par),

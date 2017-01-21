@@ -5,10 +5,12 @@ import diplomacy.board._
 import diplomacy.rule.OrderResult
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T}
+import diplomacy.variant.standard.board._
 
 class MovementResolverSupportOrderSpec extends UnitSpec {
   val resolver = new MovementResolver() {
-    type Turn = map.Turn
+    type Turn = T
     type Power = map.Power
   }
 

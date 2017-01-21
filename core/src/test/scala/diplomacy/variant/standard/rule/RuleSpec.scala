@@ -5,11 +5,13 @@ import diplomacy.board._
 import diplomacy.rule.OrderResult
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board._
 
 class RuleSpec extends UnitSpec {
-  val rule = new Rule[map.Turn, map.Power](turn => turn match {
-    case map.Turn(year, Spring) => map.Turn(year, Autumn)
-    case map.Turn(year, Autumn) => map.Turn(year + 1, Spring)
+  val rule = new Rule[T, map.Power](turn => turn match {
+    case T(year, Spring) => T(year, Autumn)
+    case T(year, Autumn) => T(year + 1, Spring)
     case _ => ???
   })
   type Executed =
@@ -19,7 +21,7 @@ class RuleSpec extends UnitSpec {
     "there are no dislodged units" should {
       "skip retreat phase." in {
         val board =
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Spring - Movement,
             Set(
@@ -37,7 +39,7 @@ class RuleSpec extends UnitSpec {
     "all dislodged units cannot retreat" should {
       "skip retreat phase." in {
         val board =
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Spring - Movement,
             Set(
@@ -74,7 +76,7 @@ class RuleSpec extends UnitSpec {
     "there are no power that can build units" should {
       "skip build phase." in {
         val board =
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Autumn - Movement,
             Set(
@@ -92,7 +94,7 @@ class RuleSpec extends UnitSpec {
     "all build and disband orders are automatically decidable" should {
       "skip build phase." in {
         val board =
-          Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Autumn - Movement,
             Set(

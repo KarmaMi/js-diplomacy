@@ -3,11 +3,13 @@ package diplomacy.variant
 import diplomacy.board._
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board
+import diplomacy.variant.standard.board._
 import diplomacy.variant.standard.rule._
 
 package object standard {
   private[this] val initialBoard =
-    Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[board.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Spring - Movement,
       units = Set(
@@ -27,9 +29,9 @@ package object standard {
       Map()
   )
 
-    private[this] val rule = new Rule[map.Turn, map.Power](_ match {
-      case map.Turn(year, Spring) => map.Turn(year, Autumn)
-      case map.Turn(year, Autumn) => map.Turn(year + 1, Spring)
+    private[this] val rule = new Rule[board.Turn, map.Power](_ match {
+      case board.Turn(year, Spring) => board.Turn(year, Autumn)
+      case board.Turn(year, Autumn) => board.Turn(year + 1, Spring)
       case _ => ???
     })
 

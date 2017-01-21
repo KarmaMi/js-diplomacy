@@ -5,11 +5,13 @@ import diplomacy.board._
 import diplomacy.rule.InvalidOrderMessage
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board._
 
 class RetreatVailidatorSpec extends UnitSpec {
-  val validator = new RetreatValidator[map.Turn, map.Power]
+  val validator = new RetreatValidator[T, map.Power]
   val board =
-    Board[State[map.Turn], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Spring - Retreat,
       Set(

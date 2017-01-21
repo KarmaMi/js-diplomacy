@@ -1,4 +1,4 @@
-package diplomacy.variant.standard.map
+package diplomacy.variant.standard.board
 
 object Season {
   sealed class Season(name: String) {
