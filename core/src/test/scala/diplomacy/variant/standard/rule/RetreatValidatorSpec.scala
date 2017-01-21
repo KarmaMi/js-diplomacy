@@ -11,7 +11,7 @@ import diplomacy.variant.standard.board._
 class RetreatVailidatorSpec extends UnitSpec {
   val validator = new RetreatValidator[T, map.Power]
   val board =
-    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch, UnitStatus, ProvinceStatus](
       map.map,
       1901.Spring - Retreat,
       Set(

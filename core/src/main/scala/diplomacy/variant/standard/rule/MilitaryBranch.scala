@@ -2,9 +2,9 @@ package diplomacy.variant.standard.rule
 
 import diplomacy.board.{ MilitaryBranch => BaseMilitaryBranch, Name }
 
-object MilitaryBranch {
-  sealed trait MilitaryBranch extends BaseMilitaryBranch
+sealed trait MilitaryBranch extends BaseMilitaryBranch
 
+object MilitaryBranch {
   object Army extends MilitaryBranch {
     val name = Name("Army", "A")
   }

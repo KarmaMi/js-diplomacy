@@ -1,6 +1,5 @@
 package diplomacy.variant.standard
 
-import diplomacy.board
 import diplomacy.board.{ Power, Location, DiplomacyUnit }
 
 package object rule {

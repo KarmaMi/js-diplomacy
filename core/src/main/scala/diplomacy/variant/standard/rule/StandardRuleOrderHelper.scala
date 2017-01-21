@@ -66,7 +66,7 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
 
 object StandardRuleOrderHelper {
   def apply[Turn_ <: Turn, Power_ <: Power](
-    target: Board[State[Turn_], Power_, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus]
+    target: Board[State[Turn_], Power_, MilitaryBranch, UnitStatus, ProvinceStatus]
   ): StandardRuleOrderHelper[Turn_, Power_] = new StandardRuleOrderHelper[Turn_, Power_] {
     protected[this] lazy val board = target
   }

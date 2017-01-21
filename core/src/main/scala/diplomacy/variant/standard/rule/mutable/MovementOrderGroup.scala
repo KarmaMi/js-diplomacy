@@ -11,7 +11,7 @@ final class MovementOrderGroup[Power_ <: Power](
   val relatedOrders: Set[MovementOrderWithResult[Power_]]
 ) extends DiplomacyMap.TypeHelper {
   type Power = Power_
-  type MilitaryBranch = MilitaryBranch.MilitaryBranch
+  type MilitaryBranch = diplomacy.variant.standard.rule.MilitaryBranch
 
   def validSupports: Set[Order.Support[Power]] = {
     this.relatedOrders withFilter { order =>

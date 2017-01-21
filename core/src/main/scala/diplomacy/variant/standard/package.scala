@@ -9,7 +9,7 @@ import diplomacy.variant.standard.rule._
 
 package object standard {
   private[this] val initialBoard =
-    Board[State[board.Turn], Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
+    Board[State[board.Turn], Power, MilitaryBranch, UnitStatus, ProvinceStatus](
       map.map,
       1901.Spring - Movement,
       units = Set(

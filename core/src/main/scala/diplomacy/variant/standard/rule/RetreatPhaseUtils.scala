@@ -4,11 +4,11 @@ import diplomacy.board._
 
 object RetreatPhaseUtils {
   def locationsToRetreat[Power_ <: Power](
-    board: Board[_, Power_, MilitaryBranch.MilitaryBranch, _, _]
+    board: Board[_, Power_, MilitaryBranch, _, _]
   )(
-    unit: DiplomacyUnit[Power_, MilitaryBranch.MilitaryBranch],
+    unit: DiplomacyUnit[Power_, MilitaryBranch],
     attackedFrom: Province[Power_]
-  ): Set[Location[Power_, MilitaryBranch.MilitaryBranch]] = {
+  ): Set[Location[Power_, MilitaryBranch]] = {
     board.map.movableLocationsOf(unit) filter {
       case Location(_, province, _) =>
         val existsUnit = board.units exists { unit =>
