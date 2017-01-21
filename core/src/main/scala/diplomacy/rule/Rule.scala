@@ -81,7 +81,7 @@ object Rule {
   trait TypeHelper extends Board.TypeHelper {
     type Order <: diplomacy.rule.Order[Power, MilitaryBranch]
     type Result
-    type OrderResult = diplomacy.rule.OrderResult.OrderResult[Power, MilitaryBranch, Order, Result]
+    type OrderResult = diplomacy.rule.OrderResult[Power, MilitaryBranch, Order, Result]
     type ResolvedResult =
       diplomacy.rule.ResolvedResult[State, Power, MilitaryBranch, UnitStatus, ProvinceStatus, Order, Result]
     type Rule =
