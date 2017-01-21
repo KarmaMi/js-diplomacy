@@ -14,7 +14,7 @@ class RetreatResolverSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
       map.map,
       1901.Spring - Retreat,
       Set(
@@ -48,8 +48,8 @@ class RetreatResolverSpec extends UnitSpec {
         board.copy(
           state = 1901.Autumn - Movement,
           units = Set(DiplomacyUnit(France, Army, Bur)),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus.UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus.ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
+          provinceStatuses = Map[Province, ProvinceStatus]()
         )
       )
     }
@@ -70,8 +70,8 @@ class RetreatResolverSpec extends UnitSpec {
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(Italy, Fleet, NAf)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus.UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus.ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
+          provinceStatuses = Map[Province, ProvinceStatus]()
         )
       )
     }
@@ -90,8 +90,8 @@ class RetreatResolverSpec extends UnitSpec {
           units = Set(
             DiplomacyUnit(France, Army, Bur)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus.UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus.ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
+          provinceStatuses = Map[Province, ProvinceStatus]()
         )
       )
     }
@@ -100,7 +100,7 @@ class RetreatResolverSpec extends UnitSpec {
     "resolves a buildable turn" should {
       "go to Build phase." in {
         val board = {
-          Board[State, Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State, Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map,
             1901.Autumn - Retreat,
             Set(

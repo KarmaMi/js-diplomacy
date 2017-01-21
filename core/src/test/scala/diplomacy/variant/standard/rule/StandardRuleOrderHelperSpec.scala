@@ -11,7 +11,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
   "A StandardRuleOrderHelper" when {
     "the phase is movement" should {
       val board = {
-        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
           map.map,
           1901.Spring - Phase.Movement,
           Set(
@@ -51,7 +51,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
 
     "the phase is retreat" should {
       val board = {
-        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
           map.map,
           1901.Spring - Phase.Retreat,
           Set(
@@ -79,7 +79,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
 
     "the phase is build" should {
       val board = {
-        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+        Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
           map.map,
           1901.Spring - Phase.Build,
           Set(

@@ -21,7 +21,7 @@ class RuleSpec extends UnitSpec {
     "there are no dislodged units" should {
       "skip retreat phase." in {
         val board =
-          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map,
             1901.Spring - Movement,
             Set(
@@ -39,7 +39,7 @@ class RuleSpec extends UnitSpec {
     "all dislodged units cannot retreat" should {
       "skip retreat phase." in {
         val board =
-          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map,
             1901.Spring - Movement,
             Set(
@@ -76,7 +76,7 @@ class RuleSpec extends UnitSpec {
     "there are no power that can build units" should {
       "skip build phase." in {
         val board =
-          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map,
             1901.Autumn - Movement,
             Set(
@@ -94,7 +94,7 @@ class RuleSpec extends UnitSpec {
     "all build and disband orders are automatically decidable" should {
       "skip build phase." in {
         val board =
-          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map,
             1901.Autumn - Movement,
             Set(

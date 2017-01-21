@@ -6,5 +6,5 @@ import diplomacy.variant.standard.rule.{ Order, Result }
 
 final case class MovementOrderWithResult[Power_ <: Power](
   order: Order.MovementOrder[Power_],
-  result: Option[Result.Result]
+  result: Option[Result]
 ) extends BaseMovementOrderWithResult[Power_]

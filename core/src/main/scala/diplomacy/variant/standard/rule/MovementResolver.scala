@@ -372,7 +372,7 @@ class MovementResolver extends Rule.TypeHelper {
         }
       }
 
-    val newUnitStatuses: Map[DiplomacyUnit, UnitStatus.UnitStatus] =
+    val newUnitStatuses: Map[DiplomacyUnit, UnitStatus] =
       (ordersWithResult flatMap { order =>
         order.result match {
           case Some(Result.Dislodged(attackedFrom)) =>
@@ -382,7 +382,7 @@ class MovementResolver extends Rule.TypeHelper {
       }).toMap
 
     val provincesContainingUnit = newUnits map { _.location.province }
-    val newProvinceStatuses: Map[Province, ProvinceStatus.ProvinceStatus] =
+    val newProvinceStatuses: Map[Province, ProvinceStatus] =
       province2OrderGroups flatMap {
         case (province, groups) =>
           val wasBounced =

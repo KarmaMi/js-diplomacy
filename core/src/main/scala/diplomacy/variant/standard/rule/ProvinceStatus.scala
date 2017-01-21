@@ -1,8 +1,9 @@
 package diplomacy.variant.standard.rule
 
+sealed class ProvinceStatus(name: String) {
+  override def toString: String = name
+}
+
 object ProvinceStatus {
-  sealed class ProvinceStatus(name: String) {
-    override def toString: String = name
-  }
   object Standoff extends ProvinceStatus("Standoff")
 }

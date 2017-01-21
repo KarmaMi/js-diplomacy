@@ -14,7 +14,7 @@ class BuildResolverSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus, ProvinceStatus](
       map.map,
       1901.Autumn - Build,
       Set(
@@ -50,8 +50,8 @@ class BuildResolverSpec extends UnitSpec {
             DiplomacyUnit(Italy, Fleet, Rom),
             DiplomacyUnit(Italy, Fleet, Nap)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus.UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus.ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
+          provinceStatuses = Map[Province, ProvinceStatus]()
         )
       )
     }
@@ -69,8 +69,8 @@ class BuildResolverSpec extends UnitSpec {
           units = Set(
             DiplomacyUnit(Italy, Fleet, Nap)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus.UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus.ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
+          provinceStatuses = Map[Province, ProvinceStatus]()
         )
       )
     }

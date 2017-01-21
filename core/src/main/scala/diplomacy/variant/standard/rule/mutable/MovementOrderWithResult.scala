@@ -6,8 +6,8 @@ import diplomacy.variant.standard.rule.{ immutable, Order, Result }
 
 class MovementOrderWithResult[Power_ <: Power](val order: Order.MovementOrder[Power_])
     extends BaseMovementOrderWithResult[Power_] {
-  def result: Option[Result.Result] = this.innerResult
-  def result_=(result: Result.Result): Unit = {
+  def result: Option[Result] = this.innerResult
+  def result_=(result: Result): Unit = {
     order match {
       case Order.Hold(_) =>
         result match {
@@ -62,5 +62,5 @@ class MovementOrderWithResult[Power_ <: Power](val order: Order.MovementOrder[Po
     immutable.MovementOrderWithResult(this.order, this.innerResult)
   }
 
-  private[this] var innerResult: Option[Result.Result] = None
+  private[this] var innerResult: Option[Result] = None
 }

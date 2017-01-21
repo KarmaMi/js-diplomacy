@@ -2,10 +2,11 @@ package diplomacy.variant.standard.rule
 
 import diplomacy.board.{ Power, Province }
 
+sealed class Result(name: String) {
+  override def toString: String = name
+}
+
 object Result {
-  sealed class Result(name: String) {
-    override def toString: String = name
-  }
   object Success extends Result("Success")
   object Failed extends Result("Failed")
   case class Dislodged[Power_ <: Power](attackedFrom: Province[Power_])
