@@ -11,7 +11,7 @@ final class OrderDependency[Power_ <: Power](
   type Power = Power_
 
   val graph = {
-    type Order = Order.MovementOrder[Power_]
+    type Order = MovementOrder[Power_]
 
     val nodes = cmutable.Set[Province]()
     val edges = cmutable.Set[(Province, Province)]()

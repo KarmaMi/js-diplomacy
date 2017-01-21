@@ -3,11 +3,10 @@ package diplomacy.variant.standard.rule
 import diplomacy.board.{ Power, Location, DiplomacyUnit }
 import diplomacy.rule.{ Order => BaseOrder }
 
+sealed trait Order[Power_ <: Power] extends BaseOrder[Power_, MilitaryBranch]
+sealed trait MovementOrder[Power_ <: Power] extends Order[Power_]
+
 object Order {
-  sealed trait Order[Power_ <: Power] extends BaseOrder[Power_, MilitaryBranch]
-
-  sealed trait MovementOrder[Power_ <: Power] extends Order[Power_]
-
   final case class Hold[Power_ <: Power](
     unit: DiplomacyUnit[Power_, MilitaryBranch]
   ) extends MovementOrder[Power_] {

@@ -2,9 +2,9 @@ package diplomacy.variant.standard.rule.mutable
 
 import diplomacy.board.Power
 import diplomacy.variant.standard.rule.{ MovementOrderWithResult => BaseMovementOrderWithResult }
-import diplomacy.variant.standard.rule.{ immutable, Order, Result }
+import diplomacy.variant.standard.rule._
 
-class MovementOrderWithResult[Power_ <: Power](val order: Order.MovementOrder[Power_])
+class MovementOrderWithResult[Power_ <: Power](val order: MovementOrder[Power_])
     extends BaseMovementOrderWithResult[Power_] {
   def result: Option[Result] = this.innerResult
   def result_=(result: Result): Unit = {

@@ -6,7 +6,7 @@ import diplomacy.rule.{ ResolvedResult, OrderResult, InvalidOrderMessage }
 
 class MovementResolver extends Rule.TypeHelper {
   def apply(
-    board: Board, orders: Set[Order.MovementOrder[Power]]
+    board: Board, orders: Set[MovementOrder[Power]]
   ): Either[InvalidOrderMessage, ResolvedResult] = {
     val ordersWithResult = orders map { order => new mutable.MovementOrderWithResult[Power](order) }
     val movesViaConvoy = cmutable.Set[Order.Move[Power]]()
