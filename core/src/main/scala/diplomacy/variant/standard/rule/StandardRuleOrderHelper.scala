@@ -1,6 +1,6 @@
 package diplomacy.variant.standard.rule
 
-import diplomacy.board.{ Power, Board, DiplomacyUnit }
+import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit, Power }
 
 trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeHelper {
   final type Turn = Turn_
@@ -34,7 +34,7 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
           case None =>
             require(location.province.homeOf.isDefined)
             location.province.homeOf match {
-              case Some(home) => DiplomacyUnit(home, militaryBranch, location)
+              case Some(home) => BaseDiplomacyUnit(home, militaryBranch, location)
               case _ => ???
             }
         }
@@ -45,7 +45,7 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
   implicit class GenOrderToLocation(location: Location) {
     require(location.province.homeOf.isDefined)
     def build(tpe: MilitaryBranch) = location.province.homeOf match {
-      case Some(home) => Order.Build(DiplomacyUnit(home, tpe, location))
+      case Some(home) => Order.Build(BaseDiplomacyUnit(home, tpe, location))
       case _ => ???
     }
   }
@@ -66,7 +66,7 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
 
 object StandardRuleOrderHelper {
   def apply[Turn_ <: Turn, Power_ <: Power](
-    target: Board[State[Turn_], Power_, MilitaryBranch, UnitStatus, ProvinceStatus]
+    target: Board[Turn_, Power_]
   ): StandardRuleOrderHelper[Turn_, Power_] = new StandardRuleOrderHelper[Turn_, Power_] {
     protected[this] lazy val board = target
   }

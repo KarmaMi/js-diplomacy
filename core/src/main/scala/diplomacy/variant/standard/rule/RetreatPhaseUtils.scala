@@ -3,12 +3,10 @@ package diplomacy.variant.standard.rule
 import diplomacy.board._
 
 object RetreatPhaseUtils {
-  def locationsToRetreat[Power_ <: Power](
-    board: Board[_, Power_, MilitaryBranch, _, _]
-  )(
-    unit: DiplomacyUnit[Power_, MilitaryBranch],
+  def locationsToRetreat[Power_ <: Power](board: Board[_, Power_])(
+    unit: DiplomacyUnit[Power_],
     attackedFrom: Province[Power_]
-  ): Set[Location[Power_, MilitaryBranch]] = {
+  ): Set[Location[Power_]] = {
     board.map.movableLocationsOf(unit) filter {
       case Location(_, province, _) =>
         val existsUnit = board.units exists { unit =>

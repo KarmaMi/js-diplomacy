@@ -2,7 +2,7 @@ package diplomacy.variant.standard.rule
 
 import scala.collection.{ mutable => cmutable }
 
-import diplomacy.board.DiplomacyUnit
+import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit }
 import diplomacy.rule.{ InvalidOrderMessage, OrderResult, ResolvedResult }
 
 class RetreatResolver extends Rule.TypeHelper {
@@ -45,7 +45,7 @@ class RetreatResolver extends Rule.TypeHelper {
     val newOccupation =
       if (board.state.turn.isOccupationUpdateable) {
         board.occupation ++ (newUnits map {
-          case DiplomacyUnit(power, _, location) => location.province -> power
+          case BaseDiplomacyUnit(power, _, location) => location.province -> power
         })
       } else {
         board.occupation

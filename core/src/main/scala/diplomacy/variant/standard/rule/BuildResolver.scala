@@ -2,7 +2,6 @@ package diplomacy.variant.standard.rule
 
 import scala.collection.{ mutable => cmutable }
 
-import diplomacy.board.DiplomacyUnit
 import diplomacy.rule.{ InvalidOrderMessage, OrderResult, ResolvedResult }
 
 class BuildResolver extends Rule.TypeHelper {
