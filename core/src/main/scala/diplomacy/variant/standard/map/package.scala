@@ -4,9 +4,11 @@ import diplomacy.board._
 import diplomacy.variant.standard.rule._
 import diplomacy.util.LabeledUndirectedGraph
 
-package object map extends DiplomacyMap.TypeHelper {
-  type Power = diplomacy.variant.standard.map.Power.Power
-  type MilitaryBranch = diplomacy.variant.standard.rule.MilitaryBranch.MilitaryBranch
+package object map {
+  val typeHelper = new Rule.TypeHelper {
+    final type Power = diplomacy.variant.standard.map.Power
+  }
+  import typeHelper._
 
   private[this] val south = Name("South Coast", "SC")
   private[this] val north = Name("North Coast", "NC")

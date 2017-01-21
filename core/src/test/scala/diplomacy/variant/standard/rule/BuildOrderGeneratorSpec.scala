@@ -14,7 +14,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
     "there are no powers that can build or disband units" should {
       "use an empty set to skip the build phase." in {
         val board =
-          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Build,
             Set(), Map(), Map(), Map()
           )
@@ -28,7 +28,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
     "all disband orders are automatically decidable" should {
       "use disband orders to skip the build phase." in {
         val board = {
-          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Build,
             Set(
               DiplomacyUnit(Germany, Army, Ruh)
@@ -46,7 +46,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
     "otherwise" can {
       "not skip the build phase." in {
         val board =
-          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Autumn - Build,
             Set(

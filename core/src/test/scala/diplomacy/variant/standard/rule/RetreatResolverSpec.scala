@@ -14,7 +14,7 @@ class RetreatResolverSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Spring - Retreat,
       Set(
@@ -100,7 +100,7 @@ class RetreatResolverSpec extends UnitSpec {
     "resolves a buildable turn" should {
       "go to Build phase." in {
         val board = {
-          Board[State, Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State, Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map,
             1901.Autumn - Retreat,
             Set(

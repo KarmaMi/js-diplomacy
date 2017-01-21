@@ -10,7 +10,7 @@ import diplomacy.variant.standard.board._
 class MovementOrderGeneratorSpec extends UnitSpec {
   val generator = new MovementOrderGenerator[T, map.Power]
   val board = {
-    Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Spring - Movement,
       Set(
@@ -32,7 +32,7 @@ class MovementOrderGeneratorSpec extends UnitSpec {
     "there are no units" should {
       "use an empty to skip the movement phase." in {
         val emptyBoard = {
-          Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+          Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
             map.map, 1901.Spring - Movement, Set(), Map(), Map(), Map()
           )
         }

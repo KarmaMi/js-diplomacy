@@ -14,7 +14,7 @@ class BuildResolverSpec extends UnitSpec {
     type Power = map.Power
   }
   val board = {
-    Board[State[T], Power.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
+    Board[State[T], map.Power, MilitaryBranch.MilitaryBranch, UnitStatus.UnitStatus, ProvinceStatus.ProvinceStatus](
       map.map,
       1901.Autumn - Build,
       Set(
