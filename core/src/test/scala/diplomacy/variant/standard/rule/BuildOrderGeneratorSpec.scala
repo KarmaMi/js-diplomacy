@@ -11,7 +11,7 @@ import diplomacy.variant.standard.board.Implicits._
 class BuildOrderGeneratorSpec extends UnitSpec {
   val generator = new BuildOrderGenerator[T, map.Power]
 
-  "A movement-order-generator"  when {
+  "A movement-order-generator" when {
     "there are no powers that can build or disband units" should {
       "use an empty set to skip the build phase." in {
         val board =
