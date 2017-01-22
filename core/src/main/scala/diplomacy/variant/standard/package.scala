@@ -4,7 +4,8 @@ import diplomacy.board.{ DiplomacyUnit, Province }
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
 import diplomacy.variant.standard.board
-import diplomacy.variant.standard.board._
+import diplomacy.variant.standard.board.Keywords._
+import diplomacy.variant.standard.board.Implicits._
 import diplomacy.variant.standard.rule._
 
 package object standard {

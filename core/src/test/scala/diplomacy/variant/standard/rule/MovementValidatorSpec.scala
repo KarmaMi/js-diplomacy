@@ -6,7 +6,8 @@ import diplomacy.rule.InvalidOrderMessage
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
 import diplomacy.variant.standard.board.{ Turn => T }
-import diplomacy.variant.standard.board._
+import diplomacy.variant.standard.board.Keywords._
+import diplomacy.variant.standard.board.Implicits._
 
 class MovementVailidatorSpec extends UnitSpec {
   val validator = new MovementValidator[T, map.Power]

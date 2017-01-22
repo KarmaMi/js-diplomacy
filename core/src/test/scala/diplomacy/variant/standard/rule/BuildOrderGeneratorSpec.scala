@@ -4,8 +4,9 @@ import diplomacy.UnitSpec
 import diplomacy.board._
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
-import diplomacy.variant.standard.board.{ Turn => T}
-import diplomacy.variant.standard.board._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board.Keywords._
+import diplomacy.variant.standard.board.Implicits._
 
 class BuildOrderGeneratorSpec extends UnitSpec {
   val generator = new BuildOrderGenerator[T, map.Power]

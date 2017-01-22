@@ -5,8 +5,9 @@ import diplomacy.board._
 import diplomacy.rule.{ OrderResult, InvalidOrderMessage }
 import diplomacy.variant.standard.map
 import diplomacy.variant.standard.map._
-import diplomacy.variant.standard.board.{ Turn => T}
-import diplomacy.variant.standard.board._
+import diplomacy.variant.standard.board.{ Turn => T }
+import diplomacy.variant.standard.board.Keywords._
+import diplomacy.variant.standard.board.Implicits._
 
 class RetreatResolverSpec extends UnitSpec {
   val resolver = new RetreatResolver {

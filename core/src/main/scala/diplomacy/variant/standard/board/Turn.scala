@@ -1,6 +1,7 @@
 package diplomacy.variant.standard.board
 
 import diplomacy.variant.standard.rule.{ Turn => BaseTurn }
+import diplomacy.variant.standard.board.Keywords._
 
 case class Turn(year: Int, season: Season) extends BaseTurn {
   override def toString: String = s"${year}-${season}"
