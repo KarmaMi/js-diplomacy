@@ -11,7 +11,7 @@ import diplomacy.variant.standard.board._
 class MovementVailidatorSpec extends UnitSpec {
   val validator = new MovementValidator[T, map.Power]
   val board = {
-    Board[State[T], map.Power, MilitaryBranch, UnitStatus, ProvinceStatus](
+    new Board[T, map.Power](
       map.map,
       1901.Spring - Movement,
       Set(

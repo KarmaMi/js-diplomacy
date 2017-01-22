@@ -11,7 +11,7 @@ import diplomacy.variant.standard.board._
 class BuildVailidatorSpec extends UnitSpec {
   val validator = new BuildValidator[T, map.Power]
   val board = {
-    Board[State[T], map.Power, MilitaryBranch, UnitStatus, ProvinceStatus](
+    new Board[T, map.Power](
       map.map,
       1901.Autumn - Build,
       Set(

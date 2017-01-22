@@ -10,6 +10,7 @@ class MovementResolver extends Rule.TypeHelper {
   ): Either[InvalidOrderMessage, ResolvedResult] = {
     val ordersWithResult = orders map { order => new mutable.MovementOrderWithResult[Power](order) }
     val movesViaConvoy = cmutable.Set[Order.Move[Power]]()
+    val dislodgedFrom = cmutable.Map[DiplomacyUnit, Province]()
 
     def canBounce(
       order1: mutable.MovementOrderWithResult[Power],
@@ -307,6 +308,8 @@ class MovementResolver extends Rule.TypeHelper {
                       offenceGroup foreach { group =>
                         defence.target.result =
                           Result.Dislodged(group.target.order.unit.location.province)
+                        dislodgedFrom(defence.target.order.unit) =
+                          group.target.order.unit.location.province
                         defence.relatedOrders foreach { o => o.result = Result.Failed }
                       }
                     } else {
@@ -375,8 +378,10 @@ class MovementResolver extends Rule.TypeHelper {
     val newUnitStatuses: Map[DiplomacyUnit, UnitStatus] =
       (ordersWithResult flatMap { order =>
         order.result match {
-          case Some(Result.Dislodged(attackedFrom)) =>
-            Option(order.order.unit -> UnitStatus.Dislodged(attackedFrom))
+          case Some(Result.Dislodged(_)) =>
+            dislodgedFrom.get(order.order.unit) map { province =>
+              order.order.unit -> UnitStatus.Dislodged(province)
+            }
           case _ => None
         }
       }).toMap
