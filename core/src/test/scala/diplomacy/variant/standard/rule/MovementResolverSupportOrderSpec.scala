@@ -12,14 +12,11 @@ import diplomacy.variant.standard.board.Implicits._
 import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.variant.standard.rule.Implicits._
 
-class MovementResolverSupportOrderSpec extends UnitSpec {
+class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult {
   val resolver = new MovementResolver() {
     type Turn = T
     type Power = map.Power
   }
-
-  type Executed =
-    OrderResult.Executed[resolver.Power, resolver.MilitaryBranch, resolver.Order, resolver.Result]
 
   "A movement-resolver" should {
     "handle DIAGRAM 8" in {

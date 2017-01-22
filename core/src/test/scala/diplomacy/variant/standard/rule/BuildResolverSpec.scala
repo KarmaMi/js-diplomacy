@@ -12,7 +12,7 @@ import diplomacy.variant.standard.board.Implicits._
 import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.variant.standard.rule.Implicits._
 
-class BuildResolverSpec extends UnitSpec {
+class BuildResolverSpec extends UnitSpec with UsesResolvedResult {
   val resolver = new BuildResolver {
     type Turn = T
     type Power = map.Power
@@ -34,8 +34,6 @@ class BuildResolverSpec extends UnitSpec {
   }
   val $ = StandardRuleOrderHelper(board)
   import $._
-  type Executed =
-    OrderResult.Executed[resolver.Power, resolver.MilitaryBranch, resolver.Order, resolver.Result]
 
   "A build-resolver" can {
     "resolve a build order." in {

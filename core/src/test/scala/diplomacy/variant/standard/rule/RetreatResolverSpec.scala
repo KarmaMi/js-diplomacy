@@ -12,7 +12,7 @@ import diplomacy.variant.standard.board.Implicits._
 import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.variant.standard.rule.Implicits._
 
-class RetreatResolverSpec extends UnitSpec {
+class RetreatResolverSpec extends UnitSpec with UsesResolvedResult {
   val resolver = new RetreatResolver {
     type Turn = T
     type Power = map.Power
@@ -35,8 +35,6 @@ class RetreatResolverSpec extends UnitSpec {
   }
   val $ = StandardRuleOrderHelper(board)
   import $._
-  type Executed =
-    OrderResult.Executed[resolver.Power, resolver.MilitaryBranch, resolver.Order, resolver.Result]
 
   "A retreat-resolver" can {
     "resolve a disband order." in {
