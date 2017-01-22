@@ -3,6 +3,7 @@ package diplomacy.variant.standard.rule
 import scala.collection.{ mutable => cmutable }
 
 import diplomacy.rule.{ InvalidOrderMessage, OrderResult, ResolvedResult }
+import diplomacy.variant.standard.rule.Keywords._
 
 class BuildResolver extends Rule.TypeHelper {
   def apply(nextTurn: Turn => Turn)(

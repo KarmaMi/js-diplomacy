@@ -8,6 +8,8 @@ import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board.{ Turn => T }
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._
+import diplomacy.variant.standard.rule.Keywords._
+import diplomacy.variant.standard.rule.Implicits._
 
 class RetreatOrderGeneratorSpec extends UnitSpec {
   val generator = new RetreatOrderGenerator[T, map.Power]

@@ -2,6 +2,7 @@ package diplomacy.variant.standard
 
 import diplomacy.board._
 import diplomacy.variant.standard.rule._
+import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.util.LabeledUndirectedGraph
 
 package object map {

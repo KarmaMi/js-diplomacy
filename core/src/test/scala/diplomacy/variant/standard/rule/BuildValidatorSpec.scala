@@ -9,6 +9,8 @@ import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board.{ Turn => T }
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._
+import diplomacy.variant.standard.rule.Keywords._
+import diplomacy.variant.standard.rule.Implicits._
 
 class BuildVailidatorSpec extends UnitSpec {
   val validator = new BuildValidator[T, map.Power]

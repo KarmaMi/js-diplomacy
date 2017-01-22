@@ -1,6 +1,7 @@
 package diplomacy.variant.standard.rule
 
 import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit, Power }
+import diplomacy.variant.standard.rule.Keywords._
 
 trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeHelper {
   final type Turn = Turn_

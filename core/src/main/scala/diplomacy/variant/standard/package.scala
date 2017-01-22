@@ -7,7 +7,9 @@ import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._
-import diplomacy.variant.standard.rule._
+import diplomacy.variant.standard.rule.{ Rule, Board }
+import diplomacy.variant.standard.rule.Keywords._
+import diplomacy.variant.standard.rule.Implicits._
 
 package object standard {
   private[this] val initialBoard =

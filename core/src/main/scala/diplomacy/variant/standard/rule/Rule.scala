@@ -3,6 +3,7 @@ package diplomacy.variant.standard.rule
 import diplomacy.board.Power
 import diplomacy.rule.{ Rule => BaseRule, InvalidOrderMessage }
 import diplomacy.variant.standard.rule
+import diplomacy.variant.standard.rule.Keywords._
 
 final class Rule[Turn_ <: Turn, Power_ <: Power](nextTurn: Turn_ => Turn_)
   extends BaseRule[rule.State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus, Order[Power_], Result]

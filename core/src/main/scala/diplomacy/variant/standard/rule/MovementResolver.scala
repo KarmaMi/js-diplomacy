@@ -3,6 +3,7 @@ package diplomacy.variant.standard.rule
 import scala.collection.{ mutable => cmutable }
 
 import diplomacy.rule.{ ResolvedResult, OrderResult, InvalidOrderMessage }
+import diplomacy.variant.standard.rule.Keywords._
 
 class MovementResolver extends Rule.TypeHelper {
   def apply(

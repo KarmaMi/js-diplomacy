@@ -4,18 +4,22 @@ import diplomacy.board.{ Power, Location, DiplomacyUnit }
 import diplomacy.board.Power
 
 package object rule {
-  /*  Military Branch */
-  val Army = MilitaryBranch.Army
-  val Fleet = MilitaryBranch.Fleet
+  object Keywords {
+    /*  Military Branch */
+    val Army = MilitaryBranch.Army
+    val Fleet = MilitaryBranch.Fleet
 
-  /* Phase */
-  val Movement = Phase.Movement
-  val Retreat = Phase.Retreat
-  val Build = Phase.Build
+    /* Phase */
+    val Movement = Phase.Movement
+    val Retreat = Phase.Retreat
+    val Build = Phase.Build
+  }
 
-  /* State */
-  implicit class Turn2State[Turn_ <: Turn](turn: Turn_) {
-    def -(phase: Phase.Phase): State[Turn_] = State(turn, phase)
+  object Implicits {
+    /* State */
+    implicit class Turn2State[Turn_ <: Turn](turn: Turn_) {
+      def -(phase: Phase.Phase): State[Turn_] = State(turn, phase)
+    }
   }
 
   /* Type Aliases */

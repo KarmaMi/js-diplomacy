@@ -4,6 +4,7 @@ import scala.collection.{ mutable => cmutable }
 
 import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit }
 import diplomacy.rule.{ InvalidOrderMessage, OrderResult, ResolvedResult }
+import diplomacy.variant.standard.rule.Keywords._
 
 class RetreatResolver extends Rule.TypeHelper {
   def apply(nextTurn: Turn => Turn)(
