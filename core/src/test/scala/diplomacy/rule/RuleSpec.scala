@@ -41,7 +41,8 @@ class RuleSpec extends UnitSpec {
               board,
               orders map { order =>
                 OrderResult.Executed[Power, MilitaryBranch, Order, String](order, "resolved")
-              }
+              },
+              false
             ))
           }
         }
@@ -89,7 +90,8 @@ class RuleSpec extends UnitSpec {
               board,
               orders map { order =>
                 OrderResult.Executed[Power, MilitaryBranch, Order, String](order, "resolved")
-              }
+              },
+              false
             ))
           }
           override def unitsRequiringOrder(board: Board) = Set($.A($.Mar))

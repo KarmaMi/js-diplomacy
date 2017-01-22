@@ -27,6 +27,6 @@ class BuildResolver extends Rule.TypeHelper {
         OrderResult.Executed[Power, MilitaryBranch, Order, Result](order, Result.Success)
     })(collection.breakOut)
 
-    Right(ResolvedResult(newBoard, orderResults))
+    Right(ResolvedResult(newBoard, orderResults, false))
   }
 }

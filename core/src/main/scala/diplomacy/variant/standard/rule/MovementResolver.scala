@@ -418,6 +418,6 @@ class MovementResolver extends Rule.TypeHelper {
           OrderResult.Executed[Power, MilitaryBranch, Order, Result](order.order, result)
         }
       }
-    Right(ResolvedResult(newBoard, orderResults))
+    Right(ResolvedResult(newBoard, orderResults, false))
   }
 }

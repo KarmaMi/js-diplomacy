@@ -73,6 +73,11 @@ class RetreatResolver extends Rule.TypeHelper {
         OrderResult.Executed[Power, MilitaryBranch, Order, Result](order, result)
     })(collection.breakOut)
 
-    Right(ResolvedResult(newBoard, orderResults))
+    val numOfCenters = board.map.provinces count { _.isSupplyCenter }
+    val isFinished =
+      board.map.powers exists { power =>
+        board.numberOfSupplyCenters.getOrElse(power, 0) > (numOfCenters / 2)
+      }
+    Right(ResolvedResult(newBoard, orderResults, isFinished))
   }
 }

@@ -48,7 +48,7 @@ trait Rule[Status_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStat
         case Some(message) => Left(message)
         case None =>
           this.resolveProcedure(board, os.values.toSet).right map {
-            case r @ ResolvedResult(board, result) =>
+            case r @ ResolvedResult(board, result, _) =>
               val newResult = mutable.Map() ++ (result map { r => r.target -> r })
               replaced foreach {
                 case (replacedOrder, (order, message)) =>

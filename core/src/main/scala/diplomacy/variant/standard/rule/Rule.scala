@@ -61,7 +61,9 @@ final class Rule[Turn_ <: Turn, Power_ <: Power](nextTurn: Turn_ => Turn_)
           orders => this.resolve(result.board, orders)
         } getOrElse (Right(result))).right
     } yield {
-      new ResolvedResult(result2.board, result.result ++ result2.result)
+      new ResolvedResult(
+        result2.board, result.result ++ result2.result, result.isFinished || result2.isFinished
+      )
     }
   }
 

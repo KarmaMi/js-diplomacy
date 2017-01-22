@@ -129,5 +129,41 @@ class RetreatResolverSpec extends UnitSpec {
           ))
       }
     }
+    "a power controls half of supply centers" should {
+      "finish the game." in {
+        val board = {
+          Board[State, Power, MilitaryBranch, UnitStatus, ProvinceStatus](
+            map.map, 1901.Autumn - Retreat,
+            Set(),
+            Map(
+              StP.province -> France,
+              Swe.province -> France,
+              Nwy.province -> France,
+              Den.province -> France,
+              Lvp.province -> France,
+              Edi.province -> France,
+              Lon.province -> France,
+              Ber.province -> France,
+              Kie.province -> France,
+              Mun.province -> France,
+              Hol.province -> France,
+              Bel.province -> France,
+              Bre.province -> France,
+              Par.province -> France,
+              Mar.province -> France,
+              Spa.province -> France,
+              Por.province -> France,
+              Tun.province -> France
+            ),
+            Map(), Map()
+          )
+        }
+        val $ = StandardRuleOrderHelper(board)
+        import $._
+
+        val Right(result) = resolver(_.copy(season = Autumn))(board, Set())
+        result.isFinished should be(true)
+      }
+    }
   }
 }

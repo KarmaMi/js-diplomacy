@@ -117,5 +117,40 @@ class RuleSpec extends UnitSpec {
         ))
       }
     }
+    "a power controls half of supply centers" should {
+      "finish the game." in {
+        val board =
+          new Board[T, map.Power](
+            map.map, 1901.Autumn - Movement,
+            Set(),
+            Map(
+              StP.province -> France,
+              Swe.province -> France,
+              Nwy.province -> France,
+              Den.province -> France,
+              Lvp.province -> France,
+              Edi.province -> France,
+              Lon.province -> France,
+              Ber.province -> France,
+              Kie.province -> France,
+              Mun.province -> France,
+              Hol.province -> France,
+              Bel.province -> France,
+              Bre.province -> France,
+              Par.province -> France,
+              Mar.province -> France,
+              Spa.province -> France,
+              Por.province -> France,
+              Tun.province -> France
+            ),
+            Map(), Map()
+          )
+        val $ = StandardRuleOrderHelper(board)
+        import $._
+
+        val Right(result) = rule.resolve(board, Set())
+        result.isFinished should be(true)
+      }
+    }
   }
 }
