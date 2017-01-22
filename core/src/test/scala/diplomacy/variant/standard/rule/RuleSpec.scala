@@ -9,11 +9,7 @@ import diplomacy.variant.standard.board.{ Turn => T }
 import diplomacy.variant.standard.board._
 
 class RuleSpec extends UnitSpec {
-  val rule = new Rule[T, map.Power](turn => turn match {
-    case T(year, Spring) => T(year, Autumn)
-    case T(year, Autumn) => T(year + 1, Spring)
-    case _ => ???
-  })
+  val rule = new Rule[T, map.Power](T.nextTurn)
   type Executed =
     OrderResult.Executed[map.Power, rule.MilitaryBranch, rule.Order, rule.Result]
 

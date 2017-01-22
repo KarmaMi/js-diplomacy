@@ -1,6 +1,6 @@
 package diplomacy.variant.standard.board
 
-sealed class Season(name: String) {
+sealed abstract class Season(name: String) {
   override def toString: String = name
 }
 

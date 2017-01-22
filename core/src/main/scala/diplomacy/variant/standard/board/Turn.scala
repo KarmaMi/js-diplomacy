@@ -7,3 +7,10 @@ case class Turn(year: Int, season: Season) extends BaseTurn {
   val isBuildable: Boolean = season == Autumn
   val isOccupationUpdateable: Boolean = season == Autumn
 }
+
+object Turn {
+  def nextTurn(turn: Turn): Turn = turn match {
+    case Turn(year, Spring) => Turn(year, Autumn)
+    case Turn(year, Autumn) => Turn(year + 1, Spring)
+  }
+}
