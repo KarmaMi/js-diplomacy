@@ -2,7 +2,8 @@ package diplomacy.variant
 
 import diplomacy.board.{ DiplomacyUnit, Province }
 import diplomacy.variant.standard.map
-import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.map.Power
+import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._

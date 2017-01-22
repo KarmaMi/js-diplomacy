@@ -2,6 +2,7 @@ package diplomacy.variant.standard.map
 
 import diplomacy.UnitSpec
 import diplomacy.variant.standard.rule._
+import diplomacy.variant.standard.map.Keywords._
 
 class MapSpec extends UnitSpec {
   "A map instance" should {

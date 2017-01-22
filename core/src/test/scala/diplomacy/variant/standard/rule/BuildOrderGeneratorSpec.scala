@@ -3,7 +3,8 @@ package diplomacy.variant.standard.rule
 import diplomacy.UnitSpec
 import diplomacy.board._
 import diplomacy.variant.standard.map
-import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.map.Power
+import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board.{ Turn => T }
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._

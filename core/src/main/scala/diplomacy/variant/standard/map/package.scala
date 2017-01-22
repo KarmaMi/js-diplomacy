@@ -20,180 +20,183 @@ package object map {
     )
   }
 
-  /* Powers */
-  val Austria = Power.Austria
-  val England = Power.England
-  val France = Power.France
-  val Germany = Power.Germany
-  val Italy = Power.Italy
-  val Russia = Power.Russia
-  val Turkey = Power.Turkey
+  object Keywords {
+    /* Powers */
+    val Austria = Power.Austria
+    val England = Power.England
+    val France = Power.France
+    val Germany = Power.Germany
+    val Italy = Power.Italy
+    val Russia = Power.Russia
+    val Turkey = Power.Turkey
 
-  /* Locations */
-  // inland
-  val Boh =
-    Location(Province[Power](Name("Bohemia", "Boh"), Option(Austria), false), Set[MilitaryBranch](Army))
-  val Bud =
-    Location(Province[Power](Name("Budapest", "Bud"), Option(Austria), true), Set[MilitaryBranch](Army))
-  val Gal =
-    Location(Province[Power](Name("Galicia", "Gal"), Option(Austria), false), Set[MilitaryBranch](Army))
-  val Tyr =
-    Location(Province[Power](Name("Tyrolia", "Tyr"), Option(Austria), false), Set[MilitaryBranch](Army))
-  val Vie =
-    Location(Province[Power](Name("Vienna", "Vie"), Option(Austria), true), Set[MilitaryBranch](Army))
-  val Bur =
-    Location(Province[Power](Name("Burgundy", "Bur"), Option(France), false), Set[MilitaryBranch](Army))
-  val Par =
-    Location(Province[Power](Name("Paris", "Par"), Option(France), true), Set[MilitaryBranch](Army))
-  val Mun =
-    Location(Province[Power](Name("Munich", "Mun"), Option(Germany), true), Set[MilitaryBranch](Army))
-  val Ruh =
-    Location(Province[Power](Name("Ruhr", "Ruh"), Option(Germany), false), Set[MilitaryBranch](Army))
-  val Sil =
-    Location(Province[Power](Name("Silesia", "Sil"), Option(Germany), false), Set[MilitaryBranch](Army))
-  val Mos =
-    Location(Province[Power](Name("Moscow", "Mos"), Option(Russia), true), Set[MilitaryBranch](Army))
-  val Ukr =
-    Location(Province[Power](Name("Ukraine", "Ukr"), Option(Russia), false), Set[MilitaryBranch](Army))
-  val War =
-    Location(Province[Power](Name("Warsaw", "War"), Option(Russia), true), Set[MilitaryBranch](Army))
-  val Ser =
-    Location(Province[Power](Name("Serbia", "Ser"), None, true), Set[MilitaryBranch](Army))
-  // coast
-  val Tri =
-    Location(Province[Power](Name("Trieste", "Tri"), Option(Austria), true), Set(Army, Fleet))
-  val Cly =
-    Location(Province[Power](Name("Clyde", "Cly"), Option(England), false), Set(Army, Fleet))
-  val Edi =
-    Location(Province[Power](Name("Edinburgh", "Edi"), Option(England), true), Set(Army, Fleet))
-  val Lvp =
-    Location(Province[Power](Name("Liverpool", "Lvp"), Option(England), true), Set(Army, Fleet))
-  val Lon =
-    Location(Province[Power](Name("London", "Lon"), Option(England), true), Set(Army, Fleet))
-  val Wal =
-    Location(Province[Power](Name("Wales", "Wal"), Option(England), false), Set(Army, Fleet))
-  val Yor =
-    Location(Province[Power](Name("Yorkshire", "Yor"), Option(England), false), Set(Army, Fleet))
-  val Bre =
-    Location(Province[Power](Name("Brest", "Bre"), Option(France), true), Set(Army, Fleet))
-  val Gas =
-    Location(Province[Power](Name("Gascony", "Gas"), Option(France), false), Set(Army, Fleet))
-  val Mar =
-    Location(Province[Power](Name("Marseilles", "Mar"), Option(France), true), Set(Army, Fleet))
-  val Pic =
-    Location(Province[Power](Name("Picardy", "Pic"), Option(France), false), Set(Army, Fleet))
-  val Ber =
-    Location(Province[Power](Name("Berlin", "Ber"), Option(Germany), true), Set(Army, Fleet))
-  val Kie =
-    Location(Province[Power](Name("Kiel", "Kie"), Option(Germany), true), Set(Army, Fleet))
-  val Pru =
-    Location(Province[Power](Name("Prussia", "Pru"), Option(Germany), false), Set(Army, Fleet))
-  val Apu =
-    Location(Province[Power](Name("Apulia", "Apu"), Option(Italy), false), Set(Army, Fleet))
-  val Nap =
-    Location(Province[Power](Name("Naples", "Nap"), Option(Italy), true), Set(Army, Fleet))
-  val Pie =
-    Location(Province[Power](Name("Piedmont", "Pie"), Option(Italy), false), Set(Army, Fleet))
-  val Rom =
-    Location(Province[Power](Name("Rome", "Rom"), Option(Italy), true), Set(Army, Fleet))
-  val Tus =
-    Location(Province[Power](Name("Tuscany", "Tus"), Option(Italy), false), Set(Army, Fleet))
-  val Ven =
-    Location(Province[Power](Name("Venice", "Ven"), Option(Italy), true), Set(Army, Fleet))
-  val Fin =
-    Location(Province[Power](Name("Finland", "Fin"), Option(Russia), false), Set(Army, Fleet))
-  val Lvn =
-    Location(Province[Power](Name("Livonia", "Lvn"), Option(Russia), false), Set(Army, Fleet))
-  val Sev =
-    Location(Province[Power](Name("Sevastopol", "Sev"), Option(Russia), true), Set(Army, Fleet))
-  val Ank =
-    Location(Province[Power](Name("Ankara", "Ank"), Option(Turkey), true), Set(Army, Fleet))
-  val Arm =
-    Location(Province[Power](Name("Armenia", "Arm"), Option(Turkey), false), Set(Army, Fleet))
-  val Con =
-    Location(Province[Power](Name("Constantinople", "Con"), Option(Turkey), true), Set(Army, Fleet))
-  val Smy =
-    Location(Province[Power](Name("Smyrna", "Smy"), Option(Turkey), true), Set(Army, Fleet))
-  val Syr =
-    Location(Province[Power](Name("Syria", "Syr"), Option(Turkey), false), Set(Army, Fleet))
-  val Alb =
-    Location(Province[Power](Name("Albania", "Alb"), None, false), Set(Army, Fleet))
-  val Bel =
-    Location(Province[Power](Name("Belgium", "Bel"), None, true), Set(Army, Fleet))
-  val Den =
-    Location(Province[Power](Name("Denmark", "Den"), None, true), Set(Army, Fleet))
-  val Gre =
-    Location(Province[Power](Name("Greece", "Gre"), None, true), Set(Army, Fleet))
-  val Hol =
-    Location(Province[Power](Name("Holland", "Hol"), None, true), Set(Army, Fleet))
-  val Nwy =
-    Location(Province[Power](Name("Norway", "Nwy"), None, true), Set(Army, Fleet))
-  val Por =
-    Location(Province[Power](Name("Portugal", "Por"), None, true), Set(Army, Fleet))
-  val Rum =
-    Location(Province[Power](Name("Rumania", "Rum"), None, true), Set(Army, Fleet))
-  val Swe =
-    Location(Province[Power](Name("Sweden", "Swe"), None, true), Set(Army, Fleet))
-  val Tun =
-    Location(Province[Power](Name("Tunis", "Tun"), None, true), Set(Army, Fleet))
-  val NAf =
-    Location(Province[Power](Name("North Africa", "NAf"), None, false), Set(Army, Fleet))
-  // special coasts
-  private[this] val StP_p = Province[Power](Name("St. Petersburg", "StP"), Option(Russia), true)
-  val StP =
-    Location(StP_p, Set[MilitaryBranch](Army))
-  val StP_NC = Location(nameWithCoast(StP_p.name, north), StP_p, Set[MilitaryBranch](Fleet))
-  val StP_SC = Location(nameWithCoast(StP_p.name, south), StP_p, Set[MilitaryBranch](Fleet))
-  private[this] val Bul_p = Province[Power](Name("Bulgaria", "Bul"), None, true)
-  val Bul =
-    Location(Bul_p, Set[MilitaryBranch](Army))
-  val Bul_EC = Location(nameWithCoast(Bul_p.name, east), Bul_p, Set[MilitaryBranch](Fleet))
-  val Bul_SC = Location(nameWithCoast(Bul_p.name, south), Bul_p, Set[MilitaryBranch](Fleet))
-  private[this] val Spa_p = Province[Power](Name("Spain", "Spa"), None, true)
-  val Spa =
-    Location(Spa_p, Set[MilitaryBranch](Army))
-  val Spa_NC = Location(nameWithCoast(Spa_p.name, north), Spa_p, Set[MilitaryBranch](Fleet))
-  val Spa_SC = Location(nameWithCoast(Spa_p.name, south), Spa_p, Set[MilitaryBranch](Fleet))
-  // sea
-  val Adr =
-    Location(Province[Power](Name("Adriatic Sea", "Adr"), None, false), Set[MilitaryBranch](Fleet))
-  val Aeg =
-    Location(Province[Power](Name("Aegean Sea", "Aeg"), None, false), Set[MilitaryBranch](Fleet))
-  val Bal =
-    Location(Province[Power](Name("Baltic Sea", "Bal"), None, false), Set[MilitaryBranch](Fleet))
-  val Bar =
-    Location(Province[Power](Name("Barents Sea", "Bar"), None, false), Set[MilitaryBranch](Fleet))
-  val Bla =
-    Location(Province[Power](Name("Black Sea", "Bla"), None, false), Set[MilitaryBranch](Fleet))
-  val Eas =
-    Location(Province[Power](Name("Eastern Mediterranean", "Eas"), None, false), Set[MilitaryBranch](Fleet))
-  val Eng =
-    Location(Province[Power](Name("English Channel", "Eng"), None, false), Set[MilitaryBranch](Fleet))
-  val Bot =
-    Location(Province[Power](Name("Gulf of Bothnia", "Bot"), None, false), Set[MilitaryBranch](Fleet))
-  val GoL =
-    Location(Province[Power](Name("Gulf of Lyon", "GoL"), None, false), Set[MilitaryBranch](Fleet))
-  val Hel =
-    Location(Province[Power](Name("Helgoland Bight", "Hel"), None, false), Set[MilitaryBranch](Fleet))
-  val Ion =
-    Location(Province[Power](Name("Ionian Sea", "Ion"), None, false), Set[MilitaryBranch](Fleet))
-  val Iri =
-    Location(Province[Power](Name("Irish Sea", "Iri"), None, false), Set[MilitaryBranch](Fleet))
-  val Mid =
-    Location(Province[Power](Name("Mid-Atlantic Ocean", "Mid"), None, false), Set[MilitaryBranch](Fleet))
-  val NAt =
-    Location(Province[Power](Name("North Atlantic Ocean", "NAt"), None, false), Set[MilitaryBranch](Fleet))
-  val Nth =
-    Location(Province[Power](Name("North Sea", "Nth"), None, false), Set[MilitaryBranch](Fleet))
-  val Nrg =
-    Location(Province[Power](Name("Norwegian Sea", "Nrg"), None, false), Set[MilitaryBranch](Fleet))
-  val Ska =
-    Location(Province[Power](Name("Skagerrak", "Ska"), None, false), Set[MilitaryBranch](Fleet))
-  val Tyn =
-    Location(Province[Power](Name("Tyrrhenian Sea", "Tyn"), None, false), Set[MilitaryBranch](Fleet))
-  val Wes =
-    Location(Province[Power](Name("Western Mediterranean", "Wes"), None, false), Set[MilitaryBranch](Fleet))
+    /* Locations */
+    // inland
+    val Boh =
+      Location(Province[Power](Name("Bohemia", "Boh"), Option(Austria), false), Set[MilitaryBranch](Army))
+    val Bud =
+      Location(Province[Power](Name("Budapest", "Bud"), Option(Austria), true), Set[MilitaryBranch](Army))
+    val Gal =
+      Location(Province[Power](Name("Galicia", "Gal"), Option(Austria), false), Set[MilitaryBranch](Army))
+    val Tyr =
+      Location(Province[Power](Name("Tyrolia", "Tyr"), Option(Austria), false), Set[MilitaryBranch](Army))
+    val Vie =
+      Location(Province[Power](Name("Vienna", "Vie"), Option(Austria), true), Set[MilitaryBranch](Army))
+    val Bur =
+      Location(Province[Power](Name("Burgundy", "Bur"), Option(France), false), Set[MilitaryBranch](Army))
+    val Par =
+      Location(Province[Power](Name("Paris", "Par"), Option(France), true), Set[MilitaryBranch](Army))
+    val Mun =
+      Location(Province[Power](Name("Munich", "Mun"), Option(Germany), true), Set[MilitaryBranch](Army))
+    val Ruh =
+      Location(Province[Power](Name("Ruhr", "Ruh"), Option(Germany), false), Set[MilitaryBranch](Army))
+    val Sil =
+      Location(Province[Power](Name("Silesia", "Sil"), Option(Germany), false), Set[MilitaryBranch](Army))
+    val Mos =
+      Location(Province[Power](Name("Moscow", "Mos"), Option(Russia), true), Set[MilitaryBranch](Army))
+    val Ukr =
+      Location(Province[Power](Name("Ukraine", "Ukr"), Option(Russia), false), Set[MilitaryBranch](Army))
+    val War =
+      Location(Province[Power](Name("Warsaw", "War"), Option(Russia), true), Set[MilitaryBranch](Army))
+    val Ser =
+      Location(Province[Power](Name("Serbia", "Ser"), None, true), Set[MilitaryBranch](Army))
+    // coast
+    val Tri =
+      Location(Province[Power](Name("Trieste", "Tri"), Option(Austria), true), Set(Army, Fleet))
+    val Cly =
+      Location(Province[Power](Name("Clyde", "Cly"), Option(England), false), Set(Army, Fleet))
+    val Edi =
+      Location(Province[Power](Name("Edinburgh", "Edi"), Option(England), true), Set(Army, Fleet))
+    val Lvp =
+      Location(Province[Power](Name("Liverpool", "Lvp"), Option(England), true), Set(Army, Fleet))
+    val Lon =
+      Location(Province[Power](Name("London", "Lon"), Option(England), true), Set(Army, Fleet))
+    val Wal =
+      Location(Province[Power](Name("Wales", "Wal"), Option(England), false), Set(Army, Fleet))
+    val Yor =
+      Location(Province[Power](Name("Yorkshire", "Yor"), Option(England), false), Set(Army, Fleet))
+    val Bre =
+      Location(Province[Power](Name("Brest", "Bre"), Option(France), true), Set(Army, Fleet))
+    val Gas =
+      Location(Province[Power](Name("Gascony", "Gas"), Option(France), false), Set(Army, Fleet))
+    val Mar =
+      Location(Province[Power](Name("Marseilles", "Mar"), Option(France), true), Set(Army, Fleet))
+    val Pic =
+      Location(Province[Power](Name("Picardy", "Pic"), Option(France), false), Set(Army, Fleet))
+    val Ber =
+      Location(Province[Power](Name("Berlin", "Ber"), Option(Germany), true), Set(Army, Fleet))
+    val Kie =
+      Location(Province[Power](Name("Kiel", "Kie"), Option(Germany), true), Set(Army, Fleet))
+    val Pru =
+      Location(Province[Power](Name("Prussia", "Pru"), Option(Germany), false), Set(Army, Fleet))
+    val Apu =
+      Location(Province[Power](Name("Apulia", "Apu"), Option(Italy), false), Set(Army, Fleet))
+    val Nap =
+      Location(Province[Power](Name("Naples", "Nap"), Option(Italy), true), Set(Army, Fleet))
+    val Pie =
+      Location(Province[Power](Name("Piedmont", "Pie"), Option(Italy), false), Set(Army, Fleet))
+    val Rom =
+      Location(Province[Power](Name("Rome", "Rom"), Option(Italy), true), Set(Army, Fleet))
+    val Tus =
+      Location(Province[Power](Name("Tuscany", "Tus"), Option(Italy), false), Set(Army, Fleet))
+    val Ven =
+      Location(Province[Power](Name("Venice", "Ven"), Option(Italy), true), Set(Army, Fleet))
+    val Fin =
+      Location(Province[Power](Name("Finland", "Fin"), Option(Russia), false), Set(Army, Fleet))
+    val Lvn =
+      Location(Province[Power](Name("Livonia", "Lvn"), Option(Russia), false), Set(Army, Fleet))
+    val Sev =
+      Location(Province[Power](Name("Sevastopol", "Sev"), Option(Russia), true), Set(Army, Fleet))
+    val Ank =
+      Location(Province[Power](Name("Ankara", "Ank"), Option(Turkey), true), Set(Army, Fleet))
+    val Arm =
+      Location(Province[Power](Name("Armenia", "Arm"), Option(Turkey), false), Set(Army, Fleet))
+    val Con =
+      Location(Province[Power](Name("Constantinople", "Con"), Option(Turkey), true), Set(Army, Fleet))
+    val Smy =
+      Location(Province[Power](Name("Smyrna", "Smy"), Option(Turkey), true), Set(Army, Fleet))
+    val Syr =
+      Location(Province[Power](Name("Syria", "Syr"), Option(Turkey), false), Set(Army, Fleet))
+    val Alb =
+      Location(Province[Power](Name("Albania", "Alb"), None, false), Set(Army, Fleet))
+    val Bel =
+      Location(Province[Power](Name("Belgium", "Bel"), None, true), Set(Army, Fleet))
+    val Den =
+      Location(Province[Power](Name("Denmark", "Den"), None, true), Set(Army, Fleet))
+    val Gre =
+      Location(Province[Power](Name("Greece", "Gre"), None, true), Set(Army, Fleet))
+    val Hol =
+      Location(Province[Power](Name("Holland", "Hol"), None, true), Set(Army, Fleet))
+    val Nwy =
+      Location(Province[Power](Name("Norway", "Nwy"), None, true), Set(Army, Fleet))
+    val Por =
+      Location(Province[Power](Name("Portugal", "Por"), None, true), Set(Army, Fleet))
+    val Rum =
+      Location(Province[Power](Name("Rumania", "Rum"), None, true), Set(Army, Fleet))
+    val Swe =
+      Location(Province[Power](Name("Sweden", "Swe"), None, true), Set(Army, Fleet))
+    val Tun =
+      Location(Province[Power](Name("Tunis", "Tun"), None, true), Set(Army, Fleet))
+    val NAf =
+      Location(Province[Power](Name("North Africa", "NAf"), None, false), Set(Army, Fleet))
+    // special coasts
+    private[this] val StP_p = Province[Power](Name("St. Petersburg", "StP"), Option(Russia), true)
+    val StP =
+      Location(StP_p, Set[MilitaryBranch](Army))
+    val StP_NC = Location(nameWithCoast(StP_p.name, north), StP_p, Set[MilitaryBranch](Fleet))
+    val StP_SC = Location(nameWithCoast(StP_p.name, south), StP_p, Set[MilitaryBranch](Fleet))
+    private[this] val Bul_p = Province[Power](Name("Bulgaria", "Bul"), None, true)
+    val Bul =
+      Location(Bul_p, Set[MilitaryBranch](Army))
+    val Bul_EC = Location(nameWithCoast(Bul_p.name, east), Bul_p, Set[MilitaryBranch](Fleet))
+    val Bul_SC = Location(nameWithCoast(Bul_p.name, south), Bul_p, Set[MilitaryBranch](Fleet))
+    private[this] val Spa_p = Province[Power](Name("Spain", "Spa"), None, true)
+    val Spa =
+      Location(Spa_p, Set[MilitaryBranch](Army))
+    val Spa_NC = Location(nameWithCoast(Spa_p.name, north), Spa_p, Set[MilitaryBranch](Fleet))
+    val Spa_SC = Location(nameWithCoast(Spa_p.name, south), Spa_p, Set[MilitaryBranch](Fleet))
+    // sea
+    val Adr =
+      Location(Province[Power](Name("Adriatic Sea", "Adr"), None, false), Set[MilitaryBranch](Fleet))
+    val Aeg =
+      Location(Province[Power](Name("Aegean Sea", "Aeg"), None, false), Set[MilitaryBranch](Fleet))
+    val Bal =
+      Location(Province[Power](Name("Baltic Sea", "Bal"), None, false), Set[MilitaryBranch](Fleet))
+    val Bar =
+      Location(Province[Power](Name("Barents Sea", "Bar"), None, false), Set[MilitaryBranch](Fleet))
+    val Bla =
+      Location(Province[Power](Name("Black Sea", "Bla"), None, false), Set[MilitaryBranch](Fleet))
+    val Eas =
+      Location(Province[Power](Name("Eastern Mediterranean", "Eas"), None, false), Set[MilitaryBranch](Fleet))
+    val Eng =
+      Location(Province[Power](Name("English Channel", "Eng"), None, false), Set[MilitaryBranch](Fleet))
+    val Bot =
+      Location(Province[Power](Name("Gulf of Bothnia", "Bot"), None, false), Set[MilitaryBranch](Fleet))
+    val GoL =
+      Location(Province[Power](Name("Gulf of Lyon", "GoL"), None, false), Set[MilitaryBranch](Fleet))
+    val Hel =
+      Location(Province[Power](Name("Helgoland Bight", "Hel"), None, false), Set[MilitaryBranch](Fleet))
+    val Ion =
+      Location(Province[Power](Name("Ionian Sea", "Ion"), None, false), Set[MilitaryBranch](Fleet))
+    val Iri =
+      Location(Province[Power](Name("Irish Sea", "Iri"), None, false), Set[MilitaryBranch](Fleet))
+    val Mid =
+      Location(Province[Power](Name("Mid-Atlantic Ocean", "Mid"), None, false), Set[MilitaryBranch](Fleet))
+    val NAt =
+      Location(Province[Power](Name("North Atlantic Ocean", "NAt"), None, false), Set[MilitaryBranch](Fleet))
+    val Nth =
+      Location(Province[Power](Name("North Sea", "Nth"), None, false), Set[MilitaryBranch](Fleet))
+    val Nrg =
+      Location(Province[Power](Name("Norwegian Sea", "Nrg"), None, false), Set[MilitaryBranch](Fleet))
+    val Ska =
+      Location(Province[Power](Name("Skagerrak", "Ska"), None, false), Set[MilitaryBranch](Fleet))
+    val Tyn =
+      Location(Province[Power](Name("Tyrrhenian Sea", "Tyn"), None, false), Set[MilitaryBranch](Fleet))
+    val Wes =
+      Location(Province[Power](Name("Western Mediterranean", "Wes"), None, false), Set[MilitaryBranch](Fleet))
+  }
 
+  import Keywords._
   val map = DiplomacyMap(LabeledUndirectedGraph(
     Set(
       // Boh

@@ -1,7 +1,8 @@
 package diplomacy.variant.standard
 
 import diplomacy.UnitSpec
-import diplomacy.variant.standard.map._
+import diplomacy.variant.standard.map.Power
+import diplomacy.variant.standard.map.Keywords._
 
 class VariantSpec extends UnitSpec {
   "The variant" should {
