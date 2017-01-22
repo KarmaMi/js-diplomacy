@@ -1,7 +1,7 @@
 package diplomacy.variant.standard.rule
 
 object Phase {
-  sealed class Phase(name: String) {
+  sealed abstract class Phase(name: String) {
     override def toString: String = name
   }
   object Movement extends Phase("Movement")

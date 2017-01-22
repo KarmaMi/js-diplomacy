@@ -1,6 +1,6 @@
 package diplomacy.variant.standard.rule
 
-sealed class ProvinceStatus(name: String) {
+sealed abstract class ProvinceStatus(name: String) {
   override def toString: String = name
 }
 

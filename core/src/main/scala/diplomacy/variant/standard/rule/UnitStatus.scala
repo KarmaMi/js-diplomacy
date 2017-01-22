@@ -2,7 +2,7 @@ package diplomacy.variant.standard.rule
 
 import diplomacy.board.{ Power, Province }
 
-sealed class UnitStatus(name: String) {
+sealed abstract class UnitStatus(name: String) {
   override def toString: String = name
 }
 

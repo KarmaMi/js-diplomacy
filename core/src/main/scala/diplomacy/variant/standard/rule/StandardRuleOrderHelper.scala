@@ -38,7 +38,6 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
               case _ => ???
             }
         }
-      case _ => ???
     }
   }
 
