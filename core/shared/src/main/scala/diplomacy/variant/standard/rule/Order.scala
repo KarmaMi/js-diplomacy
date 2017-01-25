@@ -1,6 +1,6 @@
 package diplomacy.variant.standard.rule
 
-import diplomacy.board.{ Power, Location, DiplomacyUnit }
+import diplomacy.board.{ Power, Location => BaseLocation }
 import diplomacy.rule.{ Order => BaseOrder }
 
 sealed trait Order[Power_ <: Power] extends BaseOrder[Power_, MilitaryBranch]
@@ -23,7 +23,7 @@ object Order {
 
   final case class Support[Power_ <: Power](
     unit: DiplomacyUnit[Power_], target: Either[Hold[Power_], Move[Power_]]
-  ) extends MovementOrder[Power_] with Location.TypeHelper {
+  ) extends MovementOrder[Power_] with BaseLocation.TypeHelper {
     type Power = Power_
     type MilitaryBranch = diplomacy.variant.standard.rule.MilitaryBranch
 

@@ -19,10 +19,23 @@ lazy val commonSettings = Seq(
   javacOptions ++= Seq("-source", javaVersion.value, "-target", javaVersion.value)
 )
 
-lazy val scalaTestSettings = Seq(
-  libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion.value % "test"
-)
-
-lazy val core = (project in file("core")).
+lazy val root = (project in file(".")).
+  aggregate(coreJs, coreJvm).
+  settings(
+    publish := {},
+    publishLocal := {}
+  )
+lazy val core = (crossProject in file("core")).
   settings(commonSettings: _*).
-  settings(scalaTestSettings: _*)
+  jvmSettings(
+    libraryDependencies ++= Seq(
+      "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
+      "org.scalatest" %% "scalatest" % scalatestVersion.value % "test"
+    )
+  ).
+  jsSettings(
+    libraryDependencies += "org.scalatest" %%% "scalatest" % scalatestVersion.value % "test"
+  )
+
+lazy val coreJs = core.js
+lazy val coreJvm = core.jvm
