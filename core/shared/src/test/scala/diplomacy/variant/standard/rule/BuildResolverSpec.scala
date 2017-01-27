@@ -38,10 +38,10 @@ class BuildResolverSpec extends UnitSpec with UsesResolvedResult {
   "A build-resolver" can {
     "resolve a build order." in {
       val Right(result) =
-        resolver(_.copy(year = 1902, season = Spring))(board, Set(Rom.build(Fleet)))
+        resolver(_.copy(year = 1902, season = Spring))(board, Set(F(Rom).build()))
       result.result should be(
         Set(
-          new Executed(Rom.build(Fleet), Result.Success)
+          new Executed(F(Rom).build(), Result.Success)
         )
       )
       result.board should be(

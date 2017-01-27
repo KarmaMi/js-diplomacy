@@ -42,25 +42,17 @@ trait StandardRuleOrderHelper[Turn_ <: Turn, Power_ <: Power] extends Rule.TypeH
     }
   }
 
-  implicit class GenOrderToLocation(location: Location) {
-    require(location.province.homeOf.isDefined)
-    def build(tpe: MilitaryBranch) = location.province.homeOf match {
-      case Some(home) => Order.Build(BaseDiplomacyUnit(home, tpe, location))
-      case _ => ???
-    }
-  }
   implicit class GenOrderToUnit(unit: DiplomacyUnit) {
     def hold() = Order.Hold(unit)
     def move(destination: Location) = Order.Move(unit, destination, false)
+    def moveViaConvoy(destination: Location) = Order.Move(unit, destination, true)
     def support(target: Order.Hold[Power]) = Order.Support(unit, Left(target))
     def support(target: Order.Move[Power]) = Order.Support(unit, Right(target))
     def convoy(target: Order.Move[Power]) = Order.Convoy(unit, target)
 
     def disband() = Order.Disband(unit)
     def retreat(destination: Location) = Order.Retreat(unit, destination)
-  }
-  implicit class AddViaConvoyToMove(move: Order.Move[Power]) {
-    def viaConvoy = move.copy(useConvoy = true)
+    def build() = Order.Build(unit)
   }
 }
 

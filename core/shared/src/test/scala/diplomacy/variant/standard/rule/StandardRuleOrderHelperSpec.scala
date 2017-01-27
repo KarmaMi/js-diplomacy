@@ -39,7 +39,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
         A(Spa).move(Mar) should be(Order.Move(A(Spa), Mar, false))
       }
       "generate Move order (2)." in {
-        A(Spa).move(Mar).viaConvoy should be(Order.Move(A(Spa), Mar, true))
+        A(Spa).moveViaConvoy(Mar) should be(Order.Move(A(Spa), Mar, true))
       }
       "generate Support order." in {
         A(Spa).support(F(GoL).move(Mar)) should be(
@@ -106,7 +106,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
         F(Spa_SC).disband() should be(Order.Disband(F(Spa_SC)))
       }
       "generate Build order." in {
-        Mar.build(Army) should be(Order.Build(A(Mar)))
+        A(Mar).build() should be(Order.Build(A(Mar)))
       }
     }
   }

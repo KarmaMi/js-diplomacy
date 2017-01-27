@@ -35,7 +35,7 @@ class BuildVailidatorSpec extends UnitSpec {
   "A build-validator" when {
     "a valid order is received" should {
       "return null (1)." in {
-        validator.errorMessageOfOrder(board)(Rom.build(Army)) should be(None)
+        validator.errorMessageOfOrder(board)(A(Rom).build()) should be(None)
       }
       "return null (2)." in {
         validator.errorMessageOfOrder(board)(A(Mun).disband()) should be(None)
@@ -44,7 +44,7 @@ class BuildVailidatorSpec extends UnitSpec {
 
     "try to build an unit to a location that has another unit" should {
       "return an error message." in {
-        validator.errorMessageOfOrder(board)(Nap.build(Army)) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Nap).build()) should be(Some(
           InvalidOrderMessage("An unit is in Nap.")
         ))
       }
@@ -58,14 +58,14 @@ class BuildVailidatorSpec extends UnitSpec {
     }
     "try to build an unit to a province that is not supply center" should {
       "return an error message." in {
-        validator.errorMessageOfOrder(board)(Ruh.build(Army)) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Ruh).build()) should be(Some(
           InvalidOrderMessage("Ruh is not supply center.")
         ))
       }
     }
     "try to build an unit to a province that is not occupied" should {
       "return an error message." in {
-        validator.errorMessageOfOrder(board)(Bre.build(Army)) should be(Some(
+        validator.errorMessageOfOrder(board)(A(Bre).build()) should be(Some(
           InvalidOrderMessage("Bre is not occupied by France.")
         ))
       }
