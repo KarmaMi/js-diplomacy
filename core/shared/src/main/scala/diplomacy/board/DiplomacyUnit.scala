@@ -1,5 +1,8 @@
 package diplomacy.board
 
+import scala.scalajs.js.annotation.{ JSExport, JSExportAll }
+
+@JSExport @JSExportAll
 final case class DiplomacyUnit[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch](
   power: Power_, militaryBranch: MilitaryBranch_, location: Location[Power_, MilitaryBranch_]
 ) {

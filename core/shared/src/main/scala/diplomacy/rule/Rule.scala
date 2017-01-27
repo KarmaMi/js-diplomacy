@@ -1,10 +1,12 @@
 package diplomacy.rule
 
+import scala.scalajs.js.annotation.{ JSExportDescendentObjects, JSExportAll }
 import scala.collection.mutable
 
 import diplomacy.board.Board
 import diplomacy.board.{ Power, MilitaryBranch }
 
+@JSExportDescendentObjects @JSExportAll
 trait Rule[Status_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranch, UnitStatus_, ProvinceStatus_, Order_ <: Order[Power_, MilitaryBranch_], Result_] extends Rule.TypeHelper {
   type Power = Power_
   type MilitaryBranch = MilitaryBranch_

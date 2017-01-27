@@ -1,5 +1,8 @@
 package diplomacy.board
 
+import scala.scalajs.js.annotation.{ JSExport, JSExportAll }
+
+@JSExport @JSExportAll
 final case class Province[Power_ <: Power](
   name: Name, homeOf: Option[Power_], isSupplyCenter: Boolean
 ) {

@@ -1,9 +1,12 @@
 package diplomacy.variant.standard.rule
 
+import scala.scalajs.js.annotation.{ JSExport, JSExportAll }
+
 import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit, Power }
 import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.variant.standard.rule
 
+@JSExport @JSExportAll
 class JsStandardRuleHelper[Turn_ <: Turn, Power_ <: Power] (
   board: rule.Board[Turn_, Power_]
 ) extends Rule.TypeHelper {

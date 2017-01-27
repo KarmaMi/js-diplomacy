@@ -1,19 +1,25 @@
 package diplomacy.board
 
+import scala.scalajs.js.annotation.JSExport
+import scala.annotation.meta.field
 import scala.collection.mutable
 
 import diplomacy.util.LabeledUndirectedGraph
 
+@JSExport
 final case class DiplomacyMap[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch](
+  @(JSExport @field)
   map: LabeledUndirectedGraph[Location[Power_, MilitaryBranch_], Set[MilitaryBranch_]]
 ) extends DiplomacyMap.TypeHelper {
   type Power = Power_
   type MilitaryBranch = MilitaryBranch_
 
+  @JSExport
   def locationsOf(province: Province): Set[Location] = {
     require(this.province2Locations contains province)
     this.province2Locations(province)
   }
+  @JSExport
   def movableProvincesOf(province: Province, militaryBranch: MilitaryBranch): Set[Province] = {
     this.locationsOf(province) flatMap { location =>
       this.movableLocationsOf(location, militaryBranch) map { _.province }
@@ -22,20 +28,21 @@ final case class DiplomacyMap[Power_ <: Power, MilitaryBranch_ <: MilitaryBranch
   def movableLocationsOf(unit: DiplomacyUnit): Set[Location] = {
     movableLocationsOf(unit.location, unit.militaryBranch)
   }
+  @JSExport
   def movableLocationsOf(location: Location, militaryBranch: MilitaryBranch): Set[Location] = {
     (this.map.neighborsOf(location) collect {
       case (l, mbs) if mbs contains militaryBranch => l
     })(collection.breakOut)
   }
 
-  val locations: Set[Location] = this.map.vertices
-  val provinces: Set[Province] = this.locations map { _.province }
-  val militaryBranches: Set[MilitaryBranch] = {
+  @JSExport val locations: Set[Location] = this.map.vertices
+  @JSExport val provinces: Set[Province] = this.locations map { _.province }
+  @JSExport val militaryBranches: Set[MilitaryBranch] = {
     val x1 = this.locations flatMap { _.militaryBranches }
     val x2 = this.map.edges flatMap { _._2 }
     x1 ++ x2
   }
-  val powers: Set[Power] = this.provinces flatMap { _.homeOf }
+  @JSExport val powers: Set[Power] = this.provinces flatMap { _.homeOf }
 
   private[this] val province2Locations: Map[Province, Set[Location]] = {
     val x = mutable.Map[Province, mutable.Set[Location]]()

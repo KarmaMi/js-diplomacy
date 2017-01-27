@@ -1,7 +1,10 @@
 package diplomacy.variant.standard.map
 
+import scala.scalajs.js.annotation.JSExportDescendentObjects
+
 import diplomacy.board.{ Power => BasePower }
 
+@JSExportDescendentObjects
 sealed abstract class Power(val name: String) extends BasePower
 
 object Power {
