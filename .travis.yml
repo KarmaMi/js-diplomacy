@@ -1,4 +1,11 @@
-language: node_js
-node_js:
-  - "6.1"
-  - "6"
+language: scala
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y npm
+before-script:
+  - sbt coreJS/fullOptJS
+  - ./make_node_module 2.12
+  - (cd ./node && npm update)
+script:
+  - sbt test
+  - (cd ./node && npm test)
