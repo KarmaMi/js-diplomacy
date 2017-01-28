@@ -1,13 +1,13 @@
 package diplomacy.variant.standard.rule
 
-import scala.scalajs.js.annotation.{ JSExport, JSExportDescendentObjects }
+import scala.scalajs.js.annotation.{ JSExportAll, JSExportDescendentObjects }
 
-@JSExport
+@JSExportDescendentObjects @JSExportAll
+sealed abstract class Phase(name: String) {
+  override def toString: String = name
+}
+
 object Phase {
-  @JSExportDescendentObjects
-  sealed abstract class Phase(name: String) {
-    override def toString: String = name
-  }
   object Movement extends Phase("Movement")
   object Retreat extends Phase("Retreat")
   object Build extends Phase("Build")

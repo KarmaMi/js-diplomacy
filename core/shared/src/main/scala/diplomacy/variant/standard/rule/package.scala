@@ -18,7 +18,7 @@ package object rule {
   object Implicits {
     /* State */
     implicit class Turn2State[Turn_ <: Turn](turn: Turn_) {
-      def -(phase: Phase.Phase): State[Turn_] = State(turn, phase)
+      def -(phase: Phase): State[Turn_] = State(turn, phase)
     }
   }
 
