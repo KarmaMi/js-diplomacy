@@ -1,0 +1,20 @@
+#! /bin/sh
+
+SCALA_VERSION=$1
+
+SCALA_FILE=$(dirname $0)/core/js/target/scala-${SCALA_VERSION}/core-opt.js
+SOURCE_MAP_FILE=${SCALA_FILE}.map
+TARGET=$(dirname $0)/node/index.js
+TARGET_MAP_FILE=${TARGET}.map
+PRE_FILE=${TARGET}.pre
+POST_FILE=${TARGET}.post
+
+if [ -e ${SCALA_FILE} ]
+then
+  cat ${PRE_FILE} ${SCALA_FILE} ${POST_FILE} > ${TARGET}
+  sed -e 's/\"file\":\".*\.js\"/\"file\":\"index.js\"/g' ${SOURCE_MAP_FILE} > ${TARGET_MAP_FILE}
+  exit 0
+else
+  echo "${SCALA_FILE} does not exists"
+  exit 1
+fi

@@ -1,0 +1,29 @@
+{
+  "name": "libdiplomacy",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Diplomacy library for JavaScript (written in Scala.js)",
+  "scripts": {
+    "test": "mocha -R spec test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarmaMi/libdiplomacy.git"
+  },
+  "keywords": [
+    "diplomacy"
+  ],
+  "author": "karmami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarmaMi/libdiplomacy/issues"
+  },
+  "dependencies": {
+    "source-map-support": "^0.4.11"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "homepage": "https://github.com/KarmaMi/libdiplomacy#readme"
+}

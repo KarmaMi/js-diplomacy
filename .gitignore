@@ -1,2 +1,4 @@
 target
 node_modules
+node/index.js
+node/index.js.map
