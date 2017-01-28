@@ -1,13 +1,18 @@
 language: scala
-install:
+before_install:
   - sudo apt-get update -qq
-  - sudo curl -sL https://deb.nodesource.com/setup | sudo bash -
+install:
   - sudo apt-get install -qq oracle-java8-installer oracle-java8-set-default nodejs npm
-before_script:
+  - sudo npm cache clean
+  - sudo npm install n -g
+  - sudo ln -sf /usr/local/bin/node /usr/bin/node
   - jdk_switcher use oraclejdk8
+before_script:
+  - javac -version
+  - node --version
+script:
   - sbt coreJS/fullOptJS
   - ./make_node_module 2.12
   - (cd ./node && npm update)
-script:
   - sbt test
   - (cd ./node && npm test)
