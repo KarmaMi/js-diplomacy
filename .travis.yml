@@ -1,8 +1,12 @@
 language: scala
-install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y npm
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+      - npm
 before-script:
+  - jdk_switcher use oraclejdk8
   - sbt coreJS/fullOptJS
   - ./make_node_module 2.12
   - (cd ./node && npm update)
