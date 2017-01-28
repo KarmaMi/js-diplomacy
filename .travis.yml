@@ -3,9 +3,8 @@ before_install:
   - sudo apt-get update -qq
 install:
   - sudo apt-get install -qq oracle-java8-installer oracle-java8-set-default nodejs npm
-  - sudo npm cache clean
-  - sudo npm install n -g
-  - sudo ln -sf /usr/local/bin/node /usr/bin/node
+  - nvm install node
+  - nvm alias default node
   - jdk_switcher use oraclejdk8
 before_script:
   - javac -version
