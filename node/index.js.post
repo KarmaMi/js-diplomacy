@@ -1,0 +1,6 @@
+  }
+}
+
+module.exports = new Diplomacy().__ScalaJSExportsNamespace.diplomacy
+
+//# sourceMappingURL=index.js.map

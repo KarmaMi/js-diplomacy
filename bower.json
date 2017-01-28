@@ -1,10 +1,10 @@
 {
-  "name": "js-diplomacy",
-  "homepage": "https://github.com/KarmaMi/js-diplomacy",
+  "name": "libdiplomacy",
+  "homepage": "https://github.com/KarmaMi/libdiplomacy",
   "authors": [
     "karmami <karmami674+github@gmail.com>"
   ],
-  "description": "Diplomacy library written in JavaScript",
+  "description": "Diplomacy library for JavaScript (written in Scala.js)",
   "main": "",
   "keywords": [
     "diplomacy"
@@ -13,9 +13,7 @@
   "private": true,
   "ignore": [
     "**/.*",
-    "node_modules",
+    "node/",
     "bower_components",
-    "test",
-    "tests"
   ]
 }

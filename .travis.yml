@@ -1,4 +1,17 @@
-language: node_js
-node_js:
-  - "6.1"
-  - "6"
+language: scala
+before_install:
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install -qq oracle-java8-installer oracle-java8-set-default nodejs npm
+  - nvm install node
+  - nvm alias default node
+  - jdk_switcher use oraclejdk8
+before_script:
+  - javac -version
+  - node --version
+script:
+  - sbt coreJS/fullOptJS
+  - ./make_node_module 2.12
+  - (cd ./node && npm update)
+  - sbt test
+  - (cd ./node && npm test)

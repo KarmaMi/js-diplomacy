@@ -1,0 +1,6 @@
+'use strict'
+
+require('source-map-support').install()
+
+class Diplomacy {
+  constructor () {
