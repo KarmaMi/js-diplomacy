@@ -1,11 +1,6 @@
-language: scala
-sudo: false
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-      - oracle-java8-set-default
-      - npm
+install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq oracle-java8-installer oracle-java8-set-default npm
 before-script:
   - jdk_switcher use oraclejdk8
   - sbt coreJS/fullOptJS
