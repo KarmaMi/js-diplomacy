@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
+      - oracle-java8-set-default
       - npm
 before-script:
   - jdk_switcher use oraclejdk8
