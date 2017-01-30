@@ -36,7 +36,7 @@ object DiplomacyMap {
       (Tri -> Vie, Set[MilitaryBranch](Army)),
       (Tri -> Ser, Set[MilitaryBranch](Army)),
       (Tri -> Alb, Set(Army, Fleet)),
-      (Tri -> Adr, Set(Army, Fleet)),
+      (Tri -> Adr, Set[MilitaryBranch](Fleet)),
       (Tri -> Ven, Set(Army, Fleet)),
       // Tyr
       (Tyr -> Mun, Set[MilitaryBranch](Army)),
@@ -299,6 +299,7 @@ object DiplomacyMap {
       // Mid
       (Mid -> NAf, Set[MilitaryBranch](Fleet)),
       (Mid -> Wes, Set[MilitaryBranch](Fleet)),
+      (Mid -> NAt, Set[MilitaryBranch](Fleet)),
       // NAt
       (NAt -> Nrg, Set[MilitaryBranch](Fleet)),
       // Nth
