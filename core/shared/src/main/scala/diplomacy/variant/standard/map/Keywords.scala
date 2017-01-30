@@ -1,7 +1,6 @@
 package diplomacy.variant.standard.map
 
 import scala.scalajs.js.annotation.{ JSExport, JSExportAll }
-import scala.annotation.meta.field
 
 import diplomacy.board.{ Name, Province }
 import diplomacy.variant.standard.rule._
