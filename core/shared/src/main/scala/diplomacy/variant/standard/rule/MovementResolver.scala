@@ -387,19 +387,17 @@ class MovementResolver extends Rule.TypeHelper {
       }).toMap
 
     val provincesContainingUnit = newUnits map { _.location.province }
-    val newProvinceStatuses: Map[Province, ProvinceStatus] =
-      province2OrderGroups flatMap {
-        case (province, groups) =>
-          val wasBounced =
-            groups exists { case (_, g) => g.target.result == Option(Result.Bounced) }
-          if (
-            !(provincesContainingUnit contains province) &&
-            wasBounced
-          ) {
-            Option(province -> ProvinceStatus.Standoff)
-          } else {
-            None
-          }
+    val occupationStatuses = board.provinceStatuses filter { _._2.occupied.isDefined }
+    val newProvinceStatuses = cmutable.Map() ++ occupationStatuses
+    province2OrderGroups foreach {
+      case (province, groups) =>
+        val wasBounced =
+          groups exists { case (_, g) => g.target.result == Option(Result.Bounced) }
+        val standoff = wasBounced && !(provincesContainingUnit contains province)
+        if (standoff) {
+          val current = newProvinceStatuses.getOrElseUpdate(province, ProvinceStatus(None, true))
+          newProvinceStatuses(province) = current.copy(standoff = true)
+        }
       }
 
     val newState = board.state.copy(phase = Retreat)
@@ -408,7 +406,7 @@ class MovementResolver extends Rule.TypeHelper {
       state = newState,
       units = newUnits.toSet,
       unitStatuses = newUnitStatuses,
-      provinceStatuses = newProvinceStatuses
+      provinceStatuses = newProvinceStatuses.toMap[Province, ProvinceStatus]
     )
 
     val orderResults: Set[OrderResult] =

@@ -27,7 +27,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(France, Army, Mar),
           DiplomacyUnit(Germany, Army, Bur)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -67,7 +67,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Germany, Army, Sil),
           DiplomacyUnit(Russia, Army, Pru)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -107,7 +107,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Italy, Fleet, Rom),
           DiplomacyUnit(Italy, Fleet, Nap)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -130,7 +130,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
-        provinceStatuses = Map(Tyn.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Tyn.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -143,7 +143,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Italy, Fleet, Rom),
           DiplomacyUnit(Italy, Fleet, Tyn)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -180,7 +180,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Russia, Army, Pru),
           DiplomacyUnit(Russia, Army, War)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -218,7 +218,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
         unitStatuses = Map(
           A(Mun) -> UnitStatus.Dislodged(Boh.province)
         ),
-        provinceStatuses = Map(Sil.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Sil.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -231,7 +231,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Austria, Army, Sev),
           DiplomacyUnit(Turkey, Army, Bul)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -277,7 +277,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Turkey, Army, Bul),
           DiplomacyUnit(Turkey, Fleet, Bla)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -327,7 +327,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Russia, Army, Boh),
           DiplomacyUnit(Russia, Army, War)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -361,7 +361,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Germany, Army, Sil),
           DiplomacyUnit(Russia, Army, War)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -403,7 +403,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Russia, Army, Pru),
           DiplomacyUnit(Russia, Army, War)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -438,7 +438,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
         unitStatuses = Map(
           A(Sil) -> UnitStatus.Dislodged(Pru.province)
         ),
-        provinceStatuses = Map(Pru.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Pru.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -453,7 +453,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
           DiplomacyUnit(Russia, Army, Boh),
           DiplomacyUnit(Russia, Army, Tyr)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)

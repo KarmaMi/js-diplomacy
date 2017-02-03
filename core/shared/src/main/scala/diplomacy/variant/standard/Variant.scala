@@ -8,7 +8,7 @@ import diplomacy.variant.standard.map.Power
 import diplomacy.variant.standard.map.Keywords._
 import diplomacy.variant.standard.board.Keywords._
 import diplomacy.variant.standard.board.Implicits._
-import diplomacy.variant.standard.rule.{ Rule, Board }
+import diplomacy.variant.standard.rule.{ Rule, Board, ProvinceStatus }
 import diplomacy.variant.standard.rule.Keywords._
 import diplomacy.variant.standard.rule.Implicits._
 
@@ -28,11 +28,10 @@ object Variant {
         DiplomacyUnit(Russia, Fleet, Sev), DiplomacyUnit(Russia, Fleet, StP_SC),
         DiplomacyUnit(Turkey, Army, Smy),  DiplomacyUnit(Turkey, Army, Con),  DiplomacyUnit(Turkey, Fleet, Ank)
       ),
-      occupation = (map.map.provinces collect {
-        case p@ Province(_, Some(home), _) => p -> home
-      }).toMap,
       Map(),
-      Map()
+      provinceStatuses = (map.map.provinces collect {
+        case p@ Province(_, Some(home), _) => p -> ProvinceStatus[Power](Option(home), false)
+      }).toMap
   )
 
   private[this] val rule = new Rule[board.Turn, map.Power](board.Turn.nextTurn)

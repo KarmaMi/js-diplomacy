@@ -2,11 +2,7 @@ package diplomacy.variant.standard.rule
 
 import scala.scalajs.js.annotation.{ JSExportDescendentObjects, JSExportAll }
 
-@JSExportDescendentObjects @JSExportAll
-sealed abstract class ProvinceStatus(name: String) {
-  override def toString: String = name
-}
+import diplomacy.board.Power
 
-object ProvinceStatus {
-  object Standoff extends ProvinceStatus("Standoff")
-}
+@JSExportAll
+final case class ProvinceStatus[Power_ <:Power](occupied: Option[Power], standoff: Boolean)

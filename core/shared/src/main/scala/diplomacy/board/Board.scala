@@ -7,18 +7,11 @@ final case class Board[State_, Power_ <: Power, MilitaryBranch_ <: MilitaryBranc
   map: DiplomacyMap[Power_, MilitaryBranch_],
   state: State_,
   units: Set[DiplomacyUnit[Power_, MilitaryBranch_]],
-  occupation: Map[Province[Power_], Power_],
   unitStatuses: Map[DiplomacyUnit[Power_, MilitaryBranch_], UnitStatus_],
   provinceStatuses: Map[Province[Power_], ProvinceStatus_]
 ) {
-  val numberOfSupplyCenters: Map[Power_, Int] =
-    this.occupation groupBy { _._2 } map {
-      case (power, provinces) =>
-        power -> (provinces.count { case (province, _) => province.isSupplyCenter })
-    }
-
   override def toString: String = {
-    s"${this.state}(${this.units}, ${this.occupation}, ${this.unitStatuses}, ${this.provinceStatuses})"
+    s"${this.state}(${this.units}, ${this.unitStatuses}, ${this.provinceStatuses})"
   }
 }
 

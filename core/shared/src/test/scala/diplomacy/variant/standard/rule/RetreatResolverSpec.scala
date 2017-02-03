@@ -25,12 +25,12 @@ class RetreatResolverSpec extends UnitSpec with UsesResolvedResult {
         DiplomacyUnit(France, Army, Bur),
         DiplomacyUnit(France, Army, Mar),
         DiplomacyUnit(Italy, Fleet, Wes)
-      ), Map(),
+      ),
       Map(
         DiplomacyUnit(France, Army, Mar) -> UnitStatus.Dislodged(Gas.province),
         DiplomacyUnit(Italy, Fleet, Wes) -> UnitStatus.Dislodged(Tyn.province)
       ),
-      Map(Pie.province -> ProvinceStatus.Standoff)
+      Map(Pie.province -> ProvinceStatus(None, true))
     )
   }
   val $ = StandardRuleOrderHelper(board)
@@ -109,7 +109,7 @@ class RetreatResolverSpec extends UnitSpec with UsesResolvedResult {
               DiplomacyUnit(France, Army, Bur),
               DiplomacyUnit(France, Army, Mar),
               DiplomacyUnit(Italy, Fleet, Wes)
-            ), Map(), Map(), Map()
+            ), Map(), Map()
           )
         }
         val $ = StandardRuleOrderHelper(board)
@@ -119,10 +119,10 @@ class RetreatResolverSpec extends UnitSpec with UsesResolvedResult {
         result.board should be(
           board.copy(
             state = 1901.Autumn - Build,
-            occupation = Map(
-              Bur.province -> France,
-              Mar.province -> France,
-              Wes.province -> Italy
+            provinceStatuses = Map(
+              Bur.province -> ProvinceStatus(Option(France), false),
+              Mar.province -> ProvinceStatus(Option(France), false),
+              Wes.province -> ProvinceStatus(Option(Italy), false)
             )
           ))
       }
@@ -133,27 +133,27 @@ class RetreatResolverSpec extends UnitSpec with UsesResolvedResult {
           Board[State, Power, MilitaryBranch, UnitStatus, ProvinceStatus](
             map.map, 1901.Autumn - Retreat,
             Set(),
+            Map(),
             Map(
-              StP.province -> France,
-              Swe.province -> France,
-              Nwy.province -> France,
-              Den.province -> France,
-              Lvp.province -> France,
-              Edi.province -> France,
-              Lon.province -> France,
-              Ber.province -> France,
-              Kie.province -> France,
-              Mun.province -> France,
-              Hol.province -> France,
-              Bel.province -> France,
-              Bre.province -> France,
-              Par.province -> France,
-              Mar.province -> France,
-              Spa.province -> France,
-              Por.province -> France,
-              Tun.province -> France
-            ),
-            Map(), Map()
+              StP.province -> ProvinceStatus[Power](Option(France), false),
+              Swe.province -> ProvinceStatus[Power](Option(France), false),
+              Nwy.province -> ProvinceStatus[Power](Option(France), false),
+              Den.province -> ProvinceStatus[Power](Option(France), false),
+              Lvp.province -> ProvinceStatus[Power](Option(France), false),
+              Edi.province -> ProvinceStatus[Power](Option(France), false),
+              Lon.province -> ProvinceStatus[Power](Option(France), false),
+              Ber.province -> ProvinceStatus[Power](Option(France), false),
+              Kie.province -> ProvinceStatus[Power](Option(France), false),
+              Mun.province -> ProvinceStatus[Power](Option(France), false),
+              Hol.province -> ProvinceStatus[Power](Option(France), false),
+              Bel.province -> ProvinceStatus[Power](Option(France), false),
+              Bre.province -> ProvinceStatus[Power](Option(France), false),
+              Par.province -> ProvinceStatus[Power](Option(France), false),
+              Mar.province -> ProvinceStatus[Power](Option(France), false),
+              Spa.province -> ProvinceStatus[Power](Option(France), false),
+              Por.province -> ProvinceStatus[Power](Option(France), false),
+              Tun.province -> ProvinceStatus[Power](Option(France), false)
+            )
           )
         }
         val $ = StandardRuleOrderHelper(board)

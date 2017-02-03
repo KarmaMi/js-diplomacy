@@ -11,5 +11,5 @@ package object rule {
   type DiplomacyMap[Power_ <: Power] =
     diplomacy.board.DiplomacyMap[Power_, MilitaryBranch]
   type Board[Turn_ <: Turn, Power_ <: Power] =
-    diplomacy.board.Board[State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus]
+    diplomacy.board.Board[State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus[Power_]]
 }

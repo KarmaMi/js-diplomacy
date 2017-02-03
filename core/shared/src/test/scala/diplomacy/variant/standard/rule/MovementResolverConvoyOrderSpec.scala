@@ -26,7 +26,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Army, Lon),
           DiplomacyUnit(England, Fleet, Nth)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -62,7 +62,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Fleet, Mid),
           DiplomacyUnit(England, Fleet, Wes)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -105,7 +105,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Fleet, Ion),
           DiplomacyUnit(Italy, Fleet, Tun)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)

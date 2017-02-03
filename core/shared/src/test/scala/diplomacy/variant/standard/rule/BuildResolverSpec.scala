@@ -25,11 +25,12 @@ class BuildResolverSpec extends UnitSpec with UsesResolvedResult {
         DiplomacyUnit(Germany, Army, Mun),
         DiplomacyUnit(Italy, Fleet, Nap)
       ),
+      Map(),
       Map(
-        Rom.province -> Italy, Nap.province -> Italy,
-        Mar.province -> France
-      ),
-      Map(), Map()
+        Rom.province -> ProvinceStatus[Power](Option(Italy), false),
+        Nap.province -> ProvinceStatus[Power](Option(Italy), false),
+        Mar.province -> ProvinceStatus[Power](Option(France), false)
+      )
     )
   }
   val $ = StandardRuleOrderHelper(board)
@@ -52,8 +53,7 @@ class BuildResolverSpec extends UnitSpec with UsesResolvedResult {
             DiplomacyUnit(Italy, Fleet, Rom),
             DiplomacyUnit(Italy, Fleet, Nap)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus]()
         )
       )
     }
@@ -71,8 +71,7 @@ class BuildResolverSpec extends UnitSpec with UsesResolvedResult {
           units = Set(
             DiplomacyUnit(Italy, Fleet, Nap)
           ),
-          unitStatuses = Map[DiplomacyUnit, UnitStatus](),
-          provinceStatuses = Map[Province, ProvinceStatus]()
+          unitStatuses = Map[DiplomacyUnit, UnitStatus]()
         )
       )
     }

@@ -26,7 +26,7 @@ class MovementResolverStandoffSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Ber),
           DiplomacyUnit(Russia, Army, War)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -45,7 +45,7 @@ class MovementResolverStandoffSpec extends UnitSpec with UsesResolvedResult {
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
-        provinceStatuses = Map(Sil.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Sil.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -57,7 +57,7 @@ class MovementResolverStandoffSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Ber),
           DiplomacyUnit(Russia, Army, Pru)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -88,7 +88,7 @@ class MovementResolverStandoffSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Ber),
           DiplomacyUnit(Russia, Army, Pru)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -117,7 +117,7 @@ class MovementResolverStandoffSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Fleet, Nth),
           DiplomacyUnit(Germany, Army, Hol)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)

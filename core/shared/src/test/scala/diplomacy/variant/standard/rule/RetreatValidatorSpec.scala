@@ -22,12 +22,12 @@ class RetreatVailidatorSpec extends UnitSpec {
         DiplomacyUnit(France, Army, Bur),
         DiplomacyUnit(France, Army, Mar),
         DiplomacyUnit(Italy, Fleet, Wes)
-      ), Map(),
+      ),
       Map(
         DiplomacyUnit(France, Army, Mar) -> UnitStatus.Dislodged(Gas.province),
         DiplomacyUnit(Italy, Fleet, Wes) -> UnitStatus.Dislodged(Tyn.province)
       ),
-      Map(Pie.province -> ProvinceStatus.Standoff)
+      Map(Pie.province -> ProvinceStatus(None, true))
     )
   val $ = StandardRuleOrderHelper(board)
   import $._

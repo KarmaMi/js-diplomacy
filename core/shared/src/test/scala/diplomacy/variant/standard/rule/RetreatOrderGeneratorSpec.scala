@@ -21,12 +21,12 @@ class RetreatOrderGeneratorSpec extends UnitSpec {
         DiplomacyUnit(France, Army, Bur),
         DiplomacyUnit(France, Army, Mar),
         DiplomacyUnit(Italy, Fleet, Wes)
-      ), Map(),
+      ),
       Map(
         DiplomacyUnit(France, Army, Mar) -> UnitStatus.Dislodged(Gas.province),
         DiplomacyUnit(Italy, Fleet, Wes) -> UnitStatus.Dislodged(Tyn.province)
       ),
-      Map(Pie.province -> ProvinceStatus.Standoff)
+      Map(Pie.province -> ProvinceStatus(None, true))
     )
   }
 
@@ -50,7 +50,7 @@ class RetreatOrderGeneratorSpec extends UnitSpec {
               DiplomacyUnit(Germany, Army, Bre),
               DiplomacyUnit(France, Army, Bre)
             ),
-            Map(), Map(DiplomacyUnit(France, Army, Bre) -> UnitStatus.Dislodged(Pic.province)),
+            Map(DiplomacyUnit(France, Army, Bre) -> UnitStatus.Dislodged(Pic.province)),
             Map()
           )
         }
