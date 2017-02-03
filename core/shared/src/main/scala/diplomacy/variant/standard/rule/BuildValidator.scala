@@ -9,6 +9,7 @@ class BuildValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Po
   def unitsRequiringOrder(board: Board): Set[DiplomacyUnit] = Set()
 
   def errorMessageOfOrder(board: Board)(order: Order): Option[InvalidOrderMessage] = {
+    val numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
     order match {
       case Order.Build(unit) =>
         if (board.units exists { _.location.province == unit.location.province }) {
@@ -17,7 +18,9 @@ class BuildValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Po
           Option(InvalidOrderMessage(s"${unit.power} cannot build an unit in ${unit.location}."))
         } else if (!unit.location.province.isSupplyCenter) {
           Option(InvalidOrderMessage(s"${unit.location.province.name} is not supply center."))
-        } else if (board.occupation.get(unit.location.province) != Some(unit.power)) {
+        } else if (
+          (board.provinceStatuses.get(unit.location.province) flatMap { _.occupied }) != Some(unit.power)
+        ) {
           Option(
             InvalidOrderMessage(s"${unit.location.province.name} is not occupied by ${unit.power}.")
           )
@@ -29,7 +32,7 @@ class BuildValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Po
           Option(InvalidOrderMessage(s"${unit} does not exist."))
         } else {
           val numOfUnits = board.units count { _.power == unit.power }
-          val numOfSupplys = board.numberOfSupplyCenters.getOrElse(unit.power, 0)
+          val numOfSupplys = numberOfSupplyCenters.getOrElse(unit.power, 0)
           if (numOfUnits <= numOfSupplys) {
             Option(InvalidOrderMessage(s"${unit.power} has sufficient supply centers."))
           } else {
@@ -40,9 +43,10 @@ class BuildValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, Po
     }
   }
   def errorMessageOfOrders(board: Board)(orders: Set[Order]): Option[InvalidOrderMessage] = {
+    val numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
     board.map.powers find { power =>
       val numOfUnits = board.units count { unit => power == unit.power }
-      val numOfSupplys = board.numberOfSupplyCenters.getOrElse(power, 0)
+      val numOfSupplys = numberOfSupplyCenters.getOrElse(power, 0)
 
       val diff = (orders map {
         case Order.Build(unit) if unit.power == power => 1

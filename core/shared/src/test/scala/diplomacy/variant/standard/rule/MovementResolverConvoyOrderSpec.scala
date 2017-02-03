@@ -26,7 +26,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Army, Lon),
           DiplomacyUnit(England, Fleet, Nth)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -62,7 +62,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Fleet, Mid),
           DiplomacyUnit(England, Fleet, Wes)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -105,7 +105,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Fleet, Ion),
           DiplomacyUnit(Italy, Fleet, Tun)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -125,7 +125,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
       result.result should be(Set(
         new Executed(A(Spa).move(Nap), Result.Failed),
         new Executed(F(GoL).convoy(A(Spa).move(Nap)), Result.Failed),
-        new Executed(F(Tyn).convoy(A(Spa).move(Nap)), Result.Dislodged(Ion.province)),
+        new Executed(F(Tyn).convoy(A(Spa).move(Nap)), Result.Dislodged),
         new Executed(F(Ion).move(Tyn), Result.Success),
         new Executed(F(Tun).support(F(Ion).move(Tyn)), Result.Success)
       ))

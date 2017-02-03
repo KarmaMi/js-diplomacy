@@ -6,12 +6,12 @@ import diplomacy.board.Power
 class RetreatOrderGenerator[Turn_ <: Turn, Power_ <: Power] extends OrderGenerator[Turn_, Power_] {
   def ordersToSkipPhase(board: Board): Option[Set[Order]] = {
     val dislodgedUnits = board.unitStatuses collect {
-      case (unit, x: UnitStatus.Dislodged[Power]) => unit -> x.attackedFrom // TODO
+      case (unit, x: UnitStatus.Dislodged[Power]) => unit -> x.attackedFrom
     }
     if (
       dislodgedUnits forall {
         case (unit, attackedFrom) =>
-          RetreatPhaseUtils.locationsToRetreat(board)(unit, attackedFrom).isEmpty
+          StandardRuleUtils.locationsToRetreat(board)(unit, attackedFrom).isEmpty
       }
     ) {
       Option(

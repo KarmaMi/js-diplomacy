@@ -27,7 +27,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Bur),
           DiplomacyUnit(France, Army, Mar)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -61,7 +61,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Army, Mar),
           DiplomacyUnit(Germany, Army, Ruh)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -97,7 +97,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Mun),
           DiplomacyUnit(Germany, Army, Ruh)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -134,7 +134,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Ruh),
           DiplomacyUnit(Germany, Army, Sil)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -174,7 +174,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Fleet, Bal),
           DiplomacyUnit(Germany, Army, Ber)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -202,7 +202,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
-        provinceStatuses = Map(Kie.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Kie.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -214,7 +214,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Austria, Army, Ser),
           DiplomacyUnit(Russia, Army, Gal)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -253,7 +253,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Bel),
           DiplomacyUnit(France, Fleet, Eng)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -296,7 +296,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Fleet, Bre),
           DiplomacyUnit(France, Fleet, Iri)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -316,7 +316,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
       result.result should be(Set(
         new Executed(A(Lon).move(Bel), Result.Success),
         new Executed(F(Nth).convoy(A(Lon).move(Bel)), Result.Success),
-        new Executed(F(Eng).convoy(A(Lon).move(Bel)), Result.Dislodged(Bre.province)),
+        new Executed(F(Eng).convoy(A(Lon).move(Bel)), Result.Dislodged),
         new Executed(F(Bre).move(Eng), Result.Success),
         new Executed(F(Iri).support(F(Bre).move(Eng)), Result.Success)
       ))
@@ -342,7 +342,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Fleet, Nap),
           DiplomacyUnit(Italy, Fleet, Ion)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -360,7 +360,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
 
       result.result should be(Set(
         new Executed(A(Tun).move(Nap), Result.Failed),
-        new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Dislodged(Ion.province)),
+        new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Dislodged),
         new Executed(F(Ion).move(Tyn), Result.Success),
         new Executed(F(Nap).support(F(Ion).move(Tyn)), Result.Success)
       ))
@@ -386,7 +386,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Fleet, Rom),
           DiplomacyUnit(Italy, Fleet, Nap)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -426,7 +426,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Fleet, Rom),
           DiplomacyUnit(Italy, Fleet, Nap)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -450,7 +450,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
         new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Success),
         new Executed(F(Ion).convoy(A(Tun).move(Nap)), Result.Success),
         new Executed(F(Rom).move(Tyn), Result.Bounced),
-        new Executed(F(Nap).support(F(Rom).move(Tyn)), Result.Dislodged(Tun.province))
+        new Executed(F(Nap).support(F(Rom).move(Tyn)), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,

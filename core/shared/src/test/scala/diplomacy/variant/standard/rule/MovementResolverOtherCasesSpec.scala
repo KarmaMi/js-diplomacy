@@ -26,7 +26,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Par),
           DiplomacyUnit(France, Army, Mar)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -59,7 +59,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Bre),
           DiplomacyUnit(France, Fleet, Eng)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -93,7 +93,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Germany, Army, Ber),
           DiplomacyUnit(Germany, Fleet, Bal)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -126,7 +126,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Russia, Army, Pru),
           DiplomacyUnit(Russia, Army, Sil)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -165,7 +165,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(England, Fleet, Nth),
           DiplomacyUnit(England, Fleet, Nwy)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -194,7 +194,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Par),
           DiplomacyUnit(France, Army, Mar)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -213,7 +213,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
-        provinceStatuses = Map(Bur.province -> ProvinceStatus.Standoff)
+        provinceStatuses = Map(Bur.province -> ProvinceStatus(None, true))
       ))
     }
 
@@ -226,7 +226,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(France, Army, Gas),
           DiplomacyUnit(Italy, Army, Mar)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)
@@ -245,7 +245,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
         new Executed(A(Par).move(Bur), Result.Bounced),
         new Executed(A(Bur).support(A(Gas).move(Mar)), Result.Success),
         new Executed(A(Gas).move(Mar), Result.Success),
-        new Executed(A(Mar).hold(), Result.Dislodged(Gas.province))
+        new Executed(A(Mar).hold(), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
@@ -270,7 +270,7 @@ class MovementResolverOtherCasesSpec extends UnitSpec with UsesResolvedResult {
           DiplomacyUnit(Italy, Army, Ven),
           DiplomacyUnit(Italy, Fleet, Nap)
         ),
-        Map(), Map(), Map()
+        Map(), Map()
       )
 
       val $ = StandardRuleOrderHelper(board)

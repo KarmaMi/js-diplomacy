@@ -24,7 +24,7 @@ class MovementVailidatorSpec extends UnitSpec {
         DiplomacyUnit(England, Fleet, Eng),
         DiplomacyUnit(France, Army, Spa),
         DiplomacyUnit(France, Army, Bur)
-      ), Map(), Map(), Map()
+      ), Map(), Map()
     )
   }
   val $ = StandardRuleOrderHelper(board)

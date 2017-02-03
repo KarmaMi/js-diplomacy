@@ -20,7 +20,7 @@ class MovementOrderGeneratorSpec extends UnitSpec {
       Set(
         DiplomacyUnit(France, Army, Spa),
         DiplomacyUnit(France, Fleet, GoL)
-      ), Map(), Map(), Map()
+      ), Map(), Map()
     )
   }
 
@@ -37,7 +37,7 @@ class MovementOrderGeneratorSpec extends UnitSpec {
       "use an empty to skip the movement phase." in {
         val emptyBoard = {
           new Board[T, map.Power](
-            map.map, 1901.Spring - Movement, Set(), Map(), Map(), Map()
+            map.map, 1901.Spring - Movement, Set(), Map(), Map()
           )
         }
         generator.ordersToSkipPhase(emptyBoard) should be(Some(Set()))

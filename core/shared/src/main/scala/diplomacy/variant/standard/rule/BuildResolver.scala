@@ -15,12 +15,13 @@ class BuildResolver extends Rule.TypeHelper {
     val newUnits = board.units -- (disbands map { _.unit }) ++ (builds map { _.unit })
     val newState =
       board.state.copy(turn = nextTurn(board.state.turn), phase = Movement)
+    val occupationStatuses = board.provinceStatuses filter { _._2.occupied.isDefined }
 
     val newBoard = board.copy(
       state = newState,
       units = newUnits,
       unitStatuses = Map[DiplomacyUnit, UnitStatus](),
-      provinceStatuses = Map[Province, ProvinceStatus]()
+      provinceStatuses = occupationStatuses
     )
     val orderResults: Set[OrderResult] = ((disbands ++ builds) map {
       case order =>

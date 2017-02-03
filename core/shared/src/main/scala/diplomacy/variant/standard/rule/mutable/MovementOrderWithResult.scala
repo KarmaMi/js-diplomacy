@@ -11,34 +11,34 @@ class MovementOrderWithResult[Power_ <: Power](val order: MovementOrder[Power_])
     order match {
       case Order.Hold(_) =>
         result match {
-          case Result.Dislodged(_) | Result.Success => this.innerResult = Option(result)
+          case Result.Dislodged | Result.Success => this.innerResult = Option(result)
           case _ =>
         }
       case Order.Move(_, _, _) =>
         result match {
-          case Result.Dislodged(_) | Result.Success =>
+          case Result.Dislodged | Result.Success =>
             this.innerResult match {
               case Some(Result.Success) =>
               case _ => this.innerResult = Option(result)
             }
           case Result.Failed | Result.Bounced =>
             this.innerResult match {
-              case Some(Result.Dislodged(_)) =>
+              case Some(Result.Dislodged) =>
               case _ => this.innerResult = Option(result)
             }
           case _ =>
         }
       case Order.Support(_, _) =>
         result match {
-          case Result.Dislodged(_) => this.innerResult = Option(result)
+          case Result.Dislodged => this.innerResult = Option(result)
           case Result.Failed | Result.Success =>
             this.innerResult match {
-              case Some(Result.Dislodged(_)) | Some(Result.Cut) | Some(Result.NoCorrespondingOrder) =>
+              case Some(Result.Dislodged) | Some(Result.Cut) | Some(Result.NoCorrespondingOrder) =>
               case _ => this.innerResult = Option(result)
             }
           case Result.Cut =>
             this.innerResult match {
-              case Some(Result.Dislodged(_)) =>
+              case Some(Result.Dislodged) =>
               case _ => this.innerResult = Option(result)
             }
           case Result.NoCorrespondingOrder => this.innerResult = Option(result)
@@ -46,10 +46,10 @@ class MovementOrderWithResult[Power_ <: Power](val order: MovementOrder[Power_])
         }
       case Order.Convoy(_, _) =>
         result match {
-          case Result.Dislodged(_) => this.innerResult = Option(result)
+          case Result.Dislodged => this.innerResult = Option(result)
           case Result.Failed | Result.Success =>
             this.innerResult match {
-              case Some(Result.Dislodged(_)) | Some(Result.NoCorrespondingOrder) =>
+              case Some(Result.Dislodged) | Some(Result.NoCorrespondingOrder) =>
               case _ => this.innerResult = Option(result)
             }
           case Result.NoCorrespondingOrder => this.innerResult = Option(result)

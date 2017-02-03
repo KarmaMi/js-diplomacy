@@ -20,7 +20,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
         val board =
           new Board[T, map.Power](
             map.map, 1901.Spring - Build,
-            Set(), Map(), Map(), Map()
+            Set(), Map(), Map()
           )
         val $ = StandardRuleOrderHelper(board)
         import $._
@@ -36,7 +36,7 @@ class BuildOrderGeneratorSpec extends UnitSpec {
             map.map, 1901.Spring - Build,
             Set(
               DiplomacyUnit(Germany, Army, Ruh)
-            ), Map(), Map(), Map()
+            ), Map(), Map()
           )
         }
         val $ = StandardRuleOrderHelper(board)
@@ -57,11 +57,12 @@ class BuildOrderGeneratorSpec extends UnitSpec {
               DiplomacyUnit(Germany, Army, Mun),
               DiplomacyUnit(Italy, Fleet, Nap)
             ),
+            Map(),
             Map(
-              Rom.province -> Italy, Nap.province -> Italy,
-              Mar.province -> France
-            ),
-            Map(), Map()
+              Rom.province -> ProvinceStatus[Power](Option(Italy), false),
+              Nap.province -> ProvinceStatus[Power](Option(Italy), false),
+              Mar.province -> ProvinceStatus[Power](Option(France), false)
+            )
           )
         generator.ordersToSkipPhase(board) should be(None)
       }

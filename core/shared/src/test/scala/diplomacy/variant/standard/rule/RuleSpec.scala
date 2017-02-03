@@ -27,7 +27,7 @@ class RuleSpec extends UnitSpec {
             Set(
               DiplomacyUnit(France, Army, Bre),
               DiplomacyUnit(Germany, Army, Pic)
-            ), Map(), Map(), Map()
+            ), Map(), Map()
           )
         val ruleHelper = StandardRuleOrderHelper(board)
         import ruleHelper._
@@ -47,7 +47,7 @@ class RuleSpec extends UnitSpec {
               DiplomacyUnit(Germany, Army, Gas),
               DiplomacyUnit(Germany, Army, Par),
               DiplomacyUnit(Germany, Army, Pic)
-            ), Map(), Map(), Map()
+            ), Map(), Map()
           )
         val ruleHelper = StandardRuleOrderHelper(board)
         import ruleHelper._
@@ -65,7 +65,7 @@ class RuleSpec extends UnitSpec {
             )
         ))
         result.result should be(Set(
-          new Executed(A(Bre).hold(), Result.Dislodged(Pic.province)),
+          new Executed(A(Bre).hold(), Result.Dislodged),
           new Executed(A(Bre).disband(), Result.Success),
           new Executed(A(Pic).move(Bre), Result.Success),
           new Executed(A(Par).support(A(Pic).move(Bre)), Result.Success),
@@ -82,7 +82,12 @@ class RuleSpec extends UnitSpec {
             Set(
               DiplomacyUnit(France, Army, Bre),
               DiplomacyUnit(Germany, Army, Mun)
-            ), Map(Bre.province -> France, Mun.province -> Germany), Map(), Map()
+            ),
+            Map(),
+            Map(
+              Bre.province -> ProvinceStatus[map.Power](Option(France), false),
+              Mun.province -> ProvinceStatus[map.Power](Option(Germany), false)
+            )
           )
         val ruleHelper = StandardRuleOrderHelper(board)
         import ruleHelper._
@@ -100,7 +105,12 @@ class RuleSpec extends UnitSpec {
             Set(
               DiplomacyUnit(France, Army, Gas),
               DiplomacyUnit(Germany, Army, Mun)
-            ), Map(Gas.province -> France, Mun.province -> Germany), Map(), Map()
+            ),
+            Map(),
+            Map(
+              Gas.province -> ProvinceStatus[map.Power](Option(France), false),
+              Mun.province -> ProvinceStatus[map.Power](Option(Germany), false)
+            )
           )
         val ruleHelper = StandardRuleOrderHelper(board)
         import ruleHelper._
@@ -123,27 +133,27 @@ class RuleSpec extends UnitSpec {
           new Board[T, map.Power](
             map.map, 1901.Autumn - Movement,
             Set(),
+            Map(),
             Map(
-              StP.province -> France,
-              Swe.province -> France,
-              Nwy.province -> France,
-              Den.province -> France,
-              Lvp.province -> France,
-              Edi.province -> France,
-              Lon.province -> France,
-              Ber.province -> France,
-              Kie.province -> France,
-              Mun.province -> France,
-              Hol.province -> France,
-              Bel.province -> France,
-              Bre.province -> France,
-              Par.province -> France,
-              Mar.province -> France,
-              Spa.province -> France,
-              Por.province -> France,
-              Tun.province -> France
-            ),
-            Map(), Map()
+              StP.province -> ProvinceStatus[Power](Option(France), false),
+              Swe.province -> ProvinceStatus[Power](Option(France), false),
+              Nwy.province -> ProvinceStatus[Power](Option(France), false),
+              Den.province -> ProvinceStatus[Power](Option(France), false),
+              Lvp.province -> ProvinceStatus[Power](Option(France), false),
+              Edi.province -> ProvinceStatus[Power](Option(France), false),
+              Lon.province -> ProvinceStatus[Power](Option(France), false),
+              Ber.province -> ProvinceStatus[Power](Option(France), false),
+              Kie.province -> ProvinceStatus[Power](Option(France), false),
+              Mun.province -> ProvinceStatus[Power](Option(France), false),
+              Hol.province -> ProvinceStatus[Power](Option(France), false),
+              Bel.province -> ProvinceStatus[Power](Option(France), false),
+              Bre.province -> ProvinceStatus[Power](Option(France), false),
+              Par.province -> ProvinceStatus[Power](Option(France), false),
+              Mar.province -> ProvinceStatus[Power](Option(France), false),
+              Spa.province -> ProvinceStatus[Power](Option(France), false),
+              Por.province -> ProvinceStatus[Power](Option(France), false),
+              Tun.province -> ProvinceStatus[Power](Option(France), false)
+            )
           )
         val $ = StandardRuleOrderHelper(board)
         import $._

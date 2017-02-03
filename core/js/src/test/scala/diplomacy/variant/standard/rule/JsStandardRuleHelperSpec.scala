@@ -21,7 +21,7 @@ class JsStandardRuleHelperSpec extends UnitSpec {
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, GoL)
-          ), Map(), Map(), Map()
+          ), Map(), Map()
         )
       val ruleHelper = new JsStandardRuleHelper(board)
       import ruleHelper._
@@ -60,7 +60,8 @@ class JsStandardRuleHelperSpec extends UnitSpec {
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, Spa_SC)
-          ), Map(), Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
+          ),
+          Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
       val ruleHelper = new JsStandardRuleHelper(board)
@@ -80,17 +81,17 @@ class JsStandardRuleHelperSpec extends UnitSpec {
     }
 
     "the phase is build" should {
-      val board = {
+      val board =
         new Board[T, map.Power](
           map.map,
           1901.Spring - Phase.Build,
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, Spa_SC)
-          ), Map(), Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
+          ),
+          Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
-      }
       val ruleHelper = new JsStandardRuleHelper(board)
       import ruleHelper._
 

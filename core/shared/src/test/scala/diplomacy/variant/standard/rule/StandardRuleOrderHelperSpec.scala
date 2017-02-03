@@ -21,7 +21,7 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, GoL)
-          ), Map(), Map(), Map()
+          ), Map(), Map()
         )
       }
       val ruleHelper = StandardRuleOrderHelper(board)
@@ -61,7 +61,8 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, Spa_SC)
-          ), Map(), Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
+          ),
+          Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
       }
@@ -89,7 +90,8 @@ class StandardRuleOrderHelperSpec extends UnitSpec {
           Set(
             DiplomacyUnit(France, Army, Spa),
             DiplomacyUnit(France, Fleet, Spa_SC)
-          ), Map(), Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
+          ),
+          Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
       }

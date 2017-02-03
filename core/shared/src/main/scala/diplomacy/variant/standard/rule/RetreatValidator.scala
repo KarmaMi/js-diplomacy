@@ -13,7 +13,7 @@ class RetreatValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, 
   def errorMessageOfOrder(board: Board)(order: Order): Option[InvalidOrderMessage] = {
     // The order is invalid if order.unit is not dislodged
     val dislodgedUnits = (board.unitStatuses collect {
-      case (unit, x: UnitStatus.Dislodged[Power]) => unit -> x.attackedFrom // TODO
+      case (unit, x: UnitStatus.Dislodged[Power]) => unit -> x.attackedFrom 
     }).toMap
     if (!(dislodgedUnits contains order.unit)) {
       Option(InvalidOrderMessage(s"${order.unit} is not dislodged."))
@@ -21,7 +21,7 @@ class RetreatValidator[Turn_ <: Turn, Power_ <: Power] extends Validator[Turn_, 
       order match {
         case Order.Retreat(unit, destination) =>
           if (
-            !(RetreatPhaseUtils.locationsToRetreat(board)(unit, dislodgedUnits(unit)) contains destination)
+            !(StandardRuleUtils.locationsToRetreat(board)(unit, dislodgedUnits(unit)) contains destination)
           ) {
             Option(InvalidOrderMessage(s"${unit} cannot retreat to ${destination}."))
           } else {

@@ -6,7 +6,7 @@ import diplomacy.variant.standard.rule
 import diplomacy.variant.standard.rule.Keywords._
 
 final class Rule[Turn_ <: Turn, Power_ <: Power](nextTurn: Turn_ => Turn_)
-  extends BaseRule[rule.State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus, Order[Power_], Result]
+  extends BaseRule[rule.State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus[Power_], Order[Power_], Result]
     with BaseRule.TypeHelper {
   final type Turn = Turn_
   private[this] case class PhaseRule(
@@ -94,7 +94,7 @@ object Rule {
     type State = diplomacy.variant.standard.rule.State[Turn]
     type MilitaryBranch = diplomacy.variant.standard.rule.MilitaryBranch
     type UnitStatus = diplomacy.variant.standard.rule.UnitStatus[Power]
-    type ProvinceStatus = diplomacy.variant.standard.rule.ProvinceStatus
+    type ProvinceStatus = diplomacy.variant.standard.rule.ProvinceStatus[Power]
     type Order = diplomacy.variant.standard.rule.Order[Power]
     type Result = diplomacy.variant.standard.rule.Result
   }

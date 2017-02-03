@@ -43,14 +43,6 @@ class RetreatResolver extends Rule.TypeHelper {
     }
 
     // Update occupation if needed
-    val newOccupation =
-      if (board.state.turn.isOccupationUpdateable) {
-        board.occupation ++ (newUnits map {
-          case BaseDiplomacyUnit(power, _, location) => location.province -> power
-        })
-      } else {
-        board.occupation
-      }
     val newState =
       if (board.state.turn.isBuildable) {
         board.state.copy(phase = Build)
@@ -60,13 +52,22 @@ class RetreatResolver extends Rule.TypeHelper {
           phase = Movement
         )
       }
+    val occupationStatuses = board.provinceStatuses filter { _._2.occupied.isDefined }
+    val newProvinceStatuses: Map[Province, ProvinceStatus] =
+      if (board.state.turn.isOccupationUpdateable) {
+        occupationStatuses ++ (newUnits map {
+          case BaseDiplomacyUnit(power, _, location) =>
+            location.province -> ProvinceStatus[Power](Option(power), false)
+        })
+      } else {
+        occupationStatuses
+      }
 
     val newBoard = board.copy(
       state = newState,
       units = newUnits,
-      occupation = newOccupation,
       unitStatuses = Map[DiplomacyUnit, UnitStatus](),
-      provinceStatuses = Map[Province, ProvinceStatus]()
+      provinceStatuses = newProvinceStatuses
     )
     val orderResults: Set[OrderResult] = (results map {
       case (order, result) =>
@@ -74,9 +75,10 @@ class RetreatResolver extends Rule.TypeHelper {
     })(collection.breakOut)
 
     val numOfCenters = board.map.provinces count { _.isSupplyCenter }
+    val numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
     val isFinished =
       board.map.powers exists { power =>
-        board.numberOfSupplyCenters.getOrElse(power, 0) > (numOfCenters / 2)
+        numberOfSupplyCenters.getOrElse(power, 0) > (numOfCenters / 2)
       }
     Right(ResolvedResult(newBoard, orderResults, isFinished))
   }
