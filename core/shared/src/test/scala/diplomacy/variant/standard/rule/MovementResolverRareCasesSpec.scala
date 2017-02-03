@@ -316,7 +316,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
       result.result should be(Set(
         new Executed(A(Lon).move(Bel), Result.Success),
         new Executed(F(Nth).convoy(A(Lon).move(Bel)), Result.Success),
-        new Executed(F(Eng).convoy(A(Lon).move(Bel)), Result.Dislodged(Bre.province)),
+        new Executed(F(Eng).convoy(A(Lon).move(Bel)), Result.Dislodged),
         new Executed(F(Bre).move(Eng), Result.Success),
         new Executed(F(Iri).support(F(Bre).move(Eng)), Result.Success)
       ))
@@ -360,7 +360,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
 
       result.result should be(Set(
         new Executed(A(Tun).move(Nap), Result.Failed),
-        new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Dislodged(Ion.province)),
+        new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Dislodged),
         new Executed(F(Ion).move(Tyn), Result.Success),
         new Executed(F(Nap).support(F(Ion).move(Tyn)), Result.Success)
       ))
@@ -450,7 +450,7 @@ class MovementResolverRareCasesSpec extends UnitSpec with UsesResolvedResult {
         new Executed(F(Tyn).convoy(A(Tun).move(Nap)), Result.Success),
         new Executed(F(Ion).convoy(A(Tun).move(Nap)), Result.Success),
         new Executed(F(Rom).move(Tyn), Result.Bounced),
-        new Executed(F(Nap).support(F(Rom).move(Tyn)), Result.Dislodged(Tun.province))
+        new Executed(F(Nap).support(F(Rom).move(Tyn)), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,

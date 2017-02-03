@@ -247,7 +247,7 @@ class MovementResolver extends Rule.TypeHelper {
                     group.target.order match {
                       case m @Order.Move(unit, location, _) =>
                         val isDislodged = group.target.result map {
-                          case Result.Dislodged(_) => true
+                          case Result.Dislodged => true
                           case _ => false
                         } getOrElse false
                         if (isDislodged && canBounce(group.target, defence.target)) {
@@ -307,8 +307,7 @@ class MovementResolver extends Rule.TypeHelper {
 
                     if (isDislodged) {
                       offenceGroup foreach { group =>
-                        defence.target.result =
-                          Result.Dislodged(group.target.order.unit.location.province)
+                        defence.target.result = Result.Dislodged
                         dislodgedFrom(defence.target.order.unit) =
                           group.target.order.unit.location.province
                         defence.relatedOrders foreach { o => o.result = Result.Failed }
@@ -333,7 +332,7 @@ class MovementResolver extends Rule.TypeHelper {
                         case Some(defence) =>
                           isBounced =
                             defence.target.result map {
-                              case Result.Dislodged(_) => false
+                              case Result.Dislodged => false
                               case _ => true
                             } getOrElse true
                         case None => isBounced = false
@@ -379,7 +378,7 @@ class MovementResolver extends Rule.TypeHelper {
     val newUnitStatuses: Map[DiplomacyUnit, UnitStatus] =
       (ordersWithResult flatMap { order =>
         order.result match {
-          case Some(Result.Dislodged(_)) =>
+          case Some(Result.Dislodged) =>
             dislodgedFrom.get(order.order.unit) map { province =>
               order.order.unit -> UnitStatus.Dislodged(province)
             }

@@ -125,7 +125,7 @@ class MovementResolverConvoyOrderSpec extends UnitSpec with UsesResolvedResult {
       result.result should be(Set(
         new Executed(A(Spa).move(Nap), Result.Failed),
         new Executed(F(GoL).convoy(A(Spa).move(Nap)), Result.Failed),
-        new Executed(F(Tyn).convoy(A(Spa).move(Nap)), Result.Dislodged(Ion.province)),
+        new Executed(F(Tyn).convoy(A(Spa).move(Nap)), Result.Dislodged),
         new Executed(F(Ion).move(Tyn), Result.Success),
         new Executed(F(Tun).support(F(Ion).move(Tyn)), Result.Success)
       ))

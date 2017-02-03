@@ -65,7 +65,7 @@ class RuleSpec extends UnitSpec {
             )
         ))
         result.result should be(Set(
-          new Executed(A(Bre).hold(), Result.Dislodged(Pic.province)),
+          new Executed(A(Bre).hold(), Result.Dislodged),
           new Executed(A(Bre).disband(), Result.Success),
           new Executed(A(Pic).move(Bre), Result.Success),
           new Executed(A(Par).support(A(Pic).move(Bre)), Result.Success),

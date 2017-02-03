@@ -12,9 +12,7 @@ sealed abstract class Result(name: String) {
 object Result {
   object Success extends Result("Success")
   object Failed extends Result("Failed")
-  @JSExportAll
-  case class Dislodged[Power_ <: Power](attackedFrom: Province[Power_])
-    extends Result(s"Dislodged from ${attackedFrom.name}")
+  object Dislodged extends Result("Dislodged")
   object Bounced extends Result("Bounced")
   object Cut extends Result("Cut")
   object Standoff extends Result("Standoff")

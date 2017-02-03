@@ -44,7 +44,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
       result.result should be(Set(
         new Executed(A(Mar).move(Bur), Result.Success),
         new Executed(A(Gas).support(A(Mar).move(Bur)), Result.Success),
-        new Executed(A(Bur).hold(), Result.Dislodged(Mar.province))
+        new Executed(A(Bur).hold(), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
@@ -83,7 +83,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
       result.result should be(Set(
         new Executed(A(Sil).move(Pru), Result.Success),
         new Executed(F(Bal).support(A(Sil).move(Pru)), Result.Success),
-        new Executed(A(Pru).hold(), Result.Dislodged(Sil.province))
+        new Executed(A(Pru).hold(), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
@@ -200,7 +200,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
       result.result should be(Set(
         new Executed(A(Boh).move(Mun), Result.Success),
         new Executed(A(Tyr).support(A(Boh).move(Mun)), Result.Success),
-        new Executed(A(Mun).move(Sil), Result.Dislodged(Boh.province)),
+        new Executed(A(Mun).move(Sil), Result.Dislodged),
         new Executed(A(Tyr).support(A(Mun).move(Sil)), Result.Failed),
         new Executed(A(War).move(Sil), Result.Bounced),
         new Executed(A(Pru).support(A(War).move(Sil)), Result.Failed)
@@ -250,7 +250,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
         new Executed(A(Rum).move(Bul), Result.Success),
         new Executed(A(Ser).support(A(Rum).move(Bul)), Result.Success),
         new Executed(A(Sev).move(Rum), Result.Success),
-        new Executed(A(Bul).move(Rum), Result.Dislodged(Rum.province))
+        new Executed(A(Bul).move(Rum), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
@@ -299,7 +299,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
         new Executed(A(Ser).support(A(Rum).move(Bul)), Result.Success),
         new Executed(A(Gre).support(A(Rum).move(Bul)), Result.Success),
         new Executed(A(Sev).move(Rum), Result.Success),
-        new Executed(A(Bul).move(Rum), Result.Dislodged(Rum.province)),
+        new Executed(A(Bul).move(Rum), Result.Dislodged),
         new Executed(F(Bla).support(A(Bul).move(Rum)), Result.Failed)
       ))
       result.board should be(board.copy(
@@ -378,7 +378,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
       result.result should be(Set(
         new Executed(A(Pru).move(War), Result.Success),
         new Executed(A(Sil).support(A(Pru).move(War)), Result.Success),
-        new Executed(A(War).move(Sil), Result.Dislodged(Pru.province))
+        new Executed(A(War).move(Sil), Result.Dislodged)
       ))
       result.board should be(board.copy(
         state = 1901.Spring - Retreat,
@@ -421,7 +421,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
 
       result.result should be(Set(
         new Executed(A(Ber).move(Pru), Result.Bounced),
-        new Executed(A(Sil).support(A(Ber).move(Pru)), Result.Dislodged(Pru.province)),
+        new Executed(A(Sil).support(A(Ber).move(Pru)), Result.Dislodged),
         new Executed(F(Bal).move(Pru), Result.Bounced),
         new Executed(A(Pru).move(Sil), Result.Success),
         new Executed(A(War).support(A(Pru).move(Sil)), Result.Success)
@@ -472,7 +472,7 @@ class MovementResolverSupportOrderSpec extends UnitSpec with UsesResolvedResult 
 
       result.result should be(Set(
         new Executed(A(Ber).hold(), Result.Success),
-        new Executed(A(Mun).move(Sil), Result.Dislodged(Boh.province)),
+        new Executed(A(Mun).move(Sil), Result.Dislodged),
         new Executed(A(Pru).move(Ber), Result.Bounced),
         new Executed(A(Sil).support(A(Pru).move(Ber)), Result.Cut),
         new Executed(A(Boh).move(Mun), Result.Success),
