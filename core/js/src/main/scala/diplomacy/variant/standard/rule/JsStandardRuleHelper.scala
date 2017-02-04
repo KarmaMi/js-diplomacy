@@ -2,13 +2,12 @@ package diplomacy.variant.standard.rule
 
 import scala.scalajs.js.annotation.{ JSExport, JSExportAll }
 
-import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit, Power }
+import diplomacy.board.{ DiplomacyUnit => BaseDiplomacyUnit, Power, JsBoard }
 import diplomacy.variant.standard.rule.Keywords._
-import diplomacy.variant.standard.rule
 
 @JSExport @JSExportAll
 class JsStandardRuleHelper[Turn_ <: Turn, Power_ <: Power] (
-  board: rule.Board[Turn_, Power_]
+  board: JsBoard[State[Turn_], Power_, MilitaryBranch, UnitStatus[Power_], ProvinceStatus[Power_]]
 ) extends Rule.TypeHelper {
   final type Turn = Turn_
   final type Power = Power_
@@ -25,20 +24,20 @@ class JsStandardRuleHelper[Turn_ <: Turn, Power_ <: Power] (
       units find { unit => unit.location == location && unit.militaryBranch == militaryBranch }
     }
 
-    this.board.state.phase match {
+    this.board.board.state.phase match {
       case Phase.Movement =>
-        getUnit(this.board.units).get
+        getUnit(this.board.board.units).get
       case Phase.Retreat =>
         getUnit(
-          this.board.units filter { unit =>
-            this.board.unitStatuses.get(unit) match {
+          this.board.board.units filter { unit =>
+            this.board.board.unitStatuses.get(unit) match {
               case Some(UnitStatus.Dislodged(_)) => true
               case _ => false
             }
           }
         ).get
       case Phase.Build =>
-        getUnit(this.board.units) match {
+        getUnit(this.board.board.units) match {
           case Some(unit) => unit
           case None =>
             require(location.province.homeOf.isDefined)

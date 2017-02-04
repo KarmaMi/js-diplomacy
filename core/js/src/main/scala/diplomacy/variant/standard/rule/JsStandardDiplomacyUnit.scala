@@ -6,17 +6,20 @@ import diplomacy.board.Power
 
 @JSExport @JSExportAll
 case class JsStandardDiplomacyUnit[Power_ <: Power](unit: DiplomacyUnit[Power_]) {
-  def hold() = Order.Hold(unit)
-  def move(destination: Location[Power_]) = Order.Move(unit, destination, false)
-  def moveViaConvoy(destination: Location[Power_]) = Order.Move(unit, destination, true)
-  def support(target: Order[Power_]) = target match {
-    case target@ Order.Hold(_) => Order.Support(unit, Left(target))
-    case target@ Order.Move(_, _, _) => Order.Support(unit, Right(target))
+  def hold() = JsOrder(Order.Hold(unit))
+  def move(destination: Location[Power_]) = JsOrder(Order.Move(unit, destination, false))
+  def moveViaConvoy(destination: Location[Power_]) = JsOrder(Order.Move(unit, destination, true))
+  def support(target: JsOrder[Power_]) = target.order match {
+    case target@ Order.Hold(_) => JsOrder(Order.Support(unit, Left(target)))
+    case target@ Order.Move(_, _, _) => JsOrder(Order.Support(unit, Right(target)))
     case _ => ???
   }
-  def convoy(target: Order.Move[Power_]) = Order.Convoy(unit, target)
+  def convoy(target: JsOrder[Power_]) = target.order match {
+    case target@ Order.Move(_, _, _) => JsOrder(Order.Convoy(unit, target))
+    case _ => ???
+  }
 
-  def disband() = Order.Disband(unit)
-  def retreat(destination: Location[Power_]) = Order.Retreat(unit, destination)
-  def build() = Order.Build(unit)
+  def disband() = JsOrder(Order.Disband(unit))
+  def retreat(destination: Location[Power_]) = JsOrder(Order.Retreat(unit, destination))
+  def build() = JsOrder(Order.Build(unit))
 }
