@@ -23,7 +23,7 @@ class JsStandardRuleHelperSpec extends UnitSpec {
             DiplomacyUnit(France, Fleet, GoL)
           ), Map(), Map()
         )
-      val ruleHelper = new JsStandardRuleHelper(board)
+      val ruleHelper = new JsStandardRuleHelper(JsBoard(board))
       import ruleHelper._
 
       "generate a DiplomacyUnit." in {
@@ -32,21 +32,21 @@ class JsStandardRuleHelperSpec extends UnitSpec {
       }
 
       "generate Hold order." in {
-        A(Spa).hold() should be(Order.Hold(A(Spa).unit))
+        A(Spa).hold().order should be(Order.Hold(A(Spa).unit))
       }
       "generate Move order (1)." in {
-        A(Spa).move(Mar) should be(Order.Move(A(Spa).unit, Mar, false))
+        A(Spa).move(Mar).order should be(Order.Move(A(Spa).unit, Mar, false))
       }
       "generate Move order (2)." in {
-        A(Spa).moveViaConvoy(Mar) should be(Order.Move(A(Spa).unit, Mar, true))
+        A(Spa).moveViaConvoy(Mar).order should be(Order.Move(A(Spa).unit, Mar, true))
       }
       "generate Support order." in {
-        A(Spa).support(F(GoL).move(Mar)) should be(
+        A(Spa).support(F(GoL).move(Mar)).order should be(
           Order.Support(A(Spa).unit, Right(Order.Move(F(GoL).unit, Mar, false)))
         )
       }
       "generate Convoy order." in {
-        F(GoL).convoy(A(Spa).move(Mar)) should be(
+        F(GoL).convoy(A(Spa).move(Mar)).order should be(
           Order.Convoy(F(GoL).unit, Order.Move(A(Spa).unit, Mar, false))
         )
       }
@@ -64,7 +64,7 @@ class JsStandardRuleHelperSpec extends UnitSpec {
           Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
-      val ruleHelper = new JsStandardRuleHelper(board)
+      val ruleHelper = new JsStandardRuleHelper(JsBoard(board))
       import ruleHelper._
 
       "generate a dislodged DiplomacyUnit." in {
@@ -73,10 +73,10 @@ class JsStandardRuleHelperSpec extends UnitSpec {
       }
 
       "generate Retreat order." in {
-        A(Spa).retreat(Mar) should be(Order.Retreat(A(Spa).unit, Mar))
+        A(Spa).retreat(Mar).order should be(Order.Retreat(A(Spa).unit, Mar))
       }
       "generate Disband order." in {
-        A(Spa).disband() should be(Order.Disband(A(Spa).unit))
+        A(Spa).disband().order should be(Order.Disband(A(Spa).unit))
       }
     }
 
@@ -92,7 +92,7 @@ class JsStandardRuleHelperSpec extends UnitSpec {
           Map(DiplomacyUnit(France, Army, Spa) -> UnitStatus.Dislodged(Mar.province)),
           Map()
         )
-      val ruleHelper = new JsStandardRuleHelper(board)
+      val ruleHelper = new JsStandardRuleHelper(JsBoard(board))
       import ruleHelper._
 
       "generate a DiplomacyUnit." in {
@@ -102,10 +102,10 @@ class JsStandardRuleHelperSpec extends UnitSpec {
       }
 
       "generate Disband order." in {
-        F(Spa_SC).disband() should be(Order.Disband(F(Spa_SC).unit))
+        F(Spa_SC).disband().order should be(Order.Disband(F(Spa_SC).unit))
       }
       "generate Build order." in {
-        A(Mar).build() should be(Order.Build(A(Mar).unit))
+        A(Mar).build().order should be(Order.Build(A(Mar).unit))
       }
     }
   }
