@@ -49,12 +49,4 @@ class JsStandardRuleHelper[Turn_ <: Turn, Power_ <: Power] (
         }
     }
   }
-
-  implicit class GenOrderToLocation(location: Location) {
-    require(location.province.homeOf.isDefined)
-    def build(tpe: MilitaryBranch) = location.province.homeOf match {
-      case Some(home) => Order.Build(BaseDiplomacyUnit(home, tpe, location))
-      case _ => ???
-    }
-  }
 }
