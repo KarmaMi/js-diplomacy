@@ -18,8 +18,8 @@
     "url": "https://github.com/KarmaMi/js-diplomacy/issues"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "chai": ">=4.0.0-canary.1",
+    "mocha": "*"
   },
   "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
 }
