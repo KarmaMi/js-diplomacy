@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
-    "test": "mocha -R spec test/util/*.js test/board/*.js test/map/*.js test/rule/*.js test/variant/standard/*.js test/variant/standard/rule/*.js test/variant/standard/map/*.js test/*.js"
+    "test": "mocha -R spec test/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,11 @@
     "url": "https://github.com/KarmaMi/js-diplomacy/issues"
   },
   "devDependencies": {
+    "mocha": "*",
     "chai": ">=4.0.0-canary.1",
-    "mocha": "*"
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-util": "^3.0.8"
   },
   "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
 }
