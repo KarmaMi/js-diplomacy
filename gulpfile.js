@@ -5,7 +5,7 @@ const gutil = require('gulp-util')
 gulp.task('mocha', () => {
   return gulp.src(
     [
-      'test/util/*.js', 'test/data/*.js', 'test/map/*.js', 'test/rule/*.js',
+      'test/util/*.js', 'test/board/*.js', 'test/map/*.js', 'test/rule/*.js',
       'test/variant/*.js', 'test/variant/standard/*.js', 'test/*.js'
     ],
     { read: false }
