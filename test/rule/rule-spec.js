@@ -1,132 +1,103 @@
 'use strict'
 
 const chai = require('chai')
-const assert = require('assert')
 
-const Name = require('./../../lib/data/name')
-const Location = require('./../../lib/data/location')
-const Province = require('./../../lib/data/province')
-const Rule = require('./../../lib/rule/rule')
-const RuleKeywords = require('./../../lib/rule/rule-keywords')
-const RuleKeywordsHelper = require('./../../lib/rule/rule-keywords-helper')
-const Order = require('./../../lib/variant/standard/order')
+const mockMap = require('../mock/map')
+const MockOrder = require('../mock/order')
+const MockRule = require('./../mock/rule')
+
+const { Unit, Board } = require('./../../lib/board/package')
+const ResolvedResult = require('./../../lib/rule/resolved-result')
+const { Executed, Replaced } = require('./../../lib/rule/order-result')
 
 chai.should()
 
-describe('Rule', () => {
-  describe('when one unit has several order', () => {
-    it('returns null', () => {
-      const army = new Name('Army', 'A')
-      const spa_ = new Province(new Name('Spa'), null, true)
-      const spa = new Location(spa_, [army])
+describe('A rule', () => {
+  const [Army, Fleet] = mockMap.militaryBranches
+  const [spain, naples, apulia, western] = mockMap.provinces
+  const [spa, spaSc, nap, apu, wes] = mockMap.locations
+  const map = mockMap.map
+  const unit = new Unit(Fleet, nap, 'France')
+  const board = new Board(map, 'State', [unit], [], [])
 
-      const mar_ = new Province(new Name('Mar'), 'France', true)
-      const mar = new Location(mar_, [army])
-
-      const orders = []
-      for (const name in Order) {
-        orders.push([name.toLowerCase(), Order[name]])
-      }
-
-      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
-      const $ = RuleKeywordsHelper(ruleKeywords)
-      const rule = new Rule()
-
-      const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
-
-      (result == null).should.equal(true)
+  describe('when one unit has several orders', () => {
+    it('does not resolve orders.', () => {
+      const rule = new MockRule()
+      rule.resolve(board, [new MockOrder(unit), new MockOrder(unit)]).should.deep.equal({
+        err: 'F Nap: several orders'
+      })
     })
   })
-  describe('when there are invalid orders', () => {
+  describe('when resolving an invalid order', () => {
+    it('uses a default order', () => {
+      const unit1 = new Unit(Fleet, nap, 'France')
+      const unit2 = new Unit(Army, spa, 'France')
+      const board = new Board(null, 'State', [unit1, unit2], [], [])
+
+      const rule = new MockRule()
+      rule.errorMessageOfOrder = (board, order) => {
+        return (order.unit === unit1 || order.replaced) ? null : 'Invalid'
+      }
+      rule.defaultOrderOf = (board, unit) => {
+        const o = new MockOrder(unit)
+        o.replaced = true
+        return o
+      }
+      rule.resolveProcedure = (board, orders) => {
+        return {
+          result: new ResolvedResult(
+            board,
+            orders.map(order => new Executed(order, 'Resolved')),
+            true
+          )
+        }
+      }
+
+      const results = rule.resolve(board, [new MockOrder(unit1), new MockOrder(unit2)]).result.results
+
+      const tmp = new MockOrder(unit2)
+      tmp.replaced = true
+      results.should.deep.equal(new Set([
+        new Executed(new MockOrder(unit1), 'Resolved'),
+        new Replaced(new MockOrder(unit2), 'Invalid', tmp, 'Resolved')
+      ]))
+    })
+  })
+  describe('when the set of orders are invalid', () => {
+    it('does not resolve the orders', () => {
+      const rule = new MockRule()
+      rule.errorMessageOfOrders = (board, orders) => 'Invalid'
+      rule.resolve(board, [new MockOrder(unit)]).should.deep.equal({
+        err: 'Invalid'
+      })
+    })
+  })
+  describe('when several unit that require an order do not have orders', () => {
     it('uses a default order.', () => {
-      const army = new Name('Army', 'A')
-      const spa_ = new Province(new Name('Spa'), null, true)
-      const spa = new Location(spa_, [army])
+      const unit1 = new Unit(Fleet, nap, 'France')
+      const unit2 = new Unit(Army, spa, 'France')
+      const board = new Board(null, 'State', [unit1, unit2], [], [])
 
-      const mar_ = new Province(new Name('Mar'), 'France', true)
-      const mar = new Location(mar_, [army])
-
-      const orders = []
-      for (const name in Order) {
-        orders.push([name.toLowerCase(), Order[name]])
+      const rule = new MockRule()
+      rule.unitsRequiringOrder = (board) => board.units
+      rule.defaultOrderOf = (board, unit) => {
+        const o = new MockOrder(unit)
+        return o
       }
-
-      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
-      const $ = RuleKeywordsHelper(ruleKeywords)
-      const rule = new Rule()
-
-      rule._resolveOrder = (map, board, os) => {
-        return { orderResult: os.map(order => [order, 'result']) }
+      rule.resolveProcedure = (board, orders) => {
+        return {
+          result: new ResolvedResult(
+            board,
+            orders.map(order => new Executed(order, 'Resolved')),
+            true
+          )
+        }
       }
-      rule.getUnitsRequiringOrder = (map, board) => []
-      rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
-      rule.getErrorMessageForOrders = (map, board, orders) => null
-      rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
-
-      const result = [...rule.resolve(null, { units: [] }, [$.A(mar).move(spa)]).orderResult]
-
-      result.length.should.equal(1)
-      result[0][0].type.should.equal('Move')
-      result[0][1].replacedBy.type.should.equal('Hold')
-    })
-  })
-  describe('when orders are invalid', () => {
-    it('returns null', () => {
-      const army = new Name('Army', 'A')
-      const spa_ = new Province(new Name('Spa'), null, true)
-      const spa = new Location(spa_, [army])
-
-      const mar_ = new Province(new Name('Mar'), 'France', true)
-      const mar = new Location(mar_, [army])
-
-      const orders = []
-      for (const name in Order) {
-        orders.push([name.toLowerCase(), Order[name]])
-      }
-
-      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
-      const $ = RuleKeywordsHelper(ruleKeywords)
-      const rule = new Rule()
-
-      rule._resolveOrder = (map, board, os) => {}
-      rule.getErrorMessageForOrder = (map, board, order) => (order.type === 'Hold') ? null : 'invalid'
-      rule.getErrorMessageForOrders = (map, board, orders) => 'error'
-      rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
-
-      const result = rule.resolve(null, { units: [] }, [$.A(mar).move(spa), $.A(mar).hold()]);
-
-      (result == null).should.equal(true)
-    })
-  })
-  describe('when some units that require order do not have order', () => {
-    it('uses a default order.', () => {
-      const army = new Name('Army', 'A')
-      const spa_ = new Province(new Name('Spa'), null, true)
-      const spa = new Location(spa_, [army])
-
-      const mar_ = new Province(new Name('Mar'), 'France', true)
-      const mar = new Location(mar_, [army])
-
-      const orders = []
-      for (const name in Order) {
-        orders.push([name.toLowerCase(), Order[name]])
-      }
-
-      const ruleKeywords = new RuleKeywords([], [], [], [army], orders, (map, board, os) => {})
-      const $ = RuleKeywordsHelper(ruleKeywords)
-      const rule = new Rule()
-      let result = null
-
-      rule._resolveOrder = (map, board, os) => { result = os }
-      rule.getUnitsRequiringOrder = (map, board) => [$.A(mar)]
-      rule.getErrorMessageForOrder = (map, board, order) => null
-      rule.getErrorMessageForOrders = (map, board, orders) => null
-      rule.defaultOrder = (map, board, unit) => $.A(unit.location).hold()
-
-      rule.resolve(null, { units: [] }, [])
-
-      result.length.should.equal(1)
-      result[0].type.should.equal('Hold')
+      const result = rule.resolve(board, []).result.results
+      result.should.deep.equal(new Set([
+        new Executed(new MockOrder(unit1), 'Resolved'),
+        new Executed(new MockOrder(unit2), 'Resolved')
+      ]))
     })
   })
 })
