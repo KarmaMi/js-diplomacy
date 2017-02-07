@@ -16,6 +16,7 @@
     "url": "https://github.com/KarmaMi/js-diplomacy/issues"
   },
   "devDependencies": {
+    "@alrra/travis-scripts": "^3.0.1",
     "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",

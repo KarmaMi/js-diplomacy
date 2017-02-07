@@ -1,7 +1,14 @@
+env:
+  global:
+    - secure: "xFboebQN6HkTX7rin/wrkbSya/0/Y/12eOEJyce6RUtnyt3zc//ZKOxhVBNyGZulhNRCrHmmPXjhvpGRDNdQOkDvJ+6hXPUmqfilxSraU/EmMOuZ688WqplKctjr5rp//ICdK1A5G7gSIYJOz2JQvCHoBi6OynIzw11D+J8dDqDcWd/Zf8nwIa3VRF/0cWtvLbNQeIuTk/iFuF8dr7pM/9mplbvPAFYGyGFI4NyZEup79UUXNLMybbmjaSm62AJpHXxmw5klwIJ+WSoItKhJdxTbmmeT/CbbR859LGwGyW6+WSFyhXgjkz5YZDeX6K6ACu1SbaifMfSOfhfhp0KekpBWEiokgycr4pmGu4XinvJmGpwnpANcwlOKIEQfywtff0uqi72oE1UXjdAhkObmJS2jWlJgc5Qie7L6RMP3HcIsuNV88a4vl2WgX2s4opXOlnHP7hYEm4P2VY5Zpo1+I8Qw9Rw2J7z88X5FmeDndxfos/Ra7JjtzmA20WvNWHVdvuVOYMETUPstPcXbHnAy3CXheC0OicaVp3x3dTrG0XPyyuxfG1O3alc1vdbLc+0z7I90G2N9KMN/E1AzdJ9kmLzrtVfhr9p03FGzeqbYB/bGarp8txN0m04zen+yldgrQqS2bchFr20X48vkGy++77LKte7zpeS+VEb8opr0BSI="
+branches:
+  except:
+  - gh-pages
 language: node_js
 node_js:
-  - "6.1"
-  - "6"
+  - "node"
 before_script:
   - npm install -g gulp
 script: gulp mocha
+after_success:
+  - ./scripts/deploy.sh
