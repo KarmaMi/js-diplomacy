@@ -10,3 +10,5 @@ node_js:
 before_script:
   - npm install -g gulp
 script: gulp mocha
+after_success:
+  - ./scripts/deploy.sh
