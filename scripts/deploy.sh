@@ -1,12 +1,13 @@
 #! /bin/sh
-if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
-    [ "$TRAVIS_PULL_REQUEST" == "false" ]
+if ([ "$TRAVIS_BRANCH" = "master" ] || [ ! -z "$TRAVIS_TAG" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
+  echo "Start Deployment"
   # Install modules
   npm i -g makeshift jsdoc &&
   # Publish to npm
   ## Set NPM_TOKEN
   makeshift &&
+  echo "npm publish" &&
   npm publish &&
 
   # Publish to GitHub Pages
@@ -27,6 +28,7 @@ then
   jsdoc -r ../lib -d ./api &&
   ## Push to GitHub Pages
   git commit -am "Release ${TRAVIS_TAG}" &&
+  echo "push to gh-pages" &&
   git push -q origin gh-pages &&
   ## Cleanup
   cd ../ &&
