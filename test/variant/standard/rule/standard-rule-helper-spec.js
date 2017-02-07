@@ -4,7 +4,6 @@ const chai = require('chai')
 
 const StandardRuleHelper = require('../../../../lib/variant/standard/rule/standard-rule-helper')
 const Dislodged = require('../../../../lib/variant/standard/rule/dislodged')
-const ProvinceStatus = require('../../../../lib/variant/standard/rule/province-status')
 const Order = require('../../../../lib/variant/standard/rule/order')
 const { Army, Fleet } = require('../../../../lib/variant/standard/rule/military-branch')
 const Phase = require('../../../../lib/variant/standard/rule/phase')
@@ -28,6 +27,10 @@ describe('A StandardRuleHelper', () => {
       [], []
     )
     const $$ = new StandardRuleHelper(board)
+    it('generates an unit, ', () => {
+      $$.A($.Spa).unit.should.deep.equal(new Unit(Army, $.Spa, France))
+      $$.U($.Spa).unit.should.deep.equal(new Unit(Army, $.Spa, France))
+    })
     it('generates Hold orders', () => {
       $$.A($.Spa).hold().should.deep.equal(new Order.Hold($$.A($.Spa).unit))
     })
@@ -64,6 +67,10 @@ describe('A StandardRuleHelper', () => {
       []
     )
     const $$ = new StandardRuleHelper(board)
+    it('generates an unit, ', () => {
+      $$.F($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
+      $$.U($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
+    })
     it('generates Retreat orders', () => {
       $$.F($.Spa_SC).retreat($.Mar).should.deep.equal(
         new Order.Retreat($$.F($.Spa_SC).unit, $.Mar)
@@ -83,6 +90,10 @@ describe('A StandardRuleHelper', () => {
       [], []
     )
     const $$ = new StandardRuleHelper(board)
+    it('generates an unit, ', () => {
+      $$.F($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
+      $$.U($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
+    })
     it('generates Build orders', () => {
       $$.A($.Par).build().should.deep.equal(
         new Order.Build($$.A($.Par).unit)
