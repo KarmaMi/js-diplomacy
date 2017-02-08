@@ -48,5 +48,8 @@ board = result.board // Go to the next turn (1901 Autumn, Movement phase)
 helper = new Helper(board) // Update the helper instance
 ```
 
+## Documentation
+The documentation is [here](https://karmami.github.io/js-diplomacy/docs/).
+
 ## LICENSE
 This software is released under the MIT License, see [LICESE.md](LICENSE.md)
