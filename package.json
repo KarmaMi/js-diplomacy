@@ -20,6 +20,7 @@
     "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^1.0.1",
     "gulp-mocha": "^3.0.1",
     "gulp-util": "^3.0.8",
     "mocha": "*",
