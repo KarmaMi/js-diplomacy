@@ -41,4 +41,18 @@ describe('The StandardRuleUtil', () => {
       new Set([...board.map.movableLocationsOf($.Edi, Army)].concat([$.Nwy, $.StP]))
     )
   })
+  it('calculte the number of buildable units', () => {
+    const board = new Board(
+      map, 'State',
+      [new Unit(Army, $.Yor, England)],
+      [],
+      [
+        [$.Mar.province, new ProvinceStatus(France, false)],
+        [$.Spa.province, new ProvinceStatus(France, false)]
+      ]
+    )
+    const x = StandardRuleUtils.numberOfBuildableUnits(board)
+    x.get(France).should.deep.equal(2)
+    x.get(England).should.deep.equal(-1)
+  })
 })
