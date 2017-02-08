@@ -1,0 +1,12 @@
+{
+  "templates": {
+    "default": {
+      "useLongnameInNav": true,
+      "outputSourceFiles": true
+    },
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "path": "ink-docstrap",
+    "theme": "cerulean"
+  }
+}
