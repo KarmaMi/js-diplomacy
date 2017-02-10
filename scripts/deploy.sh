@@ -1,5 +1,5 @@
 #! /bin/sh
-if ([ "$TRAVIS_BRANCH" = "master" ] && [ ! -z "$TRAVIS_TAG" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]
+if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
   echo "Start Deployment"
   # Install modules

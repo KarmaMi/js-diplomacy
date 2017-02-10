@@ -23,6 +23,7 @@ describe('A MovementValidator', () => {
     [
       new Unit(Army, $.Lvp, Power.England),
       new Unit(Fleet, $.Lon, Power.England),
+      new Unit(Fleet, $.Mid, Power.England),
       new Unit(Fleet, $.Eng, Power.England),
       new Unit(Army, $.Spa, Power.France),
       new Unit(Army, $.Bur, Power.France)
@@ -32,10 +33,10 @@ describe('A MovementValidator', () => {
   const $$ = new Helper(board)
   describe('a valid order is received', () => {
     it('returns null (1)', () => {
-      (validator.errorMessageOfOrder(board, $$.A($.Lvp).move($.Bre)) === null).should.equal(true)
+      (validator.errorMessageOfOrder(board, $$.A($.Lvp).move($.Yor)) === null).should.equal(true)
     })
     it('returns null (2)', () => {
-      (validator.errorMessageOfOrder(board, $$.A($.Spa).move($.Tun)) === null).should.equal(true)
+      (validator.errorMessageOfOrder(board, $$.A($.Spa).move($.Wal)) === null).should.equal(true)
     })
   })
   describe('an order that its target unit does not exist is received', () => {
