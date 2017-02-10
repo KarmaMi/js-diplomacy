@@ -245,4 +245,36 @@ describe('MovementResolver#Other Cases', () => {
       [], []
     ))
   })
+  it('handles the issue #53.', () => {
+    const b = new Board(
+      map, state1,
+      [
+        new Unit(Army, $.Vie, Power.Austria), new Unit(Army, $.Bud, Power.Austria),
+        new Unit(Fleet, $.Tri, Power.Austria)
+      ],
+      [], []
+    )
+    const $$ = new Helper(b)
+    const { board, results } = r.resolve(
+      b,
+      [
+        $$.A($.Vie).move($.Tri), $$.A($.Bud).support($$.A($.Vie).move($.Tri)),
+        $$.F($.Tri).move($.Adr)
+      ]
+    ).result
+
+    results.should.deep.equal(new Set([
+      new Executed($$.A($.Vie).move($.Tri), Result.Success),
+      new Executed($$.A($.Bud).support($$.A($.Vie).move($.Tri)), Result.Success),
+      new Executed($$.F($.Tri).move($.Adr), Result.Success)
+    ]))
+    board.should.deep.equal(new Board(
+      map, state2,
+      [
+        new Unit(Army, $.Tri, Power.Austria), new Unit(Army, $.Bud, Power.Austria),
+        new Unit(Fleet, $.Adr, Power.Austria)
+      ],
+      [], []
+    ))
+  })
 })
