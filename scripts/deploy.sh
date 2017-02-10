@@ -20,5 +20,5 @@ then
                            --commit-message "Update website (${TRAVIS_TAG})" \
                            --directory "./public" \
                            --distribution-branch "gh-pages" \
-                           --source-branch "master"
+                           --source-branch "${TRAVIS_TAG}"
 fi
