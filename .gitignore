@@ -2,3 +2,4 @@ node_modules
 browser/diplomacy.js
 target/
 typings/
+docs/

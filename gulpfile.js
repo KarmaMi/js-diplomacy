@@ -1,10 +1,14 @@
 const gulp = require('gulp')
-const ts = require('gulp-typescript')
-const mocha = require('gulp-mocha')
 const gutil = require('gulp-util')
-const browserify = require('browserify')
 const source = require('vinyl-source-stream')
+
+const ts = require('gulp-typescript')
+const typedoc = require('gulp-typedoc')
 const sourcemaps = require('gulp-sourcemaps')
+
+const mocha = require('gulp-mocha')
+
+const browserify = require('browserify')
 
 const tsSourceProject = ts.createProject('./configs/tsconfig.json')
 const tsTestProject = ts.createProject('./configs/tsconfig.json')
@@ -32,6 +36,18 @@ gulp.task('test', ['compile-src', 'compile-test'], () => {
     .on('error', gutil.log)
 })
 
+// Create a documentation
+gulp.task('docs', () => {
+  const configs = require('./configs/tsconfig.json').compilerOptions
+  const packageOption = require('./package.json')
+  configs.out = './docs'
+  configs.includeDeclarations = true
+  configs.name = packageOption.name
+  configs.version = true
+  gulp.src(['./src/**/*.ts'], { read: false })
+    .pipe(typedoc(configs))
+})
+
 gulp.task('mocha', () => {
   return gulp.src(['test/**/*.js'], { read: false })
     .pipe(mocha({ reporter: 'list' }))
@@ -46,9 +62,3 @@ gulp.task('browserify', () => {
   .pipe(gulp.dest('browser/'))
 })
 gulp.task('watch-browserify', () => gulp.watch(['lib/**', 'browser/index.js'], ['browserify']))
-
-gulp.task('docs', (cb) => {
-  const configs = require('./configs/jsdoc-config.json')
-  gulp.src(['./lib/**/*.js', 'README.md'], { read: false })
-    .pipe(jsdoc(configs, cb))
-})
