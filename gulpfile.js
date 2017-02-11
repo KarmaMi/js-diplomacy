@@ -52,7 +52,7 @@ gulp.task('create-module-file', () => {
               .replace(/(^|-)(.)/g, l => l.toUpperCase()).replace(/\W/g, '')
           }
 
-          importText += `import ${moduleName} from "./${fileName}";\n`
+          importText += `import ${moduleName} from "./${fileName}"\n`
           exportText += `  ${moduleName}: ${moduleName},\n`
         })
 
@@ -60,8 +60,8 @@ gulp.task('create-module-file', () => {
           `${importText}\n` +
           `const module = {\n` +
           `${exportText.substr(0, exportText.length - 2)}\n` +
-          `};\n` +
-          `export default module;`
+          `}\n` +
+          `export default module`
 
         const wStream = fs.createWriteStream(modulePath, { defaultEncoding: encoding })
         wStream.write(text)
