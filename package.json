@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.39",
     "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",
