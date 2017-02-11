@@ -4,6 +4,7 @@ const mocha = require('gulp-mocha')
 const gutil = require('gulp-util')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
+const sourcemaps = require('gulp-sourcemaps')
 
 const tsSourceProject = ts.createProject('./configs/tsconfig.json')
 const tsTestProject = ts.createProject('./configs/tsconfig.json')
@@ -11,7 +12,9 @@ const tsTestProject = ts.createProject('./configs/tsconfig.json')
 // compile source files
 gulp.task('compile-src', () => {
   return gulp.src(['./src/**/*.ts'])
+    .pipe(sourcemaps.init())
     .pipe(tsSourceProject(ts.reporter.defaultReporter()))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./target/src'))
 })
 
