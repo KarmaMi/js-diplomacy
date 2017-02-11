@@ -3,3 +3,4 @@ browser/diplomacy.js
 target/
 docs/
 module.ts
+*.js.map

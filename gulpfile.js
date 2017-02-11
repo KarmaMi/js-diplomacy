@@ -4,6 +4,7 @@ const path = require('path')
 const gulp = require('gulp')
 const gutil = require('gulp-util')
 const source = require('vinyl-source-stream')
+const buffer = require('vinyl-buffer')
 const through = require('through2')
 
 const ts = require('gulp-typescript')
@@ -107,8 +108,12 @@ gulp.task('docs', ['create-module-file'], () => {
 })
 
 gulp.task('browserify', () => {
-  browserify({entries: ['browser/index.js']})
+  browserify({entries: ['browser/index.ts']})
+  .plugin('tsify')
   .bundle()
   .pipe(source('diplomacy.js'))
+  .pipe(buffer())
+  .pipe(sourcemaps.init())
+  .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('browser/'))
 })
