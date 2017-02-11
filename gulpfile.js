@@ -6,12 +6,20 @@ const browserify = require('browserify')
 const source = require('vinyl-source-stream')
 
 const tsSourceProject = ts.createProject('./configs/tsconfig.json')
+const tsTestProject = ts.createProject('./configs/tsconfig.json')
 
 // compile source files
 gulp.task('compile-src', () => {
   return gulp.src(['./src/**/*.ts'])
     .pipe(tsSourceProject(ts.reporter.defaultReporter()))
     .pipe(gulp.dest('./target/src'))
+})
+
+// compile test files
+gulp.task('compile-test', () => {
+  return gulp.src(['./test/**/*.ts'])
+    .pipe(tsTestProject(ts.reporter.defaultReporter()))
+    .pipe(gulp.dest('./target/test'))
 })
 
 gulp.task('mocha', () => {
