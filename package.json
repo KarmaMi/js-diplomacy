@@ -3,6 +3,10 @@
   "main": "./lib/index.js",
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
+  "scripts": {
+    "prepublish": "gulp compile-src",
+    "postinstall": "typings install"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarmaMi/js-diplomacy.git"
