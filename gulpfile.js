@@ -22,6 +22,13 @@ gulp.task('compile-test', () => {
     .pipe(gulp.dest('./target/test'))
 })
 
+// Run test program
+gulp.task('test', ['compile-src', 'compile-test'], () => {
+  return gulp.src(['./target/test/**/*.js'])
+    .pipe(mocha({ repoter: 'list' }))
+    .on('error', gutil.log)
+})
+
 gulp.task('mocha', () => {
   return gulp.src(['test/**/*.js'], { read: false })
     .pipe(mocha({ reporter: 'list' }))
