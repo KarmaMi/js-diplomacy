@@ -35,6 +35,7 @@ gulp.task('test', ['compile-src', 'compile-test'], () => {
     .pipe(mocha({ repoter: 'list' }))
     .on('error', gutil.log)
 })
+gulp.task('watch-test', () => gulp.watch(['src/**/*.ts', 'test/**/*.ts'], ['test']))
 
 // Create a documentation
 gulp.task('docs', () => {
