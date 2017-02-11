@@ -1,9 +1,18 @@
 const gulp = require('gulp')
+const ts = require('gulp-typescript')
 const mocha = require('gulp-mocha')
 const gutil = require('gulp-util')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
-const jsdoc = require('gulp-jsdoc3')
+
+const tsSourceProject = ts.createProject('./configs/tsconfig.json')
+
+// compile source files
+gulp.task('compile-src', () => {
+  return gulp.src(['./src/**/*.ts'])
+    .pipe(tsSourceProject(ts.reporter.defaultReporter()))
+    .pipe(gulp.dest('./target/src'))
+})
 
 gulp.task('mocha', () => {
   return gulp.src(['test/**/*.js'], { read: false })
