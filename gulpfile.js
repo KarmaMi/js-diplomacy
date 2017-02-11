@@ -106,17 +106,9 @@ gulp.task('docs', ['create-module-file'], () => {
     .pipe(typedoc(configs))
 })
 
-gulp.task('mocha', () => {
-  return gulp.src(['test/**/*.js'], { read: false })
-    .pipe(mocha({ reporter: 'list' }))
-    .on('error', gutil.log)
-})
-gulp.task('watch-mocha', () => gulp.watch(['lib/**', 'test/**'], ['mocha']))
-
 gulp.task('browserify', () => {
   browserify({entries: ['browser/index.js']})
   .bundle()
   .pipe(source('diplomacy.js'))
   .pipe(gulp.dest('browser/'))
 })
-gulp.task('watch-browserify', () => gulp.watch(['lib/**', 'browser/index.js'], ['browserify']))
