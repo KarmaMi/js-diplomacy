@@ -97,12 +97,16 @@ gulp.task('watch-test', () => gulp.watch(['src/**/*.ts', 'test/**/*.ts'], ['test
 
 // Create a documentation
 gulp.task('docs', ['create-module-file'], () => {
-  const configs = require('./configs/tsconfig.json').compilerOptions
+  const tsconfigs = require('./configs/tsconfig.json').compilerOptions
   const packageOption = require('./package.json')
-  configs.out = './docs'
-  configs.includeDeclarations = true
-  configs.name = packageOption.name
-  configs.version = true
+  const configs = {
+    target: tsconfigs.target,
+    module: tsconfigs.module,
+    out: './docs',
+    includeDeclarations: true,
+    name: packageOption.name,
+    version: true
+  }
   gulp.src(['./src/**/*.ts'], { read: false })
     .pipe(typedoc(configs))
 })
