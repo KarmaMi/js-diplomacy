@@ -1,3 +1,4 @@
 export interface Edge<Node> {
-  edge: Array<Node> // TODO
+  n0: Node
+  n1: Node
 }

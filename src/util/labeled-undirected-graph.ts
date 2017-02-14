@@ -26,8 +26,8 @@ export class LabeledUndirectedGraph<Node, Label> {
     if (!nodes) {
       this.nodes = new Set()
       this.edges.forEach(edge => {
-        this.nodes.add(edge.edge[0])
-        this.nodes.add(edge.edge[1])
+        this.nodes.add(edge.n0)
+        this.nodes.add(edge.n1)
       })
     } else {
       this.nodes = new Set([...nodes])
@@ -40,10 +40,10 @@ export class LabeledUndirectedGraph<Node, Label> {
   neighborsOf (node: Node): Set<[Node, Label]> {
     const ns = new Set()
     this.edges.forEach(edge => {
-      if (edge.edge[0] === node) {
-        ns.add([edge.edge[1], edge.label])
-      } else if (edge.edge[1] === node) {
-        ns.add([edge.edge[0], edge.label])
+      if (edge.n0 === node) {
+        ns.add([edge.n1, edge.label])
+      } else if (edge.n1 === node) {
+        ns.add([edge.n0, edge.label])
       }
     })
 

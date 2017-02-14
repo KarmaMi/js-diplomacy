@@ -4,10 +4,7 @@ import { LabeledUndirectedGraph } from "./../../src/util/labeled-undirected-grap
 chai.should()
 
 class LabeledEdge {
-  edge: Array<number>
-  constructor (v1: number, v2: number, public label: string) {
-    this.edge = [v1, v2]
-    this.label = label
+  constructor (public n0: number, public n1: number, public label: string) {
   }
 }
 
