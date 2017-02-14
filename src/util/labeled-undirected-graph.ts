@@ -1,13 +1,10 @@
-export interface LabeledEdge<Node, Label> {
-  edge: Array<Node> // TODO
-  label: Label
-}
+import { LabeledEdge } from "./labeled-edge"
 
 /**
  * Undirected graph with labeled edges
  * {@link board.MapEdge} is an example.
  */
-export default class LabeledUndirectedGraph<Node, Label> {
+export class LabeledUndirectedGraph<Node, Label> {
   /**
    * The set of nodes.
    */

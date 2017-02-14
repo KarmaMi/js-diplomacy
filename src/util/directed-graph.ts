@@ -1,7 +1,7 @@
 /**
  * Directed graph
  */
-export default class DirectedGraph<Key, Node> {
+export class DirectedGraph<Key, Node> {
   /**
    * The set of nodes.
    */

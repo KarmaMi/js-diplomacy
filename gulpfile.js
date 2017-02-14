@@ -35,33 +35,20 @@ gulp.task('create-module-file', () => {
 
         const modulePath = path.resolve(file.path, 'module.ts')
 
-        let importText = ''
-        let exportText = ''
+        let text = ''
 
         const children = fs.readdirSync(file.path, encoding)
         children.forEach(x => {
           if (x === 'module.ts') return
 
-          let moduleName = path.basename(x, '.ts').toString()
           let fileName = path.basename(x, '.ts')
 
           if (fs.statSync(path.resolve(file.path, x)).isDirectory()) {
             fileName = path.relative(file.path, path.resolve(file.path, x, 'module'))
-          } else {
-            moduleName = path.basename(x, '.ts').toString()
-              .replace(/(^|-)(.)/g, l => l.toUpperCase()).replace(/\W/g, '')
           }
 
-          importText += `import ${moduleName} from "./${fileName}"\n`
-          exportText += `  ${moduleName}: ${moduleName},\n`
+          text += `export * from "./${fileName}"\n`
         })
-
-        const text =
-          `${importText}\n` +
-          `const module = {\n` +
-          `${exportText.substr(0, exportText.length - 2)}\n` +
-          `}\n` +
-          `export default module`
 
         const wStream = fs.createWriteStream(modulePath, { defaultEncoding: encoding })
         wStream.write(text)
