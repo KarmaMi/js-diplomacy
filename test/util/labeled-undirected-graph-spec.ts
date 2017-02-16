@@ -1,12 +1,8 @@
 import * as chai from "chai"
 import { LabeledUndirectedGraph } from "./../../src/util/labeled-undirected-graph"
+import { LabeledEdge } from "./../../src/util/labeled-edge"
 
 chai.should()
-
-class LabeledEdge {
-  constructor (public n0: number, public n1: number, public label: string) {
-  }
-}
 
 describe("LabeledUndirectedGraph", () => {
   it("returns neighbor nodes.", () => {

@@ -1,4 +1,4 @@
-import { LabeledEdge } from "./labeled-edge"
+import { ILabeledEdge } from "./labeled-edge"
 
 /**
  * Undirected graph with labeled edges
@@ -12,14 +12,14 @@ export class LabeledUndirectedGraph<Node, Label> {
   /**
    * The set of edges.
    */
-  edges: Set<LabeledEdge<Node, Label>>
+  edges: Set<ILabeledEdge<Node, Label>>
 
   /**
    * @param edges The set of edges.
    * @param nodes The set of nodles.
    */
   constructor (
-    edges: Set<LabeledEdge<Node, Label>> | Array<LabeledEdge<Node, Label>>,
+    edges: Set<ILabeledEdge<Node, Label>> | Array<ILabeledEdge<Node, Label>>,
     nodes?: Set<Node> | Array<Node>
   ) {
     this.edges = new Set([...edges])

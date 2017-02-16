@@ -1,60 +1,70 @@
+import { IEdge, Edge } from "./edge"
+
 /**
  * Directed graph
  */
-export class DirectedGraph<Key, Node> {
+export class DirectedGraph<Value> {
   /**
    * The set of nodes.
    */
-  nodes: Map<Key, Set<Node>>
+  nodes: Set<Set<Value>>
   /**
    * The set of edges.
    */
-  edges: Set<Array<Key>> // TODO type of edges
+  edges: Set<IEdge<Set<Value>>>
   /**
    * @param nodes The set of nodes.
    * @param edges The set of edges.
    */
   constructor (
-    nodes: Map<Key, Set<Node>> | Array<[Key, Set<Node>]>,
-    edges: Set<Array<Key>> | Array<Array<Key>>
+    edges: Set<IEdge<Set<Value>>> | Array<IEdge<Set<Value>>>,
+    nodes?: Set<Set<Value>> | Array<Set<Value>>
   ) {
-    this.nodes = new Map([...nodes])
     this.edges = new Set([...edges])
+    if (!nodes) {
+      this.nodes = new Set()
+      this.edges.forEach(edge => {
+        this.nodes.add(edge.n0)
+        this.nodes.add(edge.n1)
+      })
+    } else {
+      this.nodes = new Set([...nodes])
+    }
 
   }
 
   /**
    * @return The cycle that is contained this graph. If there are no cycles, returns null.
    */
-  getCycle (): Array<Key> | null {
-    const visit = (key: Key, path: Array<Key>, state: Map<Key, boolean>): Array<Key> | null => {
-      state.set(key, true)
-      let cycle: Array<Key> | null = null
-      for (let edge of [...this.edges].filter(edge => edge[0] === key)) {
-        const v = edge[1]
-        if (!state.get(v)) {
-          const p = [...path]
-          p.push(v)
-          const c = visit(v, p, state)
-          if (c) {
-            cycle = c
+  getCycle (): Array<Set<Value>> | null {
+    const visit =
+      (node: Set<Value>, path: Array<Set<Value>>, state: Map<Set<Value>, boolean>): Array<Set<Value>> | null => {
+        state.set(node, true)
+        let cycle: Array<Set<Value>> | null = null
+        for (let edge of [...this.edges].filter(edge => edge.n0 === node)) {
+          const v = edge.n1
+          if (!state.get(v)) {
+            const p = [...path]
+            p.push(v)
+            const c = visit(v, p, state)
+            if (c) {
+              cycle = c
+              break
+            }
+          } else {
+            cycle = path.slice(path.indexOf(v))
             break
           }
-        } else {
-          cycle = path.slice(path.indexOf(v))
-          break
         }
+        return cycle
       }
-      return cycle
-    }
 
     let cycle = null
-    for (let elem of [...this.nodes]) {
-      const state = new Map([...this.nodes].map(elem => <[Key, boolean]>[elem[0], false]))
+    for (let node of [...this.nodes]) {
+      const state = new Map([...this.nodes].map(node => <[Set<Value>, boolean]>[node, false]))
 
-      const key = elem[0]
-      if (!state.get(key)) {
-        const c = visit(key, [key], state)
+      if (!state.get(node)) {
+        const c = visit(node, [node], state)
         if (c) {
           cycle = c
           break
@@ -66,58 +76,49 @@ export class DirectedGraph<Key, Node> {
 
   /**
    * Deletes a node.
-   * @param key The node (key) to be deleted.
-   * @return The directed graph that deletes the key.
+   * @param node The node to be deleted.
+   * @return The directed graph that deletes the node.
    */
-  deleteNode (key: Key): DirectedGraph<Key, Node> {
-    const nodes = new Map([...this.nodes].filter(elem => elem[0] !== key))
-    const edges = [...this.edges].filter(edge => edge[0] !== key && edge[1] !== key)
-    return new DirectedGraph(nodes, new Set([...edges]))
+  deleteNode (node: Set<Value>): DirectedGraph<Value> {
+    const nodes = new Set([...this.nodes].filter(n => n !== node))
+    const edges = [...this.edges].filter(edge => edge.n0 !== node && edge.n1 !== node)
+    return new DirectedGraph(edges, nodes)
   }
 
   /**
    * Merges nodes into one node.
-   * @param keys The nodes (keys) to be merged.
+   * @param nodes The nodes to be merged.
    * @return The directed graph that merges the nodes into one node.
    */
-  mergeNodes (keys: Set<Key>): DirectedGraph<Key, Node> {
-    const nodes = new Map<Key, Set<Node>>()
-    let mergedKeyOpt: Key | null = null
-    let mergedValue: Array<Node> = []
-    keys.forEach(key => {
-      if (!this.nodes.has(key)) return
+  mergeNodes (target: Set<Set<Value>>): DirectedGraph<Value> {
+    const nodes = new Set<Set<Value>>([...this.nodes])
 
-      if (!mergedKeyOpt) {
-        mergedKeyOpt = key
-      }
-      const value: Array<Node> = [...(this.nodes.get(key) || new Set())]
-      this.nodes.delete(key)
-      mergedValue = mergedValue.concat(value)
+    let mergedValue: Array<Value> = []
+    target.forEach(node => {
+      if (!this.nodes.has(node)) return
+
+      mergedValue = mergedValue.concat([...node])
+      nodes.delete(node)
     })
 
-    // No nodes are merged.
-    if (!mergedKeyOpt) return this
+    const mergedNode = new Set(mergedValue)
+    nodes.add(mergedNode)
 
-    const mergedKey: Key = mergedKeyOpt
-
-    nodes.set(mergedKey, new Set(mergedValue))
-    this.nodes.forEach((value, key) => nodes.set(key, value))
-
-    const edges: Array<Array<Key>> = []
+    const edges = new Set<Edge<Set<Value>>>()
     this.edges.forEach(edge => {
-      const [n1, n2] = edge
-      if (keys.has(n1) && keys.has(n2)) {
+      const { n0, n1 } = edge
+      if (target.has(n0) && target.has(n1)) {
         return
-      } else if (keys.has(n1)) {
-        edges.push([mergedKey, n2])
+      } else if (target.has(n0)) {
+        edges.add(new Edge(mergedNode, n1))
         return
-      } else if (keys.has(n2)) {
-        edges.push([n1, mergedKey])
+      } else if (target.has(n1)) {
+        edges.add(new Edge(n0, mergedNode))
       } else {
-        edges.push([n1, n2])
+        edges.add(edge)
       }
     })
 
-    return new DirectedGraph(nodes, new Set(edges))
+    return new DirectedGraph(edges, nodes)
   }
 }
