@@ -45,9 +45,11 @@ gulp.task('create-module-file', () => {
 
           if (fs.statSync(path.resolve(file.path, x)).isDirectory()) {
             fileName = path.relative(file.path, path.resolve(file.path, x, 'module'))
+            text += `import * as _${x} from "./${fileName}"\n`
+            text += `export const ${x} = _${x}\n`
+          } else {
+            text += `export * from "./${fileName}"\n`
           }
-
-          text += `export * from "./${fileName}"\n`
         })
 
         const wStream = fs.createWriteStream(modulePath, { defaultEncoding: encoding })
