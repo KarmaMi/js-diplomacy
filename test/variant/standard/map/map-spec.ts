@@ -1,23 +1,22 @@
-'use strict'
+import * as chai from "chai"
+import { MilitaryBranch } from "./../../../../src/variant/standard/rule/module"
+import { locations as $ } from "./../../../../src/variant/standard/map/location"
+import { Power } from "./../../../../src/variant/standard/map/power"
+import { map } from "./../../../../src/variant/standard/map/map"
 
-const chai = require('chai')
+const { Army, Fleet } = MilitaryBranch
+const should = chai.should()
 
-const { Army, Fleet } = require('./../../../../lib/variant/standard/rule/package').MilitaryBranch
-const $ = require('./../../../../lib/variant/standard/map/location')
-const map = require('./../../../../lib/variant/standard/map/map')
-
-chai.should()
-
-describe('Map', () => {
-  it('defines a map (1).', () => {
+describe("Map", () => {
+  it("defines a map (1).", () => {
     $.Pic.province.isSupplyCenter.should.equal(false)
-    $.Pic.province.homeOf.should.equal('France')
+    should.equal($.Pic.province.homeOf, Power.France)
     $.Bre.province.isSupplyCenter.should.equal(true)
-    $.Bre.province.homeOf.should.equal('France')
+    should.equal($.Bre.province.homeOf, Power.France)
     $.Bur.province.isSupplyCenter.should.equal(false)
-    $.Bur.province.homeOf.should.equal('France')
+    should.equal($.Bur.province.homeOf, Power.France)
     $.Gas.province.isSupplyCenter.should.equal(false)
-    $.Gas.province.homeOf.should.equal('France')
+    should.equal($.Gas.province.homeOf, Power.France)
 
     const provinces = map.movableProvincesOf($.Par.province, Army)
 
@@ -26,10 +25,10 @@ describe('Map', () => {
       new Set([$.Pic.province, $.Bre.province, $.Bur.province, $.Gas.province])
     )
   })
-  it('defines a map (2).', () => {
+  it("defines a map (2).", () => {
     ($.Iri.province.homeOf == null).should.equal(true)
     $.Iri.province.isSupplyCenter.should.equal(false)
-    $.Wal.province.homeOf.should.equal('England')
+    should.equal($.Wal.province.homeOf, Power.England)
 
     const provinces = map.movableProvincesOf($.Eng.province, Fleet)
 
@@ -40,7 +39,7 @@ describe('Map', () => {
       ])
     )
   })
-  it('defines a map (3).', () => {
+  it("defines a map (3).", () => {
     const provinces = map.movableProvincesOf($.Rom.province, Fleet)
 
     provinces.size.should.equal(3)
