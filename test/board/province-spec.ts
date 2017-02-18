@@ -11,10 +11,7 @@ describe("Province", () => {
 
       prov.toString().should.equal("Lvp*")
 
-      should.not.equal(prov.homeOf, null)
-      if (prov.homeOf) {
-        prov.homeOf.should.deep.equal("England")
-      }
+      should.equal(prov.homeOf, "England")
     })
   })
 })
