@@ -70,7 +70,7 @@ gulp.task('compile-src', ['create-module-file'], () => {
 })
 
 // compile test files
-gulp.task('compile-test', () => {
+gulp.task('compile-test', ['compile-src'], () => {
   return gulp.src(['./test/**/*.ts'])
     .pipe(tsTestProject(ts.reporter.defaultReporter()))
     .pipe(gulp.dest('./target/test'))
