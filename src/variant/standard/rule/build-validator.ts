@@ -31,9 +31,7 @@ export class BuildValidator<Power> implements Validator<Power> {
         }
         break
       case OrderType.Disband:
-        if (!([...board.units].some(unit => {
-          return (unit.militaryBranch === order.unit.militaryBranch) && (unit.location === order.unit.location) && (unit.power === order.unit.power)
-        }))) {
+        if (!board.units.has(order.unit)) {
           return `${order.unit} does not exist`
         }
         const numOfUnits =

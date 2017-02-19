@@ -343,13 +343,9 @@ export class MovementResolver<Power> implements Resolver<Power> {
 
     const newUnits = new Set()
     board.units.forEach(unit => {
-      const r = [...unit2Result].find(elem => {
-        return (elem[0].militaryBranch === unit.militaryBranch) &&
-          (elem[0].location === unit.location) &&
-          (elem[0].power === unit.power)
-      })
+      const r = unit2Result.get(unit)
       if (r) {
-        const [unit, [order, result]] = r
+        const [order, result] = r
         if (order instanceof Move && result === Result.Success) {
           newUnits.add(new Unit(unit.militaryBranch, order.destination, unit.power))
         } else {

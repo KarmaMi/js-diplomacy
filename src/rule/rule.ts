@@ -18,15 +18,9 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
   ): ResultOrFail<string, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>> {
-    // Reject if one unit has several orders
-    function eq (u1: Unit<Power, MilitaryBranch>, u2: Unit<Power, MilitaryBranch>) {
-      // TODO remove
-      return (u1.location === u2.location) && (u1.militaryBranch === u2.militaryBranch) && (u1.power === u2.power)
-    }
-
     const unitsHaveSeveralOrders = new Set(
       [...orders].filter(order => {
-        return [...orders].some(order2 => order !== order2 && eq(order.unit, order2.unit))
+        return [...orders].some(order2 => order !== order2 && order.unit === order2.unit)
       }).map(order => order.unit)
     )
     if (unitsHaveSeveralOrders.size !== 0) {
@@ -36,7 +30,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     const os = new Set([...orders])
     // Add a default orders if an unit requiring an order has no order
     for (let unit of [...this.unitsRequiringOrder(board)]) {
-      if ([...orders].every(o => !eq(o.unit, unit))) {
+      if ([...orders].every(o => o.unit !== unit)) {
         const order = this.defaultOrderOf(board, unit)
         if (order) {
           os.add(order)

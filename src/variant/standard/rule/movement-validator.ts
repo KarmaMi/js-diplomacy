@@ -13,12 +13,7 @@ export class MovementValidator<Power> implements Validator<Power> {
   }
   errorMessageOfOrder (board: Board<Power>, o: Order<Power>): string | null {
     // The order is invalid if order.unit is not in board.
-    if ([...board.units].every(unit => {
-      // TODO
-      return (unit.militaryBranch !== o.unit.militaryBranch) ||
-        (unit.location !== o.unit.location) ||
-        (unit.power !== o.unit.power)
-    })) {
+    if (!board.units.has(o.unit)) {
       return `${o.unit} does not exist`
     }
     if (o instanceof Hold) {

@@ -10,27 +10,14 @@ export class RetreatValidator<Power> implements Validator<Power> {
   }
   errorMessageOfOrder (board: Board<Power>, order: Order<Power>) {
     // The order is invalid if order.unit is not dislodged
-    const dislodged = [...board.unitStatuses].some(elem => {
-      const unit = elem[0]
-      return (unit.militaryBranch === order.unit.militaryBranch) &&
-        (unit.location === order.unit.location) &&
-        (unit.power === order.unit.power)
-    })
+    const dislodged = board.unitStatuses.get(order.unit)
 
     if (!dislodged) {
       return `${order.unit} is not dislodged`
     }
 
-    // unitStatuses.find(...) is not null because disloged is true
-    const status = (<[Unit<Power>, Dislodged<Power>]>[...board.unitStatuses].find(elem => {
-      const unit = elem[0]
-      return (unit.militaryBranch === order.unit.militaryBranch) &&
-        (unit.location === order.unit.location) &&
-        (unit.power === order.unit.power)
-    }))[1]
-
     if (order instanceof Retreat) {
-      const ls = StandardRuleUtils.locationsToRetreat(board, order.unit, status.attackedFrom)
+      const ls = StandardRuleUtils.locationsToRetreat(board, order.unit, dislodged.attackedFrom)
       if (!ls.has(order.destination)) {
         return `${order.unit} cannot retreat to ${order.destination}`
       }
@@ -43,11 +30,7 @@ export class RetreatValidator<Power> implements Validator<Power> {
   errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
     for (let elem of [...board.unitStatuses]) {
       const [unit, status] = elem
-      const hasOrder = [...orders].some(order => {
-        return (unit.militaryBranch === order.unit.militaryBranch) &&
-          (unit.location === order.unit.location) &&
-          (unit.power === order.unit.power)
-      })
+      const hasOrder = [...orders].some(order => order.unit === unit)
 
       if (!hasOrder) {
         return `${unit} has no order`
