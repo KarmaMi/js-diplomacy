@@ -1,6 +1,6 @@
 {
   "name": "js-diplomacy",
-  "main": "./lib/index.js",
+  "main": "./target/src/module.js",
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
