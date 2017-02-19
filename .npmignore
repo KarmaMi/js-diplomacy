@@ -1,4 +1,6 @@
 browser
 .gitignore
 .travis.yml
+src
+test
 bower.json

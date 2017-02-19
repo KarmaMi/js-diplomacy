@@ -1,2 +1,6 @@
 node_modules
 browser/diplomacy.js
+target/
+docs/
+module.ts
+*.js.map

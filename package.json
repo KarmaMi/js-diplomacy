@@ -1,8 +1,11 @@
 {
   "name": "js-diplomacy",
-  "main": "./lib/index.js",
+  "main": "./target/src/module.js",
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
+  "scripts": {
+    "prepublish": "gulp compile-src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarmaMi/js-diplomacy.git"
@@ -17,13 +20,22 @@
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.39",
     "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-mocha": "^3.0.1",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-typedoc": "^2.0.2",
+    "gulp-typescript": "^3.1.4 ",
     "gulp-util": "^3.0.8",
-    "mocha": "*",
+    "mocha": "^3.2.0",
+    "tsify": "^3.0.1",
+    "typedoc": "^0.5.5",
+    "typescript": "^2.1.6",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
