@@ -38,7 +38,6 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     for (let unit of [...this.unitsRequiringOrder(board)]) {
       if ([...orders].every(o => !eq(o.unit, unit))) {
         const order = this.defaultOrderOf(board, unit)
-        // TODO test
         if (order) {
           os.add(order)
         } else {
