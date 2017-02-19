@@ -4,8 +4,7 @@
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
-    "prepublish": "gulp compile-src",
-    "postinstall": "typings install"
+    "prepublish": "gulp compile-src"
   },
   "repository": {
     "type": "git",
