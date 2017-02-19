@@ -1,12 +1,13 @@
-const { Unit, Board } = require('../../board/package')
-const Variant = require('../variant')
-const { Rule, MilitaryBranch: { Army, Fleet }, State, Phase: { Movement }, ProvinceStatus } =
-  require('./rule/package')
-const { Power, map, location: $ } = require('./map/package')
-const { Turn, Season: { Spring } } = require('./board/package')
+import { Variant } from "../variant"
+import { Unit, Board, Rule, MilitaryBranch, State, Phase, ProvinceStatus } from "./rule/module"
+import { Power, map, locations as $ } from "./map/module"
+import { Turn, Season } from "./board/module"
+import { Province } from "./../../board/module"
+
+const { Army, Fleet } = MilitaryBranch
 
 const board = new Board(
-  map, new State(new Turn(1901, Spring), Movement),
+  map, new State(new Turn(1901, Season.Spring), Phase.Movement),
   [
     new Unit(Army, $.Vie, Power.Austria), new Unit(Army, $.Bud, Power.Austria),
     new Unit(Fleet, $.Tri, Power.Austria),
@@ -24,15 +25,13 @@ const board = new Board(
     new Unit(Fleet, $.Ank, Power.Turkey)
   ],
   [],
-  [...map.provinces].map(p => {
+  <Array<[Province<Power>, ProvinceStatus<Power>]>>([...map.provinces].map(p => {
     if (p.homeOf) {
       return [p, new ProvinceStatus(p.homeOf, false)]
     } else {
       return null
     }
-  }).filter(x => x)
+  }).filter(x => x))
 )
 
-const variant = new Variant(new Rule(), board)
-
-module.exports = variant
+export const variant = new Variant(new Rule((x: Power) => Power[x]), board)
