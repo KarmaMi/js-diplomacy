@@ -1,5 +1,5 @@
-import { Name, Province, Location } from "../../../board/module"
-import { MilitaryBranch } from "../rule/module"
+import { Name, Province } from "../../../board/module"
+import { MilitaryBranch, Location } from "../rule/module"
 import { Power } from "./power"
 
 const { Army, Fleet } = MilitaryBranch
@@ -12,10 +12,10 @@ const SC = new Name('South Coast', 'SC')
 const provinces: { [name: string]: Province<Power> } = {}
 
 function mkLocation(province: Province<Power>, militaryBranches: Array<MilitaryBranch>) {
-  return new Location<Power, MilitaryBranch>(province.name, province, militaryBranches)
+  return new Location<Power>(province.name, province, militaryBranches)
 }
 function mkLocationWithCoast(province: Province<Power>, coast: Name) {
-  return new Location<Power, MilitaryBranch>(
+  return new Location<Power>(
     new Name(`${province.name.name} (${coast.name})`, `${province.name}_${coast}`),
     province, [Fleet]
   )
