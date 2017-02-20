@@ -7,7 +7,7 @@ import { Order } from "./order"
 /**
  * Rule of Diplomacy
  */
-export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result> {
+export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result, Error> {
   /**
    * Resolves orders and creates a result.
    * @param board
@@ -17,7 +17,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
   resolve (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
-  ): ResultOrFail<string, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>> {
+  ): ResultOrFail<Error, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>> {
     const unitsHaveSeveralOrders = new Set(
       [...orders].filter(order => {
         return [...orders].some(order2 => order !== order2 && order.unit === order2.unit)
@@ -56,6 +56,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
       }
     })
 
+    // TODO rename errorOfOrders
     const msg = this.errorMessageOfOrders(board, os)
     if (msg) {
       // Reject if the set of the orders is invalid
@@ -64,7 +65,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
 
     const result = this.resolveProcedure(board, os)
 
-    if (result.result) {
+    if (result instanceof Success) {
       const newResults = result.result.results
       replaced.forEach((value, replacedOrder) => {
         const [order, message] = value
@@ -80,7 +81,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
       )
     }
 
-    return new Failure(result.err || "")
+    return new Failure(result.err)
   }
 
   /**
@@ -102,14 +103,14 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
   protected abstract errorMessageOfOrder (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     order: Order<Power, MilitaryBranch>
-  ): string | null
+  ): Error | null
   /**
    * @return The error message of the orders. If the set of the orders is valid, it's null.
    */
   protected abstract errorMessageOfOrders (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
-  ): string | null
+  ): Error | null
   /**
    * Resolve the orders, and creates result
    * @return The result of the orders.
@@ -117,5 +118,5 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
   protected abstract resolveProcedure (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
-  ): ResultOrFail<string, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>>
+  ): ResultOrFail<Error, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>>
 }

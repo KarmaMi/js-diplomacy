@@ -37,7 +37,7 @@ class PhaseRule<Power> {
  * Standard rule of Diplomacy
  */
 export class Rule<Power>
-  extends BaseRule<Power, MilitaryBranch, State, Dislodged<Power>, ProvinceStatus<Power>, Result> {
+  extends BaseRule<Power, MilitaryBranch, State, Dislodged<Power>, ProvinceStatus<Power>, Result, string> {
   private phaseRules: Map<Phase, PhaseRule<Power>>
   /**
    * @param stringify Stringify instances of Power
