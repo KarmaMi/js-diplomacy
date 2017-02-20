@@ -28,9 +28,11 @@ describe("A rule", () => {
   describe("when one unit has several orders", () => {
     it("does not resolve orders.", () => {
       const rule = new MockRule()
-      rule.resolve(board, new Set([new MockOrder(unit), new MockOrder(unit)])).should.deep.equal({
-        err: "F Nap: several orders"
-      })
+      try {
+        rule.resolve(board, new Set([new MockOrder(unit), new MockOrder(unit)]))
+      } catch (e) {
+        e.should.deep.equal("F Nap: several orders")
+      }
     })
   })
   describe("when resolving an invalid order", () => {
@@ -112,9 +114,11 @@ describe("A rule", () => {
     it("retuns an error if there are no default order.", () => {
       const rule: any = new MockRule()
       rule.unitsRequiringOrder = (b: typeof board) => board.units
-      rule.resolve(board, new Set()).should.deep.equal({
-        err: "F Nap: no order"
-      })
+      try {
+        rule.resolve(board, new Set())
+      } catch (e) {
+        e.should.deep.equal("F Nap: no order")
+      }
     })
   })
 })

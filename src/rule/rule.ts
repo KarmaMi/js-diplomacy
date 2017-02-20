@@ -24,7 +24,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
       }).map(order => order.unit)
     )
     if (unitsHaveSeveralOrders.size !== 0) {
-      return new Failure(`${[...unitsHaveSeveralOrders].join(', ')}: several orders`)
+      throw `${[...unitsHaveSeveralOrders].join(', ')}: several orders`
     }
 
     const os = new Set([...orders])
@@ -35,7 +35,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
         if (order) {
           os.add(order)
         } else {
-          return new Failure(`${unit}: no order`)
+          throw `${unit}: no order`
         }
       }
     }
@@ -47,10 +47,11 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
       if (msg) {
         const replacedOrder = this.defaultOrderOf(board, order.unit)
         os.delete(order)
-        // TODO
         if (replacedOrder) {
           os.add(replacedOrder)
           replaced.set(replacedOrder, [order, msg])
+        } else {
+          throw `${order.unit}: no order`
         }
       }
     })
