@@ -51,7 +51,7 @@ export class UnitForStandardRule<Power> {
 export class StandardRuleHelper<Power> {
   constructor (private board: Board<Power>) {}
   private getUnit (militaryBranch: MilitaryBranch | null, location: Location<Power>): Unit<Power> {
-    function checkMilitaryBranch (tgt: MilitaryBranch | null): boolean {
+    function checkMilitaryBranch (tgt: MilitaryBranch): boolean {
       if (militaryBranch !== null) {
         return tgt === militaryBranch
       } else {
@@ -82,7 +82,7 @@ export class StandardRuleHelper<Power> {
         return (unit.location === location) && checkMilitaryBranch(unit.militaryBranch)
       })
       if (!unit) {
-        if (militaryBranch && location.province.homeOf) {
+        if ((militaryBranch !== null) && location.province.homeOf) {
           return new Unit(militaryBranch, location, location.province.homeOf)
         } else {
           throw `Cannot find unit: ${location}`

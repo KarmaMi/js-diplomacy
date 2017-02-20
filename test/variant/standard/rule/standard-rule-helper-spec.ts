@@ -1,12 +1,8 @@
 import * as chai from "chai"
-import { StandardRuleHelper } from "../../../../src/variant/standard/rule/standard-rule-helper"
-import { Board, Unit } from "./../../../../src/variant/standard/rule/types"
-import { MilitaryBranch } from "./../../../../src/variant/standard/rule/military-branch"
+import {
+  StandardRuleHelper, Board, Unit, MilitaryBranch, State, Phase, Dislodged, ProvinceStatus
+} from "../../../../src/variant/standard/rule/module"
 import * as Order from "./../../../../src/variant/standard/rule/order"
-import { State } from "./../../../../src/variant/standard/rule/state"
-import { Phase } from "./../../../../src/variant/standard/rule/phase"
-import { Dislodged } from "./../../../../src/variant/standard/rule/dislodged"
-import { ProvinceStatus } from "./../../../../src/variant/standard/rule/province-status"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 
 const { Army, Fleet } = MilitaryBranch

@@ -1,15 +1,10 @@
 import * as chai from "chai"
-import { RetreatOrderGenerator } from "../../../../src/variant/standard/rule/retreat-order-generator"
-import { StandardRuleHelper as Helper } from "../../../../src/variant/standard/rule/standard-rule-helper"
-import { Board, Unit } from "./../../../../src/variant/standard/rule/types"
-import { MilitaryBranch } from "./../../../../src/variant/standard/rule/military-branch"
-import { State } from "./../../../../src/variant/standard/rule/state"
-import { Disband } from "./../../../../src/variant/standard/rule/order"
-import { Dislodged } from "./../../../../src/variant/standard/rule/dislodged"
-import { Phase } from "./../../../../src/variant/standard/rule/phase"
-import { ProvinceStatus } from "./../../../../src/variant/standard/rule/province-status"
-import { Season, Turn } from "./../../../../src/variant/standard/board/module"
+import {
+  RetreatOrderGenerator, Board, Unit, MilitaryBranch, State, Disband, Phase, ProvinceStatus,
+  Dislodged, StandardRuleHelper as Helper
+} from "../../../../src/variant/standard/rule/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
+import { Season, Turn } from "./../../../../src/variant/standard/board/module"
 
 const { Army, Fleet } = MilitaryBranch
 const { Retreat } = Phase

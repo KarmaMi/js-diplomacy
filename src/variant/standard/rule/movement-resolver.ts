@@ -25,9 +25,7 @@ class TmpMovementOrderGroup<Power> {
 
 
 export class MovementResolver<Power> implements Resolver<Power> {
-  resolve (
-    board: Board<Power>, orders: Set<Order<Power>>
-  ): Success<string, ResolvedResult<Power>> {
+  resolve (board: Board<Power>, orders: Set<Order<Power>>) {
     const ordersWithResult = [...orders].map(order => new MovementOrderWithResult(order))
     const movesViaConvoy = new Set()
     const dislodgedFrom = new Map()

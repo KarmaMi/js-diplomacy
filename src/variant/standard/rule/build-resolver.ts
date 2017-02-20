@@ -12,7 +12,7 @@ import { Success } from "./../../../util/module"
 const Movement = Phase.Movement
 
 export class BuildResolver<Power> implements Resolver<Power> {
-  resolve (board: Board<Power>, orders: Set<Order<Power>>): Success<string, ResolvedResult<Power>> {
+  resolve (board: Board<Power>, orders: Set<Order<Power>>) {
     const disbands = [...orders].filter(order => order.tpe === OrderType.Disband)
     const builds = [...orders].filter(order => order.tpe === OrderType.Build)
 

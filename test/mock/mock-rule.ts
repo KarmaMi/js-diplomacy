@@ -3,7 +3,7 @@ import { Rule } from "../../src/rule/rule"
 import { Name, Board, Unit } from "../../src/board/module"
 import { Failure } from "../../src/util/module"
 
-export class MockRule extends Rule<string, Name, string, string, string, string> {
+export class MockRule extends Rule<string, Name, string, string, string, string, string> {
   protected unitsRequiringOrder (
     board: Board<string, Name, string, string, string>
   ) {
@@ -15,13 +15,13 @@ export class MockRule extends Rule<string, Name, string, string, string, string>
   ) {
     return null
   }
-  protected errorMessageOfOrder (
+  protected errorOfOrder (
     board: Board<string, Name, string, string, string>,
     order: Order<string, Name>
   ) {
     return null
   }
-  protected errorMessageOfOrders (
+  protected errorOfOrders (
     board: Board<string, Name, string, string, string>,
     orders: Set<Order<string, Name>>
   ) {

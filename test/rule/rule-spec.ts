@@ -1,13 +1,12 @@
 import * as chai from "chai"
 import { Name, Unit, Board } from "./../../src/board/module"
+import { ResolvedResult, Executed, Replaced } from "./../../src/rule/module"
 
 const should = chai.should()
 
 import * as mockMap from "../mock/map"
 import { MockOrder } from "../mock/mock-order"
 import { MockRule } from "./../mock/mock-rule"
-import { ResolvedResult } from "./../../src/rule/resolved-result"
-import { Executed, Replaced } from "./../../src/rule/order-result"
 
 const [Army, Fleet] = mockMap.militaryBranches
 const [spain, naples, apulia, western] = mockMap.provinces
@@ -26,14 +25,6 @@ describe("A rule", () => {
   const unit = new Unit(Fleet, nap, "France")
   const board = new Board(map, "State", [unit], [], [])
 
-  describe("when one unit has several orders", () => {
-    it("does not resolve orders.", () => {
-      const rule = new MockRule()
-      rule.resolve(board, new Set([new MockOrder(unit), new MockOrder(unit)])).should.deep.equal({
-        err: "F Nap: several orders"
-      })
-    })
-  })
   describe("when resolving an invalid order", () => {
     it("uses a default order", () => {
       const unit1 = new Unit(Fleet, nap, "France")
@@ -41,7 +32,7 @@ describe("A rule", () => {
       const board = new Board(map, "State", [unit1, unit2], [], [])
 
       const rule: any = new MockRule()
-      rule.errorMessageOfOrder = (b: typeof board, order: MockOrder2) => {
+      rule.errorOfOrder = (b: typeof board, order: MockOrder2) => {
         return (order.unit === unit1 || order.replaced) ? null : "Invalid"
       }
       rule.defaultOrderOf = (b: typeof board, unit: Unit<string, Name>) => {
@@ -73,7 +64,7 @@ describe("A rule", () => {
   describe("when the set of orders are invalid", () => {
     it("does not resolve the orders", () => {
       const rule: any = new MockRule()
-      rule.errorMessageOfOrders = (b: typeof board, orders: Set<MockOrder>) => "Invalid";
+      rule.errorOfOrders = (b: typeof board, orders: Set<MockOrder>) => "Invalid";
       (<MockRule>rule).resolve(board, new Set([new MockOrder(unit)])).should.deep.equal({
         err: "Invalid"
       })
@@ -113,9 +104,11 @@ describe("A rule", () => {
     it("retuns an error if there are no default order.", () => {
       const rule: any = new MockRule()
       rule.unitsRequiringOrder = (b: typeof board) => board.units
-      rule.resolve(board, new Set()).should.deep.equal({
-        err: "F Nap: no order"
-      })
+      try {
+        rule.resolve(board, new Set())
+      } catch (e) {
+        e.should.deep.equal("F Nap: no order")
+      }
     })
   })
 })

@@ -1,5 +1,5 @@
 import * as chai from "chai"
-import { Name } from "./../../src/board/name"
+import { Name } from "./../../src/board/module"
 
 chai.should()
 

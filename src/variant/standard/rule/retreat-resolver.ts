@@ -14,9 +14,7 @@ import { Success } from "./../../../util/module"
 const { Movement, Build } = Phase
 
 export class RetreatResolver<Power> implements Resolver<Power> {
-  resolve (
-    board: Board<Power>, orders: Set<Order<Power>>
-  ): Success<string, ResolvedResult<Power>> {
+  resolve (board: Board<Power>, orders: Set<Order<Power>>) {
     const disbands: Array<Disband<Power>> =
       [...orders].filter(order => order.tpe === OrderType.Disband)
     const retreats: Array<Retreat<Power>> =
@@ -92,6 +90,6 @@ export class RetreatResolver<Power> implements Resolver<Power> {
       return (numberOfSupplyCenters.get(power) || 0) > (numOfCenters / 2)
     })
 
-    return new Success<string, ResolvedResult<Power>>(new ResolvedResult(newBoard, orderResults, isFinished))
+    return new Success(new ResolvedResult(newBoard, orderResults, isFinished))
   }
 }

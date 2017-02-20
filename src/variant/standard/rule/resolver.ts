@@ -9,5 +9,5 @@ export interface Resolver<Power> {
    */
   resolve(
     board: Board<Power>, orders: Set<Order<Power>>
-  ): Success<string, ResolvedResult<Power>>
+  ): Success<ResolvedResult<Power>>
 }

@@ -1,16 +1,10 @@
 import * as chai from "chai"
-import { MovementResolver } from "../../../../src/variant/standard/rule/movement-resolver"
-import { StandardRuleHelper as Helper } from "../../../../src/variant/standard/rule/standard-rule-helper"
-import { Board, Unit } from "./../../../../src/variant/standard/rule/types"
-import { MilitaryBranch } from "./../../../../src/variant/standard/rule/military-branch"
-import { State } from "./../../../../src/variant/standard/rule/state"
-import { Dislodged } from "./../../../../src/variant/standard/rule/dislodged"
-import { Result } from "./../../../../src/variant/standard/rule/result"
-import { Phase } from "./../../../../src/variant/standard/rule/phase"
-import { ProvinceStatus } from "./../../../../src/variant/standard/rule/province-status"
-import { Disband } from "./../../../../src/variant/standard/rule/order"
-import { Rule } from "./../../../../src/variant/standard/rule/rule"
+import {
+  Rule, Board, Unit, MilitaryBranch, State, Result, Phase, ProvinceStatus, Dislodged,
+  Disband, SeveralOrders, StandardRuleHelper as Helper
+} from "../../../../src/variant/standard/rule/module"
 import { Executed } from "./../../../../src/rule/module"
+import { Failure } from "./../../../../src/util/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 import { Season, Turn } from "./../../../../src/variant/standard/board/module"
 
@@ -20,7 +14,7 @@ const { Spring, Autumn } = Season
 
 const should = chai.should()
 
-const rule = new Rule((x: Power) => Phase[x])
+const rule = new Rule()
 
 const state1 = new State(new Turn(1901, Spring), Movement)
 const state3 = new State(new Turn(1901, Autumn), Movement)
@@ -28,6 +22,17 @@ const state4 = new State(new Turn(1901, Autumn), Retreat)
 const state5 = new State(new Turn(1902, Spring), Movement)
 
 describe("A rule", () => {
+  describe("when one unit has several orders", () => {
+    it("does not resolve orders.", () => {
+      const board = new Board<Power>(
+        map, state1, [new Unit(Fleet, $.Nap, Power.Italy)], [], []
+      )
+      const $$ = new Helper(board)
+      rule.resolve(board, new Set([$$.F($.Nap).hold(), $$.F($.Nap).move($.Ion)])).should.deep.equal(
+        new Failure(new SeveralOrders([$$.F($.Nap).unit]))
+      )
+    })
+  })
   describe("when there are no dislodged units", () => {
     it("skips retreat phase.", () => {
       const b = new Board<Power>(
