@@ -4,6 +4,7 @@ import {
   StandardRuleHelper as Helper
 } from "../../../../src/variant/standard/rule/module"
 import * as Order from "./../../../../src/variant/standard/rule/order"
+import * as Error from "./../../../../src/variant/standard/rule/error"
 import { Executed } from "./../../../../src/rule/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 import { Season, Turn } from "./../../../../src/variant/standard/board/module"
@@ -39,51 +40,44 @@ describe("A MovementValidator", () => {
   })
   describe("an order that its target unit does not exist is received", () => {
     it("returns an error message", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, new Order.Hold(new Unit(Army, $.Lon, Power.England))),
-        "A Lon does not exist"
+      new Error.UnitNotExisted(new Unit(Army, $.Lon, Power.England)).should.deep.equal(
+        validator.errorMessageOfOrder(board, new Order.Hold(new Unit(Army, $.Lon, Power.England)))
       )
     })
   })
   describe("a unit tries to move an invalid location", () => {
     it("returns an error message", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Lvp).move($.Bud)),
-        "A Lvp cannot move to Bud"
+      new Error.UnmovableLocation($$.A($.Lvp).unit, $.Bud).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.A($.Lvp).move($.Bud))
       )
     })
   })
   describe("a unit tries to support an invalid location", () => {
     it("returns an error message (1)", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Lvp).support($$.A($.Spa).hold())),
-        "A Lvp cannot support A Spa H"
+      new Error.UnsupportableLocation($$.A($.Lvp).unit, $.Spa).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.A($.Lvp).support($$.A($.Spa).hold()))
       )
     })
     it("returns an error message (2)", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Lvp).support($$.A($.Spa).move($.Bud))),
-        "A Spa cannot move to Bud"
+      new Error.UnmovableLocation($$.A($.Spa).unit, $.Bud).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.A($.Lvp).support($$.A($.Spa).move($.Bud)))
       )
     })
   })
   describe("a unit tries to convoy an invalid order", () => {
     it("returns an error message (1)", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Lvp).convoy($$.F($.Lon).move($.Yor))),
-        "A Lvp is not fleet"
+      new Error.CannotBeOrdered($$.A($.Lvp).convoy($$.F($.Lon).move($.Yor))).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.A($.Lvp).convoy($$.F($.Lon).move($.Yor)))
       )
     })
     it("returns an error message (2)", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.F($.Eng).convoy($$.F($.Lon).move($.Eng))),
-        "F Lon is not army"
+      new Error.CannotBeOrdered($$.F($.Eng).convoy($$.F($.Lon).move($.Eng))).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.F($.Eng).convoy($$.F($.Lon).move($.Eng)))
       )
     })
     it("returns an error message (3)", () => {
-      should.equal(
-        validator.errorMessageOfOrder(board, $$.F($.Eng).convoy($$.A($.Bur).move($.Mar))),
-        "Moving from Bur to Mar via convoy is invalid"
+      new Error.UnmovableLocation($$.A($.Bur).unit, $.Mar).should.deep.equal(
+        validator.errorMessageOfOrder(board, $$.F($.Eng).convoy($$.A($.Bur).move($.Mar)))
       )
     })
   })

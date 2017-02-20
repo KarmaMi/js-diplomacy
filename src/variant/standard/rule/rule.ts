@@ -20,6 +20,7 @@ import { State } from "./state"
 import { Dislodged } from "./dislodged"
 import { ProvinceStatus } from "./province-status"
 import { Result } from "./result"
+import { Error } from "./error"
 import { Rule as BaseRule } from "../../../rule/module"
 import { Success, Failure } from "../../../util/module"
 
@@ -37,12 +38,12 @@ class PhaseRule<Power> {
  * Standard rule of Diplomacy
  */
 export class Rule<Power>
-  extends BaseRule<Power, MilitaryBranch, State, Dislodged<Power>, ProvinceStatus<Power>, Result, string> {
+  extends BaseRule<Power, MilitaryBranch, State, Dislodged<Power>, ProvinceStatus<Power>, Result, Error> {
   private phaseRules: Map<Phase, PhaseRule<Power>>
   /**
    * @param stringify Stringify instances of Power
    */
-  constructor (stringify: (power: Power) => String) {
+  constructor () {
     super()
     this.phaseRules = new Map([
       [
@@ -62,7 +63,7 @@ export class Rule<Power>
       [
         Build,
         new PhaseRule(
-          new BuildResolver<Power>(), new BuildValidator<Power>(stringify),
+          new BuildResolver<Power>(), new BuildValidator<Power>(),
           new BuildOrderGenerator<Power>()
         )
       ]

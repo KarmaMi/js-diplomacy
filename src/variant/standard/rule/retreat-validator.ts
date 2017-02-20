@@ -3,6 +3,7 @@ import { StandardRuleUtils } from "./standard-rule-utils"
 import { OrderType, Order, Disband, Retreat } from "./order"
 import { Dislodged } from "./dislodged"
 import { Board, Unit } from "./types"
+import * as Error from "./error"
 
 export class RetreatValidator<Power> implements Validator<Power> {
   unitsRequiringOrder (board: Board<Power>) {
@@ -13,16 +14,16 @@ export class RetreatValidator<Power> implements Validator<Power> {
     const dislodged = board.unitStatuses.get(order.unit)
 
     if (!dislodged) {
-      return `${order.unit} is not dislodged`
+      return new Error.CannotBeOrdered(order)
     }
 
     if (order instanceof Retreat) {
       const ls = StandardRuleUtils.locationsToRetreat(board, order.unit, dislodged.attackedFrom)
       if (!ls.has(order.destination)) {
-        return `${order.unit} cannot retreat to ${order.destination}`
+        return new Error.UnmovableLocation(order.unit, order.destination)
       }
     } else if (!(order instanceof Disband)) {
-      return `${order} is for Retreat phase`
+      return new Error.InvalidPhase(order)
     }
     return null
   }
@@ -33,7 +34,7 @@ export class RetreatValidator<Power> implements Validator<Power> {
       const hasOrder = [...orders].some(order => order.unit === unit)
 
       if (!hasOrder) {
-        return `${unit} has no order`
+        return new Error.OrderNotExisted(unit)
       }
     }
     return null

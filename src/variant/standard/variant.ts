@@ -34,4 +34,4 @@ const board = new Board(
   }).filter(x => x))
 )
 
-export const variant = new Variant(new Rule((x: Power) => Power[x]), board)
+export const variant = new Variant(new Rule(), board)

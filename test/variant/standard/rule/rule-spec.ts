@@ -13,7 +13,7 @@ const { Spring, Autumn } = Season
 
 const should = chai.should()
 
-const rule = new Rule((x: Power) => Phase[x])
+const rule = new Rule()
 
 const state1 = new State(new Turn(1901, Spring), Movement)
 const state3 = new State(new Turn(1901, Autumn), Movement)
