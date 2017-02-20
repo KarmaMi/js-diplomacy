@@ -34,7 +34,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     // Replace from invalid orders to default orders
     const replaced = new Map()
     os.forEach(order => {
-      const msg = this.errorMessageOfOrder(board, order)
+      const msg = this.errorOfOrder(board, order)
       if (msg) {
         const replacedOrder = this.defaultOrderOf(board, order.unit)
         os.delete(order)
@@ -48,7 +48,7 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     })
 
     // TODO rename errorOfOrders
-    const msg = this.errorMessageOfOrders(board, os)
+    const msg = this.errorOfOrders(board, os)
     if (msg) {
       // Reject if the set of the orders is invalid
       return new Failure(msg)
@@ -91,14 +91,14 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
   /**
    * @return The error message of the order. If the order is valid, it's null.
    */
-  protected abstract errorMessageOfOrder (
+  protected abstract errorOfOrder (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     order: Order<Power, MilitaryBranch>
   ): Error | null
   /**
    * @return The error message of the orders. If the set of the orders is valid, it's null.
    */
-  protected abstract errorMessageOfOrders (
+  protected abstract errorOfOrders (
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
   ): Error | null

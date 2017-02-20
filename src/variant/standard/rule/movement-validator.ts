@@ -12,7 +12,7 @@ export class MovementValidator<Power> implements Validator<Power> {
   unitsRequiringOrder (board: Board<Power>) {
     return board.units
   }
-  errorMessageOfOrder (board: Board<Power>, o: Order<Power>): Error.Error | null {
+  errorOfOrder (board: Board<Power>, o: Order<Power>): Error.Error | null {
     // The order is invalid if order.unit is not in board.
     if (!board.units.has(o.unit)) {
       return new Error.UnitNotExisted(o.unit)
@@ -35,7 +35,7 @@ export class MovementValidator<Power> implements Validator<Power> {
     } else if (o instanceof Support) {
       const order: Support<Power> = o
       // Support is valid if the destination can be moved.
-      const msgForTarget = this.errorMessageOfOrder(board, order.target)
+      const msgForTarget = this.errorOfOrder(board, order.target)
       if (msgForTarget) {
         return msgForTarget
       } else {
@@ -57,7 +57,7 @@ export class MovementValidator<Power> implements Validator<Power> {
       4. the location is sea, and
       5. the destination can be moved from the unit's location
       */
-      const msg = this.errorMessageOfOrder(board, order.target)
+      const msg = this.errorOfOrder(board, order.target)
       if (msg) {
         return msg
       } else {
@@ -88,7 +88,7 @@ export class MovementValidator<Power> implements Validator<Power> {
     }
     return new Error.InvalidPhase(o)
   }
-  errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
+  errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
     return null
   }
 }

@@ -9,7 +9,7 @@ export class RetreatValidator<Power> implements Validator<Power> {
   unitsRequiringOrder (board: Board<Power>) {
     return new Set([...board.unitStatuses].map(elem => elem[0]))
   }
-  errorMessageOfOrder (board: Board<Power>, order: Order<Power>) {
+  errorOfOrder (board: Board<Power>, order: Order<Power>) {
     // The order is invalid if order.unit is not dislodged
     const dislodged = board.unitStatuses.get(order.unit)
 
@@ -28,7 +28,7 @@ export class RetreatValidator<Power> implements Validator<Power> {
     return null
   }
 
-  errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
+  errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
     for (let elem of [...board.unitStatuses]) {
       const [unit, status] = elem
       const hasOrder = [...orders].some(order => order.unit === unit)

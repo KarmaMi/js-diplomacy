@@ -14,7 +14,7 @@ export class BuildValidator<Power> implements Validator<Power> {
     return new Set()
   }
 
-  errorMessageOfOrder (board: Board<Power>, order: Order<Power>) {
+  errorOfOrder (board: Board<Power>, order: Order<Power>) {
     const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
     switch (order.tpe) {
       case OrderType.Build:
@@ -48,7 +48,7 @@ export class BuildValidator<Power> implements Validator<Power> {
     return null
   }
 
-  errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
+  errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
     const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
     const power = [...board.map.powers].find(power => {
       const numOfUnits = ([...board.units].filter(unit => unit.power === power)).length

@@ -32,32 +32,32 @@ describe("A RetreatValidator", () => {
   describe("when a valid order is received", () => {
     it("returns null (1)", () => {
       should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Mar).retreat($.Spa)), null
+        validator.errorOfOrder(board, $$.A($.Mar).retreat($.Spa)), null
       )
     })
     it("returns null (2)", () => {
       should.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Mar).disband()), null
+        validator.errorOfOrder(board, $$.A($.Mar).disband()), null
       )
     })
     describe("an order that its target is not dislodged is received", () => {
       it("returns an error message", () => {
         new Error.CannotBeOrdered(new Order.Disband(u1)).should.deep.equal(
-          validator.errorMessageOfOrder(board, new Order.Disband(u1))
+          validator.errorOfOrder(board, new Order.Disband(u1))
         )
       })
     })
     describe("an order that its target retreats to an invalid location", () => {
       it("returns an error message", () => {
         new Error.UnmovableLocation($$.A($.Mar).unit, $.Gas).should.deep.equal(
-          validator.errorMessageOfOrder(board, $$.A($.Mar).retreat($.Gas))
+          validator.errorOfOrder(board, $$.A($.Mar).retreat($.Gas))
         )
       })
     })
     describe("a set of orders that some dislodged unit have no order", () => {
       it("returns an error message", () => {
         new Error.OrderNotExisted($$.F($.Wes).unit).should.deep.equal(
-          validator.errorMessageOfOrders(board, new Set([$$.A($.Mar).retreat($.Gas)]))
+          validator.errorOfOrders(board, new Set([$$.A($.Mar).retreat($.Gas)]))
         )
       })
     })

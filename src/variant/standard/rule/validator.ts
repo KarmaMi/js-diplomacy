@@ -10,9 +10,9 @@ export interface Validator<Power> {
   /**
    * @return The error message of the order. If the order is valid, it's null.
    */
-  errorMessageOfOrder (board: Board<Power>, order: Order<Power>): Error | null
+  errorOfOrder (board: Board<Power>, order: Order<Power>): Error | null
   /**
    * @return The error message of the orders. If the set of the orders is valid, it's null.
    */
-  errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>): Error | null
+  errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>): Error | null
 }

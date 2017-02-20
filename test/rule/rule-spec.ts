@@ -32,7 +32,7 @@ describe("A rule", () => {
       const board = new Board(map, "State", [unit1, unit2], [], [])
 
       const rule: any = new MockRule()
-      rule.errorMessageOfOrder = (b: typeof board, order: MockOrder2) => {
+      rule.errorOfOrder = (b: typeof board, order: MockOrder2) => {
         return (order.unit === unit1 || order.replaced) ? null : "Invalid"
       }
       rule.defaultOrderOf = (b: typeof board, unit: Unit<string, Name>) => {
@@ -64,7 +64,7 @@ describe("A rule", () => {
   describe("when the set of orders are invalid", () => {
     it("does not resolve the orders", () => {
       const rule: any = new MockRule()
-      rule.errorMessageOfOrders = (b: typeof board, orders: Set<MockOrder>) => "Invalid";
+      rule.errorOfOrders = (b: typeof board, orders: Set<MockOrder>) => "Invalid";
       (<MockRule>rule).resolve(board, new Set([new MockOrder(unit)])).should.deep.equal({
         err: "Invalid"
       })

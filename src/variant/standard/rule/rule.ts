@@ -126,20 +126,20 @@ export class Rule<Power>
     return ruleOpt.validator.unitsRequiringOrder(board)
   }
 
-  protected errorMessageOfOrder (board: Board<Power>, order: Order<Power>) {
+  protected errorOfOrder (board: Board<Power>, order: Order<Power>) {
     const ruleOpt = this.phaseRules.get(board.state.phase)
     if (!ruleOpt) {
       throw `invalid phase: ${board.state.phase}`
     }
-    return ruleOpt.validator.errorMessageOfOrder(board, order)
+    return ruleOpt.validator.errorOfOrder(board, order)
   }
 
-  protected errorMessageOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
+  protected errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
     const ruleOpt = this.phaseRules.get(board.state.phase)
     if (!ruleOpt) {
       throw `invalid phase: ${board.state.phase}`
     }
-    return ruleOpt.validator.errorMessageOfOrders(board, orders)
+    return ruleOpt.validator.errorOfOrders(board, orders)
   }
 
   protected defaultOrderOf (board: Board<Power>, unit: Unit<Power>) {

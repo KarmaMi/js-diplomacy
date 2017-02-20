@@ -15,13 +15,13 @@ export class MockRule extends Rule<string, Name, string, string, string, string,
   ) {
     return null
   }
-  protected errorMessageOfOrder (
+  protected errorOfOrder (
     board: Board<string, Name, string, string, string>,
     order: Order<string, Name>
   ) {
     return null
   }
-  protected errorMessageOfOrders (
+  protected errorOfOrders (
     board: Board<string, Name, string, string, string>,
     orders: Set<Order<string, Name>>
   ) {

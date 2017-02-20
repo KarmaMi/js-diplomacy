@@ -33,23 +33,23 @@ describe("A BuildValidator", () => {
   const $$ = new Helper(board)
   describe("when a valid order is received", () => {
     it("returns null (1)", () => {
-      should.equal(validator.errorMessageOfOrder(board, $$.A($.Rom).build()), null)
+      should.equal(validator.errorOfOrder(board, $$.A($.Rom).build()), null)
     })
     it("returns null (2)", () => {
-      should.equal(validator.errorMessageOfOrder(board, $$.A($.Mun).disband()), null)
+      should.equal(validator.errorOfOrder(board, $$.A($.Mun).disband()), null)
     })
   })
   describe("when try to build an unit to a location that has another unit", () => {
     it("returns an error message", () => {
       new Error.UnbuildableLocation($$.A($.Nap).unit).should.deep.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Nap).build())
+        validator.errorOfOrder(board, $$.A($.Nap).build())
       )
     })
   })
   describe("when try to build an unit to a province that is not home province", () => {
     it("returns an error message", () => {
       new Error.UnbuildableLocation(new Unit(Army, $.Spa, Power.France)).should.deep.equal(
-        validator.errorMessageOfOrder(
+        validator.errorOfOrder(
           board, new Order.Build(new Unit(Army, $.Spa, Power.France))
         )
       )
@@ -58,21 +58,21 @@ describe("A BuildValidator", () => {
   describe("when try to build an unit to a province that is not supply center", () => {
     it("returns an error message", () => {
       new Error.UnbuildableLocation($$.A($.Ruh).unit).should.deep.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Ruh).build())
+        validator.errorOfOrder(board, $$.A($.Ruh).build())
       )
     })
   })
   describe("when try to build an unit to a province that is not occupied", () => {
     it("returns an error message", () => {
       new Error.UnbuildableLocation($$.A($.Bre).unit).should.deep.equal(
-        validator.errorMessageOfOrder(board, $$.A($.Bre).build())
+        validator.errorOfOrder(board, $$.A($.Bre).build())
       )
     })
   })
   describe("when try to disband an unit that does not exist", () => {
     it("returns an error message", () => {
       new Error.UnitNotExisted(new Unit(Army, $.Ber, Power.Germany)).should.deep.equal(
-        validator.errorMessageOfOrder(
+        validator.errorOfOrder(
           board, new Order.Disband(new Unit(Army, $.Ber, Power.Germany))
         )
       )
@@ -81,14 +81,14 @@ describe("A BuildValidator", () => {
   describe("when try to an unnecessary disband order", () => {
     it("returns an error message", () => {
       new Error.PowerWithProblem(Power.Italy).should.deep.equal(
-        validator.errorMessageOfOrder(board, $$.F($.Nap).disband())
+        validator.errorOfOrder(board, $$.F($.Nap).disband())
       )
     })
   })
   describe("when valid order set is received", () => {
     it("returns null", () => {
       should.equal(
-        validator.errorMessageOfOrders(board, new Set([$$.A($.Mun).disband()])),
+        validator.errorOfOrders(board, new Set([$$.A($.Mun).disband()])),
         null
       )
     })
@@ -96,7 +96,7 @@ describe("A BuildValidator", () => {
   describe("when try to keep units that are more than supply centers", () => {
     it("returns an error message", () => {
       new Error.PowerWithProblem(Power.Germany).should.deep.equal(
-        validator.errorMessageOfOrders(board, new Set())
+        validator.errorOfOrders(board, new Set())
       )
     })
   })
