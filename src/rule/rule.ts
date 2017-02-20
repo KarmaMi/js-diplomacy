@@ -18,15 +18,6 @@ export abstract class Rule<Power, MilitaryBranch, State, UnitStatus, ProvinceSta
     board: Board<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus>,
     orders: Set<Order<Power, MilitaryBranch>>
   ): ResultOrFail<Error, ResolvedResult<Power, MilitaryBranch, State, UnitStatus, ProvinceStatus, Result>> {
-    const unitsHaveSeveralOrders = new Set(
-      [...orders].filter(order => {
-        return [...orders].some(order2 => order !== order2 && order.unit === order2.unit)
-      }).map(order => order.unit)
-    )
-    if (unitsHaveSeveralOrders.size !== 0) {
-      throw `${[...unitsHaveSeveralOrders].join(', ')}: several orders`
-    }
-
     const os = new Set([...orders])
     // Add a default orders if an unit requiring an order has no order
     for (let unit of [...this.unitsRequiringOrder(board)]) {

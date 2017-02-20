@@ -1,9 +1,10 @@
 import * as chai from "chai"
 import {
   Rule, Board, Unit, MilitaryBranch, State, Result, Phase, ProvinceStatus, Dislodged,
-  Disband, StandardRuleHelper as Helper
+  Disband, SeveralOrders, StandardRuleHelper as Helper
 } from "../../../../src/variant/standard/rule/module"
 import { Executed } from "./../../../../src/rule/module"
+import { Failure } from "./../../../../src/util/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 import { Season, Turn } from "./../../../../src/variant/standard/board/module"
 
@@ -21,6 +22,17 @@ const state4 = new State(new Turn(1901, Autumn), Retreat)
 const state5 = new State(new Turn(1902, Spring), Movement)
 
 describe("A rule", () => {
+  describe("when one unit has several orders", () => {
+    it("does not resolve orders.", () => {
+      const board = new Board<Power>(
+        map, state1, [new Unit(Fleet, $.Nap, Power.Italy)], [], []
+      )
+      const $$ = new Helper(board)
+      rule.resolve(board, new Set([$$.F($.Nap).hold(), $$.F($.Nap).move($.Ion)])).should.deep.equal(
+        new Failure(new SeveralOrders([$$.F($.Nap).unit]))
+      )
+    })
+  })
   describe("when there are no dislodged units", () => {
     it("skips retreat phase.", () => {
       const b = new Board<Power>(

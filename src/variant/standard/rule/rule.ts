@@ -20,7 +20,7 @@ import { State } from "./state"
 import { Dislodged } from "./dislodged"
 import { ProvinceStatus } from "./province-status"
 import { Result } from "./result"
-import { Error } from "./error"
+import { Error, SeveralOrders } from "./error"
 import { Rule as BaseRule } from "../../../rule/module"
 import { Success, Failure } from "../../../util/module"
 
@@ -71,6 +71,15 @@ export class Rule<Power>
   }
 
   protected resolveProcedure (board: Board<Power>, orders: Set<Order<Power>>) {
+    const unitsHaveSeveralOrders = new Set(
+      [...orders].filter(order => {
+        return [...orders].some(order2 => order !== order2 && order.unit === order2.unit)
+      }).map(order => order.unit)
+    )
+    if (unitsHaveSeveralOrders.size !== 0) {
+      return new Failure(new SeveralOrders(unitsHaveSeveralOrders))
+    }
+
     const ruleOpt = this.phaseRules.get(board.state.phase)
 
     if (!ruleOpt) {

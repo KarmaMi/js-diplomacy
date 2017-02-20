@@ -25,16 +25,6 @@ describe("A rule", () => {
   const unit = new Unit(Fleet, nap, "France")
   const board = new Board(map, "State", [unit], [], [])
 
-  describe("when one unit has several orders", () => {
-    it("does not resolve orders.", () => {
-      const rule = new MockRule()
-      try {
-        rule.resolve(board, new Set([new MockOrder(unit), new MockOrder(unit)]))
-      } catch (e) {
-        e.should.deep.equal("F Nap: several orders")
-      }
-    })
-  })
   describe("when resolving an invalid order", () => {
     it("uses a default order", () => {
       const unit1 = new Unit(Fleet, nap, "France")
