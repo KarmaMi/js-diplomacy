@@ -1,10 +1,7 @@
 import * as chai from "chai"
-import { StandardRuleUtils } from "../../../../src/variant/standard/rule/standard-rule-utils"
-import { Board, Unit } from "./../../../../src/variant/standard/rule/types"
-import { MilitaryBranch } from "./../../../../src/variant/standard/rule/military-branch"
-import { State } from "./../../../../src/variant/standard/rule/state"
-import { Phase } from "./../../../../src/variant/standard/rule/phase"
-import { ProvinceStatus } from "./../../../../src/variant/standard/rule/province-status"
+import {
+  StandardRuleUtils, Board, Unit, MilitaryBranch, State, Phase, ProvinceStatus
+} from "../../../../src/variant/standard/rule/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 
 const { Army, Fleet } = MilitaryBranch

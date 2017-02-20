@@ -1,12 +1,9 @@
 import * as chai from "chai"
-import { MovementValidator } from "../../../../src/variant/standard/rule/movement-validator"
-import { StandardRuleHelper as Helper } from "../../../../src/variant/standard/rule/standard-rule-helper"
-import { Board, Unit } from "./../../../../src/variant/standard/rule/types"
-import { MilitaryBranch } from "./../../../../src/variant/standard/rule/military-branch"
-import { State } from "./../../../../src/variant/standard/rule/state"
+import {
+  MovementValidator, Board, Unit, MilitaryBranch, State, Result, Phase, ProvinceStatus,
+  StandardRuleHelper as Helper
+} from "../../../../src/variant/standard/rule/module"
 import * as Order from "./../../../../src/variant/standard/rule/order"
-import { Result } from "./../../../../src/variant/standard/rule/result"
-import { Phase } from "./../../../../src/variant/standard/rule/phase"
 import { Executed } from "./../../../../src/rule/module"
 import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 import { Season, Turn } from "./../../../../src/variant/standard/board/module"

@@ -1,8 +1,6 @@
 import * as chai from "chai"
 import { MilitaryBranch } from "./../../../../src/variant/standard/rule/module"
-import { locations as $ } from "./../../../../src/variant/standard/map/location"
-import { Power } from "./../../../../src/variant/standard/map/power"
-import { map } from "./../../../../src/variant/standard/map/map"
+import { locations as $, Power, map } from "./../../../../src/variant/standard/map/module"
 
 const { Army, Fleet } = MilitaryBranch
 const should = chai.should()

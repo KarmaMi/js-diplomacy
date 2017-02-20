@@ -1,13 +1,12 @@
 import * as chai from "chai"
 import { Name, Unit, Board } from "./../../src/board/module"
+import { ResolvedResult, Executed, Replaced } from "./../../src/rule/module"
 
 const should = chai.should()
 
 import * as mockMap from "../mock/map"
 import { MockOrder } from "../mock/mock-order"
 import { MockRule } from "./../mock/mock-rule"
-import { ResolvedResult } from "./../../src/rule/resolved-result"
-import { Executed, Replaced } from "./../../src/rule/order-result"
 
 const [Army, Fleet] = mockMap.militaryBranches
 const [spain, naples, apulia, western] = mockMap.provinces

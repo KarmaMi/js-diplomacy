@@ -1,6 +1,5 @@
 import * as chai from "chai"
-import { LabeledUndirectedGraph } from "./../../src/util/labeled-undirected-graph"
-import { LabeledEdge } from "./../../src/util/labeled-edge"
+import { LabeledEdge, LabeledUndirectedGraph } from "./../../src/util/module"
 
 chai.should()
 

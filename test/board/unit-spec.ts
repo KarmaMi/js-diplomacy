@@ -1,8 +1,5 @@
 import * as chai from "chai"
-import { Name } from "./../../src/board/name"
-import { Province } from "./../../src/board/province"
-import { Location } from "./../../src/board/location"
-import { Unit } from "./../../src/board/unit"
+import { Name, Province, Location, Unit } from "./../../src/board/module"
 
 chai.should()
 
