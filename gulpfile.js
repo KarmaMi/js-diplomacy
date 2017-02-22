@@ -6,6 +6,7 @@ const gutil = require('gulp-util')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
 const through = require('through2')
+const merge = require('merge2')
 
 const ts = require('gulp-typescript')
 const tsify = require('tsify')
@@ -15,6 +16,7 @@ const sourcemaps = require('gulp-sourcemaps')
 const mocha = require('gulp-mocha')
 
 const browserify = require('browserify')
+
 
 const tsSourceProject = ts.createProject('./configs/tsconfig.json')
 const tsTestProject = ts.createProject('./configs/tsconfig.json')
@@ -63,11 +65,16 @@ gulp.task('create-module-file', () => {
 
 // compile source files
 gulp.task('compile-src', ['create-module-file'], () => {
-  return gulp.src(['./src/**/*.ts'])
+  const tsResult = gulp.src(['./src/**/*.ts'])
     .pipe(sourcemaps.init())
     .pipe(tsSourceProject(ts.reporter.defaultReporter()))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./target/src'))
+
+  return merge([
+    tsResult.dts.pipe(gulp.dest('./target/interface')),
+    tsResult.js
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./target/src'))
+  ])
 })
 
 // compile test files
