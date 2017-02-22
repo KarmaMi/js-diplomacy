@@ -8,6 +8,7 @@ const buffer = require('vinyl-buffer')
 const through = require('through2')
 
 const ts = require('gulp-typescript')
+const tsify = require('tsify')
 const typedoc = require('gulp-typedoc')
 const sourcemaps = require('gulp-sourcemaps')
 
@@ -101,8 +102,9 @@ gulp.task('docs', ['create-module-file'], () => {
 })
 
 gulp.task('browserify', () => {
+  const tsconfigs = require('./configs/tsconfig.json').compilerOptions
   browserify({entries: ['browser/index.ts']})
-  .plugin('tsify')
+  .plugin(tsify, tsconfigs)
   .bundle()
   .pipe(source('diplomacy.js'))
   .pipe(buffer())

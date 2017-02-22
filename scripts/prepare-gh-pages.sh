@@ -7,5 +7,6 @@ gulp docs &&
 mkdir -p public &&
 mkdir -p public/js &&
 cp ./browser/diplomacy.js ./public/js &&
+cp ./browser/diplomacy.js.map ./public/js &&
 rm -rf ./public/docs &&
-mv ./out ./public/docs
+mv ./docs ./public/docs
