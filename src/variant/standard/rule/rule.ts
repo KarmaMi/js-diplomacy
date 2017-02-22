@@ -22,7 +22,7 @@ import { ProvinceStatus } from "./province-status"
 import { Result } from "./result"
 import { Error, SeveralOrders } from "./error"
 import { Rule as BaseRule } from "../../../rule/module"
-import { Success, Failure } from "../../../util/module"
+import { Success, Failure, ResultOrFail } from "../../../util/module"
 
 const { Movement, Retreat, Build } = Phase
 
@@ -70,7 +70,9 @@ export class Rule<Power>
     ])
   }
 
-  protected resolveProcedure (board: Board<Power>, orders: Set<Order<Power>>) {
+  protected resolveProcedure (
+    board: Board<Power>, orders: Set<Order<Power>>
+  ): ResultOrFail<Error, ResolvedResult<Power>> {
     const unitsHaveSeveralOrders = new Set(
       [...orders].filter(order => {
         return [...orders].some(order2 => order !== order2 && order.unit === order2.unit)

@@ -9,7 +9,7 @@ import * as Error from "./error"
 const { Army, Fleet } = MilitaryBranch
 
 export class MovementValidator<Power> implements Validator<Power> {
-  unitsRequiringOrder (board: Board<Power>) {
+  unitsRequiringOrder (board: Board<Power>): Set<Unit<Power>> {
     return board.units
   }
   errorOfOrder (board: Board<Power>, o: Order<Power>): Error.Error | null {

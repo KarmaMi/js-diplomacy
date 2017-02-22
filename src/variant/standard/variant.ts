@@ -1,5 +1,7 @@
 import { Variant } from "../variant"
-import { Unit, Board, Rule, MilitaryBranch, State, Phase, ProvinceStatus } from "./rule/module"
+import {
+  Unit, Board, Rule, MilitaryBranch, State, Phase, Dislodged, ProvinceStatus, Error, Result
+} from "./rule/module"
 import { Power, map, locations as $ } from "./map/module"
 import { Turn, Season } from "./board/module"
 import { Province } from "./../../board/module"

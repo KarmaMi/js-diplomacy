@@ -1,12 +1,13 @@
 import { Validator } from "./validator"
 import { StandardRuleUtils } from "./standard-rule-utils"
 import { OrderType, Order, Disband, Retreat } from "./order"
+import { MilitaryBranch } from "./military-branch"
 import { Dislodged } from "./dislodged"
 import { Board, Unit } from "./types"
 import * as Error from "./error"
 
 export class RetreatValidator<Power> implements Validator<Power> {
-  unitsRequiringOrder (board: Board<Power>) {
+  unitsRequiringOrder (board: Board<Power>): Set<Unit<Power>> {
     return new Set([...board.unitStatuses].map(elem => elem[0]))
   }
   errorOfOrder (board: Board<Power>, order: Order<Power>) {
