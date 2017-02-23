@@ -107,6 +107,7 @@ gulp.task('docs', ['create-module-file'], () => {
     .pipe(typedoc(configs))
 })
 
+// Browserify this module
 gulp.task('browserify', () => {
   const tsconfigs = require('./configs/tsconfig.json').compilerOptions
   browserify({entries: ['browser/index.ts']})
