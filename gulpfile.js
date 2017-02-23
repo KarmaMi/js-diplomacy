@@ -17,7 +17,6 @@ const mocha = require('gulp-mocha')
 
 const browserify = require('browserify')
 
-
 const tsSourceProject = ts.createProject('./configs/tsconfig.json')
 const tsTestProject = ts.createProject('./configs/tsconfig.json')
 
