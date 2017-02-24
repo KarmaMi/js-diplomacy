@@ -50,6 +50,8 @@ gulp.task('create-module-file', () => {
             text += `import * as _${x} from "./${fileName}"\n`
             text += `export const ${x} = _${x}\n`
           } else {
+            if (!x.endsWith('.ts')) return
+
             text += `export * from "./${fileName}"\n`
           }
         })
