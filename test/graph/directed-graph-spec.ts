@@ -1,5 +1,6 @@
 import * as chai from "chai"
-import { Edge, DirectedGraph } from "./../../src/util/module"
+import { graph } from "./../../src/graph"
+const { Edge, DirectedGraph } = graph
 
 const should = chai.should()
 
