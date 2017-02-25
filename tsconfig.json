@@ -6,5 +6,5 @@
     "module": "commonjs",
     "declaration": true
   },
-  "compileOnSave": true
+  "compileOnSave": false
 }
