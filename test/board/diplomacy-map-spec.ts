@@ -1,5 +1,7 @@
 import * as chai from "chai"
-import { Name, Province, Location } from "./../../src/board/module"
+
+import { board } from "./../../src/board"
+const { Name, Province, Location } = board
 
 import * as mockMap from "./../mock/map"
 const [Army, Fleet] = mockMap.militaryBranches

@@ -1,5 +1,7 @@
 import * as chai from "chai"
-import { Name, Province, Location } from "./../../src/board/module"
+
+import { board } from "./../../src/board"
+const { Name, Province, Location } = board
 
 chai.should()
 
@@ -8,7 +10,7 @@ describe("Location", () => {
     const Fleet = new Name("Fleet", "F")
     const Army = new Name("Army", "A")
     const location =
-      new Location<string, Name>(
+      new Location<string, board.Name>(
         new Name("Sweden", "Swe"), new Province(new Name("Sweden", "Swe"), null, true),
         [Fleet, Army]
       )
@@ -18,7 +20,7 @@ describe("Location", () => {
   it("has the set of the military branches that can enter this location.", () => {
     const Fleet = new Name("Fleet", "F")
     const location =
-      new Location<string, Name>(
+      new Location<string, board.Name>(
         new Name("Spain", "Spa"), new Province(new Name("Spain", "Spa"), null, true),
         [Fleet]
       )
