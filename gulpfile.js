@@ -17,8 +17,9 @@ const mocha = require('gulp-mocha')
 
 const browserify = require('browserify')
 
-const tsSourceProject = ts.createProject('./configs/tsconfig.json')
-const tsTestProject = ts.createProject('./configs/tsconfig.json')
+const tsSourceProject = ts.createProject('./tsconfig.json')
+const tsTestProject = ts.createProject('./tsconfig.json')
+const tsCompilerOptions = require('./tsconfig.json').compilerOptions
 
 gulp.task('create-module-file', () => {
   return gulp.src(['./src/**'])
@@ -95,11 +96,10 @@ gulp.task('watch-test', () => gulp.watch(['src/**/*.ts', 'test/**/*.ts'], ['test
 
 // Create a documentation
 gulp.task('docs', ['create-module-file'], () => {
-  const tsconfigs = require('./configs/tsconfig.json').compilerOptions
   const packageOption = require('./package.json')
   const configs = {
-    target: tsconfigs.target,
-    module: tsconfigs.module,
+    target: tsCompilerOptions.target,
+    module: tsCompilerOptions.module,
     out: './docs',
     includeDeclarations: true,
     name: packageOption.name,
@@ -111,9 +111,8 @@ gulp.task('docs', ['create-module-file'], () => {
 
 // Browserify this module
 gulp.task('browserify', () => {
-  const tsconfigs = require('./configs/tsconfig.json').compilerOptions
   browserify({entries: ['browser/index.ts']})
-  .plugin(tsify, tsconfigs)
+  .plugin(tsify, tsCompilerOptions)
   .bundle()
   .pipe(source('diplomacy.js'))
   .pipe(buffer())
