@@ -81,7 +81,7 @@ export class InvalidPhase<Power> extends Error {
   }
 }
 
-export class SeveralOrders<Power, MilitaryBranch> extends Error {
+export class SeveralOrders<Power> extends Error {
   units: Set<Unit<Power>>
   constructor (units: Set<Unit<Power>> | Array<Unit<Power>>) {
     super()

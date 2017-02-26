@@ -74,7 +74,7 @@ export namespace standardRule {
     export const CannotBeOrdered = ErrorModule.CannotBeOrdered
     export declare type InvalidPhase<Power> = ErrorModule.InvalidPhase<Power>
     export const InvalidPhase = ErrorModule.InvalidPhase
-    export declare type SeveralOrders<Power, MilitaryBranch> = ErrorModule.SeveralOrders<Power, MilitaryBranch>
+    export declare type SeveralOrders<Power> = ErrorModule.SeveralOrders<Power>
     export const SeveralOrders = ErrorModule.SeveralOrders
     export declare type OrderNotExisted<Power> = ErrorModule.OrderNotExisted<Power>
     export const OrderNotExisted = ErrorModule.OrderNotExisted
