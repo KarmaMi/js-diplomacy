@@ -1,6 +1,7 @@
 {
   "name": "js-diplomacy",
-  "main": "./target/src/module.js",
+  "main": "./target/src/jsDiplomacy.js",
+  "types": "./target/interface/jsDiplomacy.d.ts",
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {

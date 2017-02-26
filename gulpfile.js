@@ -1,11 +1,7 @@
-const fs = require('fs')
-const path = require('path')
-
 const gulp = require('gulp')
 const gutil = require('gulp-util')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
-const through = require('through2')
 const merge = require('merge2')
 
 const ts = require('gulp-typescript')
@@ -17,9 +13,9 @@ const mocha = require('gulp-mocha')
 
 const browserify = require('browserify')
 
-const tsSourceProject = ts.createProject('./tsconfig.json')
-const tsTestProject = ts.createProject('./tsconfig.json')
-const tsCompilerOptions = require('./tsconfig.json').compilerOptions
+const tsSourceProject = ts.createProject('./src/tsconfig.json')
+const tsTestProject = ts.createProject('./test/tsconfig.json')
+const tsCompilerOptions = require('./src/tsconfig.json').compilerOptions
 
 // compile source files
 gulp.task('compile-src', () => {
