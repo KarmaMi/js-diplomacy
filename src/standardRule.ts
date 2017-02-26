@@ -2,10 +2,19 @@ import * as Data from "./standardRule/data"
 import * as OrderModule from "./standardRule/order"
 import * as ErrorModule from "./standardRule/error"
 import * as Types from "./standardRule/types"
+import * as StandardRuleUtilsModule from "./standardRule/standard-rule-utils"
+import * as StandardRuleHelperModule from "./standardRule/standard-rule-helper"
+import * as RuleModule from "./standardRule/rule"
 
 export namespace standardRule {
   export declare type Location<Power> = Types.Location<Power>
   export const Location = Types.Location
+
+  export declare type Unit<Power> = Types.Unit<Power>
+  export const Unit = Types.Unit
+
+  export declare type Board<Power> = Types.Board<Power>
+  export const Board = Types.Board
 
   export declare type MilitaryBranch = Data.MilitaryBranch
   export const MilitaryBranch = Data.MilitaryBranch
@@ -19,7 +28,7 @@ export namespace standardRule {
   export const State = Data.State
 
   export declare type Dislodged<Power> = Data.Dislodged<Power>
-  export const Dislodeged = Data.Dislodged
+  export const Dislodged = Data.Dislodged
 
   export declare type ProvinceStatus<Power> = Data.ProvinceStatus<Power>
   export const ProvinceStatus = Data.ProvinceStatus
@@ -70,4 +79,13 @@ export namespace standardRule {
     export declare type OrderNotExisted<Power> = ErrorModule.OrderNotExisted<Power>
     export const OrderNotExisted = ErrorModule.OrderNotExisted
   }
+
+  export declare type StandardRuleUtils = StandardRuleUtilsModule.StandardRuleUtils
+  export const StandardRuleUtils = StandardRuleUtilsModule.StandardRuleUtils
+
+  export declare type StandardRuleHelper<Power> = StandardRuleHelperModule.StandardRuleHelper<Power>
+  export const StandardRuleHelper = StandardRuleHelperModule.StandardRuleHelper
+
+  export declare type Rule<Power> = RuleModule.Rule<Power>
+  export const Rule = RuleModule.Rule
 }
