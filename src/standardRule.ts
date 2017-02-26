@@ -13,6 +13,9 @@ export namespace standardRule {
   export declare type Unit<Power> = Types.Unit<Power>
   export const Unit = Types.Unit
 
+  export declare type DiplomacyMap<Power> = Types.DiplomacyMap<Power>
+  export const DiplomacyMap = Types.DiplomacyMap
+
   export declare type Board<Power> = Types.Board<Power>
   export const Board = Types.Board
 
@@ -37,6 +40,8 @@ export namespace standardRule {
   export const Result = Data.Result
 
   export namespace Order {
+    export declare type OrderType = OrderModule.OrderType
+    export const OrderType = OrderModule.OrderType
     export declare type Order<Power> = OrderModule.Order<Power>
     export const Order = OrderModule.Order
     export declare type Hold<Power> = OrderModule.Hold<Power>
