@@ -21,52 +21,8 @@ const tsSourceProject = ts.createProject('./tsconfig.json')
 const tsTestProject = ts.createProject('./tsconfig.json')
 const tsCompilerOptions = require('./tsconfig.json').compilerOptions
 
-gulp.task('create-module-file', () => {
-  return gulp.src(['./src/**'])
-    .pipe(
-      through.obj((file, encoding, callback) => {
-        if (!file.path) {
-          callback()
-          return
-        }
-
-        // It file is not directory, do nothing
-        if (!fs.statSync(file.path).isDirectory()) {
-          callback()
-          return
-        }
-
-        const modulePath = path.resolve(file.path, 'module.ts')
-
-        let text = ''
-
-        const children = fs.readdirSync(file.path, encoding)
-        children.forEach(x => {
-          if (x === 'module.ts') return
-
-          let fileName = path.basename(x, '.ts')
-
-          if (fs.statSync(path.resolve(file.path, x)).isDirectory()) {
-            fileName = path.relative(file.path, path.resolve(file.path, x, 'module'))
-            text += `import * as _${x} from "./${fileName}"\n`
-            text += `export const ${x} = _${x}\n`
-          } else {
-            if (!x.endsWith('.ts')) return
-
-            text += `export * from "./${fileName}"\n`
-          }
-        })
-
-        const wStream = fs.createWriteStream(modulePath, { defaultEncoding: encoding })
-        wStream.write(text)
-        wStream.end()
-        callback(null, wStream)
-      })
-    )
-})
-
 // compile source files
-gulp.task('compile-src', ['create-module-file'], () => {
+gulp.task('compile-src', () => {
   const tsResult = gulp.src(['./src/**/*.ts'])
     .pipe(sourcemaps.init())
     .pipe(tsSourceProject(ts.reporter.defaultReporter()))
@@ -95,7 +51,7 @@ gulp.task('test', ['compile-src', 'compile-test'], () => {
 gulp.task('watch-test', () => gulp.watch(['src/**/*.ts', 'test/**/*.ts'], ['test']))
 
 // Create a documentation
-gulp.task('docs', ['create-module-file'], () => {
+gulp.task('docs', () => {
   const packageOption = require('./package.json')
   const configs = {
     target: tsCompilerOptions.target,
