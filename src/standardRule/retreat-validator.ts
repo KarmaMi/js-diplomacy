@@ -1,5 +1,5 @@
 import { Validator } from "./validator"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { OrderType, Order, Disband, Retreat } from "./order"
 import { MilitaryBranch, Dislodged } from "./data"
 import { Board, Unit } from "./types"
@@ -18,7 +18,7 @@ export class RetreatValidator<Power> implements Validator<Power> {
     }
 
     if (order instanceof Retreat) {
-      const ls = StandardRuleUtils.locationsToRetreat(board, order.unit, dislodged.attackedFrom)
+      const ls = Utils.locationsToRetreat(board, order.unit, dislodged.attackedFrom)
       if (!ls.has(order.destination)) {
         return new Error.UnmovableLocation(order.unit, order.destination)
       }

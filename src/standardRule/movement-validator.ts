@@ -1,5 +1,5 @@
 import { Validator } from "./validator"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { Order, Retreat, Hold, Move, Support, Convoy } from "./order"
 import { MilitaryBranch, Dislodged } from "./data"
 import { Board, Unit } from "./types"
@@ -26,7 +26,7 @@ export class MovementValidator<Power> implements Validator<Power> {
       1. the unit can move to the destination or
       2. the unit is army, the location is coast, and the fleet can move to destination from the location.
       */
-      if (StandardRuleUtils.movableLocationsOf(board, order.unit).has(order.destination)) {
+      if (Utils.movableLocationsOf(board, order.unit).has(order.destination)) {
         return null
       } else {
         return new Error.UnmovableLocation(order.unit, order.destination)
@@ -65,17 +65,17 @@ export class MovementValidator<Power> implements Validator<Power> {
         } else if (order.target.unit.militaryBranch !== Army) {
           return new Error.CannotBeOrdered(order)
         } else {
-          if (!StandardRuleUtils.isSea(board.map, order.unit.location.province)) {
+          if (!Utils.isSea(board.map, order.unit.location.province)) {
             return new Error.CannotBeOrdered(order)
           } else if (
-            !StandardRuleUtils.isMovableViaSea(
+            !Utils.isMovableViaSea(
               board.map, order.target.unit.location.province, order.target.destination.province,
               board.units
             )
           ) {
             return new Error.UnmovableLocation(order.target.unit, order.target.destination)
           } else if (
-            !StandardRuleUtils.isMovableViaSea(
+            !Utils.isMovableViaSea(
               board.map, order.unit.location.province, order.target.destination.province,
               board.units
             )

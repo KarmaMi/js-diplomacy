@@ -1,11 +1,11 @@
 import { OrderGenerator } from "./order-generator"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { Disband } from "./order"
 import { Board, Unit } from "./types"
 
 export class BuildOrderGenerator<Power> implements OrderGenerator<Power> {
   ordersToSkipPhase (board: Board<Power>) {
-    const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
+    const numberOfSupplyCenters = Utils.numberOfSupplyCenters(board)
 
     const canSkip = [...board.map.powers].every(power => {
       const numOfUnits = ([...board.units].filter(unit => unit.power === power)).length

@@ -2,8 +2,8 @@ import * as Data from "./standardRule/data"
 import * as OrderModule from "./standardRule/order"
 import * as ErrorModule from "./standardRule/error"
 import * as Types from "./standardRule/types"
-import * as StandardRuleUtilsModule from "./standardRule/standard-rule-utils"
-import * as StandardRuleHelperModule from "./standardRule/standard-rule-helper"
+import * as UtilsModule from "./standardRule/standard-rule-utils"
+import * as HelperModule from "./standardRule/standard-rule-helper"
 import * as RuleModule from "./standardRule/rule"
 
 export namespace standardRule {
@@ -85,11 +85,11 @@ export namespace standardRule {
     export const OrderNotExisted = ErrorModule.OrderNotExisted
   }
 
-  export declare type StandardRuleUtils = StandardRuleUtilsModule.StandardRuleUtils
-  export const StandardRuleUtils = StandardRuleUtilsModule.StandardRuleUtils
+  export declare type Utils = UtilsModule.Utils
+  export const Utils = UtilsModule.Utils
 
-  export declare type StandardRuleHelper<Power> = StandardRuleHelperModule.StandardRuleHelper<Power>
-  export const StandardRuleHelper = StandardRuleHelperModule.StandardRuleHelper
+  export declare type Helper<Power> = HelperModule.Helper<Power>
+  export const Helper = HelperModule.Helper
 
   export declare type Rule<Power> = RuleModule.Rule<Power>
   export const Rule = RuleModule.Rule

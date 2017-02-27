@@ -3,7 +3,7 @@ import { BuildOrderGenerator } from "./../../src/standardRule/build-order-genera
 import { standardRule } from "./../../src/standardRule"
 import { standardMap } from "./../../src/standardMap"
 
-const { Board, Unit, MilitaryBranch, State, Order, Phase, ProvinceStatus, StandardRuleHelper: Helper }
+const { Board, Unit, MilitaryBranch, State, Order, Phase, ProvinceStatus, Helper }
   = standardRule
 const { locations: $, Power, map } = standardMap
 
