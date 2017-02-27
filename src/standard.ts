@@ -31,7 +31,7 @@ const initialBoard = new Board(
   ],
   [],
   <Array<[board.Province<standardMap.Power>, standardRule.ProvinceStatus<standardMap.Power>]>>([...map.provinces].map(p => {
-    if (p.homeOf) {
+    if (p.homeOf !== null) {
       return [p, new ProvinceStatus(p.homeOf, false)]
     } else {
       return null

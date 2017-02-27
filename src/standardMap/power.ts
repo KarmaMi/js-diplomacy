@@ -1,5 +1,5 @@
 export enum Power {
-  Austria,
+  Austria = 1,
   England,
   France,
   Germany,

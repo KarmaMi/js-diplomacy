@@ -2,7 +2,7 @@ import { standardRule } from "./standardRule"
 
 export namespace standardBoard {
   export enum Season {
-    Spring,
+    Spring = 1,
     Autumn
   }
 

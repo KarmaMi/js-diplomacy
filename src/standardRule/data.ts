@@ -3,12 +3,12 @@ import * as OrderModule from "./order"
 import * as ErrorModule from "./error"
 
 export enum MilitaryBranch {
-  Army,
+  Army = 1,
   Fleet
 }
 
 export enum Phase {
-  Movement,
+  Movement = 1,
   Retreat,
   Build
 }
@@ -55,7 +55,7 @@ export class ProvinceStatus<Power> {
 }
 
 export enum Result {
-  Success,
+  Success = 1,
   Failed,
   Dislodged,
   Bounced,

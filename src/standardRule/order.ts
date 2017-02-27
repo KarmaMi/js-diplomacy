@@ -3,7 +3,7 @@ import { rule } from "./../rule"
 import { MilitaryBranch } from "./data"
 
 export enum OrderType {
-  Hold,
+  Hold = 1,
   Move,
   Support,
   Convoy,
