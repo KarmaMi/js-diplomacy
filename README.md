@@ -47,7 +47,7 @@ const result = rule.resolve(orders) // Resolve the orders using the default rule
 if (result.result) {
   console.log(result.result.results) // Show results
   board = result.result.board // Go to the next turn (1901 Autumn, Movement phase)
-  helper = new Helper(board) // Update the helper instance
+  $$ = new Helper(board) // Update the helper instance
 }
 ```
 
