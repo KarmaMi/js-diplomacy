@@ -1,6 +1,21 @@
-node_modules
-browser/diplomacy.js
-target/
-docs/
-*.js.map
-*.d.ts
+#all ignore
+/*
+!/browser/
+/browser/diplomacy.js
+/browser/diplomacy.js.map
+
+# accept
+!/LICENSE
+!/package.json
+!/README.md
+!/gulpfile.js
+!/.gitignore
+!/.npmignore
+!/.travis.yml
+!/bower.json
+!/.travis
+!/scripts/
+!/tslint.json
+!/browser/index.ts
+!/src/
+!/test/

@@ -1,6 +1,10 @@
-browser
-.gitignore
-.travis.yml
-src
-test
-bower.json
+#all ignore
+/*
+!/target
+/target/test
+
+# accept
+!/target/src/
+!/target/interface/
+!/LICENSE
+!/package.json
