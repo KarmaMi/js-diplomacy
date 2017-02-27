@@ -15,12 +15,12 @@ $ npm install js-diplomacy
 The following code snippets describe the basic usage of this library.
 
 ### 1. Get the vaiant, which defines a rule and an initial board
-`diplomacy.variant.standard` provides the objects for the standard map and rule.
+`diplomacy.standard` provides the objects for the standard map and rule.
 
-```javascript
-const diplomacy = require('js-diplomacy')
+```typescript
+import diplomacy from "js-diplomacy"
 
-const variant = diplomacy.variant.standard.variant
+const variant = diplomacy.standard.variant
 const rule = variant.rule // This defines the default rule of Diplomacy
 let board = variant.initalBoard // This represents the state of 1901, Spring.
 ```
@@ -28,9 +28,9 @@ let board = variant.initalBoard // This represents the state of 1901, Spring.
 ### 2. Create orders using a helper instance
 This library contains a helper class for the standard rule, which provides the simple and readable way to write orders.
 
-```javascript
-const Helper = diplomacy.variant.standard.rule.StandardRuleHelper
-const $ = diplomacy.variant.standard.map.location // This defines locations (e.g., StP_SC, Swe)
+```typescript
+const Helper = diplomacy.standardRule.StandardRuleHelper
+const $ = diplomacy.variant.standardMap.location // This defines locations (e.g., StP_SC, Swe)
 
 let $$ = new Helper(board) // Create a helper instance
 
@@ -41,11 +41,14 @@ const orders = [
 ```
 
 ### 3. Resolve orders, and go to the next turn
-```javascript
-const { result } = rule.resolve(orders) // Resolve the orders using the default rule
-console.log(result.results) // Show results
-board = result.board // Go to the next turn (1901 Autumn, Movement phase)
-helper = new Helper(board) // Update the helper instance
+```typescript
+const result = rule.resolve(orders) // Resolve the orders using the default rule
+
+if (result.result) {
+  console.log(result.result.results) // Show results
+  board = result.result.board // Go to the next turn (1901 Autumn, Movement phase)
+  $$ = new Helper(board) // Update the helper instance
+}
 ```
 
 ## Documentation
