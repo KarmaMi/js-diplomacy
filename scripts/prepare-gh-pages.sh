@@ -13,6 +13,7 @@ cat << EOF > ./public/index.html &&
 </body>
 </html>
 EOF
+touch ./public/.nojekyll &&
 cp ./browser/diplomacy.js ./public/js &&
 cp ./browser/diplomacy.js.map ./public/js &&
 rm -rf ./public/docs &&
