@@ -1,5 +1,7 @@
 import * as chai from "chai"
-import { Name, Province, Location, Unit } from "./../../src/board/module"
+
+import { board } from "./../../src/board"
+const { Name, Province, Location, Unit } = board
 
 chai.should()
 
@@ -7,7 +9,7 @@ describe("Unit", () => {
   it("contains its location and military-branch.", () => {
     const fleet = new Name("Fleet", "F")
     const location =
-      new Location<string, Name>(
+      new Location<string, board.Name>(
         new Name("Sweden", "Swe"), new Province(new Name("Sweden", "Swe"), null, true), [fleet]
       )
     const unit = new Unit(fleet, location, "Russia")

@@ -1,6 +1,7 @@
 {
   "name": "js-diplomacy",
-  "main": "./target/src/module.js",
+  "main": "./target/src/jsDiplomacy.js",
+  "types": "./target/interface/jsDiplomacy.d.ts",
   "version": "0.0.3",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
@@ -25,7 +26,6 @@
     "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",
-    "gulp-jsdoc3": "^1.0.1",
     "gulp-mocha": "^3.0.1",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-typedoc": "^2.0.2",

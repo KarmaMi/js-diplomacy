@@ -1,6 +1,8 @@
 import * as chai from "chai"
-import { Name, Unit, Board } from "./../../src/board/module"
-import { ResolvedResult, Executed, Replaced } from "./../../src/rule/module"
+import { board } from "./../../src/board"
+import { rule } from "./../../src/rule"
+const { Name, Unit, Board } = board
+const { ResolvedResult, Executed, Replaced } = rule
 
 const should = chai.should()
 
@@ -15,7 +17,7 @@ const map = mockMap.map
 
 class MockOrder2 extends MockOrder {
   replaced: boolean
-  constructor (unit: Unit<string, Name>, replaced?: boolean) {
+  constructor (unit: board.Unit<string, board.Name>, replaced?: boolean) {
     super(unit)
     this.replaced = replaced || false
   }
@@ -35,7 +37,7 @@ describe("A rule", () => {
       rule.errorOfOrder = (b: typeof board, order: MockOrder2) => {
         return (order.unit === unit1 || order.replaced) ? null : "Invalid"
       }
-      rule.defaultOrderOf = (b: typeof board, unit: Unit<string, Name>) => {
+      rule.defaultOrderOf = (b: typeof board, unit: board.Unit<string, board.Name>) => {
         return new MockOrder2(unit, true)
       }
       rule.resolveProcedure = (b: typeof board, orders: Set<MockOrder2>) => {
@@ -78,7 +80,7 @@ describe("A rule", () => {
 
       const rule: any = new MockRule()
       rule.unitsRequiringOrder = (b: typeof board) => board.units
-      rule.defaultOrderOf = (b: typeof board, unit: Unit<string, Name>) => {
+      rule.defaultOrderOf = (b: typeof board, unit: board.Unit<string, board.Name>) => {
         const o = new MockOrder(unit)
         return o
       }

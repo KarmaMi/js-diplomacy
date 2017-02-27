@@ -1,6 +1,6 @@
-import { Order } from "../../src/rule/order"
-import { Name, Unit } from "../../src/board/module"
+import { rule } from "../../src/rule"
+import { board } from "../../src/board"
 
-export class MockOrder implements Order<string, Name> {
-  constructor (public unit: Unit<string, Name>) {}
+export class MockOrder implements rule.Order<string, board.Name> {
+  constructor (public unit: board.Unit<string, board.Name>) {}
 }

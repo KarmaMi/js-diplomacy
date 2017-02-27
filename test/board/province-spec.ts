@@ -1,5 +1,7 @@
 import * as chai from "chai"
-import { Name, Province } from "./../../src/board/module"
+
+import { board } from "./../../src/board"
+const { Name, Province } = board
 
 const should = chai.should()
 

@@ -1,3 +1,3 @@
-import * as diplomacy from "../src/module"
+import * as diplomacy from "../src/jsDiplomacy"
 
 (<any>window).diplomacy = diplomacy

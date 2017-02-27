@@ -1,5 +1,7 @@
 import * as chai from "chai"
-import { Name } from "./../../src/board/module"
+
+import { board } from "./../../src/board"
+const { Name } = board
 
 chai.should()
 

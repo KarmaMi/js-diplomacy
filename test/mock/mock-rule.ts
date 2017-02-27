@@ -1,35 +1,35 @@
-import { Order } from "../../src/rule/order"
-import { Rule } from "../../src/rule/rule"
-import { Name, Board, Unit } from "../../src/board/module"
-import { Failure } from "../../src/util/module"
+import { rule } from "../../src/rule"
+import { board } from "../../src/board"
+import { util } from "../../src/util"
+const { Failure } = util
 
-export class MockRule extends Rule<string, Name, string, string, string, string, string> {
+export class MockRule extends rule.Rule<string, board.Name, string, string, string, string, string> {
   protected unitsRequiringOrder (
-    board: Board<string, Name, string, string, string>
+    board: board.Board<string, board.Name, string, string, string>
   ) {
     return new Set()
   }
   protected defaultOrderOf (
-    board: Board<string, Name, string, string, string>,
-    unit: Unit<string, Name>
+    board: board.Board<string, board.Name, string, string, string>,
+    unit: board.Unit<string, board.Name>
   ) {
     return null
   }
   protected errorOfOrder (
-    board: Board<string, Name, string, string, string>,
-    order: Order<string, Name>
+    board: board.Board<string, board.Name, string, string, string>,
+    order: rule.Order<string, board.Name>
   ) {
     return null
   }
   protected errorOfOrders (
-    board: Board<string, Name, string, string, string>,
-    orders: Set<Order<string, Name>>
+    board: board.Board<string, board.Name, string, string, string>,
+    orders: Set<rule.Order<string, board.Name>>
   ) {
     return null
   }
   protected resolveProcedure (
-    board: Board<string, Name, string, string, string>,
-    orders: Set<Order<string, Name>>
+    board: board.Board<string, board.Name, string, string, string>,
+    orders: Set<rule.Order<string, board.Name>>
   ) {
     return new Failure("")
   }
