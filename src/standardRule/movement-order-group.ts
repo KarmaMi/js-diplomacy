@@ -1,5 +1,5 @@
 import { Result, MilitaryBranch } from "./data"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { OrderType, Order, Convoy, Support, Move } from "./order"
 import { DiplomacyMap } from "./types"
 import { MovementOrderWithResult } from "./movement-order-with-result"
@@ -39,7 +39,7 @@ export class MovementOrderGroup<Power> {
       }).map(order => order.order.unit)
 
       if (
-        StandardRuleUtils.isMovableViaSea(
+        Utils.isMovableViaSea(
           map, this.target.order.unit.location.province, this.target.order.destination.province,
           new Set(units)
         )

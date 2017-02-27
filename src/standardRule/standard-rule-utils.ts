@@ -8,7 +8,7 @@ const { Province } = board
 /**
  * Utility of the standard rule
  */
-export class StandardRuleUtils {
+export class Utils {
   /**
    * @param board -
    * @returns The map between powers and the number of supply centers
@@ -81,7 +81,7 @@ export class StandardRuleUtils {
     function dfs (province: board.Province<Power>): boolean {
       const nextProvinces =
         [...map.movableProvincesOf(province, MilitaryBranch.Fleet)]
-          .filter(p => StandardRuleUtils.isSea(map, p) && provinces.has(p))
+          .filter(p => Utils.isSea(map, p) && provinces.has(p))
       return nextProvinces.some(p => {
         if (map.movableProvincesOf(p, MilitaryBranch.Fleet).has(destination)) {
           return true
@@ -112,7 +112,7 @@ export class StandardRuleUtils {
     function dfs (province: board.Province<Power>) {
       const nextProvinces =
         [...board.map.movableProvincesOf(province, MilitaryBranch.Fleet)]
-          .filter(p => StandardRuleUtils.isSea(board.map, p) && provinces.has(p))
+          .filter(p => Utils.isSea(board.map, p) && provinces.has(p))
       nextProvinces.forEach(p => {
         if (!visited.has(p)) {
           visited.add(p)
@@ -127,7 +127,7 @@ export class StandardRuleUtils {
 
     sea.forEach(s => {
       [...board.map.movableProvincesOf(s, MilitaryBranch.Fleet)]
-        .filter(p => !StandardRuleUtils.isSea(board.map, p))
+        .filter(p => !Utils.isSea(board.map, p))
         .forEach(p => {
           board.map.locationsOf(p).forEach(l => {
             if (l.militaryBranches.has(MilitaryBranch.Army)) {
@@ -146,7 +146,7 @@ export class StandardRuleUtils {
    *   (e.g., It contains -1 if a power has to disband 1 unit).
    */
   static numberOfBuildableUnits<Power> (board: Board<Power>): Map<Power, number> {
-    const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
+    const numberOfSupplyCenters = Utils.numberOfSupplyCenters(board)
     const retval = new Map()
     board.map.powers.forEach(power => {
       const numOfSupply = numberOfSupplyCenters.get(power) || 0

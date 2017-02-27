@@ -6,7 +6,7 @@ import { standardMap } from "./../../src/standardMap"
 import { standardBoard } from "./../../src/standardBoard"
 
 const {
-  Board, Unit, MilitaryBranch, State, Result, Phase, ProvinceStatus, StandardRuleHelper: Helper
+  Board, Unit, MilitaryBranch, State, Result, Phase, ProvinceStatus, Helper
 } = standardRule
 const { locations: $, Power, map } = standardMap
 const { Season, Turn } = standardBoard

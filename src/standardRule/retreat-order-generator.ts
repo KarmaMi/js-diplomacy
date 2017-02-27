@@ -1,5 +1,5 @@
 import { OrderGenerator } from "./order-generator"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { Disband } from "./order"
 import { Board, Unit } from "./types"
 
@@ -11,7 +11,7 @@ export class RetreatOrderGenerator<Power> implements OrderGenerator<Power> {
     if (
       [...board.unitStatuses].every(elem => {
         const [unit, status] = elem
-        const locations = StandardRuleUtils.locationsToRetreat(board, unit, status.attackedFrom)
+        const locations = Utils.locationsToRetreat(board, unit, status.attackedFrom)
         return locations.size === 0
       })
     ) {

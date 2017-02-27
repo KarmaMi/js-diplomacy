@@ -2,7 +2,7 @@ import * as chai from "chai"
 import { standardRule } from "./../../src/standardRule"
 import { standardMap } from "./../../src/standardMap"
 
-const { StandardRuleHelper, Board, Unit, MilitaryBranch, State, Phase, Dislodged, ProvinceStatus, Order }
+const { Helper, Board, Unit, MilitaryBranch, State, Phase, Dislodged, ProvinceStatus, Order }
   = standardRule
 const { locations: $, Power, map } = standardMap
 const { Army, Fleet } = MilitaryBranch
@@ -19,7 +19,7 @@ const movement = new State(turn, Phase.Movement)
 const retreat = new State(turn, Phase.Retreat)
 const build = new State(turn, Phase.Build)
 
-describe("A StandardRuleHelper", () => {
+describe("A Helper", () => {
   describe("when the phase is movement", () => {
     const board = new Board(
       map, movement,
@@ -29,7 +29,7 @@ describe("A StandardRuleHelper", () => {
       ],
       [], []
     )
-    const $$ = new StandardRuleHelper(board)
+    const $$ = new Helper(board)
     it("generates an unit, ", () => {
       $$.A($.Spa).unit.should.deep.equal(new Unit(Army, $.Spa, France))
       $$.U($.Spa).unit.should.deep.equal(new Unit(Army, $.Spa, France))
@@ -69,7 +69,7 @@ describe("A StandardRuleHelper", () => {
       ],
       []
     )
-    const $$ = new StandardRuleHelper(board)
+    const $$ = new Helper(board)
     it("generates an unit, ", () => {
       $$.F($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
       $$.U($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
@@ -92,7 +92,7 @@ describe("A StandardRuleHelper", () => {
       ],
       [], []
     )
-    const $$ = new StandardRuleHelper(board)
+    const $$ = new Helper(board)
     it("generates an unit, ", () => {
       $$.F($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))
       $$.U($.Spa_SC).unit.should.deep.equal(new Unit(Fleet, $.Spa_SC, France))

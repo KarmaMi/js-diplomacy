@@ -1,5 +1,5 @@
 import { Validator } from "./validator"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { OrderType, Order } from "./order"
 import { Board, Unit } from "./types"
 import * as Error from "./error"
@@ -15,7 +15,7 @@ export class BuildValidator<Power> implements Validator<Power> {
   }
 
   errorOfOrder (board: Board<Power>, order: Order<Power>) {
-    const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
+    const numberOfSupplyCenters = Utils.numberOfSupplyCenters(board)
     switch (order.tpe) {
       case OrderType.Build:
         if ([...board.units].some(unit => unit.location.province === order.unit.location.province)) {
@@ -49,7 +49,7 @@ export class BuildValidator<Power> implements Validator<Power> {
   }
 
   errorOfOrders (board: Board<Power>, orders: Set<Order<Power>>) {
-    const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(board)
+    const numberOfSupplyCenters = Utils.numberOfSupplyCenters(board)
     const power = [...board.map.powers].find(power => {
       const numOfUnits = ([...board.units].filter(unit => unit.power === power)).length
       const numOfSupply = numberOfSupplyCenters.get(power) || 0

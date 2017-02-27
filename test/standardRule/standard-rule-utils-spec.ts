@@ -2,7 +2,7 @@ import * as chai from "chai"
 import { standardRule } from "./../../src/standardRule"
 import { standardMap } from "./../../src/standardMap"
 
-const { StandardRuleUtils, Board, Unit, MilitaryBranch, State, Phase, ProvinceStatus } =
+const { Utils, Board, Unit, MilitaryBranch, State, Phase, ProvinceStatus } =
   standardRule
 declare type Power = standardMap.Power
 const { locations: $, Power, map } = standardMap
@@ -29,7 +29,7 @@ describe("The StandardRuleUtil", () => {
         [$.Spa.province, new ProvinceStatus<Power>(France, false)]
       ]
     )
-    Array.from(StandardRuleUtils.numberOfSupplyCenters(board))
+    Array.from(Utils.numberOfSupplyCenters(board))
       .should.have.deep.members([[France, 2]])
   })
   it("finds the provinces that an unit can move to", () => {
@@ -42,11 +42,11 @@ describe("The StandardRuleUtil", () => {
       [], []
     )
 
-    Array.from(StandardRuleUtils.movableLocationsOf<Power>(board, new Unit(Army, $.Lvp, England)))
+    Array.from(Utils.movableLocationsOf<Power>(board, new Unit(Army, $.Lvp, England)))
       .should.have.deep.members(
         [...board.map.movableLocationsOf($.Lvp, Army)]
       )
-    Array.from(StandardRuleUtils.movableLocationsOf(board, new Unit(Army, $.Edi, England)))
+    Array.from(Utils.movableLocationsOf(board, new Unit(Army, $.Edi, England)))
       .should.have.deep.members(
         [...board.map.movableLocationsOf($.Edi, Army)].concat([$.Nwy, $.StP])
       )
@@ -61,7 +61,7 @@ describe("The StandardRuleUtil", () => {
         [$.Spa.province, new ProvinceStatus<Power>(France, false)]
       ]
     )
-    const x = StandardRuleUtils.numberOfBuildableUnits(board)
+    const x = Utils.numberOfBuildableUnits(board)
     should.equal(x.get(France), 2)
     should.equal(x.get(England), -1)
   })

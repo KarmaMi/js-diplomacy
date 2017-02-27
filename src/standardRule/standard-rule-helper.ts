@@ -49,7 +49,7 @@ export class UnitForStandardRule<Power> {
  * $$.U($.Nrg).disband()
  * ```
  */
-export class StandardRuleHelper<Power> {
+export class Helper<Power> {
   constructor (private board: Board<Power>) {}
   private getUnit (militaryBranch: MilitaryBranch | null, location: Location<Power>): Unit<Power> {
     function checkMilitaryBranch (tgt: MilitaryBranch): boolean {

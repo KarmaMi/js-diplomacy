@@ -6,7 +6,7 @@ import { standardMap } from "./../../src/standardMap"
 import { standardBoard } from "./../../src/standardBoard"
 
 const {
-  Board, Unit, MilitaryBranch, State, Result, Phase, Dislodged, ProvinceStatus, StandardRuleHelper: Helper
+  Board, Unit, MilitaryBranch, State, Result, Phase, Dislodged, ProvinceStatus, Helper
 } = standardRule
 declare type Power = standardMap.Power
 const { locations: $, Power, map } = standardMap

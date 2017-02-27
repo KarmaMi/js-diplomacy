@@ -1,7 +1,7 @@
 import { Resolver } from "./resolver"
 import { Result, Phase, State, MilitaryBranch, ProvinceStatus } from "./data"
 import { Order, Retreat, Disband, OrderType } from "./order"
-import { StandardRuleUtils } from "./standard-rule-utils"
+import { Utils } from "./standard-rule-utils"
 import { Board, Unit, ResolvedResult } from "./types"
 import { board } from "./../board"
 import { rule } from "./../rule"
@@ -86,7 +86,7 @@ export class RetreatResolver<Power> implements Resolver<Power> {
     })
 
     const numOfCenters = ([...board.map.provinces].filter(p => p.isSupplyCenter)).length
-    const numberOfSupplyCenters = StandardRuleUtils.numberOfSupplyCenters(newBoard)
+    const numberOfSupplyCenters = Utils.numberOfSupplyCenters(newBoard)
     const isFinished = [...newBoard.map.powers].some(power => {
       return (numberOfSupplyCenters.get(power) || 0) > (numOfCenters / 2)
     })
