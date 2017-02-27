@@ -53,7 +53,7 @@ gulp.task('docs', () => {
     target: tsCompilerOptions.target,
     module: tsCompilerOptions.module,
     out: './docs',
-    includeDeclarations: true,
+    includeDeclarations: false,
     name: packageOption.name,
     version: true
   }
