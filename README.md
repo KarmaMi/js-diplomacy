@@ -51,6 +51,9 @@ if (result.result) {
 }
 ```
 
+## Example
+The example of the standard Diplomacy game (with visualizers) is [available](https://karmami.github.io/vizdip/example).
+
 ## Documentation
 The documentation is [here](https://karmami.github.io/js-diplomacy/docs/).
 
