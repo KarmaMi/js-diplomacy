@@ -20,7 +20,7 @@ const turn = {
 
 const state = new State(turn, Phase.Movement)
 
-describe("The StandardRuleUtil", () => {
+describe("The Utils", () => {
   it("calculates the number of supply centers for each power.", () => {
     const board = new Board<Power>(
       map, state, [], [],
@@ -32,7 +32,7 @@ describe("The StandardRuleUtil", () => {
     Array.from(Utils.numberOfSupplyCenters(board))
       .should.have.deep.members([[France, 2]])
   })
-  it("finds the provinces that an unit can move to", () => {
+  it("finds the locations that an unit can move to", () => {
     const board = new Board(
       map, state,
       [
@@ -50,6 +50,23 @@ describe("The StandardRuleUtil", () => {
       .should.have.deep.members(
         [...board.map.movableLocationsOf($.Edi, Army)].concat([$.Nwy, $.StP])
       )
+  })
+  it("finds the locations that an unit can support to", () => {
+    const board = new Board(
+      map, state,
+      [
+        new Unit(Army, $.Lvp, England), new Unit(Army, $.Edi, England),
+        new Unit(Fleet, $.Bul_EC, England), new Unit(Fleet, $.Bla, England)
+      ],
+      [], []
+    )
+
+    Array.from(Utils.supportableLocationsOf<Power>(map, new Unit(Army, $.Lvp, England)))
+      .should.have.deep.members([$.Cly, $.Edi, $.Yor, $.Wal])
+    Array.from(Utils.supportableLocationsOf(map, new Unit(Fleet, $.Bul_EC, England)))
+      .should.have.deep.members([$.Rum, $.Bla, $.Con])
+    Array.from(Utils.supportableLocationsOf(map, new Unit(Fleet, $.Bla, England)))
+      .should.include($.Bul_SC)
   })
   it("calculte the number of buildable units", () => {
     const board = new Board<Power>(

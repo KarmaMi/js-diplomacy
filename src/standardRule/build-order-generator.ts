@@ -1,5 +1,5 @@
 import { OrderGenerator } from "./order-generator"
-import { Utils } from "./standard-rule-utils"
+import { Utils } from "./utils"
 import { Disband } from "./order"
 import { Board, Unit } from "./types"
 

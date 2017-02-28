@@ -1,7 +1,7 @@
 import { Resolver } from "./resolver"
 import { Result, Phase, State, MilitaryBranch, ProvinceStatus } from "./data"
 import { Order, Retreat, Disband, OrderType } from "./order"
-import { Utils } from "./standard-rule-utils"
+import { Utils } from "./utils"
 import { Board, Unit, ResolvedResult } from "./types"
 import { board } from "./../board"
 import { rule } from "./../rule"

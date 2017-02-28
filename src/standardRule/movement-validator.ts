@@ -1,5 +1,5 @@
 import { Validator } from "./validator"
-import { Utils } from "./standard-rule-utils"
+import { Utils } from "./utils"
 import { Order, Retreat, Hold, Move, Support, Convoy } from "./order"
 import { MilitaryBranch, Dislodged } from "./data"
 import { Board, Unit } from "./types"

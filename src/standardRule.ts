@@ -2,8 +2,8 @@ import * as Data from "./standardRule/data"
 import * as OrderModule from "./standardRule/order"
 import * as ErrorModule from "./standardRule/error"
 import * as Types from "./standardRule/types"
-import * as UtilsModule from "./standardRule/standard-rule-utils"
-import * as HelperModule from "./standardRule/standard-rule-helper"
+import * as UtilsModule from "./standardRule/utils"
+import * as HelperModule from "./standardRule/helper"
 import * as RuleModule from "./standardRule/rule"
 
 export namespace standardRule {

@@ -3,7 +3,7 @@ if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
   echo "Start Deployment"
   # Install modules
-  npm i -g makeshift jsdoc &&
+  npm i -g makeshift &&
   # Publish to npm
   ## Set NPM_TOKEN
   makeshift &&

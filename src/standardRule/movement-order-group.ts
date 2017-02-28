@@ -1,5 +1,5 @@
 import { Result, MilitaryBranch } from "./data"
-import { Utils } from "./standard-rule-utils"
+import { Utils } from "./utils"
 import { OrderType, Order, Convoy, Support, Move } from "./order"
 import { DiplomacyMap } from "./types"
 import { MovementOrderWithResult } from "./movement-order-with-result"
