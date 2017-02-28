@@ -104,13 +104,13 @@ export class Utils {
   }
 
   /**
-   * @returns The locations that the unit can move to (including via convoy).
+   * @returns The location that the unit can move via convoy
    */
-  static movableLocationsOf<Power> (board: Board<Power>, unit: Unit<Power>): Set<Location<Power>> {
-    const locations = new Set([...board.map.movableLocationsOf(unit.location, unit.militaryBranch)])
-
+  static movableViaConvoyLocationsOf<Power> (
+    board: Board<Power>, unit: Unit<Power>
+  ): Set<Location<Power>> {
     if (unit.militaryBranch === MilitaryBranch.Fleet) {
-      return locations
+      return new Set()
     }
 
     const provinces = new Set([...board.units].map(x => x.location.province))
@@ -132,18 +132,28 @@ export class Utils {
     // The provinces that can use for convoy
     const sea = visited
 
+    let retval: Array<Location<Power>> = []
     sea.forEach(s => {
       [...board.map.movableProvincesOf(s, MilitaryBranch.Fleet)]
         .filter(p => !Utils.isSea(board.map, p))
         .forEach(p => {
           board.map.locationsOf(p).forEach(l => {
             if (l.militaryBranches.has(MilitaryBranch.Army)) {
-              locations.add(l)
+              retval.push(l)
             }
           })
         })
     })
-    return new Set([...locations].filter(x => x.province !== unit.location.province))
+    return new Set(retval.filter(x => x.province !== unit.location.province))
+  }
+
+  /**
+   * @returns The locations that the unit can move to (including via convoy).
+   */
+  static movableLocationsOf<Power> (board: Board<Power>, unit: Unit<Power>): Set<Location<Power>> {
+    const locations = Array.from(board.map.movableLocationsOf(unit.location, unit.militaryBranch))
+    const movableViaSea = Utils.movableViaConvoyLocationsOf(board, unit)
+    return new Set(Array.from(movableViaSea).concat(locations))
   }
 
   /**
