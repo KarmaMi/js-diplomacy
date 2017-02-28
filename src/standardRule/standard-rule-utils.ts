@@ -39,6 +39,13 @@ export class Utils {
   }
 
   /**
+   * @return True if the unit can be ordered "convoy" order.
+   */
+  static canConvoy<Power> (map: DiplomacyMap<Power>, unit: Unit<Power>): boolean {
+    return Utils.isSea(map, unit.location.province)
+  }
+
+  /**
    * @returns The locations that the unit can retreat to.
    */
   static locationsToRetreat<Power> (
