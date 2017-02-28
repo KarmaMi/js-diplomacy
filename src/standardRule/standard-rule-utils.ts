@@ -147,6 +147,24 @@ export class Utils {
   }
 
   /**
+   * @return The set of locations that can be supported by the unit
+   */
+  static supportableLocationsOf<Power> (
+    map: DiplomacyMap<Power>, unit: Unit<Power>
+  ): Set<Location<Power>> {
+    const provinces =
+      new Set(
+        Array.from(map.movableLocationsOf(unit.location, unit.militaryBranch)).map(l => l.province)
+      )
+
+    const retval = new Set()
+    provinces.forEach(p => {
+      map.locationsOf(p).forEach(l => retval.add(l))
+    })
+    return retval
+  }
+
+  /**
    * @return
    *   The Map between powers and number of buildable units.
    *   If a power should disband some units, this contains negative number
