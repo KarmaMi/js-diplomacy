@@ -55,6 +55,7 @@ export const map = new DiplomacyMap(new LabeledUndirectedGraph([
   new MapEdge<Power, MilitaryBranch>($.Lvp, $.Iri, [Fleet]),
   new MapEdge<Power, MilitaryBranch>($.Lvp, $.Yor, [Army]),
   new MapEdge<Power, MilitaryBranch>($.Lvp, $.Wal, [Army, Fleet]),
+  new MapEdge<Power, MilitaryBranch>($.Lvp, $.NAt, [Fleet]),
   // Lon
   new MapEdge<Power, MilitaryBranch>($.Lon, $.Wal, [Army, Fleet]),
   new MapEdge<Power, MilitaryBranch>($.Lon, $.Yor, [Army, Fleet]),
