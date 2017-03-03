@@ -97,11 +97,30 @@ export class MovementResolver<Power> implements Resolver<Power> {
     // 2. Exclude support or convoy orders that have no corresponding orders
     for (let elem of [...province2TmpOrderGroup]) {
       for (let elem2 of [...elem[1]]) {
-        if (!elem2[1].target) {
+        if (elem2[1].target === null) {
           elem2[1].relatedOrders.forEach((order: MovementOrderWithResult<Power>) => {
             order.setResult(Result.NoCorrespondingOrder)
           })
           elem[1].delete(elem2[0])
+        } else {
+          elem2[1].relatedOrders.forEach((order: MovementOrderWithResult<Power>) => {
+            if (order.order instanceof Support || order.order instanceof Convoy) {
+              const targetType1 = order.order.target.tpe
+              const targetType2 = elem2[1].target.order.tpe
+              switch (targetType2) {
+                case OrderType.Move:
+                  if (targetType1 !== OrderType.Move) {
+                    order.setResult(Result.NoCorrespondingOrder)
+                  }
+                  break
+                default:
+                  if (targetType1 !== OrderType.Hold) {
+                    order.setResult(Result.NoCorrespondingOrder)
+                  }
+                  break
+              }
+            }
+          })
         }
       }
     }
