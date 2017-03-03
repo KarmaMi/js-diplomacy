@@ -284,4 +284,22 @@ describe("MovementResolver#Other Cases", () => {
       [], []
     ))
   })
+  it("handles the issue #81.", () => {
+    const b = new Board<Power>(
+      map, state1,
+      [
+        new Unit(Fleet, $.Kie, Power.Germany), new Unit(Army, $.Ber, Power.Germany),
+        new Unit(Army, $.Mun, Power.Germany)
+      ],
+      [], []
+    )
+    const $$ = new Helper(b)
+    const { board, results } = r.resolve(
+      b,
+      new Set([
+        $$.U($.Kie).move($.Hol), $$.U($.Ber).support($$.U($.Kie).hold()),
+        $$.U($.Mun).hold()
+      ])
+    ).result
+  })
 })
