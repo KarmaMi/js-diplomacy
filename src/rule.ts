@@ -36,7 +36,7 @@ export namespace rule {
   /**
    * Result of an order execution. It is used when the original order is replaced.
    */
-  export class Replaced<Power, MilitaryBranch, Result>
+  export class Replaced<Power, MilitaryBranch, Result, Error>
     implements OrderResult<Power, MilitaryBranch, Result> {
     /**
      * @param target The target order.
@@ -46,7 +46,7 @@ export namespace rule {
      */
     constructor (
       public target: Order<Power, MilitaryBranch>,
-      public invalidReason: string,
+      public invalidReason: Error,
       public replacedBy: Order<Power, MilitaryBranch>,
       public result: Result
     ) {}
