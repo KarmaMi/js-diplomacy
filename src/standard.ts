@@ -5,13 +5,14 @@ import { Error } from "./standardRule/error"
 import { standardMap } from "./standardMap"
 import { standardBoard } from "./standardBoard"
 import { board } from "./board"
+import { Power } from "./standardMap/power"
 
-const { Power, map, locations: $ } = standardMap
+const { map, locations: $ } = standardMap
 const { Turn, Season } = standardBoard
 const { Army, Fleet } = standardRule.MilitaryBranch
 const { Unit, Board, Rule, Phase } = standardRule
 
-const initialBoard = new Board(
+const initialBoard = new Board<Power>(
   map, new State(new Turn(1901, Season.Spring), Phase.Movement),
   [
     new Unit(Army, $.Vie, Power.Austria), new Unit(Army, $.Bud, Power.Austria),
@@ -30,7 +31,7 @@ const initialBoard = new Board(
     new Unit(Fleet, $.Ank, Power.Turkey)
   ],
   [],
-  <Array<[board.Province<standardMap.Power>, standardRule.ProvinceStatus<standardMap.Power>]>>([...map.provinces].map(p => {
+  <Array<[board.Province<Power>, standardRule.ProvinceStatus<Power>]>>([...map.provinces].map(p => {
     if (p.homeOf !== null) {
       return [p, new ProvinceStatus(p.homeOf, false)]
     } else {
@@ -39,6 +40,8 @@ const initialBoard = new Board(
   }).filter(x => x))
 )
 
+const rule = new Rule<Power>()
+
 export namespace standard {
-  export const variant = new variantModule.Variant(new Rule(), initialBoard)
+  export const variant = new variantModule.Variant(rule, initialBoard)
 }
