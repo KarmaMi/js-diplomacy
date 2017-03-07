@@ -24,11 +24,16 @@ describe("A MovementValidator", () => {
     map, new State(new Turn(1901, Season.Autumn), Movement),
     [
       new Unit(Army, $.Lvp, Power.England),
+      new Unit(Army, $.Wal, Power.England),
       new Unit(Fleet, $.Lon, Power.England),
       new Unit(Fleet, $.Mid, Power.England),
       new Unit(Fleet, $.Eng, Power.England),
       new Unit(Army, $.Spa, Power.France),
-      new Unit(Army, $.Bur, Power.France)
+      new Unit(Army, $.Bur, Power.France),
+      new Unit(Fleet, $.Rum, Power.Turkey),
+      new Unit(Fleet, $.Bul_SC, Power.Turkey),
+      new Unit(Army, $.Rom, Power.Italy),
+      new Unit(Fleet, $.Tyn, Power.Italy)
     ],
     [], []
   )
@@ -39,6 +44,15 @@ describe("A MovementValidator", () => {
     })
     it("returns null (2)", () => {
       should.equal(validator.errorOfOrder(board, $$.A($.Spa).move($.Wal)), null)
+    })
+    it("returns null (3)", () => {
+      should.equal(validator.errorOfOrder(board, $$.U($.Eng).convoy($$.U($.Wal).move($.Bre))), null)
+    })
+    it("returns null (4)", () => {
+      should.equal(validator.errorOfOrder(board, $$.U($.Rum).support($$.U($.Bul_SC).hold())), null)
+    })
+    it("returns null (5)", () => {
+      should.equal(validator.errorOfOrder(board, $$.U($.Tyn).convoy($$.U($.Rom).move($.Tun))), null)
     })
   })
   describe("an order that its target unit does not exist is received", () => {

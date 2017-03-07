@@ -38,9 +38,7 @@ export class MovementValidator<Power> implements Validator<Power> {
       if (msgForTarget) {
         return msgForTarget
       } else {
-        if (
-          board.map.movableLocationsOf(order.unit.location, order.unit.militaryBranch).has(order.destination)
-        ) {
+        if (Utils.supportableLocationsOf(board.map, order.unit).has(order.destination)) {
           return null
         } else {
           return new Error.UnsupportableLocation(order.unit, order.destination)
@@ -75,12 +73,17 @@ export class MovementValidator<Power> implements Validator<Power> {
           ) {
             return new Error.UnmovableLocation(order.target.unit, order.target.destination)
           } else if (
-            !Utils.isMovableViaSea(
-              board.map, order.unit.location.province, order.target.destination.province,
-              board.units
+            !(
+              board.map.movableProvincesOf(order.unit.location.province, Fleet).has(order.target.destination.province) ||
+              Utils.isMovableViaSea(
+                board.map, order.unit.location.province, order.target.destination.province,
+                board.units
+              )
             )
           ) {
             return new Error.UnconvoyableLocation(order.unit, order.target.destination)
+          } else {
+            return null
           }
         }
       }
