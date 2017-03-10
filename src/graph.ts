@@ -61,23 +61,26 @@ export namespace graph {
       } else {
         this.nodes = new Set([...nodes])
       }
+
+      this.neighborLists = new Map()
+      this.nodes.forEach(node => {
+        const xs1 =
+          Array.from(this.edges).filter(edge => edge.n0 === node).map(edge => [edge.n1, edge.label])
+        const xs2 =
+          Array.from(this.edges).filter(edge => edge.n1 === node).map(edge => [edge.n0, edge.label])
+        const xs = xs1.concat(xs2) as Array<[Node, Label]>
+        this.neighborLists.set(node, new Set(xs))
+      })
     }
     /**
      * @param node - The target node
      * @return he set of nodes that are neighbors of the node.
      */
     neighborsOf (node: Node): Set<[Node, Label]> {
-      const ns = new Set()
-      this.edges.forEach(edge => {
-        if (edge.n0 === node) {
-          ns.add([edge.n1, edge.label])
-        } else if (edge.n1 === node) {
-          ns.add([edge.n0, edge.label])
-        }
-      })
-
-      return ns
+      return this.neighborLists.get(node) || new Set()
     }
+
+    private neighborLists: Map<Node, Set<[Node, Label]>>
   }
 
   /**
