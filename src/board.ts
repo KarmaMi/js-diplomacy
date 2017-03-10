@@ -131,11 +131,7 @@ export namespace board {
     constructor (
       private map: graph.LabeledUndirectedGraph<Location<Power, MilitaryBranch>, Set<MilitaryBranch>>
     ) {
-      this.locations = new Set()
-      this.map.edges.forEach(elem => {
-        this.locations.add(elem.n0)
-        this.locations.add(elem.n1)
-      })
+      this.locations = this.map.nodes
 
       this.provinces = new Set()
       this.provinceToLocation = new Map()
