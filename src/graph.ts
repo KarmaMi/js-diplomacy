@@ -114,6 +114,20 @@ export namespace graph {
         this.nodes = new Set([...nodes])
       }
 
+      this.neighborLists = new Map()
+      this.nodes.forEach(node => {
+        const os = Array.from(this.edges).filter(edge => edge.n0 === node).map(edge => edge.n1)
+        const is = Array.from(this.edges).filter(edge => edge.n1 === node).map(edge => edge.n0)
+        this.neighborLists.set(node, [new Set(os), new Set(is)])
+      })
+    }
+
+    outgoingNodesOf (node: Set<Value>): Set<Set<Value>> {
+      return (this.neighborLists.get(node) || [new Set(), new Set()])[0]
+    }
+
+    incomingNodesOf (node: Set<Value>): Set<Set<Value>> {
+      return (this.neighborLists.get(node) || [new Set(), new Set()])[1]
     }
 
     /**
@@ -124,8 +138,7 @@ export namespace graph {
         (node: Set<Value>, path: Array<Set<Value>>, state: Map<Set<Value>, boolean>): Array<Set<Value>> | null => {
           state.set(node, true)
           let cycle: Array<Set<Value>> | null = null
-          for (let edge of [...this.edges].filter(edge => edge.n0 === node)) {
-            const v = edge.n1
+          for (let v of this.outgoingNodesOf(node)) {
             if (!state.get(v)) {
               const p = [...path]
               p.push(v)
@@ -204,5 +217,7 @@ export namespace graph {
 
       return new DirectedGraph(edges, nodes)
     }
+
+    private neighborLists: Map<Set<Value>, [Set<Set<Value>>, Set<Set<Value>>]>
   }
 }

@@ -137,9 +137,7 @@ export class MovementResolver<Power> implements Resolver<Power> {
 
     // 4. Resolve orders following dependency
     while (graph.nodes.size > 0) {
-      const target = [...graph.nodes].find(node => {
-        return [...graph.edges].every(elem => elem.n1 !== node)
-      })
+      const target = [...graph.nodes].find(node => graph.incomingNodesOf(node).size === 0)
 
       if (!target) {
         throw "Internal Error"
