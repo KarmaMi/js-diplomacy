@@ -2,7 +2,7 @@
   "name": "js-diplomacy",
   "main": "./target/src/jsDiplomacy.js",
   "types": "./target/interface/jsDiplomacy.d.ts",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Diplomacy library written in JavaScript",
   "scripts": {
     "prepublish": "gulp compile-src"
