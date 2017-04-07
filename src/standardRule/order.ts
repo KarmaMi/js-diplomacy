@@ -48,18 +48,12 @@ export class Move<Power> extends Order<Power> {
   /**
    * @param unit The unit that corresponds to this order.
    * @param destination The destination of this move order.
-   * @param useConvoy The flag whether this move order uses convoy or not.
    */
-  constructor (unit: Unit<Power>, public destination: Location<Power>, useConvoy?: boolean) {
+  constructor (unit: Unit<Power>, public destination: Location<Power>) {
     super(unit, OrderType.Move)
-    this.useConvoy = useConvoy || false
   }
   toString () {
-    if (this.useConvoy) {
-      return `${this.unit}-${this.destination} via Convoy`
-    } else {
-      return `${this.unit}-${this.destination}`
-    }
+    return `${this.unit}-${this.destination}`
   }
 }
 /**

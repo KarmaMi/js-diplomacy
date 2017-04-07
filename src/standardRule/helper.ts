@@ -14,9 +14,6 @@ export class UnitForStandardRule<Power> {
   move (destination: Location<Power>) {
     return new Order.Move(this.unit, destination)
   }
-  moveViaConvoy (destination: Location<Power>) {
-    return new Order.Move(this.unit, destination, true)
-  }
   support (target: Order.Move<Power> | Order.Hold<Power>) {
     return new Order.Support(this.unit, target)
   }

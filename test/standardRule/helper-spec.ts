@@ -37,13 +37,8 @@ describe("A Helper", () => {
     it("generates Hold orders", () => {
       $$.A($.Spa).hold().should.deep.equal(new Order.Hold($$.A($.Spa).unit))
     })
-    it("generates Move orders (1)", () => {
-      $$.A($.Spa).move($.Mar).should.deep.equal(new Order.Move($$.A($.Spa).unit, $.Mar, false))
-    })
-    it("generates Move orders (2)", () => {
-      $$.A($.Spa).moveViaConvoy($.Mar).should.deep.equal(
-        new Order.Move($$.A($.Spa).unit, $.Mar, true)
-      )
+    it("generates Move orders", () => {
+      $$.A($.Spa).move($.Mar).should.deep.equal(new Order.Move($$.A($.Spa).unit, $.Mar))
     })
     it("generates Support orders", () => {
       $$.A($.Spa).support($$.F($.GoL).move($.Mar)).should.deep.equal(
