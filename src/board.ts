@@ -124,6 +124,10 @@ export namespace board {
      * The set of powers in this map
      */
     powers: Set<Power>
+    /**
+     * The set of military branches used in this map
+     */
+    militaryBranches: Set<MilitaryBranch>
     private provinceToLocation: Map<Province<Power>, Set<Location<Power, MilitaryBranch>>>
     /**
      * @param map The labeled graph that represents the map.
@@ -152,6 +156,11 @@ export namespace board {
         if (province.homeOf) {
           this.powers.add(province.homeOf)
         }
+      })
+
+      this.militaryBranches = new Set()
+      this.locations.forEach(loc => {
+        loc.militaryBranches.forEach(m => this.militaryBranches.add(m))
       })
     }
 
