@@ -1,17 +1,12 @@
 const gulp = require('gulp')
 const gutil = require('gulp-util')
-const source = require('vinyl-source-stream')
-const buffer = require('vinyl-buffer')
 const merge = require('merge2')
 
 const ts = require('gulp-typescript')
-const tsify = require('tsify')
 const typedoc = require('gulp-typedoc')
 const sourcemaps = require('gulp-sourcemaps')
 
 const mocha = require('gulp-mocha')
-
-const browserify = require('browserify')
 
 const tsSourceProject = ts.createProject('./src/tsconfig.json')
 const tsTestProject = ts.createProject('./test/tsconfig.json')
@@ -59,16 +54,4 @@ gulp.task('docs', () => {
   }
   gulp.src(['./src/**/*.ts'], { read: false })
     .pipe(typedoc(configs))
-})
-
-// Browserify this module
-gulp.task('browserify', () => {
-  browserify({entries: ['browser/index.ts']})
-  .plugin(tsify, tsCompilerOptions)
-  .bundle()
-  .pipe(source('diplomacy.js'))
-  .pipe(buffer())
-  .pipe(sourcemaps.init())
-  .pipe(sourcemaps.write('./'))
-  .pipe(gulp.dest('browser/'))
 })
