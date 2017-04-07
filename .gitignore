@@ -1,8 +1,5 @@
 #all ignore
 /*
-!/browser/
-/browser/diplomacy.js
-/browser/diplomacy.js.map
 
 # accept
 !/LICENSE
@@ -16,6 +13,5 @@
 !/.travis
 !/scripts/
 !/tslint.json
-!/browser/index.ts
 !/src/
 !/test/

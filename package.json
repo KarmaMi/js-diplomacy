@@ -23,7 +23,6 @@
     "@alrra/travis-scripts": "^3.0.1",
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.39",
-    "browserify": "^14.0.0",
     "chai": ">=4.0.0-canary.1",
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
@@ -33,11 +32,8 @@
     "gulp-util": "^3.0.8",
     "merge2": "^1.0.3",
     "mocha": "^3.2.0",
-    "tsify": "^3.0.1",
     "typedoc": "^0.5.5",
-    "typescript": "^2.1.6",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "typescript": "^2.1.6"
   },
   "homepage": "https://github.com/KarmaMi/js-diplomacy#readme"
 }
