@@ -1,11 +1,26 @@
 import { Unit, Location } from "./types"
 import { Order } from "./order"
 
+export enum ErrorType {
+  PowerWithProblem = 1,
+  UnmovableLocation,
+  UnsupportableLocation,
+  UnconvoyableLocation,
+  UnbuildableLocation,
+  UnitNotExisted,
+  CannotBeOrdered,
+  InvalidPhase,
+  SeveralOrders,
+  OrderNotExisted
+}
+
 /**
  * Errors while resolving orders
   * @typeparam Detail The detail of the error
  */
-export class Error {}
+export class Error {
+  constructor (public tpe: ErrorType) {}
+}
 
 /**
  * Error that a power does not satisify conditions.
@@ -13,7 +28,7 @@ export class Error {}
  */
 export class PowerWithProblem<Power> extends Error {
   constructor (public power: Power) {
-    super()
+    super(ErrorType.PowerWithProblem)
   }
 }
 
@@ -22,7 +37,7 @@ export class PowerWithProblem<Power> extends Error {
  */
 export class UnmovableLocation<Power> extends Error {
   constructor (public unit: Unit<Power>, public destination: Location<Power>) {
-    super()
+    super(ErrorType.UnmovableLocation)
   }
 }
 
@@ -31,7 +46,7 @@ export class UnmovableLocation<Power> extends Error {
  */
 export class UnsupportableLocation<Power> extends Error {
   constructor (public unit: Unit<Power>, public destination: Location<Power>) {
-    super()
+    super(ErrorType.UnsupportableLocation)
   }
 }
 
@@ -40,7 +55,7 @@ export class UnsupportableLocation<Power> extends Error {
  */
 export class UnconvoyableLocation<Power> extends Error {
   constructor (public unit: Unit<Power>, public destination: Location<Power>) {
-    super()
+    super(ErrorType.UnconvoyableLocation)
   }
 }
 
@@ -50,7 +65,7 @@ export class UnconvoyableLocation<Power> extends Error {
  */
 export class UnbuildableLocation<Power> extends Error {
   constructor (public unit: Unit<Power>) {
-    super()
+    super(ErrorType.UnbuildableLocation)
   }
 }
 
@@ -59,7 +74,7 @@ export class UnbuildableLocation<Power> extends Error {
  */
 export class UnitNotExisted<Power> extends Error {
   constructor (public unit: Unit<Power>) {
-    super()
+    super(ErrorType.UnitNotExisted)
   }
 }
 
@@ -68,7 +83,7 @@ export class UnitNotExisted<Power> extends Error {
  */
 export class CannotBeOrdered<Power> extends Error {
   constructor (public order: Order<Power>) {
-    super()
+    super(ErrorType.CannotBeOrdered)
   }
 }
 
@@ -77,20 +92,20 @@ export class CannotBeOrdered<Power> extends Error {
  */
 export class InvalidPhase<Power> extends Error {
   constructor (public order: Order<Power>) {
-    super()
+    super(ErrorType.InvalidPhase)
   }
 }
 
 export class SeveralOrders<Power> extends Error {
   units: Set<Unit<Power>>
   constructor (units: Set<Unit<Power>> | Array<Unit<Power>>) {
-    super()
+    super(ErrorType.SeveralOrders)
     this.units = new Set([...units])
   }
 }
 
 export class OrderNotExisted<Power> extends Error {
   constructor (public unit: Unit<Power>) {
-    super()
+    super(ErrorType.OrderNotExisted)
   }
 }

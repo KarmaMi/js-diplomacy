@@ -61,6 +61,8 @@ export namespace standardRule {
   }
 
   export namespace Error {
+    export declare type ErrorType = ErrorModule.ErrorType
+    export const ErrorType = ErrorModule.ErrorType
     export declare type Error = ErrorModule.Error
     export const Error = ErrorModule.Error
     export declare type PowerWithProblem<Power> = ErrorModule.PowerWithProblem<Power>
